@@ -108,7 +108,7 @@
                 format: "mm/yyyy",
                 viewMode: "months",
 				minViewMode: "months",
-				startDate: new Date(new Date().setDate(toDay - 365)),
+				// startDate: new Date(new Date().setDate(toDay - 365)),
 				endDate: new Date()
             });
 

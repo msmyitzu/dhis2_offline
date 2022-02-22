@@ -67,7 +67,7 @@ return [
     /* 
     | app version create by heinsoe
     */
-    'version' => '5.1.3_Oct',
+    'version' => '6.0.1_Feb', // version 6 start rollout at 2022-Feb
 
     'timezone' => 'Asia/Yangon',
 

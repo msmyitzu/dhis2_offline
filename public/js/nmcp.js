@@ -426,15 +426,19 @@ function submit_data_entry_form(role_id) {
     if ($("#select_lp_township_de").val() == "0") {
         errMsg += "<p>• မြို့နယ်ရွေးပါ</p>";
     }
-    if ($("#select_tbl_hfm_de").val() == "0" && $("#select_lp_form_cat").val() == "5" || $("#select_lp_form_cat").val() == "1" || $("#select_lp_form_cat").val() == "6" || $("#select_lp_form_cat").val() == "4" || $("#select_lp_form_cat").val() == "7") {
-        errMsg += "<p>• မြို့နယ်/တိုက်နယ်ဆေးရုံ/ကျန်းမာရေးဌာနခွဲရွေးပါ </p>";
-    } else {
-        errMsg += "<p>• ကျေးလက်ကျန်းမာရေးဌာန/ကျန်းမာရေးဌာနခွဲရွေးပါ </p>";
+    if ($("#select_tbl_hfm_de").val() == "0") {
+        if ($("#select_lp_form_cat").val() == "5" || $("#select_lp_form_cat").val() == "1" || $("#select_lp_form_cat").val() == "6" || $("#select_lp_form_cat").val() == "4" || $("#select_lp_form_cat").val() == "7") {
+            errMsg += "<p>• မြို့နယ်/တိုက်နယ်ဆေးရုံ/ကျန်းမာရေးဌာနခွဲရွေးပါ </p>";
+        } else {
+            errMsg += "<p>• ကျေးလက်ကျန်းမာရေးဌာန/ကျန်းမာရေးဌာနခွဲရွေးပါ hello</p>";
+        }
     }
-    if ($("#select_hfm_de").val() == "0" && $("#select_lp_form_cat").val() == "5" || $("#select_lp_form_cat").val() == "1" || $("#select_lp_form_cat").val() == "6" || $("#select_lp_form_cat").val() == "4" || $("#select_lp_form_cat").val() == "7") {
-        errMsg += "<p>• ကျန်းမာရေးဌာနခွဲရွေးပါ</p>";
-    } else {
-        errMsg += "<p>• စေတနာဝန်ထမ်းကျေးရွာရွေးပါ</p>";
+    if ($("#select_hfm_de").val() == "0") {
+        if ($("#select_lp_form_cat").val() == "5" || $("#select_lp_form_cat").val() == "1" || $("#select_lp_form_cat").val() == "6" || $("#select_lp_form_cat").val() == "4" || $("#select_lp_form_cat").val() == "7") {
+            errMsg += "<p>• ကျန်းမာရေးဌာနခွဲရွေးပါ</p>";
+        } else {
+            errMsg += "<p>• စေတနာဝန်ထမ်းကျေးရွာရွေးပါ</p>";
+        }
     }
     if (form_date == "") {
         errMsg += "<p>• ခုနစ်/လဖြည့်ပါ</p>";

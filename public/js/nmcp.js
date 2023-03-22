@@ -14,7 +14,7 @@ function load_lp_stateregion(target_sr_id, token) {
                     $("." + target_sr_id).html("");
 
                     $("." + target_sr_id).append("<option value='0'> ရွေးရန် </option>");
-                    $("." + target_sr_id).prop("disabled", false);
+                    $("." + target_sr_id).prop("disabled", faltse);
 
                     jQuery.each(data, function(i, val) {
                         var opt = "<option value='" + val.sr_code + "'>" + val.sr_name + " | " + val.sr_name_mmr + "</option>";
@@ -73,7 +73,8 @@ function load_lp_township(target_ts_id, sr_code, token, region_code) {
     }
 }
 
-function load_tbl_hfm(target_control_id, ts_code, token) {
+function load_tbl_hfm(target_control_id, ts_code, token, form_type = null) {
+    console.log(ts_code);
     try {
         var form_code = "";
 
@@ -93,6 +94,7 @@ function load_tbl_hfm(target_control_id, ts_code, token) {
             data: "",
             success: function(data) {
                 console.log(data);
+
                 $("#" + target_control_id).html("");
 
                 $("#" + target_control_id).append("<option value='0'> ရွေးရန် </option>");
@@ -129,14 +131,19 @@ function load_hfm(target_control_id, hf_code, token) {
             url: BACKEND_URL + 'get_grab_hfm/' + hf_code,
             data: "",
             success: function(data) {
+
                 $("#" + target_control_id).html("");
 
                 $("#" + target_control_id).append("<option value='0'> ရွေးရန် </option>");
                 $("#" + target_control_id).prop("disabled", false);
 
                 jQuery.each(data, function(i, val) {
-                    var opt = "<option value='" + val.sc_code + "'>" + val.sc_name + " | " + val.sc_name_mm + "</option>";
-                    $("#" + target_control_id).append(opt);
+
+                    if(!val.sc_name.includes("RHC")){
+                        var opt = "<option value='" + val.sc_code + "'>" + val.sc_name + " | " + val.sc_name_mm + "</option>";
+                        $("#" + target_control_id).append(opt);
+                    }
+
                 });
             }
         });
@@ -398,6 +405,7 @@ function submit_data_entry_form(role_id) {
     //$("#btn_submit_data_entry_form").html('<img src="img/default-loading.gif" style="width:20px;"/>'+btn_text);
 
     var form_code = $("#select_lp_form_cat").val();
+    // console.log(form_code);
     var form_no = $("#form_number").val(); // to make cf_link
     var sc_code = $("#select_hfm_de").val();
     var form_date = $("#form-date").val().split("/");
@@ -405,27 +413,31 @@ function submit_data_entry_form(role_id) {
     var pyear = form_date[1]; // to make cf_link
     var role_id = role_id; //to make cf_link
     var errMsg = "";
-
-    if (form_no == "") {
-        errMsg += "• ပုံစံအမျိုးအစားရွေးပါ\n";
+    
+    if (form_code == 0 || form_code == "0") {
+        errMsg += "<p>• ပုံစံအမျိုးအစားရွေးပါ</p>";
     }
-    if (form_code == "0") {
-        errMsg += "• ပုံစံအမှတ်ဖြည့်ပါ\n";
+    if (form_no == "0" || form_no == "") {
+        errMsg += "<p>• ပုံစံအမှတ်ဖြည့်ပါ</p>";
     }
     if ($("#select_lp_state_region").val() == "0") {
-        errMsg += "• ပြည်နယ်/တိုင်းဒေသကြီးရွေးပါ\n";
+        errMsg += "<p>• ပြည်နယ်/တိုင်းဒေသကြီးရွေးပါ</p>";
     }
     if ($("#select_lp_township_de").val() == "0") {
-        errMsg += "• မြို့နယ်ရွေးပါ\n";
+        errMsg += "<p>• မြို့နယ်ရွေးပါ</p>";
     }
-    if ($("#select_tbl_hfm_de").val() == "0") {
-        errMsg += "• ကျေးလက်ကျန်းမာရေးဌာန/ကျန်းမာရေးဌာနခွဲရွေးပါ\n";
+    if ($("#select_tbl_hfm_de").val() == "0" && $("#select_lp_form_cat").val() == "5" || $("#select_lp_form_cat").val() == "1" || $("#select_lp_form_cat").val() == "6" || $("#select_lp_form_cat").val() == "4" || $("#select_lp_form_cat").val() == "7") {
+        errMsg += "<p>• မြို့နယ်/တိုက်နယ်ဆေးရုံ/ကျန်းမာရေးဌာနခွဲရွေးပါ </p>";
+    } else {
+        errMsg += "<p>• ကျေးလက်ကျန်းမာရေးဌာန/ကျန်းမာရေးဌာနခွဲရွေးပါ </p>";
     }
-    if ($("#select_hfm_de").val() == "0") {
-        errMsg += "• စေတနာဝန်ထမ်းကျေးရွာရွေးပါ\n";
+    if ($("#select_hfm_de").val() == "0" && $("#select_lp_form_cat").val() == "5" || $("#select_lp_form_cat").val() == "1" || $("#select_lp_form_cat").val() == "6" || $("#select_lp_form_cat").val() == "4" || $("#select_lp_form_cat").val() == "7") {
+        errMsg += "<p>• ကျန်းမာရေးဌာနခွဲရွေးပါ</p>";
+    } else {
+        errMsg += "<p>• စေတနာဝန်ထမ်းကျေးရွာရွေးပါ</p>";
     }
     if (form_date == "") {
-        errMsg += "• ခုနစ်/လ ဖြည့်ပါ";
+        errMsg += "<p>• ခုနစ်/လဖြည့်ပါ</p>";
 
     }
     if (errMsg != "") {
@@ -455,18 +467,14 @@ function submit_data_entry_form(role_id) {
                     // } else {
                     //     $("#cf_link_code").val(data);
                     // }
-                    bootbox.confirm("ဖောင်အသစ်တစ်ခုပြုလုပ်မည်။ သေချာပါက OK နှိပ်ပါ", function(result) {
+                    bootbox.confirm('<p>• ဖောင်အသစ်တစ်ခုပြုလုပ်မည်။ သေချာပါက OK နှိပ်ပါ</p>', function(result) {
                         if (result == false) {
                             reset_button_loading('btn_submit_data_entry_form', btn_text);
                         } else {
                             $("#frm-patient-register-form").submit();
                         }
                     });
-                } else if(data == '1'){ 
-                    bootbox.alert('Server သို့ပို့ဆောင်ပြီးသော Form ဖြစ်သည်။', function(){
-                        reset_button_loading('btn_submit_data_entry_form', btn_text);
-                    });
-                }else {
+                } else {
                     $('#cf_link_code').val(data);
                     $("#frm-patient-register-form").submit();
                 }
@@ -500,7 +508,7 @@ function load_last_corefacility() {
                 $("#last_corefacility_container").html("");
 
                 jQuery.each(data, function(i, val) {
-                    console.log(val);
+                    // console.log(val);
                     $("#last_corefacility_container").append('<div class="form-group">' + val.Form_Name + '</div>');
                     $("#last_corefacility_container").append('<div class="form-group">' + val.Form_No + '</div>');
                     $("#last_corefacility_container").append('<div class="form-group">' + val.sr_name_mmr + '</div>');

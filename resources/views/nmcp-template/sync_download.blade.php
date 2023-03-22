@@ -266,7 +266,7 @@
 
             //Below codes to get client internet speed
             //var imageAddr = "http://www.kenrockwell.com/contax/images/g2/examples/31120037-5mb.jpg"; 
-            var imageAddr = "https://www.myanmarvbdc.com/img/speed-test.jpg";
+            var imageAddr = "http://127.0.0.1:8000/img/speed-test.jpg";
             var downloadSize = 4730000; //bytes
             var speedPercentage = 0;
 

@@ -19,7 +19,7 @@ use Illuminate\Support\Facades\DB;
 
 class syncController extends Controller
 {
-    protected $API_URL = "https://www.myanmarvbdc.com/" ;
+    protected $API_URL = "http://127.0.0.1:8000/" ;
 
     //Upload data page
     public function show_sync_page()
@@ -27,7 +27,7 @@ class syncController extends Controller
         if($user = Auth::user())
         {
             $api_code = Crypt::decryptString(Auth::user()->api_code);
-
+// return $api_code;
             $client = new \GuzzleHttp\Client();
 
             $response = $client->request('POST', $this->API_URL . 'generate_token', [
@@ -37,7 +37,7 @@ class syncController extends Controller
                     'user_region_code' => Auth::user()->region_code
                 ]
             ]);
-
+// dd($response);
             if($response->getStatusCode() == "200")
             {
                 Session::put('api_token', (string)$response->getBody());
@@ -123,7 +123,7 @@ class syncController extends Controller
 
                 return view('nmcp-template.sync_download',compact(
                     'name','tbl_core_facility_count','tbl_individual_case_count','size',
-                    'tbl_hfm_count','hfm_size', 'haveUpdateHfm', 'hf_update', 'hf_count', 'icmv_count', 'client_hf_count'
+                    'tbl_hfm_count','hfm_size', 'haveUpdateHfm', 'hf_count', 'icmv_count', 'client_hf_count'
                 ));
             }
             else{
@@ -590,6 +590,7 @@ class syncController extends Controller
     }
 
     public function check_server_hfm(){
+
         try {
             $client_hfm = $this->getClientHfm(Auth::user()->region_code) ;
             if(count($client_hfm) > 0){
@@ -597,7 +598,7 @@ class syncController extends Controller
                 $guzzleResponse = $guzzleClient->request("POST", $this->API_URL . "/check_server_hfm", [
                     "form_params" => [
                         "user_id" => Auth::user()->id,
-                        "api_token" => session("api_token"),
+                        "api_code" => Crypt::decryptString(Auth::user()->api_code),
                         "user_region_code" => Auth::user()->region_code,
                         "client_hfm" => json_encode($this->getClientHfm(Auth::user()->region_code))
                     ]

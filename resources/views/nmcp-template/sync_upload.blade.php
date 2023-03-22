@@ -171,7 +171,7 @@
                 };
            }
 
-            var imageAddr = "https://www.myanmarvbdc.com/img/speed-test.jpg";
+            var imageAddr = "http://127.0.0.1:8000/img/speed-test.jpg";
             var downloadSize = 4730000; //bytes
             var speedPercentage = 0;
             function ShowProgressMessage(msg) {

@@ -26,6 +26,9 @@
                 <ul class="treeview-menu">
                     <li id="li_chart" class="active"><a href="/chart"><i class="fa fa-circle-o"></i> ပင်မစာမျက်နှာ</a></li>
                     <li id="li_dataentry" class="active"><a href="/"><i class="fa fa-circle-o"></i> အချက်အလက်ဖြည့်သွင်းရန်</a></li>
+                    <li id="li_dataentry" class="active"><a href="{{ route('parent-register') }}"><i class="fa fa-circle-o"></i> အချက်အလက်ဖြည့်သွင်းရန် - v2</a></li>
+
+                    {{-- <li id="li_dataentry_2" class="active"><a href="/entry_2"><i class="fa fa-circle-o"></i> အချက်အလက်ဖြည့်သွင်းရန်_2</a></li> --}}
                     <li id="li_forms" class=""><a href="/forms"><i class="fa fa-circle-o"></i> ကုသမှုအချက်အလက်များ (Server) </a></li>
                     <li id="li_offline-forms" class=""><a href="/offline-forms"><i class="fa fa-circle-o"></i> ကုသမှုအချက်အလက်များ (Offline)</a></li>
                     <li id="li_health-facilities" class=""><a href="/health-facilities"><i class="fa fa-circle-o"></i> ကျန်းမာရေးဌာနများ</a></li>
@@ -73,6 +76,10 @@
         reset_menu_class();
         document.getElementById('li_dataentry').classList.add("active");
     }
+    else if(currentRoute == "li_dataentry_2"){
+		reset_menu_class();
+		document.getElementById('li_dataentry_2').classList.add("active");
+	}
     else if(currentRoute == "chart"){
 		reset_menu_class();
 		document.getElementById("li_chart").classList.add("active");
@@ -86,6 +93,7 @@
     function reset_menu_class(){
         // document.getElementById("li_chart").classList.remove("active");
         document.getElementById("li_dataentry").classList.remove("active");
+        document.getElementById("li_dataentry_2").classList.remove("active");
         document.getElementById("li_health-facilities").classList.remove("active");
         //document.getElementById("li_users").classList.remove("active");
         document.getElementById("li_forms").classList.remove("active");

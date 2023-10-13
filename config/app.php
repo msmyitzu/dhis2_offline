@@ -64,10 +64,10 @@ return [
     | ahead and set this to a sensible default for you out of the box.
     |
     */
-    /* 
+    /*
     | app version create by heinsoe
     */
-    'version' => '6.0.1_Feb', // version 6 start rollout at 2022-Feb
+    'version' => '6.0.3_Sep', // version 6 start rollout at 2022-Feb
 
     'timezone' => 'Asia/Yangon',
 

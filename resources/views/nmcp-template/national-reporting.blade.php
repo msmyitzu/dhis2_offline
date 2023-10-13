@@ -1,4 +1,4 @@
-<div class="tab-pane" id="national_reporting">
+<div class="" id="">
     <div class="row">
         <div class="col-md-12">
             <div class="row">

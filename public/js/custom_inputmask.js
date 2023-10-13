@@ -184,7 +184,7 @@ class custom_inputmask {
         this._input.value = null;
         this._shadow.map(char => char === null ? this._input.value += this._nullChar : this._input.value += char)
         this._input.selectionStart = index;
-        this._input.selectionEnd = index; 
+        this._input.selectionEnd = index;
         // var dArr = value.split('-').join('').split('').map( (char, key) => {
         //     console.log(key, Number(char));
         //     this._digitType(Number(char), key);

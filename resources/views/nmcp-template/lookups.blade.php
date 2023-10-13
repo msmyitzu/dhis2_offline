@@ -6,7 +6,7 @@
     <html>
     <head>
         <meta charset="UTF-8">
-        <title>National Malerial Control Program</title>
+        <title>National Malerial Control Programme</title>
         <meta name="_token" content="{{ csrf_token() }}" />
         <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
         <!-- Bootstrap 3.3.2 -->
@@ -15,13 +15,13 @@
         <link href="{{asset ('bower_components/font-awesome/css/font-awesome.css')}}" rel="stylesheet" type="text/css" />
         <!-- Ionicons -->
         <link href="{{ asset('/bower_components/Ionicons/css/ionicons.css') }}" rel="stylesheet" type="text/css" />
-        
+
         <!-- AdminLTE Skins. We have chosen the skin-blue for this starter
               page. However, you can choose any other skin. Make sure you
               apply the skin class to the body tag so the changes take effect.
         -->
         <link href="{{ asset('/bower_components/admin-lte/dist/css/skins/skin-red.min.css')}}" rel="stylesheet" type="text/css" />
-        
+
         <!-- Select2 -->
         <!--link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css"-->
         <link rel="stylesheet" href="{{ asset('/bower_components/select2/dist/css/select2.min.css')}}">
@@ -33,7 +33,11 @@
         <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
         <![endif]-->
         <!-- Theme style -->
-        <link href="{{ asset('/bower_components/admin-lte/dist/css/AdminLTE.css')}}" rel="stylesheet" type="text/css" />
+        {{-- bootstrap css1 js1 --}}
+
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+
     </head>
     <body class="hold-transition skin-red sidebar-mini">
         <!-- ./wrapper -->
@@ -49,13 +53,13 @@
             <div class="content-wrapper">
                 <!-- Main content -->
                 <section class="content">
-                    
+
                     <div class="row">
                         <div class="col-md-12">
-                                
+
                             <div class="box">
                                 <div class="box-header">
-                                    <h3 class="box-title">မြို့နယ်/တိုက်နယ်ဆေးရုံ/ကျန်းမာရေးဌာန/ကျေးလက်ကျန်းမာရေးဌာန/ကျန်းမာရေးဌာနခွဲ</h3>                            
+                                    <h3 class="box-title">မြို့နယ်/တိုက်နယ်ဆေးရုံ/ကျန်းမာရေးဌာန/ကျေးလက်ကျန်းမာရေးဌာန/ကျန်းမာရေးဌာနခွဲ</h3>
                                 </div>
                                 <!-- /.box-header table_tbl_hfm-->
                                 <div class="box-body">
@@ -102,7 +106,7 @@
                                                 <td>{{ $hfm->End }}</td>
                                                 <td>{{ $hfm->Date_Updated }}</td>
                                                 <td>{{ $hfm->hfm_id }}</td>
-                                            </tr>                                        
+                                            </tr>
                                         @endforeach
                                     </tbody>
                                 </table>
@@ -110,7 +114,7 @@
                                 {{ $tbl_hfm->links() }}
                             </div>
                         </div>
-                    </div>  
+                    </div>
 
                 </section>
                 <!-- /.content -->
@@ -123,19 +127,22 @@
         {{-- <script src="{{ asset ('bower_components/jquery/dist/jquery.min.js')}}"></script> --}}
         <!-- jQuery UI 1.11.4 -->
         <script src="{{ asset ('bower_components/jquery-ui/jquery-ui.min.js')}}"></script>
-        <!-- Select2 -->     
-        
+        <!-- Select2 -->
+
         <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
         <script>
             $.widget.bridge('uibutton', $.ui.button);
         </script>
         <!-- Bootstrap 3.3.7 -->
         <script src="{{ asset ('bower_components/bootstrap/dist/js/bootstrap.min.js')}}"></script>
+        {{-- bootstrap css1 js1 --}}
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
         <!-- Slimscroll -->
         <script src="{{ asset ('bower_components/jquery-slimscroll/jquery.slimscroll.min.js')}}"></script>
         <!-- FastClick -->
         <script src="{{ asset ('bower_components/fastclick/lib/fastclick.js')}}"></script>
-               
+
         <!-- DataTables -->
         <script src="{{ asset ('bower_components/datatables.net/js/jquery.dataTables.min.js')}}"></script>
         <script src="{{ asset ('bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js')}}"></script>
@@ -143,7 +150,7 @@
         <script src="{{ asset ('js/nmcp.js')}}"></script>
         <!-- AdminLTE App -->
         <script src="{{ asset ('bower_components/admin-lte/dist/js/adminlte.min.js')}}"></script>
-        
+
         <script>
 
             $( document ).ready(function() {
@@ -196,12 +203,12 @@
                 font-weight:bold;
             }
             /*thead th { border-bottom: 2px solid #E86156;}*/
-            
+
 
             tbody tr:hover{
                 background-color: #FFFFCB;
             }
-            
+
             .table{
                 margin-bottom: 0px;
             }

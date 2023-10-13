@@ -55,33 +55,52 @@ use Session ;
 class lookupsController extends Controller
 {
 
-    protected $API_URL = "http://127.0.0.1:8000/" ;
+    protected $API_URL = "https:/www.myanmarvbdc.com/" ;
 
     public function get_grab_all_corefacility()
-    {        
+    {
         $grab_all_corefacility = grab_all_corefacility::all();
 
         $header = array (
             'Content-Type' => 'application/json; charset=UTF-8',
             'charset' => 'utf-8'
         );
-    
+
         return response()->json($grab_all_corefacility , 200, $header, JSON_UNESCAPED_UNICODE);
 
     }
 
     public function get_grab_all_corefacility_temp()
-    {        
+    {
         $grab_all_corefacility_temp = grab_all_corefacility_temp::orderBy('desc');
 
         $header = array (
             'Content-Type' => 'application/json; charset=UTF-8',
             'charset' => 'utf-8'
         );
-    
+
         return response()->json($grab_all_corefacility_temp , 200, $header, JSON_UNESCAPED_UNICODE);
 
     }
+
+public function show_entry_2_page(){
+
+    return view('nmcp-template.data-entry-2');
+}
+
+    //start for entry-_2blade
+    public function get_lp_state_region_for_entry_2()
+	{
+        $lp_state_region = lp_state_region::all();
+
+		$header = array (
+            'Content-Type' => 'application/json; charset=UTF-8',
+            'charset' => 'utf-8'
+        );
+
+        return response()->json($lp_state_region , 200, $header, JSON_UNESCAPED_UNICODE);
+	}
+    //end for entry_2blade
 
     public function show_forms_page()
     {
@@ -140,19 +159,19 @@ class lookupsController extends Controller
     {
         if(Auth::check()) {
             $ts_code = session()->get('region_code');
-            $last_corefacility_id = tbl_core_facility::where('TS_Code', $ts_code)->max('CF_Code');
-            $grab_last_corefacility = grab_last_corefacility::where('CF_Code','=', $last_corefacility_id)->get();
+            $last_corefacility_id = tbl_core_facility_temp::where('TS_Code', $ts_code)->max('CF_Code');
+            $grab_last_corefacility = grab_last_corefacility_temp::where('CF_Code','=', $last_corefacility_id)->get();
 
             $header = array (
                 'Content-Type' => 'application/json; charset=UTF-8',
                 'charset' => 'utf-8'
             );
-        
+
             return response()->json($grab_last_corefacility , 200, $header, JSON_UNESCAPED_UNICODE);
-        
+
         }else {
             return redirect('/login');
-        }    
+        }
     }
 
     public function get_grab_healthfacilitypage($ts_code, $hftypeid)
@@ -162,14 +181,14 @@ class lookupsController extends Controller
                 ['TS_Code', '=', $ts_code],
                 ['HFTypeID', '=', $hftypeid]
             ])->orderBy('SC_Name')->get();
-        
+
             $header = array (
                 'Content-Type' => 'application/json; charset=UTF-8',
                 'charset' => 'utf-8'
             );
-        
+
             return response()->json($grab_healthfacilitypage , 200, $header, JSON_UNESCAPED_UNICODE);
-        }  
+        }
         catch (\Exception $e) {
             return $e->getMessage();
         }
@@ -183,7 +202,7 @@ class lookupsController extends Controller
             'Content-Type' => 'application/json; charset=UTF-8',
             'charset' => 'utf-8'
         );
-    
+
         return response()->json($lp_district , 200, $header, JSON_UNESCAPED_UNICODE);
     }
 
@@ -269,7 +288,7 @@ class lookupsController extends Controller
             'Content-Type' => 'application/json; charset=UTF-8',
             'charset' => 'utf-8'
         );
-    
+
         return response()->json($lp_hftype , 200, $header, JSON_UNESCAPED_UNICODE);
     }
 
@@ -332,7 +351,7 @@ class lookupsController extends Controller
 		$lp_pyear = lp_pyear::all();
 		return $lp_pyear;
     }
-    
+
     public function get_lp_rdt_result(){
         $lp_rdt_result = lp_rdt_result::all();
         return $lp_rdt_result;
@@ -341,14 +360,16 @@ class lookupsController extends Controller
 	public function get_lp_state_region()
 	{
         $lp_state_region = lp_state_region::all();
-        
+
 		$header = array (
             'Content-Type' => 'application/json; charset=UTF-8',
             'charset' => 'utf-8'
         );
-    
+
         return response()->json($lp_state_region , 200, $header, JSON_UNESCAPED_UNICODE);
 	}
+
+
 
 	public function get_lp_township($sr_code)
 	{
@@ -364,26 +385,26 @@ class lookupsController extends Controller
                 'Content-Type' => 'application/json; charset=UTF-8',
                 'charset' => 'utf-8'
             );
-        
+
             return response()->json($lp_township , 200, $header, JSON_UNESCAPED_UNICODE);
-        }  
+        }
         catch (\Exception $e) {
             return $e->getMessage();
         }
     }
-    
+
     public function get_tbl_hfm()
 	{
         try{
             $tbl_hfm = tbl_hfm::take(100)->orderBy('SC_Name')->get();
-        
+
             $header = array (
                 'Content-Type' => 'application/json; charset=UTF-8',
                 'charset' => 'utf-8'
             );
-        
+
             return response()->json($tbl_hfm , 200, $header, JSON_UNESCAPED_UNICODE);
-        }  
+        }
         catch (\Exception $e) {
             return $e->getMessage();
         }
@@ -399,8 +420,8 @@ class lookupsController extends Controller
 	{
 		$lp_yesno = lp_yesno::all();
 		return $lp_yesno;
-    }   
-    
+    }
+
     public function ShowMainTabs()
     {
 
@@ -408,7 +429,7 @@ class lookupsController extends Controller
         {
             //Select only related region depends on user role
             if(session('role_id') === 2)
-            { 
+            {
                 //role_id 2 is State level
                 $sr_code = session('region_code');
                 $lp_state_region = lp_state_region::where('sr_code','=',$sr_code)->orderBy('sr_name')->get();
@@ -416,24 +437,24 @@ class lookupsController extends Controller
                 //return $lp_state_region;
             }
             else if(session('role_id') === "3")
-            {   
+            {
                 //role_id 3 is Township level
-                $ts_code = lp_township::where('ts_code','=', session('region_code'))->pluck('ts_code')->first(); 
-                //ts_code = MMR001001    sr_code = MMR001   
-                $sr_code = substr($ts_code, 0, 6);         
+                $ts_code = lp_township::where('ts_code','=', session('region_code'))->pluck('ts_code')->first();
+                //ts_code = MMR001001    sr_code = MMR001
+                $sr_code = substr($ts_code, 0, 6);
                 $lp_state_region = lp_state_region::where('sr_code','=', $sr_code)->orderBy('sr_name')->get();
                 $lp_township = lp_township::where('ts_code','=', $ts_code)->get();
             }
             else
             {
                 //role_id 1 is Admin. Select everything
-                
+
                 $lp_state_region = lp_state_region::orderBy('sr_name')->get();
                 $lp_township = lp_township::all();
-            }            
-            
+            }
+
             $name = strtoupper(Auth::user()->name);
-                       
+
             return view('adminlte-template.admin-template',compact(
                             'lp_state_region','lp_township','name'//,'grab_last_corefacility'
                         ));
@@ -451,40 +472,40 @@ class lookupsController extends Controller
                 ['TS_Code', '=', $ts_code],
                 ['Form_Code', '=', $form_code]
             ])->orderBy('HF_Name')->get();
-        
+
             $header = array (
                 'Content-Type' => 'application/json; charset=UTF-8',
                 'charset' => 'utf-8'
             );
-        
+
             return response()->json($grab_hfconnect1 , 200, $header, JSON_UNESCAPED_UNICODE);
-        }  
+        }
         catch (\Exception $e) {
             return $e->getMessage();
         }
     }
 
-    public function get_grab_hfconnect($ts_code)
+        public function get_grab_hfconnect($ts_code)
     {
         try {
             $grab_hfconnect = DB::table('grab_hfconnect')->where("TS_Code", "=", $ts_code)->where('status', '<>', '0')->get();
-            
+
             $header = array (
                 'Content-Type' => 'application/json; charset=UTF-8',
                 'charset' => 'utf-8'
             );
-        
+
             return response()->json($grab_hfconnect , 200, $header, JSON_UNESCAPED_UNICODE);
         } catch (\Exception $e) {
             return $e->getMessage();
         }
     }
-    
+
     public function get_grab_hfm($hf_code)
     {
         // $grab_hfm = grab_hfm::where('hf_code','=', $hf_code)->orderBy('sc_name')->get();
-        
-        $grab_hfm = DB::select('select "SC_Name" as sc_name, "SC_Name_MM" as sc_name_mm, "SC_Code" as sc_code, "HF_Code" as hf_code 
+
+        $grab_hfm = DB::select('select "SC_Name" as sc_name, "SC_Name_MM" as sc_name_mm, "SC_Code" as sc_code, "HF_Code" as hf_code
                 from tbl_hfm where status <> 0 and "HF_Code" = ? order by "SC_Name"', [
                 $hf_code
             ]);
@@ -493,25 +514,27 @@ class lookupsController extends Controller
             'Content-Type' => 'application/json; charset=UTF-8',
             'charset' => 'utf-8'
         );
-    
+
         return response()->json($grab_hfm , 200, $header, JSON_UNESCAPED_UNICODE);
     }
 
     public function get_patient_registerform(Request $request){
+        //dd($request);
         $lp_patient_location = lp_patient_location::all();
         $lp_patient_sex = lp_patient_sex::all();
         $lp_rdt_result = lp_rdt_result::all();
         $lp_treatment_given = lp_treatment_given::all();
         $lp_act_code = lp_act_code::whereNotIn('act_code', [6,9])->get();
         $lp_micro_result = lp_micro_result::all();
-        // $lp_in_out_cat = lp_in_out_cat::all();     
+        // $lp_in_out_cat = lp_in_out_cat::all();
         $lp_yesno = lp_yesno::all();
         $lp_occupation = lp_occupation::all();
         $lp_org = lp_org::all();
 		$tbl_village = tbl_village::where("ts_pcode", "=", $request->input('select_lp_township_de'))->orderBy('village', 'asc')->get();
-        // $lp_form_cat = lp_form_cat::where('form_code', '=' , $request->input("select_lp_form_cat"))->get();
+        $lp_form_cat = lp_form_cat::where('form_code', '=' , $request->input("select_lp_form_cat"))->get();
 
         $lp_form_cat = $request->input("select_lp_form_cat");
+        // dd($lp_form_cat);
         $form_number = $request->input("form_number");
         $lp_state_region = $request->input("select_lp_state_region");
         $lp_township_de = $request->input("select_lp_township_de");
@@ -547,16 +570,16 @@ class lookupsController extends Controller
                 $tbl_core_facility_temp->DE_DateTime = date('Y/m/d H:i');
                 $tbl_core_facility_temp->TS_Code = $lp_township_de;
                 $tbl_core_facility_temp->save();
-                
+
                 // $cf_code = tbl_core_facility_temp::max('CF_Code'); /* get the latest inserted id (cf_code) */
                 // return $cf_code;
-                $cf_code = tbl_core_facility_temp::max('cf_code'); /* get the latest inserted id (cf_code) */                
+                $cf_code = tbl_core_facility_temp::max('cf_code'); /* get the latest inserted id (cf_code) */
                 $cf_link_code = $form_number . $form_month . substr($form_year, -2) . (session("userid") * date("ds")) . $cf_code;
-                
-                $tbl_core_facility_temp->cf_link_code = $cf_link_code;               
+
+                $tbl_core_facility_temp->cf_link_code = $cf_link_code;
                 $tbl_core_facility_temp->save();
             }
-        } 
+        }
         else {
             $tbl_core_facility_temp = tbl_core_facility_temp::where('cf_link_code','=', $cf_link_code)->get();
             $tbl_individual_case_temp = tbl_individual_case_temp::where('cf_link_code','=', $cf_link_code)->get();
@@ -564,7 +587,7 @@ class lookupsController extends Controller
             //$cf_link_code = $tbl_core_facility_temp->cf_link_code;
 			// $tbl_total_patient_temp = tbl_total_patient_temp::where('cf_link_code', '=', $cf_link_code)->get();
         }
-        
+
 
         $lp_state_region_name = lp_state_region::where('sr_code','=',$lp_state_region)->value('sr_name');
         $lp_township_name = lp_township::where('ts_code','=',$lp_township_de)->value('ts_name');
@@ -572,6 +595,7 @@ class lookupsController extends Controller
         $hfm_name = tbl_hfm::where('SC_Code','=',$hfm_de)->value('SC_Name');
         $lp_form_cat_name = lp_form_cat::where('form_code','=',$lp_form_cat)->value('form_name');
         $tbl_individual_case_temp = $tbl_individual_case_temp ?? [];
+         $review_mode = session('role_id') == 4 ? true : false ;
 
         if( $lp_form_cat == "2" || $lp_form_cat == "3" ){
             $tbl_org_vhv = tbl_org_vhv_temp::where('cf_link_code', '=', $cf_link_code)->get();
@@ -586,7 +610,7 @@ class lookupsController extends Controller
                                 'tbl_hfm_sc_name','hfm_name','lp_form_cat_name',
                                 'cf_code','lp_in_out_cat', 'tbl_individual_case_temp',
                                 'lp_yesno','lp_occupation', 'tbl_org_vhv','cf_link_code',
-								'tbl_village'));
+								'tbl_village','review_mode'));
 
         }else{
             $tbl_total_patient_temp = tbl_total_patient_temp::where('cf_link_code', '=', $cf_link_code)->get();
@@ -602,9 +626,130 @@ class lookupsController extends Controller
                                 'tbl_hfm_sc_name','hfm_name','lp_form_cat_name',
                                 'cf_code','tbl_individual_case_temp','lp_in_out_cat',
                                 'lp_yesno','lp_occupation','cf_link_code', 'tbl_total_patient_temp',
-								'tbl_village'));
+								'tbl_village','review_mode'));
         }
     }
+
+    public function get_patient_registerform_offline(Request $request){
+
+        $lp_form_cat = lp_form_cat::orderBy('form_name')->get();    //->limit(2)
+        //dd($lp_form_cat);
+        $lp_state_region = lp_state_region::get();
+        $lp_township = lp_township::get();
+        return view('parent-register-template.index',compact('lp_form_cat','lp_state_region','lp_township'));
+    }
+
+    //start for entry_2blade get_patient_registerform_for_entry_2
+    // public function get_patient_registerform_for_entry_2(Request $request){
+    //     $lp_patient_location = lp_patient_location::all();
+    //     $lp_patient_sex = lp_patient_sex::all();
+    //     $lp_rdt_result = lp_rdt_result::all();
+    //     $lp_treatment_given = lp_treatment_given::all();
+    //     $lp_act_code = lp_act_code::whereNotIn('act_code', [6,9])->get();
+    //     $lp_micro_result = lp_micro_result::all();
+    //     // $lp_in_out_cat = lp_in_out_cat::all();
+    //     $lp_yesno = lp_yesno::all();
+    //     $lp_occupation = lp_occupation::all();
+    //     $lp_org = lp_org::all();
+	// 	$tbl_village = tbl_village::where("ts_pcode", "=", $request->input('select_lp_township_de'))->orderBy('village', 'asc')->get();
+    //     // $lp_form_cat = lp_form_cat::where('form_code', '=' , $request->input("select_lp_form_cat"))->get();
+
+    //     $lp_form_cat = $request->input("select_lp_form_cat");
+    //     $form_number = $request->input("form_number");
+    //     $lp_state_region = $request->input("select_lp_state_region");
+    //     $lp_township_de = $request->input("select_lp_township_de");
+    //     $tbl_hfm_de = $request->input("select_tbl_hfm_de");
+    //     $hfm_de = $request->input("select_hfm_de");
+    //     $form_date = $request->input("form-date");
+    //     list($form_month,$form_year) = explode('/', $form_date);
+
+    //     $cf_link_code = $request->input("cf_link_code");
+    //     // return $request;
+    //     $cf_code = "0";
+    //     /*CF_Code == " " means this form is new. No existing record inside tbl_core_facility*/
+    //     // return session("region_code");
+
+    //     if($cf_link_code == "" /*&& $lp_form_cat == "2"*/){
+    //         $tbl_check = tbl_core_facility_temp::where('Form_No', '=', $form_number)
+    //                                             ->where('Form_Code', '=', $lp_form_cat)
+    //                                             // ->where('SC_Code', '=', $hfm_de)
+    //                                             ->where('PMonth', '=', $form_month)
+    //                                             ->where('PYear', '=', $form_year)
+    //                                             ->where('user_id', '=', session('userid'))
+    //                                             ->count();
+    //         if(!($tbl_check > 0)){
+    //             $tbl_core_facility_temp = new tbl_core_facility_temp();
+    //             $tbl_core_facility_temp->Form_Code = $lp_form_cat;
+    //             $tbl_core_facility_temp->Form_No = $form_number;
+    //             $tbl_core_facility_temp->SC_Code = $hfm_de;
+    //             $tbl_core_facility_temp->HF_Code = $tbl_hfm_de;
+    //             $tbl_core_facility_temp->PMonth = $form_month;
+    //             $tbl_core_facility_temp->PYear = $form_year;
+    //             $tbl_core_facility_temp->user_id = session("userid");
+    //             // $tbl_core_facility_temp->user_region_code = session("region_code");
+    //             $tbl_core_facility_temp->DE_DateTime = date('Y/m/d H:i');
+    //             $tbl_core_facility_temp->TS_Code = $lp_township_de;
+    //             $tbl_core_facility_temp->save();
+
+    //             // $cf_code = tbl_core_facility_temp::max('CF_Code'); /* get the latest inserted id (cf_code) */
+    //             // return $cf_code;
+    //             $cf_code = tbl_core_facility_temp::max('cf_code'); /* get the latest inserted id (cf_code) */
+    //             $cf_link_code = $form_number . $form_month . substr($form_year, -2) . (session("userid") * date("ds")) . $cf_code;
+
+    //             $tbl_core_facility_temp->cf_link_code = $cf_link_code;
+    //             $tbl_core_facility_temp->save();
+    //         }
+    //     }
+    //     else {
+    //         $tbl_core_facility_temp = tbl_core_facility_temp::where('cf_link_code','=', $cf_link_code)->get();
+    //         $tbl_individual_case_temp = tbl_individual_case_temp::where('cf_link_code','=', $cf_link_code)->get();
+    //         // $tbl_org_vhv = tbl_org_vhv_temp::where('cf_link_code', '=', $cf_link_code)->get(); // only for vhv form page
+    //         //$cf_link_code = $tbl_core_facility_temp->cf_link_code;
+	// 		// $tbl_total_patient_temp = tbl_total_patient_temp::where('cf_link_code', '=', $cf_link_code)->get();
+    //     }
+
+
+    //     $lp_state_region_name = lp_state_region::where('sr_code','=',$lp_state_region)->value('sr_name');
+    //     $lp_township_name = lp_township::where('ts_code','=',$lp_township_de)->value('ts_name');
+    //     $tbl_hfm_sc_name = tbl_hfm::where('SC_Code','=',$tbl_hfm_de)->value('SC_Name');
+    //     $hfm_name = tbl_hfm::where('SC_Code','=',$hfm_de)->value('SC_Name');
+    //     $lp_form_cat_name = lp_form_cat::where('form_code','=',$lp_form_cat)->value('form_name');
+    //     $tbl_individual_case_temp = $tbl_individual_case_temp ?? [];
+    //      $review_mode = session('role_id') == 4 ? true : false ;
+
+    //     if( $lp_form_cat == "2" || $lp_form_cat == "3" ){
+    //         $tbl_org_vhv = tbl_org_vhv_temp::where('cf_link_code', '=', $cf_link_code)->get();
+    //         $lp_in_out_cat = lp_in_out_cat::whereIn('ioc_code', [2,4,7,9])->get();
+    //         return view('nmcp-template/vhv-patient-register-form',
+    //                     compact('lp_patient_location', 'lp_patient_sex',
+    //                             'lp_rdt_result', 'lp_treatment_given',
+    //                             'lp_act_code', 'lp_org',
+    //                             'lp_form_cat','form_number','lp_township_de',
+    //                             'tbl_hfm_de','hfm_de','form_year','form_month',
+    //                             'lp_state_region','lp_state_region_name','lp_township_name',
+    //                             'tbl_hfm_sc_name','hfm_name','lp_form_cat_name',
+    //                             'cf_code','lp_in_out_cat', 'tbl_individual_case_temp',
+    //                             'lp_yesno','lp_occupation', 'tbl_org_vhv','cf_link_code',
+	// 							'tbl_village','review_mode'));
+
+    //     }else{
+    //         $tbl_total_patient_temp = tbl_total_patient_temp::where('cf_link_code', '=', $cf_link_code)->get();
+    //         $lp_in_out_cat = lp_in_out_cat::whereNotIn('ioc_code', [0,1])->get();
+    //         //return $tbl_individual_case_temp;
+    //         return view('nmcp-template/patient-register-form',
+    //                     compact('lp_patient_location', 'lp_patient_sex',
+    //                             'lp_rdt_result', 'lp_treatment_given',
+    //                             'lp_act_code', 'lp_micro_result',
+    //                             'lp_form_cat','form_number','lp_township_de',
+    //                             'tbl_hfm_de','hfm_de','form_year','form_month',
+    //                             'lp_state_region','lp_state_region_name','lp_township_name',
+    //                             'tbl_hfm_sc_name','hfm_name','lp_form_cat_name',
+    //                             'cf_code','tbl_individual_case_temp','lp_in_out_cat',
+    //                             'lp_yesno','lp_occupation','cf_link_code', 'tbl_total_patient_temp',
+	// 							'tbl_village','review_mode'));
+    //     }
+    // }
+    //end for entry_2blade
 
     public function get_existing_form_data($cf_link_code){
         return tbl_core_facility_temp::where('cf_link_code', $cf_link_code)->get();
@@ -629,7 +774,7 @@ class lookupsController extends Controller
     public function save_tbl_individual_case_temp(Request $request)
     {
         try {
-            $data = json_decode($request->getContent(), true);            
+            $data = json_decode($request->getContent(), true);
 			if($data){
 				tbl_individual_case_temp::insert($data);
 				return "1";
@@ -645,7 +790,7 @@ class lookupsController extends Controller
     public function save_tbl_total_patient(Request $request)
     {
         try {
-            $data = json_decode($request->getContent(), true);            
+            $data = json_decode($request->getContent(), true);
             if($data){
 			    tbl_total_patient::insert($data);
                 return "1";
@@ -657,7 +802,9 @@ class lookupsController extends Controller
     }
 
     public function save_tbl_total_patient_temp(Request $request)
+
     {
+        
         try {
             $data = json_decode($request->getContent(), true);
             if($data){
@@ -684,7 +831,7 @@ class lookupsController extends Controller
             return $e->getMessage();
         }
     }
-	
+
 	public function update_tbl_total_patient_temp(Request $request)
     {
 		try{
@@ -708,7 +855,7 @@ class lookupsController extends Controller
     public function update_tbl_individual_case(Request $request)
     {
         try {
-            $data = json_decode($request->getContent(), true);   
+            $data = json_decode($request->getContent(), true);
             //return $data["P_Number"];
             if($data) {
                 $tbl_individual_case = tbl_individual_case::find($data["P_Number"]);
@@ -751,7 +898,7 @@ class lookupsController extends Controller
     public function update_tbl_individual_case_temp(Request $request)
     {
         try {
-            $data = json_decode($request->getContent(), true);   
+            $data = json_decode($request->getContent(), true);
             //return $data["P_Number"];
             if($data) {
                 $tbl_individual_case_temp = tbl_individual_case_temp::find($data["P_Number"]);
@@ -797,7 +944,7 @@ class lookupsController extends Controller
             'Content-Type' => 'application/json; charset=UTF-8',
             'charset' => 'utf-8'
         );
-    
+
         return response()->json($tbl_individual_case , 200, $header, JSON_UNESCAPED_UNICODE);
     }
 
@@ -809,7 +956,7 @@ class lookupsController extends Controller
             'Content-Type' => 'application/json; charset=UTF-8',
             'charset' => 'utf-8'
         );
-    
+
         return response()->json($tbl_individual_case_temp , 200, $header, JSON_UNESCAPED_UNICODE);
     }
 
@@ -821,7 +968,7 @@ class lookupsController extends Controller
             'Content-Type' => 'application/json; charset=UTF-8',
             'charset' => 'utf-8'
         );
-    
+
         return response()->json($tbl_individual_case , 200, $header, JSON_UNESCAPED_UNICODE);
     }
 
@@ -833,7 +980,7 @@ class lookupsController extends Controller
             'Content-Type' => 'application/json; charset=UTF-8',
             'charset' => 'utf-8'
         );
-    
+
         return response()->json($tbl_individual_case_temp , 200, $header, JSON_UNESCAPED_UNICODE);
     }
 
@@ -902,12 +1049,12 @@ class lookupsController extends Controller
 
         if(Auth::check()){
             $name = strtoupper(Auth::user()->name);
-            
+
             if(session('role_id') === "1"){ // admin level
                 $lp_state_region = lp_state_region::all();
             }else if(session('role_id') === '2'){ // state level
                 $sr_code = session('region_code');
-                $lp_state_region = lp_state_region::where('sr_code', '=', $sr_code)->orderBy('sr_name')->get(); 
+                $lp_state_region = lp_state_region::where('sr_code', '=', $sr_code)->orderBy('sr_name')->get();
             }else if(session('role_id') == '3'){ // township level
                 // dd(session('role_id'));
                 $ts_code = session('region_code');
@@ -931,36 +1078,36 @@ class lookupsController extends Controller
     public function show_lookup_page()
     {
         if(Auth::check()){
-            //$tbl_hfm = tbl_hfm::paginate(10);        
+            //$tbl_hfm = tbl_hfm::paginate(10);
             $name = strtoupper(Auth::user()->name);
 
             $lp_hftype = lp_hftype::all();
 
             if(session('role_id') == "2")
-            { 
+            {
                 //role_id 2 is State level
-                $sr_code = session('region_code');            
+                $sr_code = session('region_code');
                 $lp_state_region = lp_state_region::where('sr_code','=',$sr_code)->orderBy('sr_name')->get();
             }
             else if(session('role_id') == "3")
-            { 
-                $ts_code = session('region_code');  
-                $sr_code = substr($ts_code, 0, 6); 
+            {
+                $ts_code = session('region_code');
+                $sr_code = substr($ts_code, 0, 6);
                 $ts_code = lp_township::where('ts_code','=', session('region_code'))->pluck('ts_code')->first();
-                        
+
                 $lp_state_region = lp_state_region::where('sr_code','=', $sr_code)->orderBy('sr_name')->get();
                 $lp_township = lp_township::where('ts_code','=', $ts_code)->get();
             }
             else if(session('role_id') == "1")
-            { 
-                $ts_code = session('region_code');            
+            {
+                $ts_code = session('region_code');
                 $lp_state_region = lp_state_region::orderBy('sr_name')->get();
                 $lp_township = lp_township::all();
             }
             else
             {
                 return redirect('/login');
-            }  
+            }
 
             return view('nmcp-template.health-facilities',compact(
                 'name','lp_hftype','lp_state_region',
@@ -974,17 +1121,17 @@ class lookupsController extends Controller
     public function show_login()
     {
         if(Auth::check()){
-            return redirect('/chart');    
+            return redirect('/chart');
         }else{
             return view('adminlte-template.login');
         }
     }
-    
+
     public function auth(Request $request)
     {
         $email = $request->input("email");
         $password = $request->input("password");
-        
+
         // check user table
         // if not exist data in user table fetch from server
         $count = User::where('email', '=', $email)->count();
@@ -996,8 +1143,8 @@ class lookupsController extends Controller
 
                 }
                 session([
-                    'email'=>$email, 
-                    'userid'=>$user->id, 
+                    'email'=>$email,
+                    'userid'=>$user->id,
                     'region_code'=>$user->region_code,
                     'role_id'=>$user->role_id,
                     'api_code'=>$user->api_code
@@ -1009,7 +1156,7 @@ class lookupsController extends Controller
                 return redirect('/login')->withErrors(['error' => 'Email and Password not match.']);
             }
         }else{
-            return redirect('pure-login')->with('info', 'သင့်အကောင့်နှင့်သက်ဆိုင်သော ဒေတာများမရှိသေးပါ။ Online Server မှာဒေါင်းလော့ဆွဲယူရန် Email နှင့် Password ပြန်လည်ထည့်သွင်းပါ။');
+            return redirect('pure-login')->with('info', 'သင့်အကောင့်နှင့်သက်ဆိုင်သော ဒေတာများမရှိသေးပါ။ Online Server မှာ downloadဆွဲယူရန် Email နှင့် Password ပြန်လည်ထည့်သွင်းပါ။');
         }
 
         // if (Auth::attempt(['email' => $email, 'password' => $password]))
@@ -1018,8 +1165,8 @@ class lookupsController extends Controller
         //     if($user->role_id == "2"){
         //     }
         //     session([
-        //         'email'=>$email, 
-        //         'userid'=>$user->id, 
+        //         'email'=>$email,
+        //         'userid'=>$user->id,
         //         'region_code'=>$user->region_code,
         //         'role_id'=>$user->role_id,
         //         'api_code'=>$user->api_code
@@ -1047,8 +1194,8 @@ class lookupsController extends Controller
             if(Auth::attempt(['email' => $email, 'password' => $password])){
                 $user = Auth::user();
                 session([
-                    'email'=>$email, 
-                    'userid'=>$user->id, 
+                    'email'=>$email,
+                    'userid'=>$user->id,
                     'region_code'=>$user->region_code,
                     'role_id'=>$user->role_id,
                     'api_code'=>$user->api_code
@@ -1062,7 +1209,7 @@ class lookupsController extends Controller
                         'password' => $password
                     ]
                 ]);
-                
+
                 $res = $response->getBody()->getContents() ;
                 // return $res ;
                 if($res == '99'){
@@ -1116,7 +1263,7 @@ class lookupsController extends Controller
             return session('api_token');
 
             $name = strtoupper(Auth::user()->name);
-                       
+
             $users = grab_users::all();
             $user_roles = user_role::all();
 
@@ -1139,13 +1286,13 @@ class lookupsController extends Controller
             if($action === "save")
             {
                 $user = new User();
-                
+
                 $user->name = $request->input("txt_name");
                 $user->email = $request->input("txt_email");
                 $user->password = Hash::make($request->input("txt_password"));
                 $user->role_id = $request->input("select_user_role");
                 $user->region_code = $request->input("select_region_code");
-                $user->api_code = Crypt::encryptString(str_random(40));    
+                $user->api_code = Crypt::encryptString(str_random(40));
 
                 $user->save();
             }
@@ -1187,34 +1334,34 @@ class lookupsController extends Controller
             if($api_code == $request->input("api_code")){
                 return "Passed";
             }
-            
+
         }
         else{
             return "Authentication failed.";
         }
-        
+
     }
 
     public function request_token()
-    {        
+    {
         $api_code = Crypt::decryptString(Auth::user()->api_code);
 
-       
+
         //CURLOPT_URL => "http://127.0.0.1:8000/generate_token?userid=".Auth::user()->id."&api_code=".$api_code,
-        
+
         $data = [
-            'query' => [ 
+            'query' => [
                             'userid' => Auth::user()->id,
                             'api_code' => $api_code
                     ]
         ];
-        
+
         $client = new \GuzzleHttp\Client();
         $res = $client->get('http://127.0.0.1:8000/generate_token', $data);
         echo $res->getStatusCode(); // 200
         echo $res->getBody(); // { "type": "User", ....
     }
-	
+
     public function get_vhv_dataentry_row($ts_code)
     {
 		$lp_patient_location = lp_patient_location::all();
@@ -1228,15 +1375,15 @@ class lookupsController extends Controller
 		$lp_yesno = lp_yesno::whereIn('YN_Code', ['0','1','7'])->get();
         $lp_occupation = lp_occupation::all();
         $tbl_village = tbl_village::where("ts_pcode","=", $ts_code)->orderBy('village', 'asc')->get();
-		return view('nmcp-template/vhv_dataentry_row', 
+		return view('nmcp-template/vhv_dataentry_row',
 					compact('lp_patient_location', 'lp_patient_sex',
 							'lp_rdt_result', 'lp_treatment_given',
 							'lp_act_code', 'lp_org', 'lp_form_cat',
 							'lp_in_out_cat', 'lp_yesno', 'lp_occupation', 'tbl_village'));
 	}
-	
-    public function get_patient_dataentry_row($ts_code)
+    public function get_patient_dataentry_row2($ts_code)
     {
+
 		$lp_patient_location = lp_patient_location::all();
 		$lp_patient_sex = lp_patient_sex::where('Sex_Code', '0')->orWhere('Sex_Code', '1')->get();
 		$lp_rdt_result = lp_rdt_result::whereNotIn('r_code', ['9'])->get();
@@ -1250,7 +1397,33 @@ class lookupsController extends Controller
         $lp_micro_result = lp_micro_result::whereNotIn('mr_code', ['5','9'])->get();
         $tbl_village = tbl_village::where("ts_pcode","=", $ts_code)->orderBy('village', 'asc')->get();
 
-		return view('nmcp-template/patient_register_form_row', 
+
+		return view('nmcp-template/patient_register_form_row',
+					compact('lp_patient_location', 'lp_patient_sex',
+							'lp_rdt_result', 'lp_treatment_given',
+							'lp_act_code', 'lp_org', 'lp_form_cat',
+							'lp_in_out_cat', 'lp_yesno', 'lp_occupation', 'lp_micro_result','tbl_village'));
+	}
+
+    public function get_patient_dataentry_row($ts_code)
+    {
+
+        $ts_code = 'MMR011010';
+		$lp_patient_location = lp_patient_location::all();
+		$lp_patient_sex = lp_patient_sex::where('Sex_Code', '0')->orWhere('Sex_Code', '1')->get();
+		$lp_rdt_result = lp_rdt_result::whereNotIn('r_code', ['9'])->get();
+		$lp_treatment_given = lp_treatment_given::whereIn('tg_code', ['1','2','77'])->get();
+		$lp_act_code = lp_act_code::whereNotIn('act_code', ['6','9'])->get();
+		$lp_org = lp_org::all();
+		$lp_form_cat = lp_form_cat::all();
+		$lp_in_out_cat =  lp_in_out_cat::whereNotIn('ioc_code', [0,1,9])->get();
+		$lp_yesno = lp_yesno::whereIn('YN_Code', ['0','1','7'])->get();
+		$lp_occupation = lp_occupation::all();
+        $lp_micro_result = lp_micro_result::whereNotIn('mr_code', ['5','9'])->get();
+        $tbl_village = tbl_village::where("ts_pcode","=", $ts_code)->orderBy('village', 'asc')->get();
+
+
+		return view('nmcp-template/patient_register_form_row',
 					compact('lp_patient_location', 'lp_patient_sex',
 							'lp_rdt_result', 'lp_treatment_given',
 							'lp_act_code', 'lp_org', 'lp_form_cat',

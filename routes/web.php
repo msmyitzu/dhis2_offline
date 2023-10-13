@@ -21,7 +21,10 @@ Route::get('/health-facilities', 'lookupsController@show_lookup_page');
 
 Route::get('/chart','lookupsController@show_charts');
 
-Route::post('/patient-register-form', 'lookupsController@get_patient_registerform');
+Route::post('/patient-register-form','lookupsController@get_patient_registerform');        //
+//for entry-2
+Route::post('entry_2/patient-register-form', 'lookupsController@get_patient_registerform_for_entry_2');
+
 Route::get('/get_existing_form_data/{cf_link_code}', 'lookupsController@get_existing_form_data');
 
 Route::get('/vhv-patient-register-form', 'lookupsController@get_vhv_patient_registerform');
@@ -46,6 +49,9 @@ Route::get('/get_lp_pmonth','lookupsController@get_lp_pmonth');
 Route::get('/get_lp_pyear','lookupsController@get_lp_pyear');
 Route::get('/get_lp_rdt_result','lookupsController@get_lp_rdt_result');
 Route::get('/get_lp_state_region','lookupsController@get_lp_state_region');
+
+Route::get('entry_2/get_lp_state_region','lookupsController@get_lp_state_region_for_entry_2');
+
 Route::get('/get_lp_township/{sr_code}','lookupsController@get_lp_township');
 Route::get('/get_lp_treatment_given','lookupsController@get_lp_treatment_given');
 Route::get('/get_lp_yesno','lookupsController@get_lp_yesno');
@@ -76,6 +82,7 @@ Route::post('/save_tbl_total_patient_temp','lookupsController@save_tbl_total_pat
 Route::post('/update_tbl_total_patient_temp','lookupsController@update_tbl_total_patient_temp');
 Route::post('/update_tbl_individual_case','lookupsController@update_tbl_individual_case');
 Route::post('/update_tbl_individual_case_temp','lookupsController@update_tbl_individual_case_temp');
+Route::get('/entry_2', 'lookupsController@show_entry_2_page');
 Route::get('/forms', 'lookupsController@show_forms_page');
 Route::get('/offline-forms', 'lookupsController@show_offline_forms_page');
 Route::get('/get_patient_dataentry_row/{ts_code}', 'lookupsController@get_patient_dataentry_row');
@@ -178,3 +185,8 @@ Route::get('/chart_exam_and_positive_all','reportController@chart_exam_and_posit
 Route::get('/chart_rhc_exam_and_positive','reportController@chart_rhc_exam_and_positive');
 Route::get('/chart_exam_and_positve_micrordt','reportController@chart_exam_and_positve_micrordt');
 Route::get('/chart_reported_percentages','reportController@chart_reported_percentages');
+
+
+
+
+Route::get('/pregform','lookupsController@get_patient_registerform_offline')->name('parent-register');

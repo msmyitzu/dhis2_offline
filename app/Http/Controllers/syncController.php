@@ -19,7 +19,7 @@ use Illuminate\Support\Facades\DB;
 
 class syncController extends Controller
 {
-    protected $API_URL = "http://127.0.0.1:8000/" ;
+    protected $API_URL = "https://www.myanmarvbdc.com/" ;   //login
 
     //Upload data page
     public function show_sync_page()
@@ -291,8 +291,13 @@ class syncController extends Controller
 
     public function sync_download()
     {
+
+
+
         if($user = Auth::user())
+
         {
+
             if(Session::get('api_token') != ""){
 
                 $client = new \GuzzleHttp\Client();
@@ -425,7 +430,7 @@ class syncController extends Controller
         if($user = Auth::user())
         {
             if(Session::get('api_token') != ""){
-                
+
                 $client_hfm = [] ;
                 if($request->input('updateHfm') == '1'){
                     // $client_hfm = tbl_hfm::get(['hfm_id', 'Date_Updated', 'status']);
@@ -451,7 +456,7 @@ class syncController extends Controller
                     if(count($json) > 0){
                         if(count($client_hfm) > 0){
                             foreach($json as $update_hfm){
-                                
+
                                 $tbl_hfm = tbl_hfm::find($update_hfm['hfm_id']) == null ? new tbl_hfm() : tbl_hfm::find($update_hfm['hfm_id']);
                                 $tbl_hfm->Date_Updated= $update_hfm["Date_Updated"];
                                 $tbl_hfm->End= $update_hfm["End"];
@@ -499,7 +504,7 @@ class syncController extends Controller
                                 $tbl_hfm->hfm_id= $data["hfm_id"];
                                 $tbl_hfm->save();
                                 $i = $i + 1;
-    
+
                                 file_put_contents("status.txt", $i);
                             }
                         }
@@ -620,7 +625,7 @@ class syncController extends Controller
     private function getClientHfm($ts_code){
         return tbl_hfm::where('TS_Code', '=', $ts_code)->get(["hfm_id", "SC_Code", "HF_Code", "TS_Code", "Date_Updated", "status"]) ;
     }
-    
+
     // public function delete_all_hfm(){
     //     tbl_hfm::truncate() ;
     //     return redirect('/');

@@ -128,7 +128,7 @@
         <input type="text" placeholder="မှတ်ချက်(Optional)">
     </td>
     <td>
-        <a href="javascript:void(0)" class="delete_icon" onClick="delete_row(this);" rowNo="">
+        <a href="javascript:void(0)" class="delete_icon" onclick="delete_row(this)" rowNo="">
             <li class="fa fa-trash-o"></li>
         </a>
     </td>
@@ -139,7 +139,7 @@
     var dd = today.getDate() < 10 ? `0${today.getDate()}` : today.getDate() ;
     var mm = today.getMonth() < 9 ? `0${today.getMonth() + 1}` : today.getMonth() + 1 ;
     var yyyy = today.getFullYear();
-    var maxDate = `${dd}-${mm}-${yyyy}` ;    
+    var maxDate = `${dd}-${mm}-${yyyy}` ;
     $('.dentry_date').inputmask('datetime', {
         inputFormat : 'dd-mm-yyyy',
         placeholder : '_',
@@ -147,7 +147,7 @@
         min : '09-09-0900',
         max : maxDate
     });
-    
+
     // $(document).ready(function(){
     //     var table = document.getElementById('data_entry_body');
     //     var v = null ; var _id = null ;
@@ -158,14 +158,14 @@
     //     }
     //     var xxx = new custom_inputmask(_id, '_', '-');
     // });
-	
+
 	$(".dentry_age").on('keypress keyup blur', function(event){
 		$(this).val($(this).val().replace(/[^\d].+/, ""));
 		if ((event.which < 48 || event.which > 57)) {
 			event.preventDefault();
 		}
     });
-    
+
     // $(".only-integer").on('keypress keyup blur', function(event){
     //     if ((event.which < 48 || event.which > 57)) {
     //         if(event.which != 46){

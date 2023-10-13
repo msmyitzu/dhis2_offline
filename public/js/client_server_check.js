@@ -31,6 +31,7 @@
             }
         }
         xmlHttp.open("GET", BASE_URL + 'check_server_hfm');
+       
         xmlHttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
         xmlHttp.setRequestHeader('X-CSRF-TOKEN', CSRF);
         xmlHttp.send();

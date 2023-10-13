@@ -28,7 +28,7 @@ class datamonitorController extends Controller
 		$township = lp_township::where('ts_code', '=', $township_code)->value('ts_name_mmr');
 		return view('report-template.datamonitor',compact('data','header_text', 'township'));
 	}
-	
+
 	public function check_malaria_pq_notgiven(Request $request)
 	{
 		list($month, $year) = explode('/', $request->input("dm-form-date"));
@@ -65,7 +65,7 @@ class datamonitorController extends Controller
 		$township = lp_township::where('ts_code', '=', $township_code)->value('ts_name_mmr');
 		return view('report-template.datamonitor',compact('data','header_text', 'township'));
 	}
-	
+
 	public function check_pv_and_cq_not_given(Request $request)
 	{
 		list($month, $year) = explode('/', $request->input("dm-form-date"));
@@ -132,13 +132,13 @@ class datamonitorController extends Controller
 		list($month, $year) = explode('/', $request->input("dm-form-date"));
 		/*return $month."/".$year."/".$request->input("select_lp_township_dm")."/".$request->input("select_lp_form_cat_dm")
 		."/".$request->input("select_lp_stateregion_dm");*/
-		
+
 		$no_data = 'false' ;
 
 		$data = DB::select(
 			"select ts_name, hf_name, sc_name, Number_Of_Forms from Grab_HFReported where (pyear=? and pmonth=? and ts_code=? and sr_code=?)", [
 				$year,
-				$month,				
+				$month,
 				$request->input("select_lp_township_dm"),
 				$request->input("select_lp_stateregion_dm")
 			]
@@ -158,7 +158,7 @@ class datamonitorController extends Controller
             'Content-Type' => 'application/json; charset=UTF-8',
             'charset' => 'utf-8'
         );
-		
+
 		$header_text = 'Health Facility Reported and Form Returned';
 
 		if(count($data) == '0'){
@@ -179,7 +179,7 @@ class datamonitorController extends Controller
 		$data = DB::select(
 			"select ts_name, hf_name, sc_name, Form_No from Grab_FormNumber where (pyear=? and pmonth=? and ts_code=? and sr_code=?)", [
 				$year,
-				$month,				
+				$month,
 				$request->input("select_lp_township_dm"),
 				$request->input("select_lp_stateregion_dm")
 			]
@@ -208,7 +208,7 @@ class datamonitorController extends Controller
 			"select ts_name, hf_name, sc_name, Form_No, Number_Of_Records from Grab_Records_Per_Form where (pyear=? and pmonth=? and ts_code=? and sr_code=?)", [
 				$year,
 				$month,
-				$request->input("select_lp_township_dm"),				
+				$request->input("select_lp_township_dm"),
 				$request->input("select_lp_stateregion_dm")
 			]
 		);
@@ -252,7 +252,7 @@ class datamonitorController extends Controller
 				$request->input("select_lp_stateregion_dm")
 			]
 		);
-	
+
 
 		//SQLite doesn't have date compare function. So, "Month_Delayed" must be calculated manually.
 		foreach($data as $d)
@@ -261,15 +261,15 @@ class datamonitorController extends Controller
 			$de_date = $d->Data_Entry_Date;
 			$date = date_create(substr($de_date, 0, 10));
 			$date = date_format($date, 'Y-m-d');
-			
-			$to = \Carbon\Carbon::createFromFormat('Y-m-d', $program_date);
+
+			$to = \Carbon\Carbon::createFromFormat('Y-m-d', $_date);
 			$from = \Carbon\Carbon::createFromFormat('Y-m-d', $date);
 
 			$diff_in_months = $to->diffInMonths($from);
-			
+
 			$d->Month_Delayed = $diff_in_months;
 		}
-		
+
 		$header = array (
             'Content-Type' => 'application/json; charset=UTF-8',
             'charset' => 'utf-8'
@@ -408,7 +408,7 @@ class datamonitorController extends Controller
 		$township = lp_township::where('ts_code', '=', $township_code)->value('ts_name_mmr');
 		return view('report-template.datamonitor',compact('data','header_text', 'township'));
 	}
-	
+
 	public function check_patient_age_blank(Request $request)
 	{
 		list($month, $year) = explode('/', $request->input("dm-form-date"));
@@ -491,7 +491,7 @@ class datamonitorController extends Controller
 		$no_data = "false" ;
 
 		$data = DB::select(
-			"select form_name, sr_name, ts_name, hf_name, sc_name, Form_No, row_no, ok, de, form from Year_Month_Validation_TS_new 
+			"select form_name, sr_name, ts_name, hf_name, sc_name, Form_No, row_no, ok, de, form from Year_Month_Validation_TS_new
 			where (pmonth=? and pyear=? and ts_code=? and sr_code=?)", [
 				$month,
 				$year,
@@ -499,7 +499,7 @@ class datamonitorController extends Controller
 				$request->input("select_lp_stateregion_dm")
 			]
 		);
-		
+
 		$header = array (
             'Content-Type' => 'application/json; charset=UTF-8',
             'charset' => 'utf-8'

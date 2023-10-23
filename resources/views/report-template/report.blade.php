@@ -68,7 +68,7 @@
                         <tr>
                             <?php
 
-						if (count($data) > 0 ||  != "null") {
+						if (count($data) >||!= "null") {
 							for($i=0; $i<1; $i++){
 									$header_columns = $data[$i];
 									echo "<th>No</th>" ;
@@ -103,7 +103,7 @@
                     <tfoot>
                         <tr>
                             <?php
-                            
+
                             for ($f = 0; $f < 1; $f++) {
                                 $header_columns = $data[$f];
                                 $a = 1;
@@ -113,7 +113,7 @@
                                     $a = $a + 1;
                                 }
                             }
-                            
+
                             ?>
                         </tr>
                     </tfoot>

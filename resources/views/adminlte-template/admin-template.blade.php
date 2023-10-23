@@ -73,6 +73,10 @@
     <script src="{{ asset('bower_components/admin-lte/dist/js/demo.js') }}"></script>
     <script src="{{ asset('bower_components/datatables.net/js/jquery.dataTables.min.js') }}"></script>
     <script src="{{ asset('bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js') }}"></script>
+{{-- 14/10/23 --}}
+    {{-- <script src="{{ asset('js/bootbox.all.min.js') }}"></script> --}}
+    {{-- <script src="{{ asset('js/custom_inputmask.js') }}"></script> --}}
+
     <script src="{{ asset('js/nmcp.js') }}"></script>
     <script src="{{ asset('js/popper.min.js') }}"></script>
     <script src="{{ asset('js/bootbox.all.min.js') }}"></script>

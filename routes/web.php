@@ -11,7 +11,7 @@
 |
 */
 
-Route::get('/','lookupsController@ShowMainTabs');
+Route::get('/main','lookupsController@ShowMainTabs');
 
 Route::get('/health-facilities', function(){
     return view('adminlte-template.lp-tbl-hfm');
@@ -82,9 +82,7 @@ Route::post('/save_tbl_total_patient_temp','lookupsController@save_tbl_total_pat
 Route::post('/update_tbl_total_patient_temp','lookupsController@update_tbl_total_patient_temp');
 Route::post('/update_tbl_individual_case','lookupsController@update_tbl_individual_case');
 Route::post('/update_tbl_individual_case_temp','lookupsController@update_tbl_individual_case_temp');
-Route::get('/entry_2', 'lookupsController@show_entry_2_page');
-Route::get('/forms', 'lookupsController@show_forms_page');
-Route::get('/offline-forms', 'lookupsController@show_offline_forms_page');
+
 Route::get('/get_patient_dataentry_row/{ts_code}', 'lookupsController@get_patient_dataentry_row');
 Route::get('/get_vhv_dataentry_row/{ts_code}', 'lookupsController@get_vhv_dataentry_row');
 Route::post('/delete_tbl_core_facility_by_code/{cf}', 'lookupsController@delete_tbl_core_facility_by_code');
@@ -106,7 +104,7 @@ Route::post('login','lookupsController@auth');
 
 Route::get('/login/signout','lookupsController@signout');
 
-Route::get('/users','lookupsController@show_users');
+Route::get('/users','lookupsController@show_users');    //can't delete
 
 Route::post('/users/{action}','lookupsController@edit_users');
 
@@ -189,4 +187,4 @@ Route::get('/chart_reported_percentages','reportController@chart_reported_percen
 
 
 
-Route::get('/pregform','lookupsController@get_patient_registerform_offline')->name('parent-register');
+Route::get('/','lookupsController@get_patient_registerform_offline')->name('parent-register');

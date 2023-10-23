@@ -25,14 +25,14 @@
                 </a>
                 <ul class="treeview-menu">
                     <li id="li_chart" class="active"><a href="/chart"><i class="fa fa-circle-o"></i> ပင်မစာမျက်နှာ</a></li>
-                    <li id="li_dataentry" class="active"><a href="/"><i class="fa fa-circle-o"></i> အချက်အလက်ဖြည့်သွင်းရန်</a></li>
+                    {{-- <li id="li_dataentry" class="active"><a href="/"><i class="fa fa-circle-o"></i> အချက်အလက်ဖြည့်သွင်းရန်</a></li> --}}
                     <li id="li_dataentry" class="active"><a href="{{ route('parent-register') }}"><i class="fa fa-circle-o"></i> အချက်အလက်ဖြည့်သွင်းရန် - v2</a></li>
 
                     {{-- <li id="li_dataentry_2" class="active"><a href="/entry_2"><i class="fa fa-circle-o"></i> အချက်အလက်ဖြည့်သွင်းရန်_2</a></li> --}}
-                    <li id="li_forms" class=""><a href="/forms"><i class="fa fa-circle-o"></i> ကုသမှုအချက်အလက်များ (Server) </a></li>
-                    <li id="li_offline-forms" class=""><a href="/offline-forms"><i class="fa fa-circle-o"></i> ကုသမှုအချက်အလက်များ (Offline)</a></li>
-                    <li id="li_health-facilities" class=""><a href="/health-facilities"><i class="fa fa-circle-o"></i> ကျန်းမာရေးဌာနများ</a></li>
-                    <!--li id="li_users" class=""><a href="/users"><i class="fa fa-circle-o"></i> အသုံးပြုသူများ</a></li-->
+                    {{-- <li id="li_forms" class=""><a href="/forms"><i class="fa fa-circle-o"></i> ကုသမှုအချက်အလက်များ (Server) </a></li> --}}
+                    {{-- <li id="li_offline-forms" class=""><a href="/offline-forms"><i class="fa fa-circle-o"></i> ကုသမှုအချက်အလက်များ (Offline)</a></li> --}}
+                    {{-- <li id="li_health-facilities" class=""><a href="/health-facilities"><i class="fa fa-circle-o"></i> ကျန်းမာရေးဌာနများ</a></li> --}}
+                    <li id="li_users" class=""><a href="/users"><i class="fa fa-circle-o"></i> အသုံးပြုသူများ</a></li>
                     <li id="li_sync" class=""><a href="/sync"><i class="fa fa-circle-o"></i> အချက်အလက်ပို့ဆောင်ရန်</a></li>
                     <li id="li_syncd" class="">
                         <a href="/syncd"><i class="fa fa-circle-o"></i> အချက်အလက်ရယူရန်

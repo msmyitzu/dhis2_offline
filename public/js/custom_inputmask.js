@@ -6,25 +6,25 @@ class custom_inputmask {
         this._currentDate = new Date();
         this._sepChar = sepChar;
         this._nullChar = nullChar;
-        this._init(_element);
+        // this._init(_element);
     }
 
-    _init(_element) {
-        this._input = document.getElementById(_element);
-        if(this._input.getAttribute('data-date')){
-            console.log("set date mode!");
-            this._shadow = [null, null, this._sepChar, null, null, this._sepChar, null, null, null, null];
-            this._months = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
-            this._populateDate();
-        }else if(this._input) {
-            this._shadow = [null, null, this._sepChar, null, null, this._sepChar, null, null, null, null];
-            this._months = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
-            this._Events();
-            this._render();
-        } else {
-            console.log("can't find tag");
-        }
-    }
+    // _init(_element) {
+    //     this._input = document.getElementById(_element);
+    //     if(this._input.getAttribute('data-date')){
+    //         console.log("set date mode!");
+    //         this._shadow = [null, null, this._sepChar, null, null, this._sepChar, null, null, null, null];
+    //         this._months = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+    //         this._populateDate();
+    //     }else if(this._input) {
+    //         this._shadow = [null, null, this._sepChar, null, null, this._sepChar, null, null, null, null];
+    //         this._months = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+    //         this._Events();
+    //         this._render();
+    //     } else {
+    //         console.log("can't find tag");
+    //     }
+    // }
 
     _Events() {
         this._input.onclick = () => {

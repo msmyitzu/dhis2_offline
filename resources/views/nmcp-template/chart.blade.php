@@ -38,7 +38,7 @@
             <div class="content-wrapper">
                 <!-- Main content -->
                 <section class="content">
-					
+
 					<!--div class="row">
                         <div class="col-md-12">
 							<div class="alert alert-danger alert-dismissible">
@@ -46,185 +46,19 @@
 									<i class="fa fa-times"></i>
 								</button>
 								<h4><i class="icon fa fa-info"></i> Please Note!</h4>
-								For presentation purpose, some of the values are hardcoded. 
+								For presentation purpose, some of the values are hardcoded.
 								Real live data will be displayed once the project is finalized and filled with actual data.
 							</div>
 						</div>
 					</div-->
 
-					<div class="row">
-                        <div class="col-md-6">
-							<div class="box box-danger">
-								
-								<div class="box-header with-border">
-									<h3 class="box-title" style="font-size: small;"></h3>
-									<div class="box-tools pull-right">
-										<button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
-										</button>
-										<button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
-									</div>
-								</div>
 
-								<div class="box-body">
-									<div class="form-group">
-									  <label style="" class="col-sm-4 control-label text-right">တိုင်းနှင့်ပြည်နယ်</label>
-									  <div class="col-sm-8">
-										<select class="form-control select2" id='chart_sr_code'
-										@if(session('role_id') !== '3')
-											onchange="load_lp_township('chart_township', this.value)"
-										@endif
-											>
-											<option value=""> ရွေးပါ </option>
-											@foreach($lp_state_region as $sr)
-												<option value="{{ $sr->sr_code }}" <?php echo session('role_id') == '3' ? 'selected' : '' ?>>
-													{{ $sr->sr_name }} | {{ $sr->sr_name_mmr }}
-												</option>
-											@endforeach
-										</select>
-									  </div>
-									</div><br/><br/>
 
-									<div class="form-group">
-									  <label for="" class="col-sm-4 control-label text-right">မြို့နယ်</label>
-									  <div class="col-sm-8">
-											@if(session('role_id') === '3')
-											<select class="form-control select2 chart_township" id="chart_ts_code">
-												<option value=""> ရွေးပါ </option>
-												@foreach($lp_township as $ts)
-													<option value="{{$ts->ts_code}}" <?php echo session('role_id') == '3' ? 'selected' : '' ?>>
-															{{ $ts->ts_name }} | {{ $ts->ts_name_mmr }}
-													</option>
-												@endforeach
-											</select>
-											@else
-												<select class="form-control select2 chart_township" id="chart_ts_code">
-													<option value="0"> ရွေးပါ </option>
-												</select>
-											@endif
-									  </div>
-									</div><br/><br/>
 
-									<div class="form-group">
-									  <label for="" class="col-sm-4 control-label text-right">စတင်သည့်ရက်</label>
 
-									  <div class="col-sm-8">
-										<input id="chart_sdate" class="form-control" type="sdate" name="sdate" placeholder="ရွေးပါ" readonly>
-									  </div>
-									</div><br/><br/>
 
-									<div class="form-group">
-									  <label class="col-sm-4 control-label text-right">ပြီးဆုံးသည့်ရက်</label>
-
-									  <div class="col-sm-8">
-										<input id="chart_edate" class="form-control" type="edate" name="edate" placeholder="ရွေးပါ" readonly>
-									  </div>
-									</div><br/><br/>
-
-									<div class="form-group">
-									  <label for="" class="col-sm-4 control-label"></label>
-
-									  <div class="col-sm-8">
-										<button type="button" class="btn btn-sm btn-success pull-right" id="update_charts">Update Charts</button>
-									  </div>
-									</div>
-									
-									
-								</div>								
-
-							  </div>
-							
-						</div>
-					</div>
 
 					
-
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="box box-default">
-								<div class="box-header with-border">
-									<h3 class="box-title" style="font-size: small;">Township Monthly Exam and Positive (Monthly)</h3>
-									<div class="box-tools pull-right">
-										<button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
-										</button>
-										<button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
-									</div>
-								</div>
-								<div class="box-body">
-									<div class="chart" id="township-monthly-Chart"></div>
-								</div>
-							</div>
-                        </div>
-
-						<div class="col-md-6">
-                            <div class="box box-default">
-							<div class="box-header with-border">
-								<h3 class="box-title" style="font-size: small;">Reported Percent Chart</h3>
-								<div class="box-tools pull-right">
-								<button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
-								</button>
-								<button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
-								</div>
-							</div>
-							<div class="box-body">
-								<div class="chart" id="percent-chart"></div>
-							</div>
-							</div>
-                        </div>
-                    </div>  
-
-					<div class="row">
-                        <div class="col-md-6">
-                            <div class="box box-default">
-							<div class="box-header with-border">
-								<div class="box-title" style="font-size: small;">RHC-Wise Exam and Positive (Monthly)</div>
-								<div class="box-tools pull-right">
-								<button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
-								</button>
-								<button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
-								</div>
-							</div>
-							<div class="box-body">
-								<div class="chart" id="rhc-chart"></div>
-							</div>
-							</div>
-                        </div>
-
-						<div class="col-md-6">
-                            <div class="box box-default">
-							<div class="box-header with-border">
-								<h3 class="box-title" style="font-size: small;">Micro and RDT Result</h3>
-								<div class="box-tools pull-right">
-								<button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
-								</button>
-								<button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
-								</div>
-							</div>
-							<div class="box-body">
-								<div class="chart" id="rdt-chart"></div>
-							</div>
-							</div>
-                        </div>
-
-						
-                    </div> 
-					<!--div class="row">
-                        <div class="col-md-12">
-							<div class="box box-default">
-							<div class="box-header with-border">
-								<h3 class="box-title" style="font-size: small;">Annual parasite incidence</h3>	
-								<div class="box-tools pull-right">
-								<button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
-								</button>
-								<button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
-								</div>
-							</div>
-							<div class="box-body">												
-								Further discussion may required for this graph.
-							</div>
-							</div>
-						</div>
-					</div-->
-                </section>
             </div>
         </div>
         <script src="{{ asset ('/bower_components/jquery/dist/jquery.min.js')}}"></script>
@@ -300,7 +134,7 @@
 						}
 					}
 				}
-				
+
 				var rdt_opt = {
 					chart: {
 						height: 400,
@@ -394,7 +228,7 @@
 								}
 							}
 						}
-					},						
+					},
 					legend: {
 						show: true,
 						floating: true,
@@ -570,7 +404,7 @@
 			function generate_rhc_chart(ts_code, sdate, edate)
 			{
 				var url = "chart_rhc_exam_and_positive?ts_code="+ts_code+"&sdate="+sdate+"&edate="+edate;
-				
+
 				$.ajax({url: url, success: function(result){
 					console.log("this is rhc : ",result);
 					var max = 400 ;
@@ -610,13 +444,13 @@
 							// 	data : result.position
 							// }],
 							xaxis : {
-								// categories : result.rhc_name 
+								// categories : result.rhc_name
 								categories : cat
 							}
 						});
 
 						console.log('this is rhc cat ' ,cat);
-					
+
 					}else{
 						max = result.rhc_names.length * 50 ;
 						result.rhc_names.map( data => cat.push(data) );
@@ -652,14 +486,14 @@
 							// 	data : result.position
 							// }],
 							xaxis : {
-								// categories : result.rhc_name 
+								// categories : result.rhc_name
 								categories : cat
 							}
 						});
 
 						console.log('this is rhc cat ' ,cat);
 					}
-				}});				
+				}});
 			}
         	function generate_reported_percent(ts_code, sdate, edate)
 			{

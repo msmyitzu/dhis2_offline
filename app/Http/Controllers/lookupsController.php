@@ -88,72 +88,6 @@ public function show_entry_2_page(){
     return view('nmcp-template.data-entry-2');
 }
 
-    //start for entry-_2blade
-    public function get_lp_state_region_for_entry_2()
-	{
-        $lp_state_region = lp_state_region::all();
-
-		$header = array (
-            'Content-Type' => 'application/json; charset=UTF-8',
-            'charset' => 'utf-8'
-        );
-
-        return response()->json($lp_state_region , 200, $header, JSON_UNESCAPED_UNICODE);
-	}
-    //end for entry_2blade
-
-    public function show_forms_page()
-    {
-        try{
-            if(Auth::check())
-            {
-                if(session('role_id') == '3') // township level
-                {
-                    $ts_code = session('region_code') ;
-                    $name = strtoupper(Auth::user()->name);
-                    $grab_all_corefacility = grab_all_corefacility::where('ts_code', '=', $ts_code)
-                                            ->orderBy('CF_Code', 'desc')->get();
-                    return view('nmcp-template.forms',compact('grab_all_corefacility','name'));
-                }else if(session('role_id') == '2'){
-                    $sr_code = session('region_code');
-                    $name = strtoupper(Auth::user()->name);
-                    $grab_all_corefacility = grab_all_corefacility::where('sr_code', '=', $sr_code)
-                                            ->orderBy('CF_Code', 'desc')->get();
-                    return view('nmcp-template.forms',compact('grab_all_corefacility','name'));
-                }
-            }else{
-                return redirect('login');
-            }
-        }catch(\Exception $e){
-            return $e->getMessage();
-        }
-    }
-
-    public function show_offline_forms_page()
-    {
-        if($user = Auth::user())
-        {
-            if(session('role_id') == '3') // township level
-            {
-                $ts_code = session('region_code') ;
-                $name = strtoupper(Auth::user()->name);
-                $grab_all_corefacility_temp = grab_all_corefacility_temp::where('ts_code', '=', $ts_code)
-                                        ->orderBy('CF_Code', 'desc')->get();
-                return view('nmcp-template.forms-offline',compact('grab_all_corefacility_temp','name'));
-            }else if(session('role_id') == '2'){ // state/region level
-                $sr_code = session('region_code');
-                $name = strtoupper(Auth::user()->name);
-                $grab_all_corefacility_temp = grab_all_corefacility_temp::where('sr_code', '=', $sr_code)
-                                        ->orderBy('CF_Code', 'desc')->get();
-                return view('nmcp-template.forms-offline',compact('grab_all_corefacility_temp','name'));
-            }else{
-                return session('role_id');
-            }
-        }
-        else {
-            return redirect('login');
-        }
-    }
 
     public function get_grab_last_corefacility()
     {
@@ -639,6 +573,7 @@ public function show_entry_2_page(){
         return view('parent-register-template.index',compact('lp_form_cat','lp_state_region','lp_township'));
     }
 
+
     //start for entry_2blade get_patient_registerform_for_entry_2
     // public function get_patient_registerform_for_entry_2(Request $request){
     //     $lp_patient_location = lp_patient_location::all();
@@ -804,7 +739,7 @@ public function show_entry_2_page(){
     public function save_tbl_total_patient_temp(Request $request)
 
     {
-        
+
         try {
             $data = json_decode($request->getContent(), true);
             if($data){

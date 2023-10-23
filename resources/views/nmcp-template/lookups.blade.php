@@ -51,73 +51,7 @@
 
             <!-- Content Wrapper. Contains page content -->
             <div class="content-wrapper">
-                <!-- Main content -->
-                <section class="content">
-
-                    <div class="row">
-                        <div class="col-md-12">
-
-                            <div class="box">
-                                <div class="box-header">
-                                    <h3 class="box-title">မြို့နယ်/တိုက်နယ်ဆေးရုံ/ကျန်းမာရေးဌာန/ကျေးလက်ကျန်းမာရေးဌာန/ကျန်းမာရေးဌာနခွဲ</h3>
-                                </div>
-                                <!-- /.box-header table_tbl_hfm-->
-                                <div class="box-body">
-                                <table id="table_tbl_hfm" class="table table-bordered nowrap">
-                                    <thead>
-                                        <tr>
-                                            <th>SC_Code</th>
-                                            <th>HF_Code</th>
-                                            <th>TS_Code</th>
-                                            <th>HFTypeID</th>
-                                            <th>SC_Name</th>
-                                            <th>SC_Name_MM</th>
-                                            <th>Org</th>
-                                            <th>MIMU_Code</th>
-                                            <th>Longitude</th>
-                                            <th>Latitude</th>
-                                            <th>HF_CodeReport</th>
-                                            <th>HF_CodeReportingUnit</th>
-                                            <th>FocalPerson</th>
-                                            <th>Start</th>
-                                            <th>End</th>
-                                            <th>Date_Updated</th>
-                                            <th>hfm_id</th>
-                                        </tr>
-                                    </thead>
-
-                                    <tbody id="grab_all_corefacility_container">
-                                        @foreach($tbl_hfm as $hfm)
-                                            <tr>
-                                                <td>{{ $hfm->SC_Code }}</td>
-                                                <td>{{ $hfm->HF_Code }}</td>
-                                                <td>{{ $hfm->TS_Code }}</td>
-                                                <td>{{ $hfm->HFTypeID }}</td>
-                                                <td>{{ $hfm->SC_Name }}</td>
-                                                <td>{{ $hfm->SC_Name_MM }}</td>
-                                                <td>{{ $hfm->Org }}</td>
-                                                <td>{{ $hfm->MIMU_Code }}</td>
-                                                <td>{{ $hfm->Longitude }}</td>
-                                                <td>{{ $hfm->Latitude }}</td>
-                                                <td>{{ $hfm->HF_CodeReport }}</td>
-                                                <td>{{ $hfm->HF_CodeReportingUnit }}</td>
-                                                <td>{{ $hfm->FocalPerson }}</td>
-                                                <td>{{ $hfm->Start }}</td>
-                                                <td>{{ $hfm->End }}</td>
-                                                <td>{{ $hfm->Date_Updated }}</td>
-                                                <td>{{ $hfm->hfm_id }}</td>
-                                            </tr>
-                                        @endforeach
-                                    </tbody>
-                                </table>
-
-                                {{ $tbl_hfm->links() }}
-                            </div>
-                        </div>
-                    </div>
-
-                </section>
-                <!-- /.content -->
+               
             </div>
             <!-- /.content-wrapper -->
         </div>

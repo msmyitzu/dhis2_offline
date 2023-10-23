@@ -1,8 +1,59 @@
 <!-- Font Awesome Icons -->
 <link href="{{ asset('bower_components/font-awesome/css/font-awesome.css') }}" rel="stylesheet" type="text/css" />
 
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js"></script>
+<script data-require="jquery@*" data-semver="2.0.3" src="http://code.jquery.com/jquery-2.0.3.min.js"></script>
+{{-- <script data-require="bootstrap@3.1.1" data-semver="3.1.1" src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+<script src="http://rawgithub.com/makeusabrew/bootbox/master/bootbox.js"></script>
+<link data-require="bootstrap-css@3.1.1" data-semver="3.1.1" rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" /> --}}
+
 <div class="header_bar">
    <a href="/chart" class="back_arrow"> <i class="fa-solid fa-arrow-left"></i> Back </a>
+
+   <ul class="nav navbar-nav">
+    <!-- User Account: style can be found in dropdown.less -->
+    <li class="dropdown user user-menu">
+      <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+        <img src="dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
+        <span class="hidden-xs">Alexander Pierce</span>
+      </a>
+      <ul class="dropdown-menu">
+        <!-- User image -->
+        <li class="user-header">
+          <img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+
+          <p>
+            Alexander Pierce - Web Developer
+            <small>Member since Nov. 2012</small>
+          </p>
+        </li>
+        <!-- Menu Body -->
+        <li class="user-body">
+          <div class="row">
+            <div class="col-xs-4 text-center">
+              <a href="#">Followers</a>
+            </div>
+            <div class="col-xs-4 text-center">
+              <a href="#">Sales</a>
+            </div>
+            <div class="col-xs-4 text-center">
+              <a href="#">Friends</a>
+            </div>
+          </div>
+          <!-- /.row -->
+        </li>
+        <!-- Menu Footer-->
+        <li class="user-footer">
+          <div class="pull-left">
+            <a href="#" class="btn btn-default btn-flat">Profile</a>
+          </div>
+          <div class="pull-right">
+            <a href="#" class="btn btn-default btn-flat">Sign out</a>
+          </div>
+        </li>
+      </ul>
+    </li>
+  </ul>
 
 </div>
 <h5 class="form_head" align="center" style="font-weight: 600; color:rgb(44, 102, 147); padding-top:10px;">ပုံစံအချက်အလက်များကိုသေချာရွေးချယ်ပါ။</h5>
@@ -214,21 +265,21 @@
 
                             <small style="font-weight: 700; font-size: 14px; padding-right:10px; ">
                                 အထွေထွေဆေးခန်းလာပြင်ပလူနာသစ်ပေါင်း(ပြင်ပ)* -</small>
-                            <input type="text" value="0" disabled="" style="width: 10%; ">
+                            <input type="text" value="0" style="width: 10%; ">
 
                         </td>
                         <td style="padding:10px;">
 
                             <small style="font-weight: 700; font-size: 14px; padding-right:10px;"> ငါးနှစ်အောက်အထွေထွေဆေးခန်းလာ(ပြင်ပ)
                                 -</small>
-                            <input type="text" value="0" disabled="" style="width: 10%; ">
+                            <input type="text" value="0" style="width: 10%; ">
 
                         </td>
                         <td sstyle="padding:10px;">
 
                             <small style="font-weight: 700; font-size: 14px; padding-right:10px;"> ကိုယ်ဝန်ဆောင်အထွေထွေဆေးခန်းလာ(ပြင်ပ)
                                 -</small>
-                            <input type="text" value="0" disabled="" style="width: 10%; margin-right:20px;">
+                            <input type="text" value="0" style="width: 10%; margin-right:20px;">
 
                         </td>
                     </tr>
@@ -236,20 +287,20 @@
                         <td style="padding:10px; margin-left:20px;">
 
                             <small style="font-weight: 700; font-size: 14px; padding-right:10px;"> ဆေးရုံတက်အတွင်းလူနာသစ်ပေါင်း -</small>
-                            <input type="text" value="0" disabled="" style="width: 10%; ">
+                            <input type="text" value="0" style="width: 10%; ">
                         </td>
                         <td style="padding:10px;">
 
                             <small style="font-weight: 700; font-size: 14px; padding-right:10px;"> ငါးနှစ်အောက်အထွေထွေဆေးခန်းလာ(အတွင်း)
                                 -</small>
-                            <input type="text" value="0" disabled="" style="width: 10%; ">
+                            <input type="text" value="0" style="width: 10%; ">
 
                         </td>
                         <td style="padding:10px;">
 
                             <small style="font-weight: 700; font-size: 14px; padding-right:10px; "> ကိုယ်ဝန်ဆောင်အထွေထွေဆေးခန်းလာ(အတွင်း)
                                 -</small>
-                            <input type="text" value="0" disabled="" style="width: 10%; margin-right:20px; ">
+                            <input type="text" value="0" style="width: 10%; margin-right:20px; ">
 
                         </td>
 
@@ -259,7 +310,7 @@
                         <td style="padding:10px;">
 
                             <small style="font-weight: 700; font-size: 14px; padding-right:10px; "> ဆေးရုံတွင်သေဆုံးသူစုစုပေါင်း -</small>
-                            <input type="text" value="0" disabled="" style="width: 10%; ">
+                            <input type="text" value="0" style="width: 10%; ">
 
                         </td>
                     </tr>
@@ -443,9 +494,9 @@
                             <th rowspan="2" style="width: 20px"></th>
                         </tr>
                         <tr class="engRows">
-                            <th width="50px">ACT</th>
-                            <th width="50px">CQ</th>
-                            <th width="50px">PQ</th>
+                            <th width="100px">ACT</th>
+                            <th width="100px">CQ</th>
+                            <th width="100px">PQ</th>
                     </thead>
                     <tbody id="data_entry_body">
                         <?php
@@ -464,15 +515,17 @@
 
                             </td>
 
-                             <td><input type="text" id="myInput" oninput="adjustInputWidth(this)"
-                                    placeholder="အမည်" value="<?= $patient->Pt_Name ?>"
-                                    {{ $review_mode ? 'disabled' : '' }}></td>
-                            <td><input type="text" id="myInput" oninput="adjustInputWidth(this)" maxlength="3" placeholder="အသက်"
-                                    value="<?= $patient->Age_Year ?>" class="age dentry_age"
-                                    onchange="checkAge(this)"></td>
-                            <td><input type="text" id="myInput" oninput="adjustInputWidth(this)" placeholder="အဘအမည်"></td>
+                             <td>
+                                <input type="text" id="" oninput="adjustInputWidth(this)"
+                                    placeholder="အမည်" value="">
+                            </td>
                             <td>
-                                <select name="address" id="myInput" oninput="adjustInputWidth(this) onblur="location_changed(this)"
+                                {{-- oninput="adjustInputWidth(this)" --}}
+                                <input type="text" id="ageInput"  maxlength="3" placeholder="အသက်" class="age dentry_age" onchange="checkAge(this)">
+                            </td>
+                            <td><input type="text" id="" oninput="adjustInputWidth(this)" placeholder="အဘအမည်"></td>
+                            <td>
+                                <select name="address" id="" oninput="adjustInputWidth(this)" onblur="location_changed(this)"
                                     {{ $review_mode ? 'disabled' : '' }}>
                                     @if ($patient->Pt_Location == 10)
                                         <option value="{{ $patient->Pt_Location }}">Other</option>
@@ -729,48 +782,49 @@
                             </td>
                             <td><input type="text" placeholder="ရွာ-မြို့-ပြည်-နယ်-တိုင်း"
                                     value="<?= $patient->Pt_Address ?>"{{ $review_mode ? 'disabled' : '' }}></td>
-                            <td>
-                                <select name="sex" class="sex" onchange="checkSex(this)">
-                                    <option value="">ရွေးပါ</option>
-                                    @foreach ($lp_patient_sex as $sex)
-                                        <option value="{{ $sex->Sex_Code }}" <?php echo $sex->Sex_Code == $patient->Sex_Code ? 'selected' : ''; ?>>
-                                            {{ $sex->P_Sex }}
-                                        </option>
-                                    @endforeach
+                            {{-- <td>
+                                <select name="sex" class="sex" id="sex" onchange="checkSex(this)">
+                                    <option value="choose">ရွေးပါ</option>
+                                    <option value="male">male</option>
+                                    <option value="female">female</option>
                                 </select>
-                            </td>
+                            </td> --}}
                             <td>
-                                <select name="preg" class="preg">
-                                    <option value="">ရွေးပါ</option>
-                                    @foreach ($lp_yesno as $yn)
-                                        <option value="{{ $yn->YN_Code }}" <?php echo $yn->YN_Code == $patient->Preg_YN ? 'selected' : ''; ?>>
-                                            {{ $yn->YesNo }}
-                                        </option>
-                                    @endforeach ?>
+                                <select name="preg" class="preg" id="preg" onchange="checkPreg(this)">
+                                    {{-- <option value="">ရွေးပါ</option> --}}
+                                    <option value="N/A">N/A</option>
+                                    <option value="Yes">Yes</option>
+                                    <option value="No">No</option>
+
                                 </select>
 
                             </td>
                             <td>
-                                <select name="rcs" class="rcs">
-                                    <option value="">ရွေးပါ</option>
-                                    @foreach ($lp_micro_result as $micro)
-                                        <option value="{{ $micro->mr_code }}" <?php echo $micro->mr_code == $patient->Micro_Code ? 'selected' : ''; ?>>
-                                            {{ $micro->m_result }}
-                                        </option>
-                                    @endforeach
-                                </select>
-                            </td>
-                            <td>
-                                <select name="rdt" class="rdt">
-                                    <option value="">ရွေးပါ</option>
-                                    @foreach ($lp_rdt_result as $rdt)
-                                        <option value="{{ $rdt->r_code }}" <?php echo $rdt->r_code == $patient->RDT_Code ? 'selected' : ''; ?>>
+                                {{-- <select name="rcs" class="rcs" id="checkRCS" onchange="checkRCS(this)">
+                                    <option value="Missing">Missing</option>
+                                    <option value="Negative">Negative</option>
+                                    <option value="Pf">Pf</option>
+                                    <option value="Pv">Pv</option>
+                                    <option value="Mixed">Mixed</option>
+                                    <option value="Pm">Pm</option>
+                                    <option value="Po">Po</option>
+                                    <option value="NotExam">Not exam</option>
 
-                                            {{ $rdt->r_result }}
-                                        </option>
-                                    @endforeach
-                                </select>
+                                </select> --}}
                             </td>
+                            {{-- <td>
+                                <select name="rdt" class="rdt" id="checkRDT" onchange="checkRTD(this)">
+                                    <option value="Missing">Missing</option>
+                                    <option value="Negative">Negative</option>
+                                    <option value="Pf">Pf</option>
+                                    <option value="Pv">Pv</option>
+                                    <option value="Mixed">Mixed</option>
+                                    <option value="Pm">Pm</option>
+                                    <option value="Po">Po</option>
+                                    <option value="NotExam">Not exam</option>
+
+                                </select>
+                            </td> --}}
                             <td>
                                 <select name="out-patient" id="" style="width: 100%">
                                     <option value="">ရွေးပါ</option>
@@ -805,7 +859,7 @@
                                     {{ $review_mode ? 'disabled' : '' }} class="cq only-integer"> --}}
                             </td>
                             <td>
-                                <select name="" id="" class="pq only-integer">
+                                <select name="" id="pq" class="pq only-integer">
                                     <option value="1">3</option>
                                     <option value="2">6</option>
                                     <option value="3">12</option>
@@ -906,8 +960,34 @@
 {{-- fontawsome 6.4.2 js 1 --}}
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 {{-- for js --}}
+<script src="{{ asset('bower_components/jquery/dist/jquery.js') }}"></script>
+<script src="{{ asset('bower_components/jquery-ui/jquery-ui.min.js') }}"></script>
+<script src="{{ asset('bower_components/select2/dist/js/select2.min.js') }}"></script>
+<script>
+    $.widget.bridge('uibutton', $.ui.button);
+</script>
+<script src="{{ asset('bower_components/bootstrap/dist/js/bootstrap.min.js') }}"></script>
+<script src="{{ asset('bower_components/raphael/raphael.min.js') }}"></script>
+<script src="{{ asset('bower_components/morris.js/morris.min.js') }}"></script>
+<script src="{{ asset('bower_components/jquery-sparkline/dist/jquery.sparkline.min.js') }}"></script>
+<script src="{{ asset('bower_components/admin-lte/plugins/jvectormap/jquery-jvectormap-1.2.2.min.js') }}"></script>
+<script src="{{ asset('bower_components/admin-lte/plugins/jvectormap/jquery-jvectormap-world-mill-en.js') }}"></script>
+<script src="{{ asset('bower_components/jquery-knob/dist/jquery.knob.min.js') }}"></script>
+<script src="{{ asset('bower_components/moment/min/moment.min.js') }}"></script>
+<script src="{{ asset('bower_components/bootstrap-daterangepicker/daterangepicker.js') }}"></script>
+<script src="{{ asset('bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js') }}"></script>
+<script src="{{ asset('bower_components/admin-lte/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js') }}">
+</script>
+<script src="{{ asset('bower_components/jquery-slimscroll/jquery.slimscroll.min.js') }}"></script>
+<script src="{{ asset('bower_components/fastclick/lib/fastclick.js') }}"></script>
+<script src="{{ asset('bower_components/admin-lte/dist/js/demo.js') }}"></script>
+<script src="{{ asset('bower_components/datatables.net/js/jquery.dataTables.min.js') }}"></script>
+<script src="{{ asset('bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js') }}"></script>
 <script src="{{ asset('js/nmcp.js') }}"></script>
-
+<script src="{{ asset('js/popper.min.js') }}"></script>
+<script src="{{ asset('js/bootbox.all.min.js') }}"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
 
 
@@ -1009,57 +1089,58 @@
         var zzz = new custom_inputmask(_id, '_', '-');
     });
 
-    $(function() {
-        var toDate = new Date();
-        var dd = toDate.getDate() < 10 ? `0${toDate.getDate()}` : toDate.getDate();
-        var mm = toDate.getMonth() < 9 ? `0${toDate.getMonth() + 1}` : toDate.getMonth() + 1;
-        var yyyy = toDate.getFullYear();
-        var maxDate = `${dd}-${mm}-${yyyy}`;
+    // $(function() {
+    //     var toDate = new Date();
+    //     var dd = toDate.getDate() < 10 ? `0${toDate.getDate()}` : toDate.getDate();
+    //     var mm = toDate.getMonth() < 9 ? `0${toDate.getMonth() + 1}` : toDate.getMonth() + 1;
+    //     var yyyy = toDate.getFullYear();
+    //     var maxDate = `${dd}-${mm}-${yyyy}`;
 
 
-        $('.dentry_date').inputmask('datetime', {
-            inputFormat: 'dd-mm-yyyy',
-            placeholder: '_',
-            clearIncomplete: true,
-            min: '09-09-0999',
-            max: maxDate
-        });
+    //     $('.dentry_date').inputmask('datetime', {
+    //         inputFormat: 'dd-mm-yyyy',
+    //         placeholder: '_',
+    //         clearIncomplete: true,
+    //         min: '09-09-0999',
+    //         max: maxDate
+    //     });
 
-        $('#txt_Total_Outpatient').focus().select();
+    //     $('#txt_Total_Outpatient').focus().select();
 
-        $('#health_facility_table').DataTable({
-            'paging': true,
-            'lengthChange': false,
-            'searching': false,
-            'ordering': true,
-            'info': true,
-            'autoWidth': false
-        });
+    //     $('#health_facility_table').DataTable({
+    //         'paging': true,
+    //         'lengthChange': false,
+    //         'searching': false,
+    //         'ordering': true,
+    //         'info': true,
+    //         'autoWidth': false
+    //     });
 
-        //Initialize Select2 Elements
-        $('.select2').select2()
+    //     //Initialize Select2 Elements
+    //     $('.select2').select2()
 
 
-        //Date picker
-        $('#datepicker').datepicker({
-            autoclose: true
-        })
+    //     //Date picker
+    //     $('#datepicker').datepicker({
+    //         autoclose: true
+    //     })
 
-        // $('.dentry_date').datepicker({
-        //     autoclose: true,
-        //     format: 'dd-mm-yyyy',
-        //     todayHighlight: true,
-        //     endDate : new Date()
-        // }).on('change', function(){
-        //     $(this).focus();
-        //     // $('.bhs-name').focus();
-        // });
+    //     // $('.dentry_date').datepicker({
+    //     //     autoclose: true,
+    //     //     format: 'dd-mm-yyyy',
+    //     //     todayHighlight: true,
+    //     //     endDate : new Date()
+    //     // }).on('change', function(){
+    //     //     $(this).focus();
+    //     //     // $('.bhs-name').focus();
+    //     // });
 
-    });
+    // });
 
     // start 16/8/23 add by me
 
     function checkrcs(rdt) {
+        // console.log('test',rdt);
         var tr = $(rdt).closest('tr');
         var rcs = tr.find('td:eq(8) select').val();
         if (rdt.value == '0' || rdt.value == '7' || rdt.value == '9') {
@@ -1118,11 +1199,11 @@
     // });
 
     $("#data_entry_body tr td input").on('focus', function() {
-        highlight_row(this);
+        //highlight_row(this);
     });
 
     $("#data_entry_body tr td select").on('focus', function() {
-        highlight_row(this);
+       //highlight_row(this);
     });
 
     // $(document).ready(function(){
@@ -1180,7 +1261,7 @@
             $('#txt_Death_Facility').css('background', '#FFC8C8');
             $(button).prop("disabled", false);
             $(button).html('<li class="fa fa-floppy-o"></li> အားလုံးသိမ်းမည်');
-            bootbox.alert(errMsg);
+            alert(errMsg);
             return false;
         } else {
             $('#txt_Total_Outpatient').css('background', 'white');
@@ -1278,7 +1359,7 @@
                 //Added on 2019-07-17
                 var dedt = row.cells[1].children[0].value.split('-');
                 if (dedt == "") {
-                    bootbox.alert("Screening Date Format မှားယွင်းနေသည်။\n မသေချာလျှင် (09-09-0999) ဟုထည့်သွင်းပါ။")
+                    alert("Screening Date Format မှားယွင်းနေသည်။\n မသေချာလျှင် (09-09-0999) ဟုထည့်သွင်းပါ။")
                         .on('hidden.bs.modal', function() {
                             row.cells[1].children[0].focus();
                         });
@@ -1291,7 +1372,7 @@
                     if (isValidDate(dedt[0], dedt[1], dedt[2]) == true) {
                         data["Screening_Date"] = sortDate(row.cells[1].children[0].value);
                     } else {
-                        bootbox.alert(
+                        alert(
                                 "Screening Date Format မှားယွင်းနေသည်။\n မသေချာလျှင် (09-09-0999) ဟုထည့်သွင်းပါ။")
                             .on('hidden.bs.modal', function() {
                                 row.cells[1].children[0].focus();
@@ -1347,7 +1428,7 @@
                                     //     // location.href = '/';
                                     // });
                                 } else {
-                                    bootbox.confirm(xmlhttp1.responseText, function(result) {
+                                    confirm(xmlhttp1.responseText, function(result) {
                                         if (result == true) {
                                             location.href = '/';
                                         } else {
@@ -1380,11 +1461,11 @@
                         if (xmlhttp.responseText == "1") {
                             $(button).prop('disabled', false);
                             $(button).html('<li class="fa fa-floppy-o"></li> အားလုံးသိမ်းမည်');
-                            bootbox.alert("Successfully Individual Case saved!", function() {
+                            alert("Successfully Individual Case saved!", function() {
                                 location.href = "/";
                             });
                         } else {
-                            bootbox.confirm(xmlhttp.responseText, function(result) {
+                            confirm(xmlhttp.responseText, function(result) {
                                 if (result == true) {
                                     location.href = '/';
                                 } else {
@@ -1403,7 +1484,7 @@
             }
         } else {
             console.log(save_update_check);
-            bootbox.confirm(save_update_check, function(result) {
+            confirm(save_update_check, function(result) {
                 if (result == false) {
                     $(button).prop('disabled', false);
                     $(button).html('<li class="fa fa-floppy-o"></li> အားလုံးသိမ်းမည်');
@@ -1494,14 +1575,14 @@
                 type: "GET",
                 url: BACKEND_URL + "get_patient_dataentry_row/" + value,
                 // url: "/get_patient_dataentry_row/$lp_township_de" + value,
-                data: "",
+
                 success: function(data) {
                     // alert('this isopeirepw');
                     // console.log("myitzu", data);
                     $("#data_entry_body").append(data);
                     set_row_numbers();
                     checkBtn();
-                    set_focus();
+                    // set_focus();
                 },
                 error: function(error) {
                     bootbox.alert(error.statusText);
@@ -1526,14 +1607,14 @@
 
 
         function delete_row(btn) {
-        alert('this is deleted111',btn);
+        // alert('this is deleted111',btn);
         var rowNum = $(btn).attr("rowNo");
-        bootbox.confirm("Row အမှတ် " + rowNum + " တစ်ခုလုံးအား အပြီးဖျက်မည်။ သေချာပါက OK နှိပ်ပါ", function(c) {
+        confirm("Row အမှတ် " + rowNum + " တစ်ခုလုံးအား အပြီးဖျက်မည်။ သေချာပါက OK နှိပ်ပါ", function(c) {
             if (c == true) {
                 $(btn).closest('tr').remove();
                 set_row_numbers();
             }
-            //checkBtn();
+            checkBtn();
          });
     }
 
@@ -1543,7 +1624,7 @@
 
     function delete_existing_row(p_number, sync, btn) {
         if (sync == "1") {
-            bootbox.alert(
+            alert(
                 "ဤအချက်အလက်သည် server ပေါ်သို့ပို့ဆောင်ပြီးဖြစ်ပါသဖြင့် ပြုပြင်ခြင်း၊ဖျက်ခြင်းများ ခွင့်မပြုပါ");
             return false;
         } else {
@@ -1565,7 +1646,7 @@
     }
 
     function close_page() {
-        bootbox.confirm("ယခုစာမျက်နှာအားပိတ်မည်။ သေချာပါက OK နှိပ်ပါ", function(result) {
+        confirm("ယခုစာမျက်နှာအားပိတ်မည်။ သေချာပါက OK နှိပ်ပါ", function(result) {
             if (result == true) {
                 location.href = "/";
             }
@@ -1585,7 +1666,7 @@
         var v = $(".num-only").val();
 
         if ($.isNumeric(v) == false) {
-            bootbox.alert("နံပါတ်များသာရိုက်သွင်းပါ");
+            alert("နံပါတ်များသာရိုက်သွင်းပါ");
             $(".num-only").val("");
         }
     });
@@ -1619,7 +1700,7 @@
         var out_total = parseInt($('#txt_Total_Outpatient').val());
 
         if (out_total < (out_u5 + out_preg)) {
-            bootbox.alert("ထည့်သွင်းသောစာရင်းမှားယွင်းနေသည်။").on('hidden.bs.modal', () => {
+            alert("ထည့်သွင်းသောစာရင်းမှားယွင်းနေသည်။").on('hidden.bs.modal', () => {
                 $('#txt_Total_Outpatient').css('background', '#FFC8C8').focus();
             });
         } else {
@@ -1634,7 +1715,7 @@
         var in_preg = parseInt($('#txt_Preg_Inpatient').val());
         var in_total = parseInt($('#txt_Total_Inpatient').val());
         if (in_total < (in_u5 + in_preg)) {
-            bootbox.alert("ထည့်သွင်းသောစာရင်းမှားယွင်းနေသည်။").on('hidden.bs.modal', () => {
+            alert("ထည့်သွင်းသောစာရင်းမှားယွင်းနေသည်။").on('hidden.bs.modal', () => {
                 $('#txt_Total_Inpatient').css('background', '#FFC8C8').focus();
             });
         } else {
@@ -1652,19 +1733,19 @@
     width: 100%;
     height: 50px;
     background-color: rgb(44, 102, 147);
-    position: fixed;
+
 }
 
 .back_arrow{
-    padding-top: 50px;
-    padding-left: 20px;
+    float: left;
+    padding:15px 15px;
     font-size: 15px;
     color: #fff;
 
 }
 .back_arrow:hover{
     font-size: 20px;
-    color: darkturquoise;
+    color: rgb(192, 193, 197);
 }
 
     .tableCell {

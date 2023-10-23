@@ -755,23 +755,12 @@
                             </td>
                             <td>
                                 <select name="rcs" class="rcs">
-                                    <option value="">ရွေးပါ</option>
-                                    @foreach ($lp_micro_result as $micro)
-                                        <option value="{{ $micro->mr_code }}" <?php echo $micro->mr_code == $patient->Micro_Code ? 'selected' : ''; ?>>
-                                            {{ $micro->m_result }}
-                                        </option>
-                                    @endforeach
+
                                 </select>
                             </td>
                             <td>
                                 <select name="rdt" class="rdt">
-                                    <option value="">ရွေးပါ</option>
-                                    @foreach ($lp_rdt_result as $rdt)
-                                        <option value="{{ $rdt->r_code }}" <?php echo $rdt->r_code == $patient->RDT_Code ? 'selected' : ''; ?>>
 
-                                            {{ $rdt->r_result }}
-                                        </option>
-                                    @endforeach
                                 </select>
                             </td>
                             <td>
@@ -966,7 +955,7 @@
         const minWidth = 100; // Minimum width you want for the input
 
         // Calculate the new width based on the text length
-        const newWidth = Math.max(minWidth, textLength * 10); // Adjust the multiplier as needed
+        const newWidth = Math.max(minWidth, textLength * 50); // Adjust the multiplier as needed
 
         // Set the input's width dynamically
         inputElement.style.width = newWidth + 'px';
@@ -1112,8 +1101,8 @@
     // });
 
     function save_data_entry(button) {
-        $(button).prop("disabled", true);
-        $(button).html('<img src="img/default-loading.gif" style="width:20px;"/> ခေတ္တစောင့်ပါ');
+        // $(button).prop("disabled", true);
+        // $(button).html('<img src="img/default-loading.gif" style="width:20px;"/> ခေတ္တစောင့်ပါ');
         //tpa check
         var tp_code = document.getElementById('txt_Death_Facility').getAttribute('tp_code');
         var tpa_out = $("#txt_Total_Outpatient").val();
@@ -1155,7 +1144,7 @@
             $('#txt_Death_Facility').css('background', '#FFC8C8');
             $(button).prop("disabled", false);
             $(button).html('<li class="fa fa-floppy-o"></li> အားလုံးသိမ်းမည်');
-            bootbox.alert(errMsg);
+            alert(errMsg);
             return false;
         } else {
             $('#txt_Total_Outpatient').css('background', 'white');
@@ -1265,7 +1254,7 @@
                     if (isValidDate(dedt[0], dedt[1], dedt[2]) == true) {
                         data["Screening_Date"] = sortDate(row.cells[1].children[0].value);
                     } else {
-                        bootbox.alert(
+                        alert(
                                 "Screening Date Format မှားယွင်းနေသည်။\n မသေချာလျှင် (09-09-0999) ဟုထည့်သွင်းပါ။")
                             .on('hidden.bs.modal', function() {
                                 row.cells[1].children[0].focus();
@@ -1321,7 +1310,7 @@
                                     //     // location.href = '/';
                                     // });
                                 } else {
-                                    bootbox.confirm(xmlhttp1.responseText, function(result) {
+                                    confirm(xmlhttp1.responseText, function(result) {
                                         if (result == true) {
                                             location.href = '/';
                                         } else {

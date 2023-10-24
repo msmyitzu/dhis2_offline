@@ -68,7 +68,7 @@
                         <tr>
                             <?php
 
-						if (count($data) >||!= "null") {
+						if (count($data) > 0 || count($data) != "null") {
 							for($i=0; $i<1; $i++){
 									$header_columns = $data[$i];
 									echo "<th>No</th>" ;

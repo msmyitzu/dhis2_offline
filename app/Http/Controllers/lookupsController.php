@@ -567,7 +567,7 @@ public function show_entry_2_page(){
     public function get_patient_registerform_offline(Request $request){
 
         $lp_form_cat = lp_form_cat::orderBy('form_name')->get();    //->limit(2)
-        //dd($lp_form_cat);
+        dd($lp_form_cat);
         $lp_state_region = lp_state_region::get();
         $lp_township = lp_township::get();
         return view('parent-register-template.index',compact('lp_form_cat','lp_state_region','lp_township'));

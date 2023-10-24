@@ -1216,7 +1216,7 @@
 
     function save_data_entry(button) {
         // alert('hello i am new1111');
-        $(button).prop("disabled", true);
+        //$(button).prop("disabled", true);
         $(button).html('<img src="img/default-loading.gif" style="width:20px;"/> ခေတ္တစောင့်ပါ');
         //tpa check
 

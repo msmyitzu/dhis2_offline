@@ -7,7 +7,6 @@ use App\tbl_core_facility_temp;
 use App\tbl_individual_case;
 use App\tbl_individual_case_temp;
 use App\tbl_region;
-use App\tbl_total_patient;
 use App\tbl_township;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -696,7 +695,6 @@ class lookupsController extends Controller
                 $tbl_individual_case->Screening_Date = $data["Screening_Date"];
                 $tbl_individual_case->Pt_Name = $data["Pt_Name"];
                 $tbl_individual_case->Age_Year = $data["Age_Year"];
-                $tbl_individual_case->Pt_Name = $data["Pt_Pather_Name"];
                 $tbl_individual_case->Pt_Location = $data["Pt_Location"];
                 $tbl_individual_case->Pt_Address = $data["Pt_Address"];
                 $tbl_individual_case->Sex_Code = $data["Sex_Code"];
@@ -1193,48 +1191,48 @@ class lookupsController extends Controller
         echo $res->getBody(); // { "type": "User", ....
     }
 
-    // public function get_vhv_dataentry_row($ts_code)
-    // {
-	// 	$lp_patient_location = lp_patient_location::all();
-	// 	$lp_patient_sex = lp_patient_sex::where('Sex_Code', '0')->orWhere('Sex_Code', '1')->get();
-	// 	$lp_rdt_result = lp_rdt_result::whereNotIn('r_code', ['9'])->get();
-	// 	$lp_treatment_given = lp_treatment_given::whereIn('tg_code', ['1','2','77'])->get();
-	// 	$lp_act_code = lp_act_code::whereNotIn('act_code', ['6','9'])->get();
-	// 	$lp_org = lp_org::all();
-	// 	$lp_form_cat = lp_form_cat::all();
-	// 	$lp_in_out_cat = lp_in_out_cat::whereIn('ioc_code', [2,4,7,9])->get();
-	// 	$lp_yesno = lp_yesno::whereIn('YN_Code', ['0','1','7'])->get();
-    //     $lp_occupation = lp_occupation::all();
-    //     $tbl_village = tbl_village::where("ts_pcode","=", $ts_code)->orderBy('village', 'asc')->get();
-	// 	return view('nmcp-template/vhv_dataentry_row',
-	// 				compact('lp_patient_location', 'lp_patient_sex',
-	// 						'lp_rdt_result', 'lp_treatment_given',
-	// 						'lp_act_code', 'lp_org', 'lp_form_cat',
-	// 						'lp_in_out_cat', 'lp_yesno', 'lp_occupation', 'tbl_village'));
-	// }
-    // public function get_patient_dataentry_row2($ts_code)
-    // {
+    public function get_vhv_dataentry_row($ts_code)
+    {
+		$lp_patient_location = lp_patient_location::all();
+		$lp_patient_sex = lp_patient_sex::where('Sex_Code', '0')->orWhere('Sex_Code', '1')->get();
+		$lp_rdt_result = lp_rdt_result::whereNotIn('r_code', ['9'])->get();
+		$lp_treatment_given = lp_treatment_given::whereIn('tg_code', ['1','2','77'])->get();
+		$lp_act_code = lp_act_code::whereNotIn('act_code', ['6','9'])->get();
+		$lp_org = lp_org::all();
+		$lp_form_cat = lp_form_cat::all();
+		$lp_in_out_cat = lp_in_out_cat::whereIn('ioc_code', [2,4,7,9])->get();
+		$lp_yesno = lp_yesno::whereIn('YN_Code', ['0','1','7'])->get();
+        $lp_occupation = lp_occupation::all();
+        $tbl_village = tbl_village::where("ts_pcode","=", $ts_code)->orderBy('village', 'asc')->get();
+		return view('nmcp-template/vhv_dataentry_row',
+					compact('lp_patient_location', 'lp_patient_sex',
+							'lp_rdt_result', 'lp_treatment_given',
+							'lp_act_code', 'lp_org', 'lp_form_cat',
+							'lp_in_out_cat', 'lp_yesno', 'lp_occupation', 'tbl_village'));
+	}
+    public function get_patient_dataentry_row2($ts_code)
+    {
 
-	// 	$lp_patient_location = lp_patient_location::all();
-	// 	$lp_patient_sex = lp_patient_sex::where('Sex_Code', '0')->orWhere('Sex_Code', '1')->get();
-	// 	$lp_rdt_result = lp_rdt_result::whereNotIn('r_code', ['9'])->get();
-	// 	$lp_treatment_given = lp_treatment_given::whereIn('tg_code', ['1','2','77'])->get();
-	// 	$lp_act_code = lp_act_code::whereNotIn('act_code', ['6','9'])->get();
-	// 	$lp_org = lp_org::all();
-	// 	$lp_form_cat = lp_form_cat::all();
-	// 	$lp_in_out_cat =  lp_in_out_cat::whereNotIn('ioc_code', [0,1,9])->get();
-	// 	$lp_yesno = lp_yesno::whereIn('YN_Code', ['0','1','7'])->get();
-	// 	$lp_occupation = lp_occupation::all();
-    //     $lp_micro_result = lp_micro_result::whereNotIn('mr_code', ['5','9'])->get();
-    //     $tbl_village = tbl_village::where("ts_pcode","=", $ts_code)->orderBy('village', 'asc')->get();
+		$lp_patient_location = lp_patient_location::all();
+		$lp_patient_sex = lp_patient_sex::where('Sex_Code', '0')->orWhere('Sex_Code', '1')->get();
+		$lp_rdt_result = lp_rdt_result::whereNotIn('r_code', ['9'])->get();
+		$lp_treatment_given = lp_treatment_given::whereIn('tg_code', ['1','2','77'])->get();
+		$lp_act_code = lp_act_code::whereNotIn('act_code', ['6','9'])->get();
+		$lp_org = lp_org::all();
+		$lp_form_cat = lp_form_cat::all();
+		$lp_in_out_cat =  lp_in_out_cat::whereNotIn('ioc_code', [0,1,9])->get();
+		$lp_yesno = lp_yesno::whereIn('YN_Code', ['0','1','7'])->get();
+		$lp_occupation = lp_occupation::all();
+        $lp_micro_result = lp_micro_result::whereNotIn('mr_code', ['5','9'])->get();
+        $tbl_village = tbl_village::where("ts_pcode","=", $ts_code)->orderBy('village', 'asc')->get();
 
 
-	// 	return view('nmcp-template/patient_register_form_row',
-	// 				compact('lp_patient_location', 'lp_patient_sex',
-	// 						'lp_rdt_result', 'lp_treatment_given',
-	// 						'lp_act_code', 'lp_org', 'lp_form_cat',
-	// 						'lp_in_out_cat', 'lp_yesno', 'lp_occupation', 'lp_micro_result','tbl_village'));
-	// }
+		return view('nmcp-template/patient_register_form_row',
+					compact('lp_patient_location', 'lp_patient_sex',
+							'lp_rdt_result', 'lp_treatment_given',
+							'lp_act_code', 'lp_org', 'lp_form_cat',
+							'lp_in_out_cat', 'lp_yesno', 'lp_occupation', 'lp_micro_result','tbl_village'));
+	}
 
     public function get_patient_dataentry_row($ts_code)
     {

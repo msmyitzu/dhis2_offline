@@ -1,6 +1,6 @@
 
 
-<tr>
+<tr id="data_entry_row">
     <td style="font-size:10px; font-weight: bold;" P_Number="0"></td>
     <td>
         <input type="date" id="birthday" oninput="adjustInputWidth(this)" name="birthday" placeholder="dd/mm/yyyy">
@@ -12,9 +12,10 @@
     {{-- <td> --}}
     {{-- <select name="address" id="" onchange="checkAddress(this);"> --}}
     {{-- <option value="">ရွေးပါ</option> --}}
-    @foreach ($lp_patient_location as $location)
+    @foreach ($tbl_village as $location)
         {{-- <option value="{{ $location->p_location }}"> --}}
-        {{ $location->patient_location }} &nbsp;&
+
+        {{ $location->village_name_en }} &nbsp;&
         {{-- </option> --}}
     @endforeach
     {{-- </select> --}}
@@ -93,11 +94,13 @@
     <td>
         <select name="out-patient" id="" oninput="adjustInputWidth(this)"  style="width: 100%">
             <option value="" selected>N/A</option>
-            @foreach ($lp_in_out_cat as $ioc)
+            <option value="test">Testing</option>
+            {{-- @foreach ($lp_in_out_cat as $ioc)
                 <option value="{{ $ioc->ioc_code }}">
                     {{ $ioc->io_cat }}
-                </option>
-            @endforeach
+                </option>--}}
+
+            {{-- @endforeach --}}
         </select>
     </td>
     <td>
@@ -147,52 +150,60 @@
     </td>
     <td>
         <select name="referral" id="" oninput="adjustInputWidth(this)">
+            <option value="Yes">Yes</option>
             <option value="" selected>No</option>
-            @foreach ($lp_yesno as $yn)
+            {{-- @foreach ($lp_yesno as $yn)
                 <option value="{{ $yn->YN_Code }}">
                     {{ $yn->YesNo }}
                 </option>
-            @endforeach
+            @endforeach --}}
         </select>
     </td>
     <td>
         <select name="malaria-death" id="" onchange="checkMpdeath(this)">
-            <option value="" selected>No</option>
-            @foreach ($lp_yesno as $yn)
+            <option value="Yes">Yes</option>
+            <option value="No" selected>No</option>
+            {{-- @foreach ($lp_yesno as $yn)
                 <option value="{{ $yn->YN_Code }}">
                     {{ $yn->YesNo }}
                 </option>
-            @endforeach
+            @endforeach --}}
         </select>
     </td>
     <td>
         <select name="" id="t-given">
             <option value="" selected><=24hr</option>
-            @foreach ($lp_treatment_given as $treatment)
+            {{-- @foreach ($lp_treatment_given as $treatment)
                 <option value="{{ $treatment->tg_code }}">
                     {{ $treatment->t_given }}
                 </option>
-            @endforeach
+            @endforeach --}}
         </select>
     </td>
     <td>
         <select name="travel-log" id="travel-log">
             <option value="" selected>No</option>
-            @foreach ($lp_yesno as $yn)
+            {{-- @foreach ($lp_yesno as $yn)
                 <option value="{{ $yn->YN_Code }}">
                     {{ $yn->YesNo }}
                 </option>
-            @endforeach
+            @endforeach --}}
         </select>
     </td>
     <td>
         <select name="job" id="job" oninput="adjustInputWidth(this)">
             <option value="" selected>ရွေးပါ</option>
-            @foreach ($lp_occupation as $job)
+            <option value="RubberPlantation">Rubber Plantation</option>
+            <option value="Gardening">Gardening</option>
+            <option value="ForestRelatedJob">Forest Related Job</option>
+            <option value="Construction">Construction</option>
+            <option value="Mining">Mining</option>
+            <option value="Other">Other</option>
+            {{-- @foreach ($lp_occupation as $job)
                 <option value="{{ $job->occupation_id }}">
                     {{ $job->occupation_name }}
                 </option>
-            @endforeach
+            @endforeach --}}
         </select>
     </td>
     <td>

@@ -545,7 +545,7 @@ function load_hfm(target_control_id, hf_code, token) {
 }
 
 // start for icmvVillage input
-function load_icmv_village(form_code) {
+function load_icmv_village(service_provider) {
     //  alert('this is icmvbillage',form_code);
     var selectFormCode = document.getElementById("select_lp_form_cat");
     if (selectFormCode.value === "1") {
@@ -717,38 +717,38 @@ function change_rhcsc_label(select_id) {
     }
 }
 
-function load_lp_form_cat(target_control_id, token) {
-    try {
-        $("#" + target_control_id).html("<option>Loading...</option>");
-        $("#" + target_control_id).prop("disabled", true);
+// function load_lp_form_cat(target_control_id, token) {
+//     try {
+//         $("#" + target_control_id).html("<option>Loading...</option>");
+//         $("#" + target_control_id).prop("disabled", true);
 
-        $.ajax({
-            type: "GET",
-            url: BACKEND_URL + "get_lp_form_cat",
-            data: "",
-            success: function (data) {
-                $("#" + target_control_id).html("");
+//         $.ajax({
+//             type: "GET",
+//             url: BACKEND_URL + "get_lp_form_cat",
+//             data: "",
+//             success: function (data) {
+//                 $("#" + target_control_id).html("");
 
-                $("#" + target_control_id).append(
-                    "<option value='0' selected disabled> ရွေးရန် </option>"
-                );
-                $("#" + target_control_id).prop("disabled", false);
+//                 $("#" + target_control_id).append(
+//                     "<option value='0' selected disabled> ရွေးရန် </option>"
+//                 );
+//                 $("#" + target_control_id).prop("disabled", false);
 
-                jQuery.each(data, function (i, val) {
-                    var opt =
-                        "<option value='" +
-                        val.form_code +
-                        "'>" +
-                        val.form_name +
-                        "</option>";
-                    $("#" + target_control_id).append(opt);
-                });
-            },
-        });
-    } catch (err) {
-        bootbox.alert(err.message);
-    }
-}
+//                 jQuery.each(data, function (i, val) {
+//                     var opt =
+//                         "<option value='" +
+//                         val.form_code +
+//                         "'>" +
+//                         val.form_name +
+//                         "</option>";
+//                     $("#" + target_control_id).append(opt);
+//                 });
+//             },
+//         });
+//     } catch (err) {
+//         bootbox.alert(err.message);
+//     }
+// }
 
 function load_reportpage(select_reportpage, token) {
     try {
@@ -1478,7 +1478,7 @@ function checkSex(sextype) {
     if (input_age == "AGE_GROUP_1" || input_age == "AGE_GROUP_1_TO_4" || input_age == "AGE_GROUP_5_TO_9") {
         tr.find('td:eq(13) select').prop('disabled', true);
         tr.find('td:eq(13) select').css('cursor', 'not-allowed');
-    } else {
+    }else {
         tr.find('td:eq(13) select').prop('disabled',false);
         tr.find('td:eq(13) select').css('cursor', 'default');
     }

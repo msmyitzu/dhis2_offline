@@ -912,7 +912,7 @@
         }
 
         function add_row(btn) {
-            $(btn).prop('disabled', true);
+            //$(btn).prop('disabled', true);
             $(btn).html("<li class='fa fa-spinner fa-spin'></li> ခေတ္တစောင့်ပါ");
             // var table = document.getElementById('data_entry_body');
             var row_count = get_row();
@@ -923,8 +923,8 @@
             } else {
                 $.ajax({
                     type: "GET",
-                    url: BACKEND_URL + "/get_patient_dataentry_row/{{ $lp_township_de }}",
-                    url: "/get_patient_dataentry_row/{{ $lp_township_de }}",
+                    //url: BACKEND_URL + "/get_patient_dataentry_row/{{ $lp_township_de }}",
+                    //url: "/get_patient_dataentry_row/{{ $lp_township_de }}",
                     data: "",
                     success: function(data) {
                         //console.log("name", data);

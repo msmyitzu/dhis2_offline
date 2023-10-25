@@ -8,15 +8,15 @@
 <link data-require="bootstrap-css@3.1.1" data-semver="3.1.1" rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" /> --}}
 
 <div class="header_bar">
-   <a href="/chart" class="back_arrow"> <i class="fa-solid fa-arrow-left"></i> Back </a>
+   {{-- <a href="/chart" class="back_arrow"> <i class="fa-solid fa-arrow-left"></i> Back </a> --}}
 
    <ul class="nav navbar-nav">
     <!-- User Account: style can be found in dropdown.less -->
     <li class="dropdown user user-menu">
-      <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-        <img src="dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
-        <span class="hidden-xs">Alexander Pierce</span>
-      </a>
+        <a href="https://mcbrs-dev2.myanmarvbdc.com/" class="" data-toggle="">
+            <img src="{{ asset('img/logo.png') }}" class="user-image" alt="User Image">
+            <span class="card-title"> Malaria Case-Based Reporting for VBDC Myanmar </span>
+          </a>
       <ul class="dropdown-menu">
         <!-- User image -->
         <li class="user-header">
@@ -56,7 +56,7 @@
   </ul>
 
 </div>
-<h5 class="form_head" align="center" style="font-weight: 600; color:rgb(44, 102, 147); padding-top:10px;">ပုံစံအချက်အလက်များကိုသေချာရွေးချယ်ပါ။</h5>
+<h5 class="form_head" style="font-weight: 600; color:rgb(44, 102, 147); padding-top:10px;align:center;">ပုံစံအချက်အလက်များကိုသေချာရွေးချယ်ပါ။</h5>
 
 <main>
     <div class="tab-pane active " id="data_entry">
@@ -76,9 +76,13 @@
                                     <select class="form-control select2" name="select_lp_form_cat"
                                         id="select_lp_form_cat" style="height:50px; padding-left:10px;"
                                         onChange="load_icmv_village('select_lp_form_cat',this.value)">
-                                        @foreach ($lp_form_cat as $sp)
-                                            <option value="{{ $sp->form_code }}">
-                                                {{ $sp->form_name }}
+                                        <option value="Basic Health Staff">Basic Health Staff</option>
+                                            <option value="ICMV">ICMV</option>
+                                            <option value="GP">GP</option>
+                                            <option value="Outlet">Outlet</option>
+                                        @foreach ($tbl_core_facility as $sp)
+                                            <option value="{{ $sp->service_provider }}">
+                                                {{ $sp->service_provider }}
                                             </option>
                                         @endforeach
                                     </select>
@@ -107,9 +111,10 @@
                                     <select class="form-control select2" style="height:50px;" name="select_lp_state_region" id="select_lp_state_region"
                                     onChange="load_lp_township('select_lp_township_de', this.value, '<?= csrf_token() ?>','')">
                                         <option value="0">ရွေးရန်</option>
-                                        @foreach ($lp_state_region as $sr)
-                                            <option value="{{ $sr->sr_code }}">
-                                                {{ $sr->sr_name }} | {{ $sr->sr_name_mmr }}
+                                        <option value="test">Testing</option>
+                                        @foreach ($tbl_region as $sr)
+                                            <option value="{{ $sr->region_mmr }}">
+                                                {{ $sr->region_name_en }} | {{ $sr->region_name_mm }}
                                             </option>
                                         @endforeach
                                     </select>
@@ -122,9 +127,10 @@
                                         onChange="load_tbl_hfm('select_tbl_hfm_de', this.value, '<?= csrf_token() ?>')"
                                         class="form-control select2 select_lp_township_de" style="height:50px;">
                                         <option value="0" selected>ရွေးရန်</option>
-                                        @foreach ($lp_township as $ts)
-                                            <option value="{{ $ts->ts_code }}" <?php echo session('role_id') == '3' ? 'selected' : ''; ?>>
-                                                {{ $ts->ts_name }} | {{ $ts->ts_name_mmr }}
+                                        <option value="test">Testing</option>
+                                        @foreach ($tbl_township as $ts)
+                                            <option value="{{ $ts->district_code }}" <?php echo session('role_id') == '3' ? 'selected' : ''; ?>>
+                                                {{ $ts->township_name_en }} | {{ $ts->township_mmr }}
                                             </option>
                                         @endforeach
                                     </select>
@@ -166,6 +172,7 @@
                                         class="form-control select2" style="height:50px;">
                                         <option value="selected" >ရွေးပါ</option>
                                         <option value="option1">option</option>
+                                        <option value="test">Testing</option>
                                     </select>
                                 </div>
                             </div>
@@ -1215,7 +1222,7 @@
     // });
 
     function save_data_entry(button) {
-        // alert('hello i am new1111');
+        alert('hello i am new1111');
         //$(button).prop("disabled", true);
         $(button).html('<img src="img/default-loading.gif" style="width:20px;"/> ခေတ္တစောင့်ပါ');
         //tpa check
@@ -1291,7 +1298,7 @@
                     url: BACKEND_URL + "save_tbl_total_patient_temp/",
                     data: data_to_post,
                     success: function(result) {
-                        //alert('hi saved successs111');
+                        alert('hi saved successs111');
                         if (result == "1") {
                             //console.log("save success");
                             save_update_check = true;
@@ -1389,22 +1396,28 @@
                 pt_name = pt_name.replace(/'/, "");
                 data["Pt_Name"] = pt_name;
                 data["Age_Year"] = row.cells[3].children[0].value;
-                data["Pt_Location"] = row.cells[4].children[0].value;
-                data["Pt_Address"] = row.cells[5].children[0].value;
-                data["Sex_Code"] = row.cells[6].children[0].value;
-                data["Preg_YN"] = row.cells[7].children[0].value;
-                data["Micro_Code"] = row.cells[8].children[0].value;
-                data["RDT_Code"] = row.cells[9].children[0].value;
-                data["IOC_Code"] = row.cells[10].children[0].value;
-                data["ACT_Code"] = row.cells[11].children[0].value;
-                data["CQ_Code"] = row.cells[12].children[0].value;
-                data["PQ_Code"] = row.cells[13].children[0].value;
-                data["Referral_Code"] = row.cells[14].children[0].value;
-                data["Malaria_Death"] = row.cells[15].children[0].value;
-                data["TG_Code"] = row.cells[16].children[0].value;
-                data["travel_yn"] = row.cells[17].children[0].value;
-                data["occupation"] = row.cells[18].children[0].value;
-                data["Remark"] = row.cells[19].children[0].value;
+                data["Pt_Father_Name"] = row.cells[4].children[].value;
+                data["Pt_Location"] = row.cells[5].children[0].value;
+                data["Pt_Address"] = row.cells[6].children[0].value;
+                data["Pt_Address"] = row.cells[7].children[0].value;
+                data["Pt_Address"] = row.cells[8].children[0].value;
+                data["Pt_Address"] = row.cells[9].children[0].value;
+                data["Pt_Address"] = row.cells[10].children[0].value;
+                data["Pt_Address"] = row.cells[11].children[0].value;
+                data["Sex_Code"] = row.cells[12].children[0].value;
+                data["Preg_YN"] = row.cells[13].children[0].value;
+                data["Micro_Code"] = row.cells[14].children[0].value;
+                data["RDT_Code"] = row.cells[15].children[0].value;
+                data["IOC_Code"] = row.cells[16].children[0].value;
+                data["ACT_Code"] = row.cells[17].children[0].value;
+                data["CQ_Code"] = row.cells[18].children[0].value;
+                data["PQ_Code"] = row.cells[19].children[0].value;
+                data["Referral_Code"] = row.cells[20].children[0].value;
+                data["Malaria_Death"] = row.cells[21].children[0].value;
+                data["TG_Code"] = row.cells[22].children[0].value;
+                data["travel_yn"] = row.cells[23].children[0].value;
+                data["occupation"] = row.cells[24].children[0].value;
+                data["Remark"] = row.cells[25].children[0].value;
 
                 /* P_Number is 0, means this is a new record */
                 if (row.cells[0].getAttribute("P_Number") == "0") {
@@ -1556,11 +1569,12 @@
     }
 
     function add_row(btn) {
-// alert('this will new rowlll');
+        // alert('this will new rowlll');
 
         //$(btn).prop('disabled', true);
-        $(btn).html("<li class='fa fa-spinner fa-spin'></li> ခေတ္တစောင့်ပါ");
+        //$(btn).html("<li class='fa fa-spinner fa-spin'></li> ခေတ္တစောင့်ပါ");
         // var table = document.getElementById('data_entry_body');
+
         var row_count = get_row();
         if (row_count >= 17) {
             alert('maximum');
@@ -1577,15 +1591,16 @@
                 // url: "/get_patient_dataentry_row/$lp_township_de" + value,
 
                 success: function(data) {
+
                     // alert('this isopeirepw');
-                    // console.log("myitzu", data);
+                    //console.log("myitzu", data);
                     $("#data_entry_body").append(data);
                     set_row_numbers();
                     checkBtn();
                     // set_focus();
                 },
                 error: function(error) {
-                    bootbox.alert(error.statusText);
+                    alert(error.statusText);
                     checkBtn();
                 }
             });
@@ -1594,11 +1609,13 @@
 
     }
 
+
     function set_row_numbers() {
         var table = document.getElementById('data_entry_body');
         for (var i = 0, row; row = table.rows[i]; i++) {
+            //console.log('myitzuhtun',row);
             row.cells[0].innerHTML = i + 1;
-            row.cells[20].children[0].setAttribute("rowNo", i + 1);
+            row.cells[26].children[0].setAttribute("rowNo", i + 1);
         }
     }
 
@@ -1608,14 +1625,22 @@
 
         function delete_row(btn) {
         // alert('this is deleted111',btn);
-        var rowNum = $(btn).attr("rowNo");
-        confirm("Row အမှတ် " + rowNum + " တစ်ခုလုံးအား အပြီးဖျက်မည်။ သေချာပါက OK နှိပ်ပါ", function(c) {
-            if (c == true) {
-                $(btn).closest('tr').remove();
+        var rowNum = $(btn).attr("rowno");
+        // confirm("Row အမှတ် " + rowNum + " တစ်ခုလုံးအား အပြီးဖျက်မည်။ သေချာပါက OK နှိပ်ပါ", function(c) {
+        //     if (c == true) {
+        //         alert('this is rowno');
+        //         $(btn).closest('tr').remove();
+        //         set_row_numbers();
+        //     }
+        //     checkBtn();
+        //  });
+         if(confirm("Row အမှတ် " + rowNum + " တစ်ခုလုံးအား အပြီးဖျက်မည်။ သေချာပါက OK နှိပ်ပါ") == true){
+            $(btn).closest('tr').remove();
                 set_row_numbers();
-            }
+         }else{
             checkBtn();
-         });
+         }
+
     }
 
 

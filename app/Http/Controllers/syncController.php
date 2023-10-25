@@ -48,8 +48,8 @@ class syncController extends Controller
             }
 
             $name = strtoupper(Auth::user()->name);
-            //$tbl_core_facility_count = tbl_core_facility_temp::where('sync','=','0')->count();
-            //$tbl_individual_case_count = tbl_individual_case_temp::where('sync','=','0')->count();
+            // $tbl_core_facility_count = tbl_core_facility_temp::where('sync','=','0')->count();
+            // $tbl_individual_case_count = tbl_individual_case_temp::where('sync','=','0')->count();
 
             // $tbl_core_facility = tbl_core_facility_temp::where('sync','=','0')->get();
             // $tbl_individual_case = tbl_individual_case_temp::where('sync','=','0')->get();

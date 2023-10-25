@@ -4,8 +4,8 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class lp_pmonth extends Model
+class tbl_users extends Model
 {
-    protected $table = 'lp_pmonth';
+    protected $table = 'tbl_users';
     protected $primaryKey = 'id';
 }

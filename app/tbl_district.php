@@ -4,9 +4,9 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class tbl_core_facility extends Model
+class tbl_district extends Model
 {
-    protected $table = 'tbl_core_facility';
+    protected $table = 'tbl_district';
     protected $primaryKey = 'cf_id';
-   
+  
 }

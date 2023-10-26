@@ -3,55 +3,15 @@
 
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js"></script>
 <script data-require="jquery@*" data-semver="2.0.3" src="http://code.jquery.com/jquery-2.0.3.min.js"></script>
-{{-- <script data-require="bootstrap@3.1.1" data-semver="3.1.1" src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
-<script src="http://rawgithub.com/makeusabrew/bootbox/master/bootbox.js"></script>
-<link data-require="bootstrap-css@3.1.1" data-semver="3.1.1" rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" /> --}}
 
 <div class="header_bar">
-   {{-- <a href="/chart" class="back_arrow"> <i class="fa-solid fa-arrow-left"></i> Back </a> --}}
-
    <ul class="nav navbar-nav">
     <!-- User Account: style can be found in dropdown.less -->
     <li class="dropdown user user-menu">
-        <a href="https://mcbrs-dev2.myanmarvbdc.com/" class="" data-toggle="">
-            <img src="{{ asset('img/logo.png') }}" class="user-image" alt="User Image">
-            <span class="card-title"> Malaria Case-Based Reporting for VBDC Myanmar </span>
-          </a>
-      <ul class="dropdown-menu">
-        <!-- User image -->
-        <li class="user-header">
-          <img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
-
-          <p>
-            Alexander Pierce - Web Developer
-            <small>Member since Nov. 2012</small>
-          </p>
-        </li>
-        <!-- Menu Body -->
-        <li class="user-body">
-          <div class="row">
-            <div class="col-xs-4 text-center">
-              <a href="#">Followers</a>
-            </div>
-            <div class="col-xs-4 text-center">
-              <a href="#">Sales</a>
-            </div>
-            <div class="col-xs-4 text-center">
-              <a href="#">Friends</a>
-            </div>
-          </div>
-          <!-- /.row -->
-        </li>
-        <!-- Menu Footer-->
-        <li class="user-footer">
-          <div class="pull-left">
-            <a href="#" class="btn btn-default btn-flat">Profile</a>
-          </div>
-          <div class="pull-right">
-            <a href="#" class="btn btn-default btn-flat">Sign out</a>
-          </div>
-        </li>
-      </ul>
+      <a href="https://mcbrs-dev2.myanmarvbdc.com/" class="" data-toggle="">
+        <img src="{{ asset('img/logo.png') }}" class="user-image" alt="User Image">
+        <span class="card-title"> Malaria Case-Based Reporting for VBDC Myanmar </span>
+      </a>
     </li>
   </ul>
 
@@ -76,15 +36,10 @@
                                     <select class="form-control select2" name="select_lp_form_cat"
                                         id="select_lp_form_cat" style="height:50px; padding-left:10px;"
                                         onChange="load_icmv_village('select_lp_form_cat',this.value)">
-                                        <option value="Basic Health Staff">Basic Health Staff</option>
+                                            <option value="Basic Health Staff">Basic Health Staff</option>
                                             <option value="ICMV">ICMV</option>
                                             <option value="GP">GP</option>
                                             <option value="Outlet">Outlet</option>
-                                        @foreach ($tbl_core_facility as $sp)
-                                            <option value="{{ $sp->service_provider }}">
-                                                {{ $sp->service_provider }}
-                                            </option>
-                                        @endforeach
                                     </select>
                                 </div>
                             </div>
@@ -97,7 +52,6 @@
                                         class="form-control select2" style=" height:50px;">
                                         <option value="option1" >ရွေးရန်</option>
                                         <option value="option2">Clinic data (OP/IP) and Carbonless register</option>
-
                                     </select>
                                 </div>
 
@@ -111,12 +65,9 @@
                                     <select class="form-control select2" style="height:50px;" name="select_lp_state_region" id="select_lp_state_region"
                                     onChange="load_lp_township('select_lp_township_de', this.value, '<?= csrf_token() ?>','')">
                                         <option value="0">ရွေးရန်</option>
-                                        <option value="test">Testing</option>
-                                        @foreach ($tbl_region as $sr)
-                                            <option value="{{ $sr->region_mmr }}">
-                                                {{ $sr->region_name_en }} | {{ $sr->region_name_mm }}
+                                            <option value="">
+                                                Testing
                                             </option>
-                                        @endforeach
                                     </select>
                                 </div>
                             </div>
@@ -127,12 +78,9 @@
                                         onChange="load_tbl_hfm('select_tbl_hfm_de', this.value, '<?= csrf_token() ?>')"
                                         class="form-control select2 select_lp_township_de" style="height:50px;">
                                         <option value="0" selected>ရွေးရန်</option>
-                                        <option value="test">Testing</option>
-                                        @foreach ($tbl_township as $ts)
-                                            <option value="{{ $ts->district_code }}" <?php echo session('role_id') == '3' ? 'selected' : ''; ?>>
-                                                {{ $ts->township_name_en }} | {{ $ts->township_mmr }}
+                                        <option value="">
+                                                Testing
                                             </option>
-                                        @endforeach
                                     </select>
                                 </div>
                             </div>
@@ -172,7 +120,6 @@
                                         class="form-control select2" style="height:50px;">
                                         <option value="selected" >ရွေးပါ</option>
                                         <option value="option1">option</option>
-                                        <option value="test">Testing</option>
                                     </select>
                                 </div>
                             </div>
@@ -227,17 +174,8 @@
                     </div>
 
 
-
                     @extends('nmcp-template.patient-register-form')
-
-                    @section('content')
-                        {{-- @include('nmcp-template.patient-register-form') --}}
-                    @endsection
-
-
-                    {{-- <input type="hidden" id="cf_code" value="{{ $cf_code }}" />
-<input type="hidden" id="cf_link_code" value="{{ $cf_link_code }}" /> --}}
-
+                    {{-- @extends('data-entry.patient-register-form') --}}
 
                     <input type="hidden" id="cf_code" name="cf_code" />
                     <input type="hidden" id="cf_link_code" name="cf_link_code" />
@@ -362,7 +300,7 @@
                     <td>လ</td>
                     <td><input type="text" id='frm_month'value='{{ $form_month }}' disabled></td>
                 </tr>
-                <tr>
+                {{-- <tr>
                     <td>ဆေးရုံတက်အတွင်းလူနာသစ်ပေါင်း</td>
                     <td><input type="number" class="" id='txt_Total_Inpatient'
                             value="{{ $tp->Total_Inpatient }}"></td>
@@ -377,7 +315,7 @@
                             value="{{ $tp->Death_Facility }}"></td>
                     <td>ခုနှစ်</td>
                     <td><input type="text" id='frm_year' value='{{ $form_year }}' disabled></td>
-                </tr>
+                </tr> --}}
             </tbody>
         </table>
         <?php
@@ -399,7 +337,7 @@
                     <td>လ</td>
                     <td><input type="text" id='frm_month'value='{{ $form_month }}' disabled></td>
                 </tr>
-                <tr>
+                {{-- <tr>
                     <td>ဆေးရုံတက်အတွင်းလူနာသစ်ပေါင်း</td>
                     <td><input type="number" class="" id='txt_Total_Inpatient' value="0"></td>
                     <td>ငါးနှစ်အောက်အထွေထွေဆေးခန်းလာ(အတွင်း)</td>
@@ -412,7 +350,7 @@
                     </td>
                     <td>ခုနှစ်</td>
                     <td><input type="text" id='frm_year' value='{{ $form_year }}' disabled></td>
-                </tr>
+                </tr> --}}
             </tbody>
         </table>
         <?php }} ?>
@@ -1222,13 +1160,13 @@
     // });
 
     function save_data_entry(button) {
-        alert('hello i am new1111');
+        //alert('hello i am new1111');
         //$(button).prop("disabled", true);
-        $(button).html('<img src="img/default-loading.gif" style="width:20px;"/> ခေတ္တစောင့်ပါ');
+        //$(button).html('<img src="img/default-loading.gif" style="width:20px;"/> ခေတ္တစောင့်ပါ');
         //tpa check
 
 
-        var tp_code = document.getElementById('txt_Death_Facility').getAttribute('tp_code');
+        //var tp_code = document.getElementById('txt_Death_Facility').getAttribute('tp_code');
         var tpa_out = $("#txt_Total_Outpatient").val();
         var u5_tpa = $("#txt_U5_Outpatient").val();
         var preg_tpa = $("#txt_Preg_Outpatient").val();
@@ -1298,7 +1236,7 @@
                     url: BACKEND_URL + "save_tbl_total_patient_temp/",
                     data: data_to_post,
                     success: function(result) {
-                        alert('hi saved successs111');
+                        //alert('hi saved successs111');
                         if (result == "1") {
                             //console.log("save success");
                             save_update_check = true;
@@ -1396,14 +1334,14 @@
                 pt_name = pt_name.replace(/'/, "");
                 data["Pt_Name"] = pt_name;
                 data["Age_Year"] = row.cells[3].children[0].value;
-                data["Pt_Father_Name"] = row.cells[4].children[].value;
+                data["Pt_Father_Name"] = row.cells[4].children[0].value;
                 data["Pt_Location"] = row.cells[5].children[0].value;
                 data["Pt_Address"] = row.cells[6].children[0].value;
-                data["Pt_Address"] = row.cells[7].children[0].value;
-                data["Pt_Address"] = row.cells[8].children[0].value;
-                data["Pt_Address"] = row.cells[9].children[0].value;
-                data["Pt_Address"] = row.cells[10].children[0].value;
-                data["Pt_Address"] = row.cells[11].children[0].value;
+                data["Pt_Address1"] = row.cells[7].children[0].value;
+                data["Pt_Address2"] = row.cells[8].children[0].value;
+                data["Pt_Address3"] = row.cells[9].children[0].value;
+                data["Pt_Address4"] = row.cells[10].children[0].value;
+                data["Pt_Address5"] = row.cells[11].children[0].value;
                 data["Sex_Code"] = row.cells[12].children[0].value;
                 data["Preg_YN"] = row.cells[13].children[0].value;
                 data["Micro_Code"] = row.cells[14].children[0].value;
@@ -1569,12 +1507,11 @@
     }
 
     function add_row(btn) {
-        // alert('this will new rowlll');
+    //alert('this will new rowlll');
 
         //$(btn).prop('disabled', true);
-        //$(btn).html("<li class='fa fa-spinner fa-spin'></li> ခေတ္တစောင့်ပါ");
+        $(btn).html("<li class='fa fa-spinner fa-spin'></li> ခေတ္တစောင့်ပါ");
         // var table = document.getElementById('data_entry_body');
-
         var row_count = get_row();
         if (row_count >= 17) {
             alert('maximum');
@@ -1588,11 +1525,11 @@
             $.ajax({
                 type: "GET",
                 url: BACKEND_URL + "get_patient_dataentry_row/" + value,
-                // url: "/get_patient_dataentry_row/$lp_township_de" + value,
+                //url: "/dhis-offline-app/public/get_patient_dataentry_row/" + value,
+                //url: "/dhis-offline-app/public/get_patient_dataentry_row/0",
 
                 success: function(data) {
-
-                    // alert('this isopeirepw');
+                    //alert('this isopeirepw');
                     //console.log("myitzu", data);
                     $("#data_entry_body").append(data);
                     set_row_numbers();
@@ -1600,7 +1537,7 @@
                     // set_focus();
                 },
                 error: function(error) {
-                    alert(error.statusText);
+                    bootbox.alert(error.statusText);
                     checkBtn();
                 }
             });
@@ -1609,11 +1546,9 @@
 
     }
 
-
     function set_row_numbers() {
         var table = document.getElementById('data_entry_body');
         for (var i = 0, row; row = table.rows[i]; i++) {
-            //console.log('myitzuhtun',row);
             row.cells[0].innerHTML = i + 1;
             row.cells[26].children[0].setAttribute("rowNo", i + 1);
         }
@@ -1625,16 +1560,16 @@
 
         function delete_row(btn) {
         // alert('this is deleted111',btn);
-        var rowNum = $(btn).attr("rowno");
+        var rowNum = $(btn).attr("rowNo");
         // confirm("Row အမှတ် " + rowNum + " တစ်ခုလုံးအား အပြီးဖျက်မည်။ သေချာပါက OK နှိပ်ပါ", function(c) {
         //     if (c == true) {
-        //         alert('this is rowno');
         //         $(btn).closest('tr').remove();
         //         set_row_numbers();
         //     }
-        //     checkBtn();
+
         //  });
-         if(confirm("Row အမှတ် " + rowNum + " တစ်ခုလုံးအား အပြီးဖျက်မည်။ သေချာပါက OK နှိပ်ပါ") == true){
+
+         if (confirm("Row အမှတ် " + rowNum + " တစ်ခုလုံးအား အပြီးဖျက်မည်။ သေချာပါက OK နှိပ်ပါ") == true){
             $(btn).closest('tr').remove();
                 set_row_numbers();
          }else{
@@ -1879,8 +1814,7 @@
     .sec-row,
     .third-row {
         margin-bottom: 15px;
-        padding;
-        0 5px;
+        padding:0 5px;
     }
 
     .label-right {

@@ -562,7 +562,8 @@
         }
 
         function add_row(btn) {
-            $(btn).prop('disabled', true);
+            // alert('this is row');
+            // $(btn).prop('disabled', true);
             $(btn).html("<li class='fa fa-spinner fa-spin'></li> ခေတ္တစောင့်ပါ");
             // var table = document.getElementById('data_entry_body');
             var row_count = get_row();
@@ -593,7 +594,7 @@
                 //"http://" + window.location.host +
             }
 
-        // }
+        // } 
 
         function set_row_numbers() {
             var table = document.getElementById('data_entry_body');

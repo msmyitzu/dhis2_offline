@@ -601,21 +601,24 @@ class lookupsController extends Controller
         }
     }
 
-    // public function save_tbl_individual_case_temp(Request $request)
-    // {
-    //     try {
-    //         $data = json_decode($request->getContent(), true);
-	// 		if($data){
-	// 			tbl_individual_case_temp::insert($data);
-	// 			return "1";
-	// 		}else{
-	// 		    return "Edited or Updated Data Successfully Save.";
-    //         }
-    //     }
-    //     catch (\Exception $e) {
-    //         return $e->getMessage();
-    //     }
-    // }
+    public function save_tbl_individual_case_temp(Request $request)
+
+    {
+       // dd($request);
+        try {
+            $data = json_decode($request->getContent(), true);
+			if($data){
+                //dd($data);
+				tbl_individual_case::insert($data);
+				return "1";
+			}else{
+			    return "Edited or Updated Data Successfully Save.";
+            }
+        }
+        catch (\Exception $e) {
+            return $e->getMessage();
+        }
+    }
 
     public function save_tbl_total_patient(Request $request)
     {

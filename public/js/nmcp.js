@@ -1637,7 +1637,7 @@ function checkTestResult(rdt) {
         assum_result='Mixed';
         tr.find('td:eq(17) select,td:eq(18) select,td:eq(19) select').prop('disabled', false);
         tr.find('td:eq(17) select,td:eq(18) select,td:eq(19) select').css('cursor', 'default');
-    }else if(select_check_lens == "Pyeo" && select_check_rdt == "Not Exam"){
+    }else if(select_check_lens == "Po" && select_check_rdt == "Not Exam"){
         assum_result='Po';
         tr.find('td:eq(17) select,td:eq(18) select,td:eq(19) select').prop('disabled', false);
         tr.find('td:eq(17) select,td:eq(18) select,td:eq(19) select').css('cursor', 'default');
@@ -1704,7 +1704,7 @@ function checkTestResult(rdt) {
             var $select = tr.find("td:eq(17) select");
             $select.val("18");
             $select.find("option[value='3'], option[value='12'], option[value='6'], option[value='24']").prop("disabled", true);
-            // checkPreg(preg);
+            checkPreg(preg);
             // if (select_preg == "Yes") {
             //     tr.find('td:eq(19) select').prop('disabled',true);
             //     tr.find('td:eq(19) select').css('cursor', 'not-allowed');
@@ -1719,7 +1719,7 @@ function checkTestResult(rdt) {
             var $select = tr.find("td:eq(17) select");
             $select.val("24");
             $select.find("option[value='3'], option[value='12'], option[value='18'], option[value='6']").prop("disabled", true);
-            // checkPreg(preg);
+            checkPreg(preg);
             // // if (select_preg == "Yes") {
             //     tr.find('td:eq(19) select').prop('disabled',true);
             //     tr.find('td:eq(19) select').css('cursor', 'not-allowed');
@@ -1762,7 +1762,7 @@ function checkTestResult(rdt) {
         }else if(input_age == "AGE_GROUP_10_TO_14"){
             tr.find('td:eq(17) select').prop('disabled',true);
             tr.find('td:eq(17) select').css('cursor', 'not-allowed');
-            // checkPreg(preg);
+            checkPreg(preg);
             // if (select_preg == "Yes") {
             //     tr.find('td:eq(19) select').prop('disabled',true);
             //     tr.find('td:eq(19) select').css('cursor', 'not-allowed');
@@ -1777,7 +1777,7 @@ function checkTestResult(rdt) {
         }else if(input_age == "AGE_GROUP_15_AND_ABOVE"){
             tr.find('td:eq(17) select').prop('disabled',true);
             tr.find('td:eq(17) select').css('cursor', 'not-allowed');
-            // checkPreg(preg);
+            checkPreg(preg);
             // if (select_preg == "Yes") {
             //     tr.find('td:eq(19) select').prop('disabled',true);
             //     tr.find('td:eq(19) select').css('cursor', 'not-allowed');
@@ -1797,6 +1797,7 @@ function checkTestResult(rdt) {
             tr.find('td:eq(18) select,td:eq(19) select').prop('disabled',true);
             tr.find('td:eq(18) select,td:eq(19) select').css('cursor', 'not-allowed');
             var $select = tr.find("td:eq(17) select");
+            // alert($select);
             $select.val("3");
             $select.find("option[value='24'], option[value='12'], option[value='18'], option[value='6']").prop("disabled", true);
         }else if(input_age == "AGE_GROUP_1_TO_4"){
@@ -1823,7 +1824,7 @@ function checkTestResult(rdt) {
             var $select = tr.find("td:eq(17) select");
             $select.val("18");
             $select.find("option[value='3'], option[value='6'], option[value='12'], option[value='24']").prop("disabled", true);
-            // checkPreg(preg);
+            checkPreg(preg);
             // if (select_preg == "Yes") {
             //     tr.find('td:eq(19) select').prop('disabled',true);
             //     tr.find('td:eq(19) select').css('cursor', 'not-allowed');
@@ -1838,7 +1839,7 @@ function checkTestResult(rdt) {
             var $select = tr.find("td:eq(17) select");
             $select.val("24");
             $select.find("option[value='3'], option[value='6'], option[value='18'], option[value='12']").prop("disabled", true);
-            // checkPreg(preg);
+            checkPreg(preg);
             // if (select_preg == "Yes") {
             //     tr.find('td:eq(19) select').prop('disabled',true);
             //     tr.find('td:eq(19) select').css('cursor', 'not-allowed');

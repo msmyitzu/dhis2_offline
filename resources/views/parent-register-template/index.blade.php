@@ -13,6 +13,9 @@
         <span class="card-title"> Malaria Case-Based Reporting for VBDC Myanmar </span>
       </a>
     </li>
+    <li>
+        <button type="submit" class="upload_to_online_btn">Upload to Online</button>
+    </li>
   </ul>
 
 </div>
@@ -30,7 +33,7 @@
                     <div class="box-body">
                         <div class="row"  style="">
                             {{-- justify-content-evenly --}}
-                            <div class="form-group col-md-5">
+                            <div class="form-group col-md-5" id="service_provider">
                                 <label for="" class="control-label"style="padding-bottom:10px;">Service Provider *</label>
                                 <div class="">
                                     <select class="form-control select2" name="select_lp_form_cat"
@@ -45,7 +48,7 @@
                             </div>
 
 
-                            <div class="form-group col-md-5">
+                            <div class="form-group col-md-5" id="data_entry_type">
                                 <label for="" class="control-label" style="padding-bottom:10px;">Data Entry Type *</label>
                                 <div class="">
                                     <select id="dataEntry" name="dataEntry"
@@ -59,7 +62,7 @@
                         </div>
 
                         <div class="row">
-                            <div class="form-group col-md-5">
+                            <div class="form-group col-md-5" id="state_region">
                                 <label for="" class=" control-label" style="padding-bottom:10px;">ပြည်နယ်/တိုင်းဒေသကြီး *</label>
                                 <div class="">
                                     <select class="form-control select2" style="height:50px;" name="select_lp_state_region" id="select_lp_state_region"
@@ -71,7 +74,7 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="form-group col-md-5">
+                            <div class="form-group col-md-5" id="township">
                                 <label for="" class=" control-label" style="padding-bottom:10px;">မြို့နယ် *</label>
                                 <div class="">
                                     <select name="select_lp_township_de" id="select_lp_township_de"
@@ -87,7 +90,7 @@
                         </div>
                         <div class="row">
 
-                            <div class="form-group col-md-5">
+                            <div class="form-group col-md-5" id="rhc_health">
                                 <label for="" id="rhc_label" class="control-label"
                                     style="word-wrap: anywhere; padding-bottom:10px;" >မြို့နယ်/တိုက်နယ်ဆေးရုံ/ကျန်းမာရေးဌာန *</label>
                                 <div class="">
@@ -98,7 +101,7 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="form-group col-md-5">
+                            <div class="form-group col-md-5" id="sc_health">
                                 <label for="" id="sc_label" class="control-label" style="word-wrap: anywhere; padding-bottom:10px;">
                                     ကျန်းမာရေးဌာနခွဲ *</label>
                                 <div class="">
@@ -124,7 +127,7 @@
                                 </div>
                             </div>
 
-                            <div class="form-group col-md-3" style="margin-top:35px;">
+                            <div class="form-group col-md-3" style="margin-top:35px;" id="rp_month">
                                 <label for="" class="control-label" style="padding-bottom:10px;">အစီရင်ခံသည့် လ/ခုနှစ် *</label>
                                 <div class="month">
                                     <input type="month" id="start" name="start" class="form-control text-center"  style="height:50px;" autocomplete=off>
@@ -135,7 +138,7 @@
 
                             </div>
 
-                            <div class="form-group col-md-3"style="margin-top:20px;" >
+                            <div class="form-group col-md-3"style="margin-top:20px;" id="bloodTest">
                                 <label for="" class=" control-label" style="text-align:left;
                                 padding-bottom:10px;">ယခုလအတွင်း
                                     ငှက်ဖျားလူနာ<br>သွေးဖောက်စစ်ဆေးမှုရှိပါသလား*</label>
@@ -206,56 +209,56 @@
             <table class="" style="margin-left:20px;">
                 <tbody align="center">
                     <tr style="padding-bottom:20px;">
-                        <td style="padding:10px;">
+                        <td style="padding:10px;" >
 
                             <small style="font-weight: 700; font-size: 14px; padding-right:10px; ">
                                 အထွေထွေဆေးခန်းလာပြင်ပလူနာသစ်ပေါင်း(ပြင်ပ)* -</small>
-                            <input type="text" value="0" style="width: 10%; ">
+                            <input type="text" id="txt_total_outpatient" value="" style="width: 10%; ">
 
                         </td>
-                        <td style="padding:10px;">
+                        <td style="padding:10px;" >
 
                             <small style="font-weight: 700; font-size: 14px; padding-right:10px;"> ငါးနှစ်အောက်အထွေထွေဆေးခန်းလာ(ပြင်ပ)
                                 -</small>
-                            <input type="text" value="0" style="width: 10%; ">
+                            <input type="text" id="txt_total_child_out" value="" style="width: 10%; ">
 
                         </td>
-                        <td sstyle="padding:10px;">
+                        <td sstyle="padding:10px;" >
 
                             <small style="font-weight: 700; font-size: 14px; padding-right:10px;"> ကိုယ်ဝန်ဆောင်အထွေထွေဆေးခန်းလာ(ပြင်ပ)
                                 -</small>
-                            <input type="text" value="0" style="width: 10%; margin-right:20px;">
+                            <input type="text" id="txt_total_preg_out" value="" style="width: 10%; margin-right:20px;">
 
                         </td>
                     </tr>
                     <tr>
-                        <td style="padding:10px; margin-left:20px;">
+                        <td style="padding:10px; margin-left:20px;" >
 
                             <small style="font-weight: 700; font-size: 14px; padding-right:10px;"> ဆေးရုံတက်အတွင်းလူနာသစ်ပေါင်း -</small>
-                            <input type="text" value="0" style="width: 10%; ">
+                            <input type="text" id="txt_total_inpatient" value="" style="width: 10%; ">
                         </td>
-                        <td style="padding:10px;">
+                        <td style="padding:10px;" >
 
                             <small style="font-weight: 700; font-size: 14px; padding-right:10px;"> ငါးနှစ်အောက်အထွေထွေဆေးခန်းလာ(အတွင်း)
                                 -</small>
-                            <input type="text" value="0" style="width: 10%; ">
+                            <input type="text" id="txt_total_in_child" value="" style="width: 10%; ">
 
                         </td>
-                        <td style="padding:10px;">
+                        <td style="padding:10px;" >
 
                             <small style="font-weight: 700; font-size: 14px; padding-right:10px; "> ကိုယ်ဝန်ဆောင်အထွေထွေဆေးခန်းလာ(အတွင်း)
                                 -</small>
-                            <input type="text" value="0" style="width: 10%; margin-right:20px; ">
+                            <input type="text" id="txt_total_preg_in" value="" style="width: 10%; margin-right:20px; ">
 
                         </td>
 
                     </tr>
                     <tr>
                         <td></td>
-                        <td style="padding:10px;">
+                        <td style="padding:10px;" >
 
                             <small style="font-weight: 700; font-size: 14px; padding-right:10px; "> ဆေးရုံတွင်သေဆုံးသူစုစုပေါင်း -</small>
-                            <input type="text" value="0" style="width: 10%; ">
+                            <input type="text" id="txt_total_death_in" value="" style="width: 10%; ">
 
                         </td>
                     </tr>
@@ -1166,67 +1169,55 @@
         //tpa check
 
 
-        //var tp_code = document.getElementById('txt_Death_Facility').getAttribute('tp_code');
-        var tpa_out = $("#txt_Total_Outpatient").val();
-        var u5_tpa = $("#txt_U5_Outpatient").val();
-        var preg_tpa = $("#txt_Preg_Outpatient").val();
-        var df = $("#txt_Death_Facility").val();
-        var tpa_in = $("#txt_Total_Inpatient").val();
-        var u5_in = $("#txt_U5_Inpatient").val();
-        var preg_in = $("#txt_Preg_Inpatient").val();
-        var errMsg = '';
-        if (tpa_out == '') {
-            errMsg += '<p>• အထွေထွေဆေးခန်းလာပြင်ပလူနာသစ်ပေါင်းဖြည့်ပါ</p>';
-        }
-        if (u5_tpa == '') {
-            errMsg += '<p>• ငါးနှစ်အောက်အထွေထွေဆေးခန်းလာ(ပြင်ပ)ဖြည့်ပါ</p>';
-        }
-        if (preg_tpa == '') {
-            errMsg += '<p>• ကိုယ်ဝန်ဆောင်အထွေထွေဆေးခန်းလာ(ပြင်ပ)ဖြည့်ပါ</p>';
-        }
-        if (df == '') {
-            errMsg += '<p>• ဆေးရုံတွင်သေဆုံးသူစုစုပေါင်းဖြည့်ပါ</p>';
-        }
-        if (tpa_in == '') {
-            errMsg += '<p>• ဆေးရုံတက်အတွင်းလူနာသစ်ပေါင်းဖြည့်ပါ</p>';
-        }
-        if (u5_in == '') {
-            errMsg += '<p>• ငါးနှစ်အောက်အထွေအထွေဆေးခန်းလာ(အတွင်း)ဖြည့်ပါ</p>';
-        }
-        if (preg_in == '') {
-            errMsg += '<p>• ကိုယ်ဝန်ဆောင်အထွေထွေဆေးခန်းလာ(အတွင်း)ဖြည့်ပါ</p>';
-        }
-        if (errMsg != '') {
-            $('#txt_Total_Outpatient').css('background', '#FFC8C8');
-            $('#txt_Total_Inpatient').css('background', '#FFC8C8');
-            $('#txt_U5_Inpatient').css('background', '#FFC8C8');
-            $('#txt_U5_Outpatient').css('background', '#FFC8C8');
-            $('#txt_Preg_Inpatient').css('background', '#FFC8C8');
-            $('#txt_Preg_Outpatient').css('background', '#FFC8C8');
-            $('#txt_Death_Facility').css('background', '#FFC8C8');
-            $(button).prop("disabled", false);
-            $(button).html('<li class="fa fa-floppy-o"></li> အားလုံးသိမ်းမည်');
-            alert(errMsg);
-            return false;
-        } else {
-            $('#txt_Total_Outpatient').css('background', 'white');
-            $('#txt_Total_Inpatient').css('background', 'white');
-            $('#txt_U5_Inpatient').css('background', 'white');
-            $('#txt_U5_Outpatient').css('background', 'white');
-            $('#txt_Preg_Inpatient').css('background', 'white');
-            $('#txt_Preg_Outpatient').css('background', 'white');
-            $('#txt_Death_Facility').css('background', 'white');
-            if (tp_code == '') {
                 var data = {};
-                data["cf_link_code"] = $("#cf_link_code").val();
-                data["Total_Outpatient"] = tpa_out;
-                data["U5_Outpatient"] = u5_tpa;
-                data["Preg_Outpatient"] = preg_tpa;
-                data["Death_Facility"] = df;
-                data["Total_Inpatient"] = tpa_in;
-                data["U5_Inpatient"] = u5_in;
-                data["Preg_Inpatient"] = preg_in;
+                    data["service_provider"] = $("#service_provider").val();
+                    data["data_entry"] = $("#data_entry_type").val();
+                    data["state_region"] = $("#state_region").val();
+                    data["township"] = $("#township").val();
+                    data["rhc_health"] =$("#rhc_health").val();
+                    data["sc_health"] = $("#sc_health").val();
+                    data["icmv_select"] = $("#icmvSelect").val();
+                    data["rp_month"] = $("#rp_month").val();
+                    data["blood_test"] = $("#bloodTest").val();
+                    data["condition"] = $("#conditionalSelect").val();
+                    //data["cf_link_code"] = $("#cf_link_code").val();
+                    data["Total_Outpatient"] = $("#txt_total_outpatient").val();
+                    data["U5_Outpatient"] = $("#txt_total_child_out").val();
+                    data["Preg_Outpatient"] = $("#txt_total_preg_out").val();
+                    data["Total_Inpatient"] = $("#txt_total_inpatient").val();
+                    data["U5_Inpatient"] = $("#txt_total_in_child").val();
+                    data["Preg_Inpatient"] = $("#txt_total_preg_in").val();
+                    data["Death_Facility"] = $("#txt_total_death_in").val();
+                    var table = document.getElementById('data_entry_body');
+            for (var i = 0, row; row = table.rows[i]; i++) {
+                    data["Pt_Name"] = row.cells[2].children[0].value;
+                    data["Age_Year"] = row.cells[3].children[0].value;
+                    data["Pt_Father_Name"] = row.cells[4].children[0].value;
+                    data["Pt_Location"] = row.cells[5].children[0].value;
+                    data["Pt_Address"] = row.cells[6].children[0].value;
+                    data["Pt_Address1"] = row.cells[7].children[0].value;
+                    data["Pt_Address2"] = row.cells[8].children[0].value;
+                    data["Pt_Address3"] = row.cells[9].children[0].value;
+                    data["Pt_Address4"] = row.cells[10].children[0].value;
+                    data["Pt_Address5"] = row.cells[11].children[0].value;
+                    data["Sex_Code"] = row.cells[12].children[0].value;
+                    data["Preg_YN"] = row.cells[13].children[0].value;
+                    data["Micro_Code"] = row.cells[14].children[0].value;
+                    data["RDT_Code"] = row.cells[15].children[0].value;
+                    data["IOC_Code"] = row.cells[16].children[0].value;
+                    data["ACT_Code"] = row.cells[17].children[0].value;
+                    data["CQ_Code"] = row.cells[18].children[0].value;
+                    data["PQ_Code"] = row.cells[19].children[0].value;
+                    data["Referral_Code"] = row.cells[20].children[0].value;
+                    data["Malaria_Death"] = row.cells[21].children[0].value;
+                    data["TG_Code"] = row.cells[22].children[0].value;
+                    data["travel_yn"] = row.cells[23].children[0].value;
+                    data["occupation"] = row.cells[24].children[0].value;
+                    data["Remark"] = row.cells[25].children[0].value;
+            }
+
                 var data_to_post = JSON.stringify(data);
+                console.log(data);
                 var save_update_check = $.ajax({
                     async: false,
                     type: "POST",
@@ -1234,9 +1225,9 @@
                         "X-CSRF_TOKEN": '{{ csrf_token() }}'
                     },
                     url: BACKEND_URL + "save_tbl_total_patient_temp/",
-                    data: data_to_post,
+                     data: data_to_post,
                     success: function(result) {
-                        //alert('hi saved successs111');
+                        alert('save data to tbl_individual_case');
                         if (result == "1") {
                             //console.log("save success");
                             save_update_check = true;
@@ -1244,207 +1235,32 @@
                             console.log(result);
                         }
                     }
-                }).responseText;
-            } else {
-                var data = {};
-                data["cf_link_code"] = $("#cf_link_code").val();
-                data["TP_Code"] = tp_code;
-                data["Total_Outpatient"] = tpa_out;
-                data["U5_Outpatient"] = u5_tpa;
-                data["Preg_Outpatient"] = preg_tpa;
-                data["Death_Facility"] = df;
-                data["Total_Inpatient"] = tpa_in;
-                data["U5_Inpatient"] = u5_in;
-                data["Preg_Inpatient"] = preg_in;
-                var data_to_update = JSON.stringify(data);
-                console.log(data_to_update);
-                var save_update_check = $.ajax({
-                    async: false,
-                    type: "POST",
-                    headers: {
-                        "X-CSRF_TOKEN": '{{ csrf_token() }}'
-                    },
-                    url: BACKEND_URL + "update_tbl_total_patient_temp/",
-                    data: data_to_update,
-                    success: function(result) {
-                        if (result == "1") {
-                            //console.log(result + " update success");
-                            save_update_check = true;
-                        } else {
-                            save_update_check = false;
-                        }
-                    }
-                }).responseText;
-            }
-        }
-        if (save_update_check == "1" || save_update_check == "2") {
-            var table = document.getElementById('data_entry_body');
-            var alldata = [];
-            var checker = "false";
-            for (var i = 0, row; row = table.rows[i]; i++) {
-                //date check
-                //check if any column left empty
-                for (var j = 1, col; col = row.cells[j]; j++) {
-                    if (col.children[0].value == "" && j != 19) {
-                        col.children[0].style.background = "#FFC8C8";
-                        checker = "true";
-                    } else {
-                        col.children[0].style.background = "white";
-                    }
-                }
-                //console.log(row.cells[0].getAttribute("P_Number"));
-                //Get all the data from controls inside <td>
-                var data = {};
-                data["CF_Code"] = $("#cf_code").val();
-                data["cf_link_code"] = $("#cf_link_code").val();
-                data["Row_No"] = row.cells[0].innerHTML;
-                //data["Screening_Date"] = $("#frm_year").val()+"-"+ $("#frm_month").val()+"-"+row.cells[1].children[0].value;
-                //data["Screening_Date"] = row.cells[1].children[0].value;
+                 }).responseText;
+                // var data_to_update = JSON.stringify(data);
+                // console.log(data_to_update);
+                // var save_update_check = $.ajax({
+                //     async: false,
+                //     type: "POST",
+                //     headers: {
+                //         "X-CSRF_TOKEN": '{{ csrf_token() }}'
+                //     },
+                //     url: BACKEND_URL + "update_tbl_total_patient_temp/",
+                //     data: data_to_update,
+                //     success: function(result) {
+                //         if (result == "1") {
+                //             //console.log(result + " update success");
+                //             save_update_check = true;
+                //         } else {
+                //             save_update_check = false;
+                //         }
+                //     }
+                // }).responseText;
 
-                //Added on 2019-07-17
-                var dedt = row.cells[1].children[0].value.split('-');
-                if (dedt == "") {
-                    alert("Screening Date Format မှားယွင်းနေသည်။\n မသေချာလျှင် (09-09-0999) ဟုထည့်သွင်းပါ။")
-                        .on('hidden.bs.modal', function() {
-                            row.cells[1].children[0].focus();
-                        });
-                    $(button).prop("disabled", false);
-                    $(button).html('<li class="fa fa-floppy-o"></li> အားလုံးသိမ်းမည်');
-                    return false;
-                } else {
-                    dedt = dedt; //.split('-')
-                    //alert(isValidDate(dedt[0], dedt[1], dedt[2]));
-                    if (isValidDate(dedt[0], dedt[1], dedt[2]) == true) {
-                        data["Screening_Date"] = sortDate(row.cells[1].children[0].value);
-                    } else {
-                        alert(
-                                "Screening Date Format မှားယွင်းနေသည်။\n မသေချာလျှင် (09-09-0999) ဟုထည့်သွင်းပါ။")
-                            .on('hidden.bs.modal', function() {
-                                row.cells[1].children[0].focus();
-                            });
-                        $(button).prop("disabled", false);
-                        $(button).html('<li class="fa fa-floppy-o"></li> အားလုံးသိမ်းမည်');
-                        return false;
-                    }
-                }
-                //Added on 2019-07-17 end
 
-                // data["Screening_Date"] = sortDate(row.cells[1].children[0].value);
-                var pt_name = (row.cells[2].children[0].value).replace(/"/, "");
-                pt_name = pt_name.replace(/'/, "");
-                data["Pt_Name"] = pt_name;
-                data["Age_Year"] = row.cells[3].children[0].value;
-                data["Pt_Father_Name"] = row.cells[4].children[0].value;
-                data["Pt_Location"] = row.cells[5].children[0].value;
-                data["Pt_Address"] = row.cells[6].children[0].value;
-                data["Pt_Address1"] = row.cells[7].children[0].value;
-                data["Pt_Address2"] = row.cells[8].children[0].value;
-                data["Pt_Address3"] = row.cells[9].children[0].value;
-                data["Pt_Address4"] = row.cells[10].children[0].value;
-                data["Pt_Address5"] = row.cells[11].children[0].value;
-                data["Sex_Code"] = row.cells[12].children[0].value;
-                data["Preg_YN"] = row.cells[13].children[0].value;
-                data["Micro_Code"] = row.cells[14].children[0].value;
-                data["RDT_Code"] = row.cells[15].children[0].value;
-                data["IOC_Code"] = row.cells[16].children[0].value;
-                data["ACT_Code"] = row.cells[17].children[0].value;
-                data["CQ_Code"] = row.cells[18].children[0].value;
-                data["PQ_Code"] = row.cells[19].children[0].value;
-                data["Referral_Code"] = row.cells[20].children[0].value;
-                data["Malaria_Death"] = row.cells[21].children[0].value;
-                data["TG_Code"] = row.cells[22].children[0].value;
-                data["travel_yn"] = row.cells[23].children[0].value;
-                data["occupation"] = row.cells[24].children[0].value;
-                data["Remark"] = row.cells[25].children[0].value;
 
-                /* P_Number is 0, means this is a new record */
-                if (row.cells[0].getAttribute("P_Number") == "0") {
-                    alldata.push(data);
-                }
-                /* P_Number is not 0, so this is an existing record. It will be updated with the new values. */
-                else {
-                    if (checker == "true") {
-                        $(button).prop("disabled", false);
-                        $(button).html('<li class="fa fa-floppy-o"></li> အားလုံးသိမ်းမည်');
-                        return false;
-                    } else {
-                        data["P_Number"] = row.cells[0].getAttribute("P_Number");
-                        var data_to_update = JSON.stringify(data);
-                        console.log('this is update data : ', data_to_update);
-                        var xmlhttp1 = new XMLHttpRequest();
-                        xmlhttp1.onreadystatechange = function() {
-                            if (this.readyState == 4 && this.status == 200) {
-                                if (xmlhttp1.responseText == "1") {
-                                    // bootbox.alert("Successfully updated!", function () {
-                                    //     // location.href = '/';
-                                    // });
-                                } else {
-                                    confirm(xmlhttp1.responseText, function(result) {
-                                        if (result == true) {
-                                            location.href = '/';
-                                        } else {
-                                            $(button).prop("disabled", false);
-                                            $(button).html(
-                                                '<li class="fa fa-floppy-o"></li> အားလုံးသိမ်းမည်');
-                                        }
-                                    });
-                                }
-                            }
-                        }
-                        xmlhttp1.open("POST", BACKEND_URL + 'update_tbl_individual_case_temp');
-                        xmlhttp1.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-                        xmlhttp1.setRequestHeader('X-CSRF-TOKEN', '{{ csrf_token() }}');
-                        xmlhttp1.send(data_to_update);
-                    }
-                }
-            }
-            if (checker == "true") {
-                $(button).prop("disabled", false);
-                $(button).html('<li class="fa fa-floppy-o"></li> အားလုံးသိမ်းမည်');
-                return false;
-            } else {
-                // $(button).prop("disabled", true);
-                // $(button).html('<img src="img/default-loading.gif" style="width:20px;"/> ခေတ္တစောင့်ပါ');
-                var data_to_post = JSON.stringify(alldata);
-                var xmlhttp = new XMLHttpRequest();
-                xmlhttp.onreadystatechange = function() {
-                    if (this.readyState == 4 && this.status == 200) {
-                        if (xmlhttp.responseText == "1") {
-                            $(button).prop('disabled', false);
-                            $(button).html('<li class="fa fa-floppy-o"></li> အားလုံးသိမ်းမည်');
-                            alert("Successfully Individual Case saved!", function() {
-                                location.href = "/";
-                            });
-                        } else {
-                            confirm(xmlhttp.responseText, function(result) {
-                                if (result == true) {
-                                    location.href = '/';
-                                } else {
-                                    $(button).prop('disabled', false);
-                                    $(button).html('<li class="fa fa-floppy-o"></li> အားလုံးသိမ်းမည်');
-                                }
-                            });
-                        }
-                    }
-                }
-                xmlhttp.open("POST", BACKEND_URL + 'save_tbl_individual_case_temp');
-                xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-                xmlhttp.setRequestHeader('X-CSRF-TOKEN', '{{ csrf_token() }}');
-                xmlhttp.send(data_to_post);
-                // end save function
-            }
-        } else {
-            console.log(save_update_check);
-            confirm(save_update_check, function(result) {
-                if (result == false) {
-                    $(button).prop('disabled', false);
-                    $(button).html('<li class="fa fa-floppy-o"></li> အားလုံးသိမ်းမည်');
-                } else {
-                    location.href = '/';
-                }
-            });
-        }
     }
+
+// ------------------------------------
 
     function isValidDate(d, m, y) {
         var thirtyDaysMonth = [9, 4, 6, 11];
@@ -1694,6 +1510,11 @@
     height: 50px;
     background-color: rgb(44, 102, 147);
 
+}
+.upload_to_online_btn{
+    height: auto:
+    width:150px;
+    
 }
 
 .back_arrow{

@@ -6,6 +6,7 @@ use App\tbl_core_facility;
 use App\tbl_core_facility_temp;
 use App\tbl_individual_case;
 use App\tbl_individual_case_temp;
+use App\tbl_nil;
 use App\tbl_region;
 use App\tbl_total_patient;
 use App\tbl_township;
@@ -638,26 +639,81 @@ class lookupsController extends Controller
 
     {
 
+
         try {
             $data = json_decode($request->getContent(), true);
             if($data){
-                // $tbl_total_patient_temp = tbl_total_patient_temp::where([
-                //     ['Total_Outpatient', '=', $data['Total_Outpatient']],
-                //     ['U5_Outpatient', '=', $data['U5_Outpatient']],
-                //     ['Preg_Outpatient', '=', $data['Preg_Outpatient']],
-                //     ['Total_Inpatient', '=', $data['Total_Inpatient']],
-                //     ['U5_Inpatient', '=', $data['U5_Inpatient']],
-                //     ['Preg_Inpatient', '=', $data['Preg_Inpatient']],
-                //     ['Death_Facility', '=', $data['Death_Facility']],
-                //     ['cf_link_code', '=', $data['cf_link_code']]
-                // ])->first();
-                $tbl_total_patient_temp = tbl_individual_case::where('cf_link_code', '=', $data['cf_link_code'])->count();
-                if(!$tbl_total_patient_temp > 0){
-                    tbl_individual_case::insert($data);
-                    return "1";
-                }else{
-                    return "2" ;
-                }
+
+                $tbl_individual_case_data = [
+                    'pt_Name' => $data['Pt_Name'],
+                    'pt_age' => $data['Age_Year'],
+                    'pt_father_name' => $data['Pt_Father_Name'],
+                    'pt_address' => $data['Pt_Location'],
+                    'pt_current_township' => $data['Pt_Address'],
+                    'pt_current_village' => $data['Pt_Address1'],
+                    'pt_current_ward' => $data['Pt_Address2'],
+                    'pt_permanent_township' => $data['Pt_Address3'],
+                    'pt_permanent_village' => $data['Pt_Address4'],
+                    'pt_permanent_ward' => $data['Pt_Address5'],
+                    'Sex_Code' => $data['Sex_Code'],
+                    'Preg_YN' => $data['Preg_YN'],
+                    'Micro_Code' => $data['Micro_Code'],
+                    'RDT_Code' => $data['RDT_Code'],
+                    'IOC_Code' => $data['IOC_Code'],
+                    'ACT_Code' => $data['ACT_Code'],
+                    'CQ_Code' => $data['CQ_Code'],
+                    'PQ_Code' => $data['PQ_Code'],
+                    'Referral_Code' => $data['Referral_Code'],
+                    'Malaria_Death' => $data['Malaria_Death'],
+                    'TG_Code' => $data['TG_Code'],
+                    'travel_yn' => $data['travel_yn'],
+                    'occupation' => $data['occupation'],
+                    'Remark' => $data['Remark']
+                    // ['Total_Outpatient', '=', $data['Total_Outpatient']],
+                    // ['U5_Outpatient', '=', $data['U5_Outpatient']],
+                    // ['Preg_Outpatient', '=', $data['Preg_Outpatient']],
+                    // ['Total_Inpatient', '=', $data['Total_Inpatient']],
+                    // ['U5_Inpatient', '=', $data['U5_Inpatient']],
+                    // ['Preg_Inpatient', '=', $data['Preg_Inpatient']],
+                    // ['Death_Facility', '=', $data['Death_Facility']],
+                    // ['cf_link_code', '=', $data['cf_link_code']]
+                ];
+                $tbl = tbl_individual_case::insert($tbl_individual_case_data );
+                // dd($tbl);
+                //  return "1";
+                // $tbl_total_patient_temp = tbl_individual_case::where('cf_id', '=', $data['cf_id'])->count();
+                // if(!$tbl_total_patient_temp > 0){
+                //     tbl_individual_case::insert($data);
+                //     return "1";
+                // }else{
+                //     return "2" ;
+                // }
+
+                // $tbl_core_facility_data = [
+                //     'service_provider' => $data['service_provider'],
+                //     'data_entry_type' => $data['data_entry'],
+                //     'region_mmr' => $data['state_region'],
+                //     'district_mmr' => $data['township'],
+                //     'township_mmr' => $data['sc_health'],
+                //     'healh_facility' => $data['icmv_select'],
+                //     'report_month' => $data['rp_month'],
+                //     'blood_test_result' => $data['blood_test'],
+                //     'condition' => $data['condition']
+                // ];
+                // tbl_core_facility::insert($tbl_core_facility_data);
+                    // dd($data);
+                $tbl_nil_data = [
+                    'total_outpatient' => $data['Total_Outpatient'],
+                    'u5_outpatient' => $data['U5_Outpatient'],
+                    'preg_outpatient' => $data['Preg_Outpatient'],
+                    'total_inpatient' => $data['Total_Inpatient'],
+                    'u5_inpatient'  => $data['U5_Inpatient'],
+                    'preg_inpatient' => $data['Preg_Inpatient'],
+                    'death_facility' => $data['Death_Facility']
+                ];
+                $tbl = tbl_nil::insert($tbl_nil_data);
+                // dd($tbl);
+                return "1";
             }
         }
         catch (\Exception $e) {
@@ -665,25 +721,25 @@ class lookupsController extends Controller
         }
     }
 
-	public function update_tbl_total_patient_temp(Request $request)
-    {
-		try{
-            $data = json_decode($request->getContent(), true);
-            $tbl_total_patient = tbl_individual_case::find($data['TP_Code']);
-            $tbl_total_patient->cf_link_code = $data['cf_link_code'];
-            $tbl_total_patient->Total_Outpatient = $data['Total_Outpatient'];
-            $tbl_total_patient->U5_Outpatient = $data['U5_Outpatient'];
-            $tbl_total_patient->Preg_Outpatient = $data['Preg_Outpatient'];
-            $tbl_total_patient->Total_Inpatient = $data['Total_Inpatient'];
-            $tbl_total_patient->U5_Inpatient = $data['U5_Inpatient'];
-            $tbl_total_patient->Preg_Inpatient = $data['Preg_Inpatient'];
-            $tbl_total_patient->Death_Facility = $data['Death_Facility'];
-            $tbl_total_patient->save();
-            return '1';
-        }catch (\Exception $e){
-            return $e->getMessage();
-        }
-	}
+	// public function update_tbl_total_patient_temp(Request $request)
+    // {
+	// 	try{
+    //         $data = json_decode($request->getContent(), true);
+    //         $tbl_total_patient = tbl_individual_case::find($data['TP_Code']);
+    //         $tbl_total_patient->cf_link_code = $data['cf_link_code'];
+    //         $tbl_total_patient->Total_Outpatient = $data['Total_Outpatient'];
+    //         $tbl_total_patient->U5_Outpatient = $data['U5_Outpatient'];
+    //         $tbl_total_patient->Preg_Outpatient = $data['Preg_Outpatient'];
+    //         $tbl_total_patient->Total_Inpatient = $data['Total_Inpatient'];
+    //         $tbl_total_patient->U5_Inpatient = $data['U5_Inpatient'];
+    //         $tbl_total_patient->Preg_Inpatient = $data['Preg_Inpatient'];
+    //         $tbl_total_patient->Death_Facility = $data['Death_Facility'];
+    //         $tbl_total_patient->save();
+    //         return '1';
+    //     }catch (\Exception $e){
+    //         return $e->getMessage();
+    //     }
+	// }
 
     public function update_tbl_individual_case(Request $request)
     {

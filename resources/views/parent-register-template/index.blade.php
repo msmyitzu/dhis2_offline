@@ -1500,6 +1500,7 @@
             $('#txt_U5_Inpatient').css('background', '#FFFFFF');
         }
     }
+    
     set_row_numbers();
 </script>
 <style>
@@ -1514,7 +1515,7 @@
 .upload_to_online_btn{
     height: auto:
     width:150px;
-    
+
 }
 
 .back_arrow{

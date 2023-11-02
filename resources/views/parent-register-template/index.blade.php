@@ -13,8 +13,8 @@
         <span class="card-title"> Malaria Case-Based Reporting for VBDC Myanmar </span>
       </a>
     </li>
-    <li>
-        <button type="submit" class="upload_to_online_btn">Upload to Online</button>
+    <li >
+        <a href="" class="upload_to_online_btn" >Upload to Online</a>
     </li>
   </ul>
 
@@ -1227,8 +1227,9 @@
                     url: BACKEND_URL + "save_tbl_total_patient_temp/",
                      data: data_to_post,
                     success: function(result) {
-                        alert('save data to tbl_individual_case');
+
                         if (result == "1") {
+                            alert('save data to tbl_individual_case');
                             //console.log("save success");
                             save_update_check = true;
                         } else {
@@ -1500,7 +1501,7 @@
             $('#txt_U5_Inpatient').css('background', '#FFFFFF');
         }
     }
-    
+
     set_row_numbers();
 </script>
 <style>
@@ -1512,11 +1513,20 @@
     background-color: rgb(44, 102, 147);
 
 }
-.upload_to_online_btn{
-    height: auto:
-    width:150px;
-
+.navbar {
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #333; /* Adjust as needed */
+    color: white; /* Adjust as needed */
+    padding: 10px; /* Adjust as needed */
 }
+
+.upload_to_online_btn {
+    margin-left: auto; /* Pushes the "Upload to Online" list item to the right */
+}
+
 
 .back_arrow{
     float: left;

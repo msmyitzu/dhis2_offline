@@ -11,6 +11,8 @@
 |
 */
 
+use App\Http\Controllers\APIController;
+
 Route::get('/main','lookupsController@ShowMainTabs');
 
 Route::get('/health-facilities', function(){
@@ -30,6 +32,8 @@ Route::get('/vhv-patient-register-form', 'lookupsController@get_vhv_patient_regi
 Route::get('/township-summary-report-SC', function(){
     return view('nmcp-template.township-summary-report-SC');
 });
+
+
 
 
 Route::get('/get_grab_tbl_individual_case/{cf_link_code}','lookupsController@get_grab_tbl_individual_case');

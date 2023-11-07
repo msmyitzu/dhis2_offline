@@ -16,6 +16,9 @@
     <li >
         <a href="" class="upload_to_online_btn" >Upload to Online</a>
     </li>
+    <li >
+        <a href="" class="upload_to_online_btn" >Download from Online</a>
+    </li>
   </ul>
 
 </div>

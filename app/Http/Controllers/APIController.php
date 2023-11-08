@@ -104,72 +104,168 @@ public function dhis2getData() {
 }
 }
 
-public function dhis2postData(Request $request) {
+public function dhis2postData() {
     // /{$updateURL}
-    $url = "https://mcbrs-dev2.myanmarvbdc.com/api/29/dataElements";
-    https://mcbrs-dev2.myanmarvbdc.com/api/29/dataElements/E0qWI5la2Zh.json
+   $baseUrl = 'https://mcbrs-dev2.myanmarvbdc.com/api/29/dataElements/';
+
 $data =DB::table('tbl_individual_case')->get();
 $data2 = DB::table('tbl_nil')->get();
 // dd($data2);
     // dd($data);
      $postData = [];
-     $postData2 = [];
 if ($data) {
     foreach ($data as $row) {
 
-        $postData[] = [
-            'enrollmentDate' => $row->screening_date,
-            'pt_name' => $row->pt_Name,
-            'age' => $row->pt_age,
-            'f_name' => $row->pt_father_name,
-            'case_outside_SubCenter_township' => $row->pt_address,
-            'current_township' => $row->pt_current_township,
-            'current_village' => $row-> pt_current_village,
-            'current_otherVillage' => $row->pt_current_ward,
-            'parmenant_township' => $row-> pt_permanent_township,
-            'parmenant_village' =>$row->pt_permanent_village,
-            'parmenant_otherVillage'=>$row->pt_permanent_ward,
-            'gender' => $row->Sex_Code,
-            'pregnancy_tf' => $row->Preg_YN,
-            'rdt_test' => $row ->RDT_Code,
-            'mcp_test' =>$row -> Micro_Code,
-            'act'=> $row->ACT_Code,
-            'cq'=>$row->CQ_Code,
-            'pq'=>$row->PQ_Code,
-            'referral'=>$row->Referral_Code,
-            'm_death'=>$row->Malaria_Death,
-            'note'=>$row->Remark,
-            'travel'=>$row->travel_yn,
-            'job'=>$row->occupation
+        $postData = [
+            [   'id' => 'CJqZCPAg6Yv',
+                'reportingPeriod' => $row->screening_date
+            ],
+            [
+                'id' => 'C89brF2qFjY',
+                'pt_name' => $row->pt_Name
+            ],
+            [
+             'id'=>'ncDYKoYDCbi',
+             'age' => $row->pt_age
+            ],
+            [
+                'id'=> 'ntzzGM9v0kJ',
+                'f_name' => $row->pt_father_name
+            ],
+            [
+                'id'=> 'HqF8dFu79ex',
+                'case_outside_SubCenter_township' => $row->pt_address
+            ],
+            [
+                'id'=> 'qCI5cGiVE3B',
+                'current_township' => $row->pt_current_township
+            ],
+            [
+                'id'=> 'Qr3v7XAQC77',
+                'current_village' => $row-> pt_current_village
+            ],
+            [
+                'id'=> 'E0qWI5la2Zh',
+                'current_otherVillage' => $row->pt_current_ward
+            ],
+            [
+                'id'=> 'hMK8hf12Yvi',
+                'parmenant_township' => $row-> pt_permanent_township
+            ],
+            [
+                'id'=> 'w9RT32cvgHf',
+                'parmenant_village' =>$row->pt_permanent_village
+            ],
+            [
+                'id'=> 'XZ3OP1jdCfo',
+                'parmenant_otherVillage'=>$row->pt_permanent_ward
+            ],
+            [
+                'id'=> 'NlmG4cwRzmJ',
+                'gender' => $row->Sex_Code
+            ],
+            [
+                'id'=> 'YPmjEZvUjpg',
+                'pregnancy_tf' => $row->Preg_YN
+
+            ],
+            [
+                'id'=> 'KdiR3PGFj3P',
+                'rdt_test' => $row ->RDT_Code
+            ],
+            [
+                'id'=> 'SWhiDdRgUwT',
+                'mcp_test' =>$row -> Micro_Code
+            ],
+            [
+                'id'=> 'WJ1MqhmfPHz',
+                'act'=> $row->ACT_Code
+            ],
+            [
+                'id'=> 'jqCfD3BCumN',
+                'cq'=>$row->CQ_Code
+            ],
+            [
+                'id'=> 'QBBPxUuOulF',
+                'pq'=>$row->PQ_Code
+            ],
+            [
+                'id'=> 'UUWSRVYn7Pl',
+                'referral'=>$row->Referral_Code
+            ],
+            [
+                'id'=> 'aWLj1EJFbQV',
+                'm_death'=>$row->Malaria_Death
+            ],
+            [
+                'id'=> 'rBkCZXJFKXq',
+                'note'=>$row->Remark
+            ],
+            [
+                'id'=> 'Kxzh0PMCa2d',
+                'travel'=>$row->travel_yn
+            ],
+            [
+                'id'=> 'oIRHWGk2OCy',
+                'job'=>$row->occupation
+            ]
         ];
     }
 }
 
 if($data2){
-    foreach ($data2 as $d) {
+    foreach ($data2 as $d2) {
 
         $postData[] = [
-            'outerPatients'=>$d->total_outpatient,
-            'outerPatientsAge'=>$d->u5_outpatient,
-            'outerPregnancyPatients'=>$d->preg_outpatient,
-            'innerPatients'=>$d->total_inpatient,
-            'innerPatientsAge'=>$d->u5_inpatient,
-            'innerPregnancyPatients'=>$d->preg_inpatient,
-            'totalPatientsDead'=>$d->death_facility
+            [   'id' => 'BV3Uv6YBxnK',
+                'outerPatients'=>$d2->total_outpatient
+            ],
+            [
+                'id'=> 'PbreMPAmzFW',
+                'outerPatientsAge'=>$d2->u5_outpatient
+            ],
+            [
+                'id'=> 'wNq3zFtsiuq',
+                'outerPregnancyPatients'=>$d2->preg_outpatient
+            ],
+            [
+                'id'=> 'IvNLoKHaG6O',
+                'innerPatients'=>$d2->total_inpatient
+            ],
+            [
+                'id'=> 'heN9yJ9BsD6',
+                'innerPatientsAge'=>$d2->u5_inpatient
+            ],
+            [
+                'id'=> 'Jqc47QHqa2e',
+                'innerPregnancyPatients'=>$d2->preg_inpatient
+            ],
+            [
+                'id'=> 'qsxGdracapt',
+                'totalPatientsDead'=>$d2->death_facility
+            ]
         ];
         }
 }
+foreach ($postData as $dataSet) {
+    $id = $dataSet['id'];
+    $url = $baseUrl . $id . '.json';
+
+
+    $dataToSend = array_filter($dataSet, function ($key) {
+        return $key !== 'id';
+    }, ARRAY_FILTER_USE_KEY);
 
     $ch = curl_init();
 
     curl_setopt($ch, CURLOPT_URL, $url);
     curl_setopt($ch, CURLOPT_POST, true);
-    curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($postData));
+    curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($dataToSend));
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 
     $response = curl_exec($ch);
 
-    
+
     if (curl_errno($ch)) {
         return 'cURL error: ' . curl_error($ch);
     }
@@ -183,5 +279,7 @@ if($data2){
         return 'Failed to receive a response.';
     }
 }
+}
+
 
 }

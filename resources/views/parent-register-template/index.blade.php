@@ -14,10 +14,10 @@
       </a>
     </li>
     <li >
-        <a href="" class="upload_to_online_btn" >Upload to Online</a>
+        <a href="" class="upload_to_online_btn" id="showPopupBtnUpload" >Upload to Online</a>
     </li>
     <li >
-        <a href="" class="upload_to_online_btn" >Download from Online</a>
+        <a href="" class="upload_to_online_btn" id="showPopupBtnDownload" >Download from Online</a>
     </li>
   </ul>
 
@@ -1193,6 +1193,7 @@
                     data["Death_Facility"] = $("#txt_total_death_in").val();
                     var table = document.getElementById('data_entry_body');
             for (var i = 0, row; row = table.rows[i]; i++) {
+                    data["date"] = row.cells[1].children[0].value;
                     data["Pt_Name"] = row.cells[2].children[0].value;
                     data["Age_Year"] = row.cells[3].children[0].value;
                     data["Pt_Father_Name"] = row.cells[4].children[0].value;

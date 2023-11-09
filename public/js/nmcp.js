@@ -460,6 +460,47 @@ function load_hfm(target_control_id, hf_code, token) {
     }
 }
 
+
+//start upload data to server
+
+function showConfirmationPopup() {
+    var isConfirmed = window.confirm("All data will be uploaded to the server. Do you want to proceed?");
+
+    if (isConfirmed) {
+
+        console.log("Data uploaded to the server.");
+    } else {
+        console.log("Upload canceled.");
+    }
+}
+
+
+var showPopupBtn = document.getElementById("showPopupBtnUpload");
+showPopupBtn.addEventListener("click", showConfirmationPopup);
+
+//end upload data to server
+
+
+//start download data from server
+
+function showConfirmationPopup() {
+    var isConfirmed = window.confirm("Download Data from Online Server. Do you want to proceed?");
+
+    if (isConfirmed) {
+
+        console.log("Data download from the server.");
+    } else {
+        console.log("Download canceled.");
+    }
+}
+
+
+var showPopupBtn = document.getElementById("showPopupBtnDownload");
+showPopupBtn.addEventListener("click", showConfirmationPopup);
+
+//end download data from server
+
+
 // start for icmvVillage input
 function load_icmv_village(service_provider) {
     //  alert('this is icmvbillage',form_code);

@@ -645,6 +645,7 @@ class lookupsController extends Controller
             if($data){
 
                 $tbl_individual_case_data = [
+                    'screening_date' => $data['date'],
                     'pt_Name' => $data['Pt_Name'],
                     'pt_age' => $data['Age_Year'],
                     'pt_father_name' => $data['Pt_Father_Name'],
@@ -747,12 +748,14 @@ class lookupsController extends Controller
             $data = json_decode($request->getContent(), true);
             //return $data["P_Number"];
             if($data) {
+                // dd($data);
                 $tbl_individual_case = tbl_individual_case::find($data["P_Number"]);
 
                 $tbl_individual_case->CF_Code = $data["CF_Code"];
                 $tbl_individual_case->cf_link_code = $data["cf_link_code"];
                 $tbl_individual_case->Row_No = $data["Row_No"];
-                $tbl_individual_case->Screening_Date = $data["Screening_Date"];
+                $tbl_individual_case->screening_date = $data["date"];
+                // dd('screenig_date');
                 $tbl_individual_case->Pt_Name = $data["Pt_Name"];
                 $tbl_individual_case->Age_Year = $data["Age_Year"];
                 $tbl_individual_case->Pt_Name = $data["Pt_Pather_Name"];

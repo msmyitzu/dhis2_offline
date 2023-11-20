@@ -148,11 +148,7 @@ class lookupsController extends Controller
     //     return response()->json($lp_district , 200, $header, JSON_UNESCAPED_UNICODE);
     // }
 
-    // public function get_lp_act_code()
-    // {
-    //     $lp_act_code = lp_act_code::all();
-    //     return $lp_act_code;
-    // }
+
 
     // public function get_tbl_core_facility_by_code(Request $request)
     // {
@@ -187,19 +183,7 @@ class lookupsController extends Controller
     //     }
     // }
 
-    // public function delete_tbl_individual_by_code($p_number){
-    //     try{
-    //         if(Auth::check()){
-    //             if($p_number){
-    //                 //$tbl_individual_case_temp = tbl_individual_case_temp::where('P_Number', '=', $p_number);
-    //                 //$tbl_individual_case_temp->delete();
-    //                 return '1';
-    //             }
-    //         }
-    //     }catch(\Exception $e){
-    //         return $e->getMessage();
-    //     }
-    // }
+
 
     // public function delete_tbl_core_facility_by_code($cf_link_code)
     // {
@@ -222,65 +206,18 @@ class lookupsController extends Controller
     //     return $lp_form_cat;
     // }
 
-    // public function get_lp_hftype()
-    // {
-    //     $lp_hftype = lp_hftype::all();
 
-    //     $header = array (
-    //         'Content-Type' => 'application/json; charset=UTF-8',
-    //         'charset' => 'utf-8'
-    //     );
 
-    //     return response()->json($lp_hftype , 200, $header, JSON_UNESCAPED_UNICODE);
-    // }
 
-    // public function get_lp_hftype_formcat()
-    // {
-    //     $lp_hftype_formcat = lp_hftype_formcat::all();
-    //     return $lp_hftype_formcat;
-    // }
 
-    // public function get_lp_in_out_cat()
-    // {
-    //     $lp_in_out_cat = lp_in_out_cat::all();
-    //     return $lp_in_out_cat;
-    // }
 
-    // public function get_lp_inouttpa_formcat()
-    // {
-    //     $lp_inouttpa_formcat = lp_inouttpa_formcat::all();
-    //     return $lp_inouttpa_formcat;
-    // }
 
-    // public function get_lp_malaria_strata()
-    // {
-    //     $lp_malaria_strata = lp_malaria_strata::all();
-    //     return $lp_malaria_strata;
-    // }
 
-	// public function get_lp_micro_result()
-	// {
-	// 	$lp_micro_result = lp_micro_result::all();
-	// 	return $lp_micro_result;
-	// }
 
-	// public function get_lp_org()
-	// {
-	// 	$lp_org = lp_org::all();
-	// 	return $lp_org;
-	// }
 
-	// public function get_lp_patient_location()
-	// {
-	// 	$lp_patient_location = lp_patient_location::all();
-	// 	return $lp_patient_location;
-	// }
 
-	// public function get_lp_patient_sex()
-	// {
-	// 	$lp_patient_sex = lp_patient_sex::all();
-	// 	return $lp_patient_sex;
-	// }
+
+
 
 	// public function get_lp_pmonth()
 	// {
@@ -294,10 +231,6 @@ class lookupsController extends Controller
 	// 	return $lp_pyear;
     // }
 
-    // public function get_lp_rdt_result(){
-    //     $lp_rdt_result = lp_rdt_result::all();
-    //     return $lp_rdt_result;
-    // }
 
 	// public function get_lp_state_region()
 	// {
@@ -313,27 +246,27 @@ class lookupsController extends Controller
 
 
 
-	// public function get_lp_township($sr_code)
-	// {
-    //     try{
+	public function get_lp_township($sr_code)
+	{
+        try{
 
-    //         if($sr_code === "all"){
-    //             $lp_township = lp_township::all();
-    //         } else {
-    //             $lp_township = lp_township::where('ts_code','LIKE', $sr_code.'%')->orderBy('ts_name')->get();
-    //         }
+            if($sr_code === "all"){
+                $tbl_region = tbl_region::all();
+            } else {
+                $tbl_region = tbl_region::where('township_id','LIKE', $sr_code.'%')->orderBy('ts_name')->get();
+            }
 
-    //         $header = array (
-    //             'Content-Type' => 'application/json; charset=UTF-8',
-    //             'charset' => 'utf-8'
-    //         );
+            $header = array (
+                'Content-Type' => 'application/json; charset=UTF-8',
+                'charset' => 'utf-8'
+            );
 
-    //         return response()->json($lp_township , 200, $header, JSON_UNESCAPED_UNICODE);
-    //     }
-    //     catch (\Exception $e) {
-    //         return $e->getMessage();
-    //     }
-    // }
+            return response()->json($tbl_region , 200, $header, JSON_UNESCAPED_UNICODE);
+        }
+        catch (\Exception $e) {
+            return $e->getMessage();
+        }
+    }
 
     // public function get_tbl_hfm()
 	// {
@@ -829,6 +762,10 @@ class lookupsController extends Controller
         }
     }
 
+    public function show_upload_form(){
+        $state_region = tbl_region::all();
+        return view('parent-register-template.uploadForm', compact('state_region'));
+    }
     // public function get_tbl_individual_case($cf_link_code)
     // {
     //     $tbl_individual_case = tbl_individual_case::where('cf_link_code','=', $cf_link_code)->get();

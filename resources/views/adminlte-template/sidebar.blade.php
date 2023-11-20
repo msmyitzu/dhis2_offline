@@ -29,7 +29,7 @@
                     <li id="li_dataentry" class="active"><a href="{{ route('parent-register') }}"><i class="fa fa-circle-o"></i> အချက်အလက်ဖြည့်သွင်းရန် - v2</a></li>
 
                     {{-- <li id="li_dataentry_2" class="active"><a href="/entry_2"><i class="fa fa-circle-o"></i> အချက်အလက်ဖြည့်သွင်းရန်_2</a></li> --}}
-                    {{-- <li id="li_forms" class=""><a href="/forms"><i class="fa fa-circle-o"></i> ကုသမှုအချက်အလက်များ (Server) </a></li> --}}
+                    <li id="li_forms" class=""><a href="/forms"><i class="fa fa-circle-o"></i> ကုသမှုအချက်အလက်များ (Server) </a></li>
                     {{-- <li id="li_offline-forms" class=""><a href="/offline-forms"><i class="fa fa-circle-o"></i> ကုသမှုအချက်အလက်များ (Offline)</a></li> --}}
                     {{-- <li id="li_health-facilities" class=""><a href="/health-facilities"><i class="fa fa-circle-o"></i> ကျန်းမာရေးဌာနများ</a></li> --}}
                     <li id="li_users" class=""><a href="/users"><i class="fa fa-circle-o"></i> အသုံးပြုသူများ</a></li>

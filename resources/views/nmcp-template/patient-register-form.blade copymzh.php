@@ -1278,8 +1278,8 @@
         text-align: center;
         vertical-align: middle;
         padding: 2px;
-        border: 1px solid grey;
-        padding: 0px;
+        /* border: 1px solid grey; */
+        /* padding: 0px; */
         margin: 0px;
         font-weight: 600;
     }

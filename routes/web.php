@@ -23,6 +23,11 @@ Route::get('/health-facilities', 'lookupsController@show_lookup_page');
 
 Route::get('/chart','lookupsController@show_charts');
 
+
+// Route::get('/get_lp_township/{sr_code}','lookupsController@get_lp_township');
+Route::get('/uploadForm','lookupsController@show_upload_form');
+Route::get('/search/{type}', 'searchController@search')->name('form_search');
+
 Route::post('/patient-register-form','lookupsController@get_patient_registerform');        //
 
 Route::get('/get_existing_form_data/{cf_link_code}', 'lookupsController@get_existing_form_data');

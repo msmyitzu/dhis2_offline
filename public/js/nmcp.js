@@ -256,47 +256,100 @@ function load_sr_lp_township(ts_id, sr_code, token, region_code) {
     }
 }
 
-function load_lp_township() {
+function load_lp_township(target_ts_id, sr_code, token, region_code) {
+    if (sr_code != "0" && sr_code.length == 6) {
+        try {
+            $("." + target_ts_id).html("<option>Loading...</option>");
+            $("." + target_ts_id).prop("disabled", true);
+            //$("#select_tbl_hfm_de").html("<option>Loading...</option>");
+            //$("#select_tbl_hfm_de").prop("disabled", true);
+            //$("#select_hfm_de").html("<option>Loading...</option>");
+            //$("#select_hfm_de").prop("disabled", true);
 
+            $.ajax({
+                type: "GET",
+                url: BACKEND_URL + 'get_lp_township/' + sr_code,
+                data: "",
+                success: function (data) {
 
-            // var apiurl = 'https://mcbrs-dev2.myanmarvbdc.com//api/organisationUnits.json?filter=level:eq:2&paging=false'
-            // var headers = {
-            //     'Authorization':'Basic YWRtaW46RWZvbGlvc2UxMi0jQ2Fzc2l1czI4'
-            // };
-            // var params = {
-            //     'filter':'level:eq:2',
-            //     'paging':'false'
-            // };
+                    $("." + target_ts_id).html("");
 
-            // $.ajax({
-            //     type: "GET",
-            //     // url: BACKEND_URL + "get_lp_township/" + sr_code,
-            //     url: apiurl,
-            //     dataType: 'json',
-            //     headers: headers,
-            //     data: params,
+                    $("." + target_ts_id).append("<option value='0'> ရွေးရန် </option>");
+                    $("." + target_ts_id).prop("disabled", false);
+                    //$("#select_tbl_hfm_de").html("<option value='0'> ရွေးရန် </option>");
+                    //$("#select_tbl_hfm_de").prop("disabled", false);
+                    //$("#select_hfm_de").html("<option value='0'> ရွေးရန် </option>");
+                    //$("#select_hfm_de").prop("disabled", false);
 
-            //     success: function(response) {
-            //         // console.log(response);
-            //         $("#" + target_control_id).html("");
+                    jQuery.each(data, function (i, val) {
+                        var opt = "<option value='" + val.township_id + "'>" + val.township_name_en + " | " + val.township_name_mm + "</option>";
+                        $("." + target_ts_id).append(opt);
+                    });
 
-            //         $("#" + target_control_id).append(
-            //             "<option value='0'> ရွေးရန် </option>"
-            //         );
-            //         $("#" + target_control_id).prop("disabled", false);
-
-            //         jQuery.each(data, function (i, val) {
-            //             var opt = "<option value='" + val.id + "'>" + val.displayName + "</option>";
-            //             $("#" + target_control_id).append(opt);
-            //         });
-            //     },
-            //     error: function(error) {
-
-            //         console.error('this is ',error);
-            //     }
-            // });
-
+                    if (region_code != "") {
+                        $("#select_region_code").val(region_code).trigger('change');
+                    }
+                },
+                error : function(error){
+                    console.log(error);
+                }
+            });
+        } catch (err) {
+            bootbox.alert(err.message);
+        }
+    } else if (sr_code.length > 6) {
+        try {
+            $("." + target_ts_id).html("<option>Loading...</option>");
+            $("." + target_ts_id).prop("disabled", true);
+            $.ajax({
+                type: "GET",
+                url: BACKEND_URL + 'get_lp_township/' + sr_code,
+                data: "",
+                success: function (data) {
+                    $("#" + target_ts_id).html("");
+                    $("#" + target_ts_id).append("<option value='0'> ရွေးရန် </option>");
+                    $("#" + target_ts_id).prop("disabled", false);
+                    jQuery.each(data, function (i, val) {
+                        var opt = "<option value='" + val.ts_code + "'>" + val.ts_name + " | " + val.ts_name_mmr + "</option>";
+                        $("#" + target_ts_id).append(opt);
+                    });
+                    if (region_code != "") {
+                        $("#select_region_code").val(region_code).trigger('change');
+                    }
+                }
+            });
+        } catch (err) {
+            bootbox.alert(err.message);
+        }
+    } else if (sr_code == 'all') {
+        try {
+            $("." + target_ts_id).html("<option>Loading...</option>");
+            $("." + target_ts_id).prop("disabled", true);
+            $.ajax({
+                type: "GET",
+                url: BACKEND_URL + 'get_lp_township/' + sr_code,
+                data: "",
+                success: function (data) {
+                    $("#" + target_ts_id).html("");
+                    $("#" + target_ts_id).append("<option value='0'> ရွေးရန် </option>");
+                    $("#" + target_ts_id).prop("disabled", false);
+                    jQuery.each(data, function (i, val) {
+                        var opt = "<option value='" + val.ts_code + "'>" + val.ts_name + " | " + val.ts_name_mmr + "</option>";
+                        $("#" + target_ts_id).append(opt);
+                    });
+                    if (region_code != "") {
+                        $("#select_region_code").val(region_code).trigger('change');
+                    }
+                }
+            });
+        } catch (err) {
+            bootbox.alert(err.message);
+        }
+    } else {
+        $("." + target_ts_id).html("");
+    }
 }
+
 
 function load_tbl_hfm(target_control_id, ts_code, token, form_type = null) {
     let form_cat = $("#select_lp_form_cat").val();

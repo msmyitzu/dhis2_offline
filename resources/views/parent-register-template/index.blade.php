@@ -14,7 +14,8 @@
       </a>
     </li>
     <li >
-        <a href="" class="upload_to_online_btn" id="showPopupBtnUpload" >Upload to Online</a>
+
+        <a href="/uploadForm" class="" id="showPopupBtnUpload" >Upload to Online</a>
     </li>
     <li >
         <a href="" class="upload_to_online_btn" id="showPopupBtnDownload" >Download from Online</a>
@@ -71,9 +72,9 @@
                                     <select class="form-control select2" style="height:50px;" name="select_lp_state_region" id="select_lp_state_region"
                                     onChange="load_lp_township('select_lp_township_de', this.value, '<?= csrf_token() ?>','')">
                                         <option value="0">ရွေးရန်</option>
-                                            <option value="">
-                                                Testing
-                                            </option>
+                                        @foreach($tbl_region as $region)
+                                        <option value="{{ $region->region_id }}">{{ $region->region_name_en }}</option>
+                                    @endforeach
                                     </select>
                                 </div>
                             </div>
@@ -200,7 +201,7 @@
         <div class="text-center" style="padding: 20px">
             {{-- <span style="float:left; font-size: 10px;">ပုံစံအမျိုးအစား - </span> --}}
             {{-- {{ $lp_form_cat_name }} --}}
-            <h3>ငှက်ဖျားလူနာစစ်ဆေးကုသမှုမှတ်တမ်း /လချုပ်</h3>
+            <h3>ငှက်ဖျားလူနာစစ်ဆေးကုသမှုမှတ်တမ်း /လချုပ်</h3><hr>
             {{-- / <span style="float:right; font-size: 10px;">Form No - </span> --}}
             {{-- {{ $form_number }} --}}
         </div>
@@ -210,61 +211,64 @@
         <div class=""
             style="border: 1px solid #fff; box-shadow: grey 3px 3px 1px; border-radius: 10px; background-color:white; color:#000;">
             <table class="" style="margin-left:20px;">
-                <tbody align="center">
+                <tbody align="left">
                     <tr style="padding-bottom:20px;">
-                        <td style="padding:10px;" >
+                        <td style="padding:10px; padding-right:50px; margin-right:20px;" >
 
-                            <small style="font-weight: 700; font-size: 14px; padding-right:10px; ">
-                                အထွေထွေဆေးခန်းလာပြင်ပလူနာသစ်ပေါင်း(ပြင်ပ)* -</small>
-                            <input type="text" id="txt_total_outpatient" value="" style="width: 10%; ">
-
-                        </td>
-                        <td style="padding:10px;" >
-
-                            <small style="font-weight: 700; font-size: 14px; padding-right:10px;"> ငါးနှစ်အောက်အထွေထွေဆေးခန်းလာ(ပြင်ပ)
-                                -</small>
-                            <input type="text" id="txt_total_child_out" value="" style="width: 10%; ">
+                            <small style="font-weight: 700; font-size: 15px; padding-right:10px; ">
+                                အထွေထွေဆေးခန်းလာပြင်ပလူနာသစ်ပေါင်း(ပြင်ပ)* - </small>
+                            <input type="text" id="txt_total_outpatient" value=""  style="width: 20%;padding-left:10px;">
 
                         </td>
-                        <td sstyle="padding:10px;" >
+                        <td style="padding:10px 50px 10px 30px;  margin-right:20px" >
 
-                            <small style="font-weight: 700; font-size: 14px; padding-right:10px;"> ကိုယ်ဝန်ဆောင်အထွေထွေဆေးခန်းလာ(ပြင်ပ)
-                                -</small>
-                            <input type="text" id="txt_total_preg_out" value="" style="width: 10%; margin-right:20px;">
+                            <small style="font-weight: 700; font-size: 15px; padding-right:10px;"> ငါးနှစ်အောက်အထွေထွေဆေးခန်းလာ(ပြင်ပ)
+                                - </small>
+                            <input type="text" id="txt_total_child_out" value=""  style="width: 20%; ">
 
                         </td>
+                        <td style="padding:10px 50px 10px 30px; margin-right:20px" >
+
+                            <small style="font-weight: 700; font-size: 15px; padding-right:10px;"> ကိုယ်ဝန်ဆောင်အထွေထွေဆေးခန်းလာ(ပြင်ပ)
+                                - </small>
+                            <input type="text" id="txt_total_preg_out" value=""  style="width: 20%; margin-right:20px;">
+
+                        </td>
+                        <td></td>
                     </tr>
                     <tr>
-                        <td style="padding:10px; margin-left:20px;" >
+                        <td style="padding:10px 50px 10px 30px; margin-right:20px" >
 
-                            <small style="font-weight: 700; font-size: 14px; padding-right:10px;"> ဆေးရုံတက်အတွင်းလူနာသစ်ပေါင်း -</small>
-                            <input type="text" id="txt_total_inpatient" value="" style="width: 10%; ">
+                            <small style="font-weight: 700; font-size: 15px; padding-right:10px;"> ဆေးရုံတက်အတွင်းလူနာသစ်ပေါင်း - </small>
+                            <input type="text" id="txt_total_inpatient" value=""  style="width: 20%; ">
                         </td>
-                        <td style="padding:10px;" >
+                        <td style="padding:10px 50px 10px 30px; margin-right:20px" >
 
-                            <small style="font-weight: 700; font-size: 14px; padding-right:10px;"> ငါးနှစ်အောက်အထွေထွေဆေးခန်းလာ(အတွင်း)
-                                -</small>
-                            <input type="text" id="txt_total_in_child" value="" style="width: 10%; ">
+                            <small style="font-weight: 700; font-size: 15px;"> ငါးနှစ်အောက်အထွေထွေဆေးခန်းလာ(အတွင်း)
+                                - </small>
+                            <input type="text" id="txt_total_in_child" value=""  style="width: 20%; ">
 
                         </td>
-                        <td style="padding:10px;" >
+                        <td style="padding:10px 50px 10px 30px; margin-right:20px" >
 
-                            <small style="font-weight: 700; font-size: 14px; padding-right:10px; "> ကိုယ်ဝန်ဆောင်အထွေထွေဆေးခန်းလာ(အတွင်း)
-                                -</small>
-                            <input type="text" id="txt_total_preg_in" value="" style="width: 10%; margin-right:20px; ">
+                            <small style="font-weight: 700; font-size: 15px;"> ကိုယ်ဝန်ဆောင်အထွေထွေဆေးခန်းလာ(အတွင်း)
+                                - </small>
+                            <input type="text" id="txt_total_preg_in" value=""  style="width: 20%; margin-right:20px; ">
 
                         </td>
 
                     </tr>
                     <tr>
                         <td></td>
-                        <td style="padding:10px;" >
+                        <td style="padding:10px 50px 10px 30px; margin-right:20px" >
 
-                            <small style="font-weight: 700; font-size: 14px; padding-right:10px; "> ဆေးရုံတွင်သေဆုံးသူစုစုပေါင်း -</small>
-                            <input type="text" id="txt_total_death_in" value="" style="width: 10%; ">
+                            <small style="font-weight: 700; font-size: 15px;"> ဆေးရုံတွင်သေဆုံးသူစုစုပေါင်း - </small>
+                            <input type="text" id="txt_total_death_in" value=""  style="width: 20%; ">
 
                         </td>
+                        <td></td>
                     </tr>
+
 
                 </tbody>
             </table>
@@ -331,7 +335,8 @@
         <table width='100%' id='tbl_iop'>
             <tbody id='tbody_iop'>
                 <tr>
-                    <td>အထွေထွေဆေးခန်းလာပြင်ပလူနာသစ်ပေါင်း</td>
+                    <td>အထွေထွေဆေးခန်းလာပြင်ပ
+                        လူနာသစ်ပေါင်း</td>
                     <td><input type="number" class="" id='txt_Total_Outpatient' value="0"></td>
                     <td>ငါးနှစ်အောက်အထွေထွေဆေးခန်းလာ(ပြင်ပ)</td>
                     <td><input type="number" class="" id='txt_U5_Outpatient' value="0"></td>
@@ -1800,6 +1805,10 @@
         width: 100%;
         height: 50px !important;
     }
+
+    #act, #cq, #pq {
+  width: 100px !important;
+}
 
     #data_entry_body>tr>td>input {
         font-size: 12px;

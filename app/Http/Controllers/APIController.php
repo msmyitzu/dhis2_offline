@@ -327,113 +327,170 @@ class APIController extends Controller
     // }
 
     //public function postDHIS()
-    public function dhis2postData()
-    {
-        $data = '{
-            "trackedEntityInstances": [
-                {
-                "trackedEntity": "IGWEnvbuuru",
-                "orgUnit": "S1sWiUMHf9g",
-                "attributes": [
+    public function dhis2postData(){
+
+
+        $table = DB::table('tbl_individual_case')->get();
+
+
+        $trackedEntityInstances = [];
+
+        foreach ($table as $row) {
+            $patient_name = $row->patient_name;
+            $data = '{
+                "trackedEntityInstances": [
                     {
-                    "attribute": "CJqZCPAg6Yv",
-                    "value": "Joe"
-                    },
-                    {
-                    "attribute": "ncDYKoYDCbi",
-                    "value": "23"
-                    },
-                    {
-                        "attribute": "ntzzGM9v0kJ",
-                        "value": "U Toe Toe"
-                    },
-                    {
-                        "attribute": "HqF8dFu79ex",
-                        "value": "Testing SC"
-                    },
-                    {
-                        "attribute": "qCI5cGiVE3B",
-                        "value": "Test township"
-                    },
-                    {
-                        "attribute": "Qr3v7XAQC77",
-                        "value": "Test village"
-                    },
-                    {
-                        "attribute": "E0qWI5la2Zh",
-                        "value": "Test ward"
-                    },{
-                        "attribute": "hMK8hf12Yvi",
-                        "value": "Test Ptown"
-                    },
-                    {
-                        "attribute": "w9RT32cvgHf",
-                        "value": "Test Pvillage"
-                    },
-                    {
-                        "attribute": "XZ3OP1jdCfo",
-                        "value": "Test Pward"
-                    },
-                    {
-                        "attribute": "NlmG4cwRzmJ",
-                        "value": "male"
-                    },
-                    {
-                        "attribute": "YPmjEZvUjpg",
-                        "value": "PregN/A"
-                    },
-                    {
-                        "attribute": "KdiR3PGFj3P",
-                        "value": "RDT_Code"
-                    },
-                    {
-                        "attribute": "SWhiDdRgUwT",
-                        "value": "Micro_code"
-                    },
-                    {
-                        "attribute": "WJ1MqhmfPHz",
-                        "value": "ACT_Code"
-                    },
-                    {
-                        "attribute": "jqCfD3BCumN",
-                        "value": "CQ_code"
-                    },
-                    {
-                        "attribute": "QBBPxUuOulF",
-                        "value": "PQ_code"
-                    },
-                    {
-                        "attribute": "UUWSRVYn7Pl",
-                        "value": "Referral_code"
-                    },
-                    {
-                        "attribute": "aWLj1EJFbQV",
-                        "value": "Malaria_Death"
-                    },
-                    {
-                        "attribute": "rBkCZXJFKXq",
-                        "value": "test remark"
-                    },
-                    {
-                        "attribute": "Kxzh0PMCa2d",
-                        "value": "Travel_yn"
-                    },
-                    {
-                        "attribute": "oIRHWGk2OCy",
-                        "value": "testing occupation"
+                    "orgUnit": "S1sWiUMHf9g",
+                    "program": "ec31yGIJJzu",
+                    "trackedEntityType": "bwrCfr3nMhv",
+                    "type":"created",
+                     "attributes":[
+                         {
+                        "attribute": "C89brF2qFjY",
+                        "value": "$patient_name"	//no need on programstages
+                        },
+                        {
+                            "attribute": "ntzzGM9v0kJ",
+                            "value": "U Toe Toe"	//no need in programstage
+                        },
+                        {
+                            "attribute": "NlmG4cwRzmJ",
+                            "value": "TT-Female"	//no need in programstage
+                        }
+                     ],
+                    "enrollments": [
+
+                        {
+                        "program": "ec31yGIJJzu",
+                        "orgUnit": "S1sWiUMHf9g",
+                        "events":[
+                            {
+                                "orgUnit": "S1sWiUMHf9g",
+                            "program": "ec31yGIJJzu",
+                        "programStage": "bgPjhWMVFDv",
+                        "eventDate": "2023-11-15",
+                        "type":"created",
+                        "dataValues": [
+                        {
+                            "dataElement":"mPKo8fRmj2A",
+                            "value":"Survey"
+                        },
+                        {
+                            "dataElement": "HqF8dFu79ex",
+                            "value": "No (within Township)"
+                        },
+                        {
+                            "dataElement": "ncDYKoYDCbi",
+                            "value": "23"
+                        },
+                        {
+                            "dataElement": "oIRHWGk2OCy",
+                            "value": "Gardening"
+                        },
+                        {
+                            "dataElement": "YPmjEZvUjpg",
+                            "value": "No"
+                        },
+                        {
+                            "dataElement": "Kxzh0PMCa2d",
+                            "value": "Yes"
+                        },
+                        // {
+                        //     "dataElement":"UWS9UZxBLDI",
+                        //     "value":"2023-11-01"
+                        // },
+                        {
+                            "dataElement":"qCI5cGiVE3B",
+                            "value" :"ctownship"
+                        },
+                        {
+                            "dataElement":"Qr3v7XAQC77",
+                            "value" :"cvillage"
+                        },
+                        {
+                            "dataElement":"E0qWI5la2Zh",
+                            "value" :"cward"
+                        },
+                        {
+                            "dataElement": "hMK8hf12Yvi",
+                             "value": "Test Ptown"
+                        },
+                         {
+                             "dataElement": "w9RT32cvgHf",
+                             "value": "Test Pvillage"
+                         },
+                         {
+                             "dataElement": "XZ3OP1jdCfo",
+                             "value": "Test Pward"
+                         },
+                        {"dataElement":"SWhiDdRgUwT",
+                        "value" :""
+                        },
+                         {
+                            "dataElement": "KdiR3PGFj3P",
+                            "value": ""
+                        },
+                        {
+                            "dataElement":"qihIcNI1PdA",
+                            "value":"Uncomplicated (OP)"
+                        },
+                        {
+                            "dataElement":"GASizN790rz",
+                            "value":"> 24hr"
+                        },
+                        {
+                            "dataElement": "WJ1MqhmfPHz",
+                            "value": "N/A"
+                        },
+                        {
+                            "dataElement": "jqCfD3BCumN",
+                            "value": "N/A"
+                        },
+                        {
+                            "dataElement": "QBBPxUuOulF",
+                            "value": "N/A"
+                        },
+                        {
+                            "dataElement": "UUWSRVYn7Pl",
+                            "value": "No"
+                        },
+                         {
+                            "dataElement": "aWLj1EJFbQV",
+                            "value": "No"
+                        },
+                         {
+                            "dataElement": "rBkCZXJFKXq",
+                            "value": "test remark"
+                        }
+
+                    ]
                     }
-
-                ]
+                    ]
                 }
+
             ]
-        }';
 
-        $url = 'https://mcbrs-dev2.myanmarvbdc.com/api/29/trackedEntityInstances'; // Replace with your API endpoint
+        }
+    ]
 
+    }';
+
+        $trackedEntityInstances[] = $trackedEntityInstance;
+
+}
+        $url = 'https://mcbrs-dev2.myanmarvbdc.com/api/40/trackedEntityInstances';
+        // $username = 'admin';
+        // $password = 'district';
         $ch = curl_init($url);
 
         // Set the content type to JSON
-        curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
+        // curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
+
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+            'Content-Type: application/json',
+            'Authorization: Basic YWRtaW46ZGlzdHJpY3Q=',
+            'charset=utf8'
+        ));
 
         // Set the request method to POST
         curl_setopt($ch, CURLOPT_POST, 1);
@@ -454,4 +511,5 @@ class APIController extends Controller
 
         echo $response;
     }
+
 }

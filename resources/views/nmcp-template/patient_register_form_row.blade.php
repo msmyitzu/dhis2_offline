@@ -36,21 +36,82 @@
         </select>
     </td>
     <td>
-        <input type="text" name="address" id="dAddress1" oninput="adjustInputWidth(this)"  placeholder="မြို့နယ်(လက်ရှိနေရပ်လိပ်စာ)">
+        <select class="" name="address" id="dAddress"  onchange="location_changed(this)">
+            <option value="" selected>မြို့နယ်(လက်ရှိနေရပ်လိပ်စာ)</option>
+            @foreach ($tbl_village as $v)
+                <option value="{{ $v->village_pcode }}">
+                    {{ $v->village }} &nbsp;&nbsp;&nbsp;&nbsp;| {{ $v->village_tract }}
+                </option>
+            @endforeach
+            <!-- <option value="10">Other</option> -->
+            <option value="20">Other Within Township</option>
+            <option value="30">Other Outside Township</option>
+            <option value="99">Missing</option>
+        </select>
+        {{-- <input type="text" name="address" id="dAddress1" oninput="adjustInputWidth(this)"  placeholder=""> --}}
     </td>
     <td>
-        <input type="text" name="address" id="dAddress2" oninput="adjustInputWidth(this)" placeholder="ကျေးရွာ/ရပ်ကွက်(လက်ရှိနေရပ်လိပ်စာ)">
+        <select class="" name="address" id="dAddress"  onchange="location_changed(this)">
+            <option value="" selected>ရွကျေးရွာ/ရပ်ကွက်(လက်ရှိနေရပ်လိပ်စာ)</option>
+            @foreach ($tbl_village as $v)
+                <option value="{{ $v->village_pcode }}">
+                    {{ $v->village }} &nbsp;&nbsp;&nbsp;&nbsp;| {{ $v->village_tract }}
+                </option>
+            @endforeach
+            <!-- <option value="10">Other</option> -->
+            <option value="20">Other Within Township</option>
+            <option value="30">Other Outside Township</option>
+            <option value="99">Missing</option>
+        </select>
+        {{-- <input type="text" name="address" id="dAddress2" oninput="adjustInputWidth(this)" placeholder=""> --}}
     </td>
     <td>
-        <input type="text" name="address" id="dAddress3" oninput="adjustInputWidth(this)" placeholder="ကျေးရွာ/ရပ်ကွက်အမည်(လက်ရှိနေရပ်လိပ်စာ)">
+        <select class="" name="address" id="dAddress"  onchange="location_changed(this)">
+            <option value="" selected>ကျေးရွာ/ရပ်ကွက်အမည်(လက်ရှိနေရပ်လိပ်စာ)</option>
+            @foreach ($tbl_village as $v)
+                <option value="{{ $v->village_pcode }}">
+                    {{ $v->village }} &nbsp;&nbsp;&nbsp;&nbsp;| {{ $v->village_tract }}
+                </option>
+            @endforeach
+            <!-- <option value="10">Other</option> -->
+            <option value="20">Other Within Township</option>
+            <option value="30">Other Outside Township</option>
+            <option value="99">Missing</option>
+        </select>
+        {{-- <input type="text" name="address" id="dAddress3" oninput="adjustInputWidth(this)" placeholder=""> --}}
     </td>
     <td>
-        <input type="text" name="address" id="dAddress4" oninput="adjustInputWidth(this)" placeholder="မြို့နယ်(အမြဲတမ်းနေရပ်လိပ်စာ)">
+        <select class="" name="address" id="dAddress"  onchange="location_changed(this)">
+            <option value="" selected>မြို့နယ်(အမြဲတမ်းနေရပ်လိပ်စာ)</option>
+            @foreach ($tbl_village as $v)
+                <option value="{{ $v->village_pcode }}">
+                    {{ $v->village }} &nbsp;&nbsp;&nbsp;&nbsp;| {{ $v->village_tract }}
+                </option>
+            @endforeach
+            <!-- <option value="10">Other</option> -->
+            <option value="20">Other Within Township</option>
+            <option value="30">Other Outside Township</option>
+            <option value="99">Missing</option>
+        </select>
+        {{-- <input type="text" name="address" id="dAddress4" oninput="adjustInputWidth(this)" placeholder=""> --}}
     </td>
     <td>
-        <input type="text" name="address" id="dAddress5" oninput="adjustInputWidth(this)" placeholder="ကျေးရွာ/ရပ်ကွက်(အမြဲတမ်းနေရပ်လိပ်စာ)">
+        <select class="" name="address" id="dAddress"  onchange="location_changed(this)">
+            <option value="" selected>ကျေးရွာ/ရပ်ကွက်(အမြဲတမ်းနေရပ်လိပ်စာ)</option>
+            @foreach ($tbl_village as $v)
+                <option value="{{ $v->village_pcode }}">
+                    {{ $v->village }} &nbsp;&nbsp;&nbsp;&nbsp;| {{ $v->village_tract }}
+                </option>
+            @endforeach
+            <!-- <option value="10">Other</option> -->
+            <option value="20">Other Within Township</option>
+            <option value="30">Other Outside Township</option>
+            <option value="99">Missing</option>
+        </select>
+        {{-- <input type="text" name="address" id="dAddress5" oninput="adjustInputWidth(this)" placeholder=""> --}}
     </td>
-    <td><input type="text" class="other-address" placeholder="ရွာ-မြို့-ပြည်-နယ်-တိုင်း" disabled="true"></td>
+    <td>
+        <input type="text" class="other-address" placeholder="ရွာ-မြို့-ပြည်-နယ်-တိုင်း" disabled="true"></td>
     <td>
         <select name="sex" id="sex" onchange="checkSex(this); adjustInputWidth(this)" class="sex">
 

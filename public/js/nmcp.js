@@ -188,7 +188,7 @@ function load_sr_lp_township(ts_id, sr_code, token, region_code) {
             $("." + ts_id).prop("disabled", true);
             $.ajax({
                 type: "GET",
-                url: BACKEND_URL + "get_lp_township/" + sr_code,
+                url: BACKEND_URL + "/" + sr_code,
                 data: "",
                 success: function (data) {
                     $("#" + ts_id).html("");
@@ -256,19 +256,16 @@ function load_sr_lp_township(ts_id, sr_code, token, region_code) {
     }
 }
 
-function load_lp_township(target_ts_id, sr_code, token, region_code) {
-    if (sr_code != "0" && sr_code.length == 6) {
+function load_lp_township(target_ts_id, region_id) {
+    // && region_id.length == 6
+    if (region_id != "0" ) {
         try {
             $("." + target_ts_id).html("<option>Loading...</option>");
-            $("." + target_ts_id).prop("disabled", true);
-            //$("#select_tbl_hfm_de").html("<option>Loading...</option>");
-            //$("#select_tbl_hfm_de").prop("disabled", true);
-            //$("#select_hfm_de").html("<option>Loading...</option>");
-            //$("#select_hfm_de").prop("disabled", true);
+            // $("." + target_ts_id).prop("disabled", true);
 
             $.ajax({
                 type: "GET",
-                url: BACKEND_URL + 'get_lp_township/' + sr_code,
+                url: BACKEND_URL + 'get_lp_township/' + region_id,
                 data: "",
                 success: function (data) {
 
@@ -282,12 +279,12 @@ function load_lp_township(target_ts_id, sr_code, token, region_code) {
                     //$("#select_hfm_de").prop("disabled", false);
 
                     jQuery.each(data, function (i, val) {
-                        var opt = "<option value='" + val.township_id + "'>" + val.township_name_en + " | " + val.township_name_mm + "</option>";
+                        var opt = "<option value='" + val.township_id + "'>" + val.township_mmr + " | " + val.township_name_mm + "</option>";
                         $("." + target_ts_id).append(opt);
                     });
 
-                    if (region_code != "") {
-                        $("#select_region_code").val(region_code).trigger('change');
+                    if (region_id != "") {
+                        $("#select_region_code").val(region_id).trigger('change');
                     }
                 },
                 error : function(error){
@@ -297,58 +294,63 @@ function load_lp_township(target_ts_id, sr_code, token, region_code) {
         } catch (err) {
             bootbox.alert(err.message);
         }
-    } else if (sr_code.length > 6) {
+    }
+
+    // else if (region_id.length > 6) {
+    //     try {
+    //         $("." + target_township_id).html("<option>Loading...</option>");
+    //         $("." + target_township_id).prop("disabled", true);
+    //         $.ajax({
+    //             type: "GET",
+    //             url: BACKEND_URL + 'get_lp_township/' + region_id,
+    //             data: "",
+    //             success: function (data) {
+    //                 $("#" + target_township_id).html("");
+    //                 $("#" + target_township_id).append("<option value='0'> ရွေးရန် </option>");
+    //                 $("#" + target_township_id).prop("disabled", false);
+    //                 jQuery.each(data, function (i, val) {
+    //                     var opt = "<option value='" + val.township_id + "'>" + val.township_name_en + " | " + val.township_name_mm + "</option>";
+    //                     $("#" + target_township_id).append(opt);
+    //                 });
+    //                 if (region_code != "") {
+    //                     $("#select_region_code").val(region_code).trigger('change');
+    //                 }
+    //             }
+    //         });
+    //     } catch (err) {
+    //         bootbox.alert(err.message);
+    //     }
+    // }
+
+    else if (region_id == 'all') {
         try {
             $("." + target_ts_id).html("<option>Loading...</option>");
             $("." + target_ts_id).prop("disabled", true);
             $.ajax({
                 type: "GET",
-                url: BACKEND_URL + 'get_lp_township/' + sr_code,
+                url: BACKEND_URL + 'get_lp_township/' + region_id,
                 data: "",
                 success: function (data) {
                     $("#" + target_ts_id).html("");
                     $("#" + target_ts_id).append("<option value='0'> ရွေးရန် </option>");
                     $("#" + target_ts_id).prop("disabled", false);
                     jQuery.each(data, function (i, val) {
-                        var opt = "<option value='" + val.ts_code + "'>" + val.ts_name + " | " + val.ts_name_mmr + "</option>";
+                        var opt = "<option value='" + val.township_id + "'>" + val.township_mmr + " | " + val.township_name_mm + "</option>";
                         $("#" + target_ts_id).append(opt);
                     });
-                    if (region_code != "") {
-                        $("#select_region_code").val(region_code).trigger('change');
+                    if (region_id != "") {
+                        $("#select_region_code").val(region_id).trigger('change');
                     }
                 }
             });
         } catch (err) {
-            bootbox.alert(err.message);
-        }
-    } else if (sr_code == 'all') {
-        try {
-            $("." + target_ts_id).html("<option>Loading...</option>");
-            $("." + target_ts_id).prop("disabled", true);
-            $.ajax({
-                type: "GET",
-                url: BACKEND_URL + 'get_lp_township/' + sr_code,
-                data: "",
-                success: function (data) {
-                    $("#" + target_ts_id).html("");
-                    $("#" + target_ts_id).append("<option value='0'> ရွေးရန် </option>");
-                    $("#" + target_ts_id).prop("disabled", false);
-                    jQuery.each(data, function (i, val) {
-                        var opt = "<option value='" + val.ts_code + "'>" + val.ts_name + " | " + val.ts_name_mmr + "</option>";
-                        $("#" + target_ts_id).append(opt);
-                    });
-                    if (region_code != "") {
-                        $("#select_region_code").val(region_code).trigger('change');
-                    }
-                }
-            });
-        } catch (err) {
-            bootbox.alert(err.message);
+            alert(err.message);
         }
     } else {
         $("." + target_ts_id).html("");
     }
 }
+
 
 
 function load_tbl_hfm(target_control_id, ts_code, token, form_type = null) {

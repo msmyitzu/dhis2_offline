@@ -13,6 +13,9 @@
          <span class="card-title"> Malaria Case-Based Reporting for VBDC Myanmar </span>
        </a>
      </li>
+     <li >
+        <a href="{{ url()->previous() }}" class="" id="" >Go To HomePage</a>
+    </li>
    </ul>
 
  </div>
@@ -31,157 +34,88 @@
                                     <div class="col-md-3">
                                         <div class="form-group">
                                             <label class="control-label">တိုင်းနှင့်ပြည်နယ်</label>
-                                            <div class="input-group input-group-sm">
                                                 <select class="form-control input-sm select2 search_state"
-                                                    name="sr_search" onchange="load_lp_township('search_township', this.value)">
+                                                    name="sr_search" onchange="load_lp_township('search_township', this.value)" >
                                                     <option value="">ရွေးပါ</option>
                                                     @foreach($state_region as $stateRegion)
-                                                        <option value="{{ $stateRegion->region_id }}">{{ $stateRegion->region_name_en }}</option>
+                                                        <option value="{{ $stateRegion->region_id }}">{{ $stateRegion->region_name_en }} | {{ $stateRegion->region_name_mm }}</option>
                                                     @endforeach
-                                                {{-- <span class="input-group-btn">
-                                                    <button type="text" id="sr_search"
-                                                        class="btn btn-info btn-flat">
-                                                        <i class="fa fa-search"></i>
-                                                    </button>
-                                                </span> --}}
-                                            </div>
+                                                </select>
                                         </div>
                                     </div>
 
-                                    {{-- <div class="col-md-3">
-                                        <div class="form-group">
-                                            <label class="control-label">မြို့နယ်</label>
-                                            <div class="input-group input-group-sm">
-                                                <select class="form-control input-sm select2 search_state"
-                                                    name="sr_search">
-                                                    <option value="">ရွေးပါ</option>
 
-                                                <span class="input-group-btn">
-                                                    <button type="text" id="sr_search"
-                                                        class="btn btn-info btn-flat">
-                                                        <i class="fa fa-search"></i>
-                                                    </button>
-                                                </span>
-                                            </div>
-                                        </div>
-                                    </div> --}}
 
                                     <div class="col-md-3">
-                                        <div class="form-group">
+                                        <div class="form-group"   style="width:100%;">
                                             <label class="control-label">မြို့နယ်</label>
-                                            <div class="input-group input-group-sm">
                                                 <select class="form-control input-sm select2 search_township"
-                                                    name="ts_search">
+                                                    name="ts_search" style="width: 100%">
                                                     <option value="">ရွေးပါ</option>
-
+                                                    @foreach($township as $tsp)
+                                                    <option value="{{ $tsp->township_id}}">
+                                                        {{ $tsp->township_mmr }} | {{ $tsp->township_name_en }}
+                                                    </option>
+                                                    @endforeach
                                                 </select>
-                                                <span class="input-group-btn">
-                                                    <button type="text" id="ts_search"
-                                                        class="btn btn-info btn-flat"
-                                                        formaction="https://www.myanmarvbdc.com/search/ts_search">
-                                                        <i class="fa fa-search"></i>
-                                                    </button>
-                                                </span>
-                                            </div>
                                         </div>
                                     </div>
 
                                     <div class="col-md-3">
                                         <div class="form-group">
                                             <label class="control-label">Sub Center</label>
-                                            <div class="input-group input-group-sm">
-                                                <select class="form-control input-sm"
-                                                    name="sub_center_search">
-                                                    <option value="">ရွေးပါ</option>
 
+                                                <select class="form-control input-sm"
+                                                    name="sub_center_search" style="width: 100%;">
+                                                    <option value="">ရွေးပါ</option>
+                                                    @foreach($township as $tsp)
+                                                    <option value="{{ $tsp->township_id}}">
+                                                        {{ $tsp->township_mmr }} | {{ $tsp->township_name_en }}
+                                                    </option>
+                                                    @endforeach
                                                 </select>
-                                                <span class="input-group-btn">
-                                                    <button type="text" id="sub_center_search"
-                                                        class="btn btn-info btn-flat"
-                                                        formaction="https://www.myanmarvbdc.com/search/ts_search">
-                                                        <i class="fa fa-search"></i>
-                                                    </button>
-                                                </span>
-                                            </div>
                                         </div>
                                     </div>
 
                                     <div class="col-md-3">
                                         <div class="form-group">
                                             <label class="control-label">VHV</label>
-                                            <div class="input-group input-group-sm">
-                                                <select class="form-control input-sm "
-                                                    name="vhv_search">
-                                                    <option value="">ရွေးပါ</option>
 
+                                                <select class="form-control input-sm "
+                                                    name="vhv_search" style="width:100%;">
+                                                    <option value="">ရွေးပါ</option>
+                                                    @foreach($township as $tsp)
+                                                    <option value="{{ $tsp->township_id}}">
+                                                        {{ $tsp->township_mmr }} | {{ $tsp->township_name_en }}
+                                                    </option>
+                                                    @endforeach
                                                 </select>
-                                                <span class="input-group-btn">
-                                                    <button type="text" id="vhv_search"
-                                                        class="btn btn-info btn-flat"
-                                                        formaction="https://www.myanmarvbdc.com/search/ts_search">
-                                                        <i class="fa fa-search"></i>
-                                                    </button>
-                                                </span>
-                                            </div>
+
                                         </div>
                                     </div>
 
                                     <div class="col-md-3">
                                         <div class="form-group">
                                             <label class="control-label">စတင်သည့်ရက် လ/ခုနှစ်</label>
-                                            {{-- <div class="input-group input-group-sm">
                                                 <input type="text" class="form-control input-sm search_date"
                                                     id="sdate_input" name="sdate_search"
-                                                    placeholder="Start Date" autocomplete="off">
-                                                <span class="input-group-btn">
-                                                    <button type="text" id="sdate_search"
-                                                        class="btn btn-info btn-flat"
-                                                        formaction="https://www.myanmarvbdc.com/search/sdate_search">
-                                                        <i class="fa fa-search"></i>
-                                                    </button>
-                                                </span>
-                                            </div> --}}
-                                            <div class="input-group input-group-sm">
-                                                <input type="text" class="form-control input-sm search_date"
-                                                    id="sdate_input" name="sdate_search"
-                                                    placeholder="Start Date" autocomplete="off">
-                                                <span class="input-group-btn">
-                                                    <button type="text" id="sdate_search"
-                                                        class="btn btn-info btn-flat"
-                                                        formaction="{{ route('form_search', ['type' => 'sdate_search']) }}">
-                                                        <i class="fa fa-search"></i>
-                                                    </button>
-                                                </span>
-                                            </div>
+                                                    placeholder="Start Date" autocomplete="off" style="width: 100%;">
                                         </div>
                                     </div>
                                     <div class="col-md-3">
                                         <div class="form-group">
                                             <label class="control-label">ပြီးဆုံးသည့်ရက် လ/ခုနှစ်</label>
-                                            {{-- <div class="input-group input-group-sm">
-                                                <input type="text" class="form-control input-sm search_date"
-                                                    id="edate_input" name="edate_search" placeholder="End Date"
-                                                    autocomplete="off">
-                                                <span class="input-group-btn">
-                                                    <button type="text" id="edate_search" name="search"
-                                                        class="btn btn-info btn-flat"
-                                                        formaction="https://www.myanmarvbdc.com/search/edate_search">
-                                                        <i class="fa fa-search"></i>
-                                                    </button>
-                                                </span>
-                                            </div> --}}
-                                            <div class="input-group input-group-sm">
                                                 <input type="text" class="form-control input-sm search_date"
                                                     id="edate_input" name="edate_search"
                                                     placeholder="End Date" autocomplete="off">
-                                                <span class="input-group-btn">
-                                                    <button type="text" id="edate_search"
-                                                        class="btn btn-info btn-flat"
-                                                        formaction="{{ route('form_search', ['type' => 'edate_search']) }}">
-                                                        <i class="fa fa-search"></i>
-                                                    </button>
-                                                </span>
-                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div class="form-group">
+                                            <button type="text" id="btnSearch"
+                                                class="btn btn-info btn-flat btnSearchs" style="width: 100%;margin-top:20px;">
+                                                <i class="fa fa-search"></i> Search
+                                            </button>
                                         </div>
                                     </div>
                                 </div>
@@ -216,9 +150,12 @@
         <td>
             <form id="form_51023586194718009" method="POST">
             <div class="btn-group" style="width:max-content">
-                <button title="Data Uploaded" type="button" class="btn btn-success btn-xs" onClick="goto_form()" >
-                   Uploaded
-                </button>
+                <a href="/formList">
+                    <button title="Data Uploaded" type="button" class="btn btn-success btn-xs" onClick="goto_form()" >
+                        Uploaded
+                     </button>
+                </a>
+
                 <button title="Upload to server" type="button" class="btn btn-info btn-xs" cf_link_code="51023586194718009"
                     onClick="delete_tbl_core_facility()">
 
@@ -296,6 +233,10 @@
     padding: 10px; /* Adjust as needed */
 }
 
+.btnSearchs{
+
+}
+
 .theads th{
     padding-top: 16px !important;
   padding-bottom: 16px !important;
@@ -311,6 +252,9 @@
     margin-left: auto; /* Pushes the "Upload to Online" list item to the right */
 }
 
+/* .form-group{
+    width: 100% !important;
+} */
 
 .back_arrow{
     float: left;

@@ -8,7 +8,9 @@ use App\tbl_individual_case;
 use App\tbl_individual_case_temp;
 use App\tbl_nil;
 use App\tbl_region;
+// use App\tbl_sub_center;
 use App\tbl_total_patient;
+// use App\tbl_health_facility;
 use App\tbl_township;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -246,27 +248,51 @@ class lookupsController extends Controller
 
 
 
-	public function get_lp_township($sr_code)
-	{
-        try{
+	// public function get_lp_township($region_id)
+	// {
+    //     try{
 
-            if($sr_code === "all"){
-                $tbl_region = tbl_region::all();
-            } else {
-                $tbl_region = tbl_region::where('township_id','LIKE', $sr_code.'%')->orderBy('ts_name')->get();
-            }
+    //         if($region_id === "all"){
+    //             $region = tbl_region::all();
+    //         } else {
+    //             $township = tbl_township::where('township_id','LIKE', $region_id.'%')->orderBy('township_name_mm')->get();
+    //         }
 
-            $header = array (
-                'Content-Type' => 'application/json; charset=UTF-8',
-                'charset' => 'utf-8'
-            );
+    //         $header = array (
+    //             'Content-Type' => 'application/json; charset=UTF-8',
+    //             'charset' => 'utf-8'
+    //         );
 
-            return response()->json($tbl_region , 200, $header, JSON_UNESCAPED_UNICODE);
+    //         return response()->json($township , 200, $header, JSON_UNESCAPED_UNICODE);
+    //     }
+    //     catch (\Exception $e) {
+    //         return $e->getMessage();
+    //     }
+    // }
+
+
+
+    public function get_lp_township($region_id)
+{
+    try {
+        if ($region_id === "all") {
+            $townships = tbl_township::orderBy('township_mmr')->get();
+            // dd($township);
+        } else {
+            //
+            $townships = tbl_township::where('township_id', 'LIKE','region_id')->orderBy('township_mmr')->get();
         }
-        catch (\Exception $e) {
-            return $e->getMessage();
+
+        if ($townships->isEmpty()) {
+            return response()->json(['message' => 'No townships found for the given region ID'], 404);
         }
+
+        return response()->json($townships, 200, [], JSON_UNESCAPED_UNICODE);
+    } catch (\Exception $e) {
+        return response()->json(['error' => $e->getMessage()], 500);
     }
+}
+
 
     // public function get_tbl_hfm()
 	// {
@@ -762,9 +788,15 @@ class lookupsController extends Controller
         }
     }
 
-    public function show_upload_form(){
+    public function show_upload_form($request){
         $state_region = tbl_region::all();
-        return view('parent-register-template.uploadForm', compact('state_region'));
+        $township = tbl_township::all();
+
+        return view('parent-register-template.uploadForm', compact('state_region','township'));
+    }
+
+    public function show_form_list(){
+        return view('parent-register-template.formList');
     }
     // public function get_tbl_individual_case($cf_link_code)
     // {

@@ -5,29 +5,30 @@
 <script data-require="jquery@*" data-semver="2.0.3" src="http://code.jquery.com/jquery-2.0.3.min.js"></script>
 
 <div class="header_bar">
-   <ul class="nav navbar-nav">
-    <!-- User Account: style can be found in dropdown.less -->
-    <li class="dropdown user user-menu">
-      <a href="https://mcbrs-dev2.myanmarvbdc.com/" class="" data-toggle="">
-        <img src="{{ asset('img/logo.png') }}" class="user-image" alt="User Image">
-        <span class="card-title"> Malaria Case-Based Reporting for VBDC Myanmar </span>
-      </a>
-    </li>
-    <li >
+    <ul class="nav navbar-nav">
+        <!-- User Account: style can be found in dropdown.less -->
+        <li class="dropdown user user-menu">
+            <a href="https://mcbrs-dev2.myanmarvbdc.com/" class="" data-toggle="">
+                <img src="{{ asset('img/logo.png') }}" class="user-image" alt="User Image">
+                <span class="card-title"> Malaria Case-Based Reporting for VBDC Myanmar </span>
+            </a>
+        </li>
+        <li>
 
-        <a href="/uploadForm" class="" id="showPopupBtnUpload" >Upload to Online</a>
-    </li>
-    <li >
-        <a href="" class="upload_to_online_btn" id="showPopupBtnDownload" >Download from Online</a>
-    </li>
-  </ul>
+            <a href="/uploadForm" class="" id="">Upload to Online</a>
+        </li>
+        <li>
+            <a href="" class="upload_to_online_btn" id="showPopupBtnDownload">Download from Online</a>
+        </li>
+    </ul>
 
 </div>
-<h5 class="form_head" style="font-weight: 600; color:rgb(44, 102, 147); padding-top:10px;align:center;">ပုံစံအချက်အလက်များကိုသေချာရွေးချယ်ပါ။</h5>
+<h5 class="form_head" style="font-weight: 600; color:rgb(44, 102, 147); padding-top:10px;align:center;">
+    ပုံစံအချက်အလက်များကိုသေချာရွေးချယ်ပါ။</h5>
 
 <main>
     <div class="tab-pane active " id="data_entry">
-        <div class="row" >
+        <div class="row">
             <div class=""style="margin-left:25px;">
                 {{-- <div class="text-center" style="border: 1px solid #E3E3E3;      background-color:#FBFBFB"> --}}
                 {{-- <h5>ပုံစံအချက်အလက်များကိုသေချာရွေးချယ်ပါ။</h5> --}}
@@ -35,29 +36,31 @@
                     style="font-weight: 600;">
                     {{ csrf_field() }}
                     <div class="box-body">
-                        <div class="row"  style="">
+                        <div class="row" style="">
                             {{-- justify-content-evenly --}}
                             <div class="form-group col-md-5" id="service_provider">
-                                <label for="" class="control-label"style="padding-bottom:10px;">Service Provider *</label>
+                                <label for="" class="control-label"style="padding-bottom:10px;">Service Provider
+                                    *</label>
                                 <div class="">
                                     <select class="form-control select2" name="select_lp_form_cat"
                                         id="select_lp_form_cat" style="height:50px; padding-left:10px;"
-                                        onChange="load_icmv_village('select_lp_form_cat',this.value)">
-                                            <option value="Basic Health Staff">Basic Health Staff</option>
-                                            <option value="ICMV">ICMV</option>
-                                            <option value="GP">GP</option>
-                                            <option value="Outlet">Outlet</option>
+                                        onclick="load_icmv_village('select_lp_form_cat',this.value)">
+                                        <option value="Basic Health Staff">Basic Health Staff</option>
+                                        <option value="ICMV">ICMV</option>
+                                        <option value="GP">GP</option>
+                                        <option value="Outlet">Outlet</option>
                                     </select>
                                 </div>
                             </div>
 
 
                             <div class="form-group col-md-5" id="data_entry_type">
-                                <label for="" class="control-label" style="padding-bottom:10px;">Data Entry Type *</label>
+                                <label for="" class="control-label" style="padding-bottom:10px;">Data Entry Type
+                                    *</label>
                                 <div class="">
-                                    <select id="dataEntry" name="dataEntry"
-                                        class="form-control select2" style=" height:50px;">
-                                        <option value="option1" >ရွေးရန်</option>
+                                    <select id="dataEntry" name="dataEntry" class="form-control select2"
+                                        style=" height:50px;">
+                                        <option value="option1">ရွေးရန်</option>
                                         <option value="option2">Clinic data (OP/IP) and Carbonless register</option>
                                     </select>
                                 </div>
@@ -67,27 +70,38 @@
 
                         <div class="row">
                             <div class="form-group col-md-5" id="state_region">
-                                <label for="" class=" control-label" style="padding-bottom:10px;">ပြည်နယ်/တိုင်းဒေသကြီး *</label>
+                                <label for="" class=" control-label"
+                                    style="padding-bottom:10px;">ပြည်နယ်/တိုင်းဒေသကြီး *</label>
                                 <div class="">
-                                    <select class="form-control select2" style="height:50px;" name="select_lp_state_region" id="select_lp_state_region"
-                                    onChange="load_lp_township('select_lp_township_de', this.value, '<?= csrf_token() ?>','')">
+                                    <select class="form-control select2" style="height:50px;"
+                                        name="select_lp_state_region" id="data_select_region">
                                         <option value="0">ရွေးရန်</option>
-                                        @foreach($tbl_region as $region)
-                                        <option value="{{ $region->region_id }}">{{ $region->region_name_en }}</option>
-                                    @endforeach
+                                        @foreach ($data_region as $region)
+                                            <option value="{{ $region->region_mmr }}">{{ $region->region_name_en }}
+                                            </option>
+                                        @endforeach
                                     </select>
                                 </div>
                             </div>
-                            <div class="form-group col-md-5" id="township">
-                                <label for="" class=" control-label" style="padding-bottom:10px;">မြို့နယ် *</label>
+
+                            <div class="form-group col-md-5" id="state_district">
+                                <label for="" class=" control-label"
+                                    style="padding-bottom:10px;">ခရိုင်</label>
                                 <div class="">
-                                    <select name="select_lp_township_de" id="select_lp_township_de"
-                                        onChange="load_tbl_hfm('select_tbl_hfm_de', this.value, '<?= csrf_token() ?>')"
+                                    <select class="form-control select2" style="height:50px;"
+                                        name="select_lp_state_region" id="data_select_district">
+                                        <option value="0">ရွေးရန်</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-group col-md-5" id="township">
+                                <label for="" class=" control-label" style="padding-bottom:10px;">မြို့နယ်
+                                    *</label>
+                                <div class="">
+                                    <select name="select_lp_township_de" id="data_select_township"
                                         class="form-control select2 select_lp_township_de" style="height:50px;">
                                         <option value="0" selected>ရွေးရန်</option>
-                                        <option value="">
-                                                Testing
-                                            </option>
                                     </select>
                                 </div>
                             </div>
@@ -96,20 +110,21 @@
 
                             <div class="form-group col-md-5" id="rhc_health">
                                 <label for="" id="rhc_label" class="control-label"
-                                    style="word-wrap: anywhere; padding-bottom:10px;" >မြို့နယ်/တိုက်နယ်ဆေးရုံ/ကျန်းမာရေးဌာန *</label>
+                                    style="word-wrap: anywhere; padding-bottom:10px;">မြို့နယ်/တိုက်နယ်ဆေးရုံ/ကျန်းမာရေးဌာန
+                                    *</label>
                                 <div class="">
-                                    <select name="select_tbl_hfm_de" id="select_tbl_hfm_de"
-                                    onChange="load_hfm('select_hfm_de', this.value, '<?= csrf_token() ?>')"
+                                    <select name="select_tbl_hfm_de" id="data_select_hf"
                                         class="form-control select2" style="height:50px;">
                                         <option selected="selected">ရွေးပါ</option>
                                     </select>
                                 </div>
                             </div>
                             <div class="form-group col-md-5" id="sc_health">
-                                <label for="" id="sc_label" class="control-label" style="word-wrap: anywhere; padding-bottom:10px;">
+                                <label for="" id="sc_label" class="control-label"
+                                    style="word-wrap: anywhere; padding-bottom:10px;">
                                     ကျန်းမာရေးဌာနခွဲ *</label>
                                 <div class="">
-                                    <select name="select_hfm_de" id="select_hfm_de" class="form-control select2"
+                                    <select name="select_hfm_de" id="data_select_subcenter" class="form-control select2"
                                         style="height:50px;">
                                         <option selected="selected">ရွေးပါ</option>
                                     </select>
@@ -119,22 +134,23 @@
                         <div class="row">
 
 
-                            <div class="form-group col-md-2" style="margin-top:35px; display:none; "
-                                id="icmvSelect">
-                                <label for="icmvSelect" class=" control-label" style="padding-bottom:10px;">ICMV village *</label>
+                            <div class="form-group col-md-2" style="margin-top:35px; display:none; " id="icmvSelect">
+                                <label for="icmvSelect" class=" control-label" style="padding-bottom:10px;">ICMV
+                                    village *</label>
                                 <div class="icmbSelects" style="">
-                                    <select id="icmvOption " name="icmvOption"
-                                        class="form-control select2" style="height:50px;">
-                                        <option value="selected" >ရွေးပါ</option>
-                                        <option value="option1">option</option>
+                                    <select id="data_select_village" name="icmvOption" class="form-control select2"
+                                        style="height:50px;">
+                                        <option value="selected">ရွေးပါ</option>
                                     </select>
                                 </div>
                             </div>
 
                             <div class="form-group col-md-3" style="margin-top:35px;" id="rp_month">
-                                <label for="" class="control-label" style="padding-bottom:10px;">အစီရင်ခံသည့် လ/ခုနှစ် *</label>
+                                <label for="" class="control-label" style="padding-bottom:10px;">အစီရင်ခံသည့်
+                                    လ/ခုနှစ် *</label>
                                 <div class="month">
-                                    <input type="month" id="start" name="start" class="form-control text-center"  style="height:50px;" autocomplete=off>
+                                    <input type="month" id="start" name="start"
+                                        class="form-control text-center" style="height:50px;" autocomplete=off>
 
                                 </div>
 
@@ -143,12 +159,13 @@
                             </div>
 
                             <div class="form-group col-md-3"style="margin-top:20px;" id="bloodTest">
-                                <label for="" class=" control-label" style="text-align:left;
+                                <label for="" class=" control-label"
+                                    style="text-align:left;
                                 padding-bottom:10px;">ယခုလအတွင်း
                                     ငှက်ဖျားလူနာ<br>သွေးဖောက်စစ်ဆေးမှုရှိပါသလား*</label>
                                 <div class="">
-                                    <select name="chooseOption" id="chooseOption" onclick="showConditionalSelect()" class="form-control select2"
-                                        style="height:50px;">
+                                    <select name="chooseOption" id="chooseOption" onclick="showConditionalSelect()"
+                                        class="form-control select2" style="height:50px;">
                                         <option value="selected">ရွေးပါ</option>
                                         <option value="yes">Yes</option>
                                         <option value="no">No</option>
@@ -158,11 +175,12 @@
 
                             <div class="form-group col-md-2" style="margin-top:35px; display:none;"
                                 id="conditionalSelect">
-                                <label for="conditionalOption" class=" control-label" style="padding-bottom:10px;">Activities *</label>
+                                <label for="conditionalOption" class=" control-label"
+                                    style="padding-bottom:10px;">Activities *</label>
                                 <div class="data" style="">
                                     <select id="conditionalOption" name="conditionalOption"
                                         class="form-control select2" style="height:50px;">
-                                        <option value="selected" ></option>
+                                        <option value="selected"></option>
                                         <option value="option1">ACD/ICD</option>
                                         <option value="option2">PCD</option>
                                         <option value="option3">RACD</option>
@@ -201,7 +219,8 @@
         <div class="text-center" style="padding: 20px">
             {{-- <span style="float:left; font-size: 10px;">ပုံစံအမျိုးအစား - </span> --}}
             {{-- {{ $lp_form_cat_name }} --}}
-            <h3>ငှက်ဖျားလူနာစစ်ဆေးကုသမှုမှတ်တမ်း /လချုပ်</h3><hr>
+            <h3>ငှက်ဖျားလူနာစစ်ဆေးကုသမှုမှတ်တမ်း /လချုပ်</h3>
+            <hr>
             {{-- / <span style="float:right; font-size: 10px;">Form No - </span> --}}
             {{-- {{ $form_number }} --}}
         </div>
@@ -213,57 +232,63 @@
             <table class="" style="margin-left:20px;">
                 <tbody align="left">
                     <tr style="padding-bottom:20px;">
-                        <td style="padding:10px; padding-right:50px; margin-right:20px;" >
+                        <td style="padding:10px; padding-right:50px; margin-right:20px;">
 
                             <small style="font-weight: 700; font-size: 15px; padding-right:10px; ">
                                 အထွေထွေဆေးခန်းလာပြင်ပလူနာသစ်ပေါင်း(ပြင်ပ)* - </small>
-                            <input type="text" id="txt_total_outpatient" value=""  style="width: 20%;padding-left:10px;">
+                            <input type="text" id="txt_total_outpatient" value=""
+                                style="width: 20%;padding-left:10px;">
 
                         </td>
-                        <td style="padding:10px 50px 10px 30px;  margin-right:20px" >
+                        <td style="padding:10px 50px 10px 30px;  margin-right:20px">
 
-                            <small style="font-weight: 700; font-size: 15px; padding-right:10px;"> ငါးနှစ်အောက်အထွေထွေဆေးခန်းလာ(ပြင်ပ)
+                            <small style="font-weight: 700; font-size: 15px; padding-right:10px;">
+                                ငါးနှစ်အောက်အထွေထွေဆေးခန်းလာ(ပြင်ပ)
                                 - </small>
-                            <input type="text" id="txt_total_child_out" value=""  style="width: 20%; ">
+                            <input type="text" id="txt_total_child_out" value="" style="width: 20%; ">
 
                         </td>
-                        <td style="padding:10px 50px 10px 30px; margin-right:20px" >
+                        <td style="padding:10px 50px 10px 30px; margin-right:20px">
 
-                            <small style="font-weight: 700; font-size: 15px; padding-right:10px;"> ကိုယ်ဝန်ဆောင်အထွေထွေဆေးခန်းလာ(ပြင်ပ)
+                            <small style="font-weight: 700; font-size: 15px; padding-right:10px;">
+                                ကိုယ်ဝန်ဆောင်အထွေထွေဆေးခန်းလာ(ပြင်ပ)
                                 - </small>
-                            <input type="text" id="txt_total_preg_out" value=""  style="width: 20%; margin-right:20px;">
+                            <input type="text" id="txt_total_preg_out" value=""
+                                style="width: 20%; margin-right:20px;">
 
                         </td>
                         <td></td>
                     </tr>
                     <tr>
-                        <td style="padding:10px 50px 10px 30px; margin-right:20px" >
+                        <td style="padding:10px 50px 10px 30px; margin-right:20px">
 
-                            <small style="font-weight: 700; font-size: 15px; padding-right:10px;"> ဆေးရုံတက်အတွင်းလူနာသစ်ပေါင်း - </small>
-                            <input type="text" id="txt_total_inpatient" value=""  style="width: 20%; ">
+                            <small style="font-weight: 700; font-size: 15px; padding-right:10px;">
+                                ဆေးရုံတက်အတွင်းလူနာသစ်ပေါင်း - </small>
+                            <input type="text" id="txt_total_inpatient" value="" style="width: 20%; ">
                         </td>
-                        <td style="padding:10px 50px 10px 30px; margin-right:20px" >
+                        <td style="padding:10px 50px 10px 30px; margin-right:20px">
 
                             <small style="font-weight: 700; font-size: 15px;"> ငါးနှစ်အောက်အထွေထွေဆေးခန်းလာ(အတွင်း)
                                 - </small>
-                            <input type="text" id="txt_total_in_child" value=""  style="width: 20%; ">
+                            <input type="text" id="txt_total_in_child" value="" style="width: 20%; ">
 
                         </td>
-                        <td style="padding:10px 50px 10px 30px; margin-right:20px" >
+                        <td style="padding:10px 50px 10px 30px; margin-right:20px">
 
                             <small style="font-weight: 700; font-size: 15px;"> ကိုယ်ဝန်ဆောင်အထွေထွေဆေးခန်းလာ(အတွင်း)
                                 - </small>
-                            <input type="text" id="txt_total_preg_in" value=""  style="width: 20%; margin-right:20px; ">
+                            <input type="text" id="txt_total_preg_in" value=""
+                                style="width: 20%; margin-right:20px; ">
 
                         </td>
 
                     </tr>
                     <tr>
                         <td></td>
-                        <td style="padding:10px 50px 10px 30px; margin-right:20px" >
+                        <td style="padding:10px 50px 10px 30px; margin-right:20px">
 
                             <small style="font-weight: 700; font-size: 15px;"> ဆေးရုံတွင်သေဆုံးသူစုစုပေါင်း - </small>
-                            <input type="text" id="txt_total_death_in" value=""  style="width: 20%; ">
+                            <input type="text" id="txt_total_death_in" value="" style="width: 20%; ">
 
                         </td>
                         <td></td>
@@ -367,14 +392,14 @@
         <?php }} ?>
 
 
-        <button class="btn btn-default btn-sm pull-right btn-primary" style="margin-top: 20px; margin-bottom: 10px; margin-right:30px;"
-            id="add_row" onClick="add_row(this)">
+        <button class="btn btn-default btn-sm pull-right btn-primary"
+            style="margin-top: 20px; margin-bottom: 10px; margin-right:30px;" id="add_row" onClick="add_row(this)">
             <li class="fa fa-plus-square text-white" style="margin-right:20px;"></li>အသစ်တစ်ကြောင်းထပ်တိုးရန်
         </button>
         <div class="col-md-12 table-container" style="padding: 10px;">
             <div class="">
-                <table class="table table-bordered dataTable" id="dynamicInput"
-                    id="register-table" style="background-color: rgb(120, 120, 114); justify-content:center">
+                <table class="table table-bordered dataTable" id="dynamicInput" id="register-table"
+                    style="background-color: rgb(120, 120, 114); justify-content:center">
                     <thead class="mmtext-12">
                         <tr>
                             <th rowspan="2" width="20px">စဉ်</th>
@@ -467,277 +492,104 @@
                             </td>
 
                             <td>
-                                <input type="text" id="datepicker" class="form-control text-center" style="height: 50px;" autocomplete="off">
+                                <input type="text" id="datepicker" class="form-control text-center"
+                                    style="height: 50px;" autocomplete="off">
 
                             </td>
 
-                             <td>
+                            <td>
                                 <input type="text" id="" oninput="adjustInputWidth(this)"
                                     placeholder="အမည်" value="">
                             </td>
                             <td>
                                 {{-- oninput="adjustInputWidth(this)" --}}
-                                <input type="text" id="ageInput"  maxlength="3" placeholder="အသက်" class="age dentry_age" onchange="checkAge(this)">
+                                <input type="text" id="ageInput" maxlength="3" placeholder="အသက်"
+                                    class="age dentry_age" onchange="checkAge(this)">
                             </td>
-                            <td><input type="text" id="" oninput="adjustInputWidth(this)" placeholder="အဘအမည်"></td>
+                            <td><input type="text" id="" oninput="adjustInputWidth(this)"
+                                    placeholder="အဘအမည်"></td>
                             <td>
-                                <select name="address" id="" oninput="adjustInputWidth(this)" onblur="location_changed(this)"
+                                <select name="address" id="" oninput="adjustInputWidth(this)"
+                                    onblur="location_changed(this)" {{ $review_mode ? 'disabled' : '' }}>
+
+                                        <option value="{{ $patient->Pt_Location }}">Other</option>
+                                        @foreach ($tbl_village as $v)
+                                            <option value="{{ $v->village_mmr }}">
+                                                {{ $v->village_name_en }} &nbsp;&nbsp;&nbsp;&nbsp;| {{ $v->village_name_mm }}
+                                            </option>
+                                        @endforeach
+
+                                </select>
+                            </td>
+                            <td>
+                                <select name="address" id="" onblur="location_changed(this)"
                                     {{ $review_mode ? 'disabled' : '' }}>
-                                    @if ($patient->Pt_Location == 10)
+
                                         <option value="{{ $patient->Pt_Location }}">Other</option>
                                         @foreach ($tbl_village as $v)
                                             <option value="{{ $v->village_pcode }}">
                                                 {{ $v->village }} &nbsp;&nbsp;&nbsp;&nbsp;| {{ $v->village_tract }}
                                             </option>
                                         @endforeach
-                                    @elseif($patient->Pt_Location == 20)
-                                        <option value="{{ $patient->Pt_Location }}">Other Within Township</option>
+
+                                </select>
+                            </td>
+                            <td>
+                                <select name="address" id="" onblur="location_changed(this)"
+                                    {{ $review_mode ? 'disabled' : '' }}>
+
+                                        <option value="{{ $patient->Pt_Location }}">Other</option>
                                         @foreach ($tbl_village as $v)
                                             <option value="{{ $v->village_pcode }}">
                                                 {{ $v->village }} &nbsp;&nbsp;&nbsp;&nbsp;| {{ $v->village_tract }}
                                             </option>
                                         @endforeach
-                                    @elseif($patient->Pt_Location == 30)
-                                        <option value="{{ $patient->Pt_Location }}">Other Outside Township</option>
-                                        @foreach ($tbl_village as $v)
-                                            <option value="{{ $v->village_pcode }}">
-                                                {{ $v->village }} &nbsp;&nbsp;&nbsp;&nbsp;| {{ $v->village_tract }}
-                                            </option>
-                                        @endforeach
-                                    @elseif($patient->Pt_Location == 99)
-                                        <option value="{{ $patient->Pt_Location }}">Missing</option>
-                                        @foreach ($tbl_village as $v)
-                                            <option value="{{ $v->village_pcode }}">
-                                                {{ $v->village }} &nbsp;&nbsp;&nbsp;&nbsp;| {{ $v->village_tract }}
-                                            </option>
-                                        @endforeach
-                                    @else
-                                        @foreach ($tbl_village as $v)
-                                            <option value="{{ $v->village_pcode }}" <?php echo $v->village_pcode == $patient->Pt_Location ? 'selected' : ''; ?>>
-                                                {{ $v->village }} &nbsp;&nbsp;&nbsp;&nbsp;| {{ $v->village_tract }}
-                                            </option>
-                                        @endforeach
-                                        <option value="10">Other</option>
-                                    @endif
+
                                 </select>
                             </td>
                             <td>
                                 <select name="address" id="" onblur="location_changed(this)"
                                     {{ $review_mode ? 'disabled' : '' }}>
                                     @if ($patient->Pt_Location == 10)
-                                        <option value="{{ $patient->Pt_Location }}">Other</option>
-                                        @foreach ($tbl_village as $v)
-                                            <option value="{{ $v->village_pcode }}">
-                                                {{ $v->village }} &nbsp;&nbsp;&nbsp;&nbsp;| {{ $v->village_tract }}
-                                            </option>
-                                        @endforeach
-                                    @elseif($patient->Pt_Location == 20)
-                                        <option value="{{ $patient->Pt_Location }}">Other Within Township</option>
-                                        @foreach ($tbl_village as $v)
-                                            <option value="{{ $v->village_pcode }}">
-                                                {{ $v->village }} &nbsp;&nbsp;&nbsp;&nbsp;| {{ $v->village_tract }}
-                                            </option>
-                                        @endforeach
-                                    @elseif($patient->Pt_Location == 30)
-                                        <option value="{{ $patient->Pt_Location }}">Other Outside Township</option>
-                                        @foreach ($tbl_village as $v)
-                                            <option value="{{ $v->village_pcode }}">
-                                                {{ $v->village }} &nbsp;&nbsp;&nbsp;&nbsp;| {{ $v->village_tract }}
-                                            </option>
-                                        @endforeach
-                                    @elseif($patient->Pt_Location == 99)
-                                        <option value="{{ $patient->Pt_Location }}">Missing</option>
-                                        @foreach ($tbl_village as $v)
-                                            <option value="{{ $v->village_pcode }}">
-                                                {{ $v->village }} &nbsp;&nbsp;&nbsp;&nbsp;| {{ $v->village_tract }}
-                                            </option>
-                                        @endforeach
+                                        <option value="">Other</option>
+
                                     @else
-                                        @foreach ($tbl_village as $v)
-                                            <option value="{{ $v->village_pcode }}" <?php echo $v->village_pcode == $patient->Pt_Location ? 'selected' : ''; ?>>
-                                                {{ $v->village }} &nbsp;&nbsp;&nbsp;&nbsp;| {{ $v->village_tract }}
-                                            </option>
-                                        @endforeach
-                                        <option value="10">Other</option>
+                                    <input type="text">
                                     @endif
                                 </select>
                             </td>
                             <td>
                                 <select name="address" id="" onblur="location_changed(this)"
                                     {{ $review_mode ? 'disabled' : '' }}>
-                                    @if ($patient->Pt_Location == 10)
+
                                         <option value="{{ $patient->Pt_Location }}">Other</option>
                                         @foreach ($tbl_village as $v)
                                             <option value="{{ $v->village_pcode }}">
-                                                {{ $v->village }} &nbsp;&nbsp;&nbsp;&nbsp;| {{ $v->village_tract }}
+                                                {{ $v->village }} &nbsp;&nbsp;&nbsp;&nbsp;|
+                                                {{ $v->village_tract }}
                                             </option>
                                         @endforeach
-                                    @elseif($patient->Pt_Location == 20)
-                                        <option value="{{ $patient->Pt_Location }}">Other Within Township</option>
-                                        @foreach ($tbl_village as $v)
-                                            <option value="{{ $v->village_pcode }}">
-                                                {{ $v->village }} &nbsp;&nbsp;&nbsp;&nbsp;| {{ $v->village_tract }}
-                                            </option>
-                                        @endforeach
-                                    @elseif($patient->Pt_Location == 30)
-                                        <option value="{{ $patient->Pt_Location }}">Other Outside Township</option>
-                                        @foreach ($tbl_village as $v)
-                                            <option value="{{ $v->village_pcode }}">
-                                                {{ $v->village }} &nbsp;&nbsp;&nbsp;&nbsp;| {{ $v->village_tract }}
-                                            </option>
-                                        @endforeach
-                                    @elseif($patient->Pt_Location == 99)
-                                        <option value="{{ $patient->Pt_Location }}">Missing</option>
-                                        @foreach ($tbl_village as $v)
-                                            <option value="{{ $v->village_pcode }}">
-                                                {{ $v->village }} &nbsp;&nbsp;&nbsp;&nbsp;| {{ $v->village_tract }}
-                                            </option>
-                                        @endforeach
-                                    @else
-                                        @foreach ($tbl_village as $v)
-                                            <option value="{{ $v->village_pcode }}" <?php echo $v->village_pcode == $patient->Pt_Location ? 'selected' : ''; ?>>
-                                                {{ $v->village }} &nbsp;&nbsp;&nbsp;&nbsp;| {{ $v->village_tract }}
-                                            </option>
-                                        @endforeach
-                                        <option value="10">Other</option>
-                                    @endif
+
                                 </select>
                             </td>
                             <td>
                                 <select name="address" id="" onblur="location_changed(this)"
                                     {{ $review_mode ? 'disabled' : '' }}>
-                                    @if ($patient->Pt_Location == 10)
+
                                         <option value="{{ $patient->Pt_Location }}">Other</option>
                                         @foreach ($tbl_village as $v)
                                             <option value="{{ $v->village_pcode }}">
-                                                {{ $v->village }} &nbsp;&nbsp;&nbsp;&nbsp;| {{ $v->village_tract }}
+                                                {{ $v->village }} &nbsp;&nbsp;&nbsp;&nbsp;|
+                                                {{ $v->village_tract }}
                                             </option>
                                         @endforeach
-                                    @elseif($patient->Pt_Location == 20)
-                                        <option value="{{ $patient->Pt_Location }}">Other Within Township</option>
-                                        @foreach ($tbl_village as $v)
-                                            <option value="{{ $v->village_pcode }}">
-                                                {{ $v->village }} &nbsp;&nbsp;&nbsp;&nbsp;| {{ $v->village_tract }}
-                                            </option>
-                                        @endforeach
-                                    @elseif($patient->Pt_Location == 30)
-                                        <option value="{{ $patient->Pt_Location }}">Other Outside Township</option>
-                                        @foreach ($tbl_village as $v)
-                                            <option value="{{ $v->village_pcode }}">
-                                                {{ $v->village }} &nbsp;&nbsp;&nbsp;&nbsp;| {{ $v->village_tract }}
-                                            </option>
-                                        @endforeach
-                                    @elseif($patient->Pt_Location == 99)
-                                        <option value="{{ $patient->Pt_Location }}">Missing</option>
-                                        @foreach ($tbl_village as $v)
-                                            <option value="{{ $v->village_pcode }}">
-                                                {{ $v->village }} &nbsp;&nbsp;&nbsp;&nbsp;| {{ $v->village_tract }}
-                                            </option>
-                                        @endforeach
-                                    @else
-                                        @foreach ($tbl_village as $v)
-                                            <option value="{{ $v->village_pcode }}" <?php echo $v->village_pcode == $patient->Pt_Location ? 'selected' : ''; ?>>
-                                                {{ $v->village }} &nbsp;&nbsp;&nbsp;&nbsp;| {{ $v->village_tract }}
-                                            </option>
-                                        @endforeach
-                                        <option value="10">Other</option>
-                                    @endif
+
                                 </select>
                             </td>
                             <td>
-                                <select name="address" id="" onblur="location_changed(this)"
-                                    {{ $review_mode ? 'disabled' : '' }}>
-                                    @if ($patient->Pt_Location == 10)
-                                        <option value="{{ $patient->Pt_Location }}">Other</option>
-                                        @foreach ($tbl_village as $v)
-                                            <option value="{{ $v->village_pcode }}">
-                                                {{ $v->village }} &nbsp;&nbsp;&nbsp;&nbsp;|
-                                                {{ $v->village_tract }}
-                                            </option>
-                                        @endforeach
-                                    @elseif($patient->Pt_Location == 20)
-                                        <option value="{{ $patient->Pt_Location }}">Other Within Township</option>
-                                        @foreach ($tbl_village as $v)
-                                            <option value="{{ $v->village_pcode }}">
-                                                {{ $v->village }} &nbsp;&nbsp;&nbsp;&nbsp;|
-                                                {{ $v->village_tract }}
-                                            </option>
-                                        @endforeach
-                                    @elseif($patient->Pt_Location == 30)
-                                        <option value="{{ $patient->Pt_Location }}">Other Outside Township</option>
-                                        @foreach ($tbl_village as $v)
-                                            <option value="{{ $v->village_pcode }}">
-                                                {{ $v->village }} &nbsp;&nbsp;&nbsp;&nbsp;|
-                                                {{ $v->village_tract }}
-                                            </option>
-                                        @endforeach
-                                    @elseif($patient->Pt_Location == 99)
-                                        <option value="{{ $patient->Pt_Location }}">Missing</option>
-                                        @foreach ($tbl_village as $v)
-                                            <option value="{{ $v->village_pcode }}">
-                                                {{ $v->village }} &nbsp;&nbsp;&nbsp;&nbsp;|
-                                                {{ $v->village_tract }}
-                                            </option>
-                                        @endforeach
-                                    @else
-                                        @foreach ($tbl_village as $v)
-                                            <option value="{{ $v->village_pcode }}" <?php echo $v->village_pcode == $patient->Pt_Location ? 'selected' : ''; ?>>
-                                                {{ $v->village }} &nbsp;&nbsp;&nbsp;&nbsp;|
-                                                {{ $v->village_tract }}
-                                            </option>
-                                        @endforeach
-                                        <option value="10">Other</option>
-                                    @endif
-                                </select>
+                                <input type="text" placeholder="ရွာ-မြို့-ပြည်-နယ်-တိုင်း"
+                                value="<?= $patient->Pt_Address ?>"{{ $review_mode ? 'disabled' : '' }}>
                             </td>
-                            <td>
-                                <select name="address" id="" onblur="location_changed(this)"
-                                    {{ $review_mode ? 'disabled' : '' }}>
-                                    @if ($patient->Pt_Location == 10)
-                                        <option value="{{ $patient->Pt_Location }}">Other</option>
-                                        @foreach ($tbl_village as $v)
-                                            <option value="{{ $v->village_pcode }}">
-                                                {{ $v->village }} &nbsp;&nbsp;&nbsp;&nbsp;|
-                                                {{ $v->village_tract }}
-                                            </option>
-                                        @endforeach
-                                    @elseif($patient->Pt_Location == 20)
-                                        <option value="{{ $patient->Pt_Location }}">Other Within Township</option>
-                                        @foreach ($tbl_village as $v)
-                                            <option value="{{ $v->village_pcode }}">
-                                                {{ $v->village }} &nbsp;&nbsp;&nbsp;&nbsp;|
-                                                {{ $v->village_tract }}
-                                            </option>
-                                        @endforeach
-                                    @elseif($patient->Pt_Location == 30)
-                                        <option value="{{ $patient->Pt_Location }}">Other Outside Township</option>
-                                        @foreach ($tbl_village as $v)
-                                            <option value="{{ $v->village_pcode }}">
-                                                {{ $v->village }} &nbsp;&nbsp;&nbsp;&nbsp;|
-                                                {{ $v->village_tract }}
-                                            </option>
-                                        @endforeach
-                                    @elseif($patient->Pt_Location == 99)
-                                        <option value="{{ $patient->Pt_Location }}">Missing</option>
-                                        @foreach ($tbl_village as $v)
-                                            <option value="{{ $v->village_pcode }}">
-                                                {{ $v->village }} &nbsp;&nbsp;&nbsp;&nbsp;|
-                                                {{ $v->village_tract }}
-                                            </option>
-                                        @endforeach
-                                    @else
-                                        @foreach ($tbl_village as $v)
-                                            <option value="{{ $v->village_pcode }}" <?php echo $v->village_pcode == $patient->Pt_Location ? 'selected' : ''; ?>>
-                                                {{ $v->village }} &nbsp;&nbsp;&nbsp;&nbsp;|
-                                                {{ $v->village_tract }}
-                                            </option>
-                                        @endforeach
-                                        <option value="10">Other</option>
-                                    @endif
-                                </select>
-                            </td>
-                            <td><input type="text" placeholder="ရွာ-မြို့-ပြည်-နယ်-တိုင်း"
-                                    value="<?= $patient->Pt_Address ?>"{{ $review_mode ? 'disabled' : '' }}></td>
                             {{-- <td>
                                 <select name="sex" class="sex" id="sex" onchange="checkSex(this)">
                                     <option value="choose">ရွေးပါ</option>
@@ -914,7 +766,9 @@
 </main>
 
 {{-- fontawsome 6.4.2 js 1 --}}
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+    integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
 {{-- for js --}}
 <script src="{{ asset('bower_components/jquery/dist/jquery.js') }}"></script>
 <script src="{{ asset('bower_components/jquery-ui/jquery-ui.min.js') }}"></script>
@@ -927,7 +781,8 @@
 <script src="{{ asset('bower_components/morris.js/morris.min.js') }}"></script>
 <script src="{{ asset('bower_components/jquery-sparkline/dist/jquery.sparkline.min.js') }}"></script>
 <script src="{{ asset('bower_components/admin-lte/plugins/jvectormap/jquery-jvectormap-1.2.2.min.js') }}"></script>
-<script src="{{ asset('bower_components/admin-lte/plugins/jvectormap/jquery-jvectormap-world-mill-en.js') }}"></script>
+<script src="{{ asset('bower_components/admin-lte/plugins/jvectormap/jquery-jvectormap-world-mill-en.js') }}">
+</script>
 <script src="{{ asset('bower_components/jquery-knob/dist/jquery.knob.min.js') }}"></script>
 <script src="{{ asset('bower_components/moment/min/moment.min.js') }}"></script>
 <script src="{{ asset('bower_components/bootstrap-daterangepicker/daterangepicker.js') }}"></script>
@@ -949,60 +804,62 @@
 
 
 <script>
-
-// $(document).ready(function() {
-//         $('#datepicker').datepicker({
-//             format: "mm/yyyy",
-//             startView: "months",
-//             minViewMode: "months",
-//             autoclose: true,
-//         });
-//     });
+    // $(document).ready(function() {
+    //         $('#datepicker').datepicker({
+    //             format: "mm/yyyy",
+    //             startView: "months",
+    //             minViewMode: "months",
+    //             autoclose: true,
+    //         });
+    //     });
 
     function load_tbl_hfm(target_control_id, ts_code, token, form_type = null) {
 
         //alert('thisejrwo');
-    let form_cat = $('#select_lp_form_cat').val();
+        let form_cat = $('#select_lp_form_cat').val();
 
 
-    let hf_types = [];
+        let hf_types = [];
 
-    if (form_cat == 2 || form_cat == 3) {
-        hf_types = ['SC', 'MH', 'SU'];
-    }
-
-    try {
-        var form_code = "";
-
-        if ($("#select_lp_form_cat").val() == "0") {
-            bootbox.alert("<p>• ပုံစံအမျိုးအစားရွေးပါ</p>");
-            return false;
+        if (form_cat == 2 || form_cat == 3) {
+            hf_types = ['SC', 'MH', 'SU'];
         }
 
-        $("#" + target_control_id).html("<option>Loading...</option>");
-        $("#" + target_control_id).prop("disabled", true);
+        try {
+            var form_code = "";
 
-        $.ajax({
-            type: "GET",
-            url: BACKEND_URL + 'get_grab_hfconnect/' + ts_code,
-            data: { hf_types: hf_types },
-            success: function(data) {
-                //console.log('mzh', data);
-                $("#" + target_control_id).html("");
-
-                $("#" + target_control_id).append("<option value='0'> ရွေးရန် </option>");
-                $("#" + target_control_id).prop("disabled", false);
-
-                jQuery.each(data, function(i, val) {
-                    var opt = "<option value='" + val.HF_Code + "'>" + val.hf_name + " | " + val.hf_name_mm + "</option>";
-                    $("#" + target_control_id).append(opt);
-                });
+            if ($("#select_lp_form_cat").val() == "0") {
+                bootbox.alert("<p>• ပုံစံအမျိုးအစားရွေးပါ</p>");
+                return false;
             }
-        });
-    } catch (err) {
-        bootbox.alert(err.message);
+
+            $("#" + target_control_id).html("<option>Loading...</option>");
+            $("#" + target_control_id).prop("disabled", true);
+
+            $.ajax({
+                type: "GET",
+                url: BACKEND_URL + 'get_grab_hfconnect/' + ts_code,
+                data: {
+                    hf_types: hf_types
+                },
+                success: function(data) {
+                    //console.log('mzh', data);
+                    $("#" + target_control_id).html("");
+
+                    $("#" + target_control_id).append("<option value='0'> ရွေးရန် </option>");
+                    $("#" + target_control_id).prop("disabled", false);
+
+                    jQuery.each(data, function(i, val) {
+                        var opt = "<option value='" + val.HF_Code + "'>" + val.hf_name + " | " + val
+                            .hf_name_mm + "</option>";
+                        $("#" + target_control_id).append(opt);
+                    });
+                }
+            });
+        } catch (err) {
+            bootbox.alert(err.message);
+        }
     }
-}
 
     function yesno(yncode) {
         switch (yncode) {
@@ -1023,12 +880,12 @@
 
 
     function adjustInputWidth(input) {
-            if (input.value.length <= 15 || input.value.length === 0) {
-                input.style.width = "20ch"; // Default width
-            } else {
-                input.style.width = `${input.value.length + 2}ch`;
-            }
+        if (input.value.length <= 15 || input.value.length === 0) {
+            input.style.width = "20ch"; // Default width
+        } else {
+            input.style.width = `${input.value.length + 2}ch`;
         }
+    }
 
 
     clickOnRow();
@@ -1159,7 +1016,7 @@
     });
 
     $("#data_entry_body tr td select").on('focus', function() {
-       //highlight_row(this);
+        //highlight_row(this);
     });
 
     // $(document).ready(function(){
@@ -1177,100 +1034,112 @@
         //tpa check
 
 
-                var data = {};
-                    data["service_provider"] = $("#service_provider").val();
-                    data["data_entry"] = $("#data_entry_type").val();
-                    data["state_region"] = $("#state_region").val();
-                    data["township"] = $("#township").val();
-                    data["rhc_health"] =$("#rhc_health").val();
-                    data["sc_health"] = $("#sc_health").val();
-                    data["icmv_select"] = $("#icmvSelect").val();
-                    data["rp_month"] = $("#rp_month").val();
-                    data["blood_test"] = $("#bloodTest").val();
-                    data["condition"] = $("#conditionalSelect").val();
-                    //data["cf_link_code"] = $("#cf_link_code").val();
-                    data["Total_Outpatient"] = $("#txt_total_outpatient").val();
-                    data["U5_Outpatient"] = $("#txt_total_child_out").val();
-                    data["Preg_Outpatient"] = $("#txt_total_preg_out").val();
-                    data["Total_Inpatient"] = $("#txt_total_inpatient").val();
-                    data["U5_Inpatient"] = $("#txt_total_in_child").val();
-                    data["Preg_Inpatient"] = $("#txt_total_preg_in").val();
-                    data["Death_Facility"] = $("#txt_total_death_in").val();
-                    var table = document.getElementById('data_entry_body');
-            for (var i = 0, row; row = table.rows[i]; i++) {
-                    data["date"] = row.cells[1].children[0].value;
-                    data["Pt_Name"] = row.cells[2].children[0].value;
-                    data["Age_Year"] = row.cells[3].children[0].value;
-                    data["Pt_Father_Name"] = row.cells[4].children[0].value;
-                    data["Pt_Location"] = row.cells[5].children[0].value;
-                    data["Pt_Address"] = row.cells[6].children[0].value;
-                    data["Pt_Address1"] = row.cells[7].children[0].value;
-                    data["Pt_Address2"] = row.cells[8].children[0].value;
-                    data["Pt_Address3"] = row.cells[9].children[0].value;
-                    data["Pt_Address4"] = row.cells[10].children[0].value;
-                    data["Pt_Address5"] = row.cells[11].children[0].value;
-                    data["Sex_Code"] = row.cells[12].children[0].value;
-                    data["Preg_YN"] = row.cells[13].children[0].value;
-                    data["Micro_Code"] = row.cells[14].children[0].value;
-                    data["RDT_Code"] = row.cells[15].children[0].value;
-                    data["IOC_Code"] = row.cells[16].children[0].value;
-                    data["ACT_Code"] = row.cells[17].children[0].value;
-                    data["CQ_Code"] = row.cells[18].children[0].value;
-                    data["PQ_Code"] = row.cells[19].children[0].value;
-                    data["Referral_Code"] = row.cells[20].children[0].value;
-                    data["Malaria_Death"] = row.cells[21].children[0].value;
-                    data["TG_Code"] = row.cells[22].children[0].value;
-                    data["travel_yn"] = row.cells[23].children[0].value;
-                    data["occupation"] = row.cells[24].children[0].value;
-                    data["Remark"] = row.cells[25].children[0].value;
+        var data = {};
+        // data["service_provider"] = $("#service_provider").val();
+        // data["data_entry"] = $("#data_entry_type").val();
+        // data["state_region"] = $("#state_region").val();
+        // data["township"] = $("#township").val();
+        // data["rhc_health"] = $("#rhc_health").val();
+        // data["sc_health"] = $("#sc_health").val();
+        // data["icmv_select"] = $("#icmvSelect").val();
+        // data["rp_month"] = $("#rp_month").val();
+        // data["blood_test"] = $("#bloodTest").val();
+        // data["condition"] = $("#conditionalSelect").val();
+
+        data["service_provider"] =  document.getElementById("select_lp_form_cat").value;
+        data["data_entry"] = document.getElementById("dataEntry").value;
+        data["state_region"] = document.getElementById("data_select_region").value;
+        data["township"] = document.getElementById("data_select_township").value;
+        data["rhc_health"] = document.getElementById("data_select_hf").value;
+        data["sc_health"] = document.getElementById("data_select_subcenter").value;
+        data["icmv_select"] = document.getElementById("data_select_village").value;
+        data["rp_month"] = document.getElementById("start").value;
+        data["blood_test"] = document.getElementById("chooseOption").value;
+        data["condition"] = document.getElementById("conditionalOption").value;
+
+        //data["cf_link_code"] = $("#cf_link_code").val();
+        data["Total_Outpatient"] = $("#txt_total_outpatient").val();
+        data["U5_Outpatient"] = $("#txt_total_child_out").val();
+        data["Preg_Outpatient"] = $("#txt_total_preg_out").val();
+        data["Total_Inpatient"] = $("#txt_total_inpatient").val();
+        data["U5_Inpatient"] = $("#txt_total_in_child").val();
+        data["Preg_Inpatient"] = $("#txt_total_preg_in").val();
+        data["Death_Facility"] = $("#txt_total_death_in").val();
+        var table = document.getElementById('data_entry_body');
+        for (var i = 0, row; row = table.rows[i]; i++) {
+            data["date"] = row.cells[1].children[0].value;
+            data["Pt_Name"] = row.cells[2].children[0].value;
+            data["Age_Year"] = row.cells[3].children[0].value;
+            data["Pt_Father_Name"] = row.cells[4].children[0].value;
+            data["Pt_Location"] = row.cells[5].children[0].value;
+            data["Pt_Address"] = row.cells[6].children[0].value;
+            data["Pt_Address1"] = row.cells[7].children[0].value;
+            data["Pt_Address2"] = row.cells[8].children[0].value;
+            data["Pt_Address3"] = row.cells[9].children[0].value;
+            data["Pt_Address4"] = row.cells[10].children[0].value;
+            data["Pt_Address5"] = row.cells[11].children[0].value;
+            data["Sex_Code"] = row.cells[12].children[0].value;
+            data["Preg_YN"] = row.cells[13].children[0].value;
+            data["Micro_Code"] = row.cells[14].children[0].value;
+            data["RDT_Code"] = row.cells[15].children[0].value;
+            data["IOC_Code"] = row.cells[16].children[0].value;
+            data["ACT_Code"] = row.cells[17].children[0].value;
+            data["CQ_Code"] = row.cells[18].children[0].value;
+            data["PQ_Code"] = row.cells[19].children[0].value;
+            data["Referral_Code"] = row.cells[20].children[0].value;
+            data["Malaria_Death"] = row.cells[21].children[0].value;
+            data["TG_Code"] = row.cells[22].children[0].value;
+            data["travel_yn"] = row.cells[23].children[0].value;
+            data["occupation"] = row.cells[24].children[0].value;
+            data["Remark"] = row.cells[25].children[0].value;
+        }
+
+        var data_to_post = JSON.stringify(data);
+        console.log(data);
+        var save_update_check = $.ajax({
+            async: false,
+            type: "POST",
+            headers: {
+                "X-CSRF_TOKEN": '{{ csrf_token() }}'
+            },
+            url: BACKEND_URL + "save_tbl_total_patient_temp/",
+            data: data_to_post,
+            success: function(result) {
+
+                if (result == "1") {
+                    alert('save data to tbl_individual_case');
+                    //console.log("save success");
+                    save_update_check = true;
+                } else {
+                    console.log(result);
+                }
             }
-
-                var data_to_post = JSON.stringify(data);
-                console.log(data);
-                var save_update_check = $.ajax({
-                    async: false,
-                    type: "POST",
-                    headers: {
-                        "X-CSRF_TOKEN": '{{ csrf_token() }}'
-                    },
-                    url: BACKEND_URL + "save_tbl_total_patient_temp/",
-                     data: data_to_post,
-                    success: function(result) {
-
-                        if (result == "1") {
-                            alert('save data to tbl_individual_case');
-                            //console.log("save success");
-                            save_update_check = true;
-                        } else {
-                            console.log(result);
-                        }
-                    }
-                 }).responseText;
-                // var data_to_update = JSON.stringify(data);
-                // console.log(data_to_update);
-                // var save_update_check = $.ajax({
-                //     async: false,
-                //     type: "POST",
-                //     headers: {
-                //         "X-CSRF_TOKEN": '{{ csrf_token() }}'
-                //     },
-                //     url: BACKEND_URL + "update_tbl_total_patient_temp/",
-                //     data: data_to_update,
-                //     success: function(result) {
-                //         if (result == "1") {
-                //             //console.log(result + " update success");
-                //             save_update_check = true;
-                //         } else {
-                //             save_update_check = false;
-                //         }
-                //     }
-                // }).responseText;
+        }).responseText;
+        // var data_to_update = JSON.stringify(data);
+        // console.log(data_to_update);
+        // var save_update_check = $.ajax({
+        //     async: false,
+        //     type: "POST",
+        //     headers: {
+        //         "X-CSRF_TOKEN": '{{ csrf_token() }}'
+        //     },
+        //     url: BACKEND_URL + "update_tbl_total_patient_temp/",
+        //     data: data_to_update,
+        //     success: function(result) {
+        //         if (result == "1") {
+        //             //console.log(result + " update success");
+        //             save_update_check = true;
+        //         } else {
+        //             save_update_check = false;
+        //         }
+        //     }
+        // }).responseText;
 
 
 
     }
 
-// ------------------------------------
+    // ------------------------------------
 
     function isValidDate(d, m, y) {
         var thirtyDaysMonth = [9, 4, 6, 11];
@@ -1333,7 +1202,7 @@
     }
 
     function add_row(btn) {
-    //alert('this will new rowlll');
+        //alert('this will new rowlll');
 
         //$(btn).prop('disabled', true);
         $(btn).html("<li class='fa fa-spinner fa-spin'></li> ခေတ္တစောင့်ပါ");
@@ -1344,7 +1213,7 @@
             //bootbox.alert('Reached Maximun Number of Rows.');
             checkBtn();
         } else {
-            var select_lp_township_de = document.getElementById('select_lp_township_de');
+            var select_lp_township_de = document.getElementById('data_select_township');
             var value = select_lp_township_de.value;
             //var select_lp_township_de_text = e.options[e.selectedIndex].text;
             //console.log('aaaaaa',select_lp_township_de_text);
@@ -1384,7 +1253,7 @@
 
 
 
-        function delete_row(btn) {
+    function delete_row(btn) {
         // alert('this is deleted111',btn);
         var rowNum = $(btn).attr("rowNo");
         // confirm("Row အမှတ် " + rowNum + " တစ်ခုလုံးအား အပြီးဖျက်မည်။ သေချာပါက OK နှိပ်ပါ", function(c) {
@@ -1395,12 +1264,12 @@
 
         //  });
 
-         if (confirm("Row အမှတ် " + rowNum + " တစ်ခုလုံးအား အပြီးဖျက်မည်။ သေချာပါက OK နှိပ်ပါ") == true){
+        if (confirm("Row အမှတ် " + rowNum + " တစ်ခုလုံးအား အပြီးဖျက်မည်။ သေချာပါက OK နှိပ်ပါ") == true) {
             $(btn).closest('tr').remove();
-                set_row_numbers();
-         }else{
+            set_row_numbers();
+        } else {
             checkBtn();
-         }
+        }
 
     }
 
@@ -1514,67 +1383,77 @@
     set_row_numbers();
 </script>
 <style>
-.header_bar{
-    margin: 0;
-    padding: 0;
-    width: 100%;
-    height: 50px;
-    background-color: rgb(44, 102, 147);
+    .header_bar {
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        height: 50px;
+        background-color: rgb(44, 102, 147);
 
-}
-.navbar {
-    list-style: none;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: #333; /* Adjust as needed */
-    color: white; /* Adjust as needed */
-    padding: 10px; /* Adjust as needed */
-}
+    }
 
-.upload_to_online_btn {
-    margin-left: auto; /* Pushes the "Upload to Online" list item to the right */
-}
+    .navbar {
+        list-style: none;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background-color: #333;
+        /* Adjust as needed */
+        color: white;
+        /* Adjust as needed */
+        padding: 10px;
+        /* Adjust as needed */
+    }
+
+    .upload_to_online_btn {
+        margin-left: auto;
+        /* Pushes the "Upload to Online" list item to the right */
+    }
 
 
-.back_arrow{
-    float: left;
-    padding:15px 15px;
-    font-size: 15px;
-    color: #fff;
+    .back_arrow {
+        float: left;
+        padding: 15px 15px;
+        font-size: 15px;
+        color: #fff;
 
-}
-.back_arrow:hover{
-    font-size: 20px;
-    color: rgb(192, 193, 197);
-}
+    }
+
+    .back_arrow:hover {
+        font-size: 20px;
+        color: rgb(192, 193, 197);
+    }
 
     .tableCell {
-        align-items:left;
+        align-items: left;
         justify-content: space-between;
         display: flex;
     }
-.box-body{
-    margin-left:20%;
-    margin-right:10%;
-}
-    table.dataTable thead tr th {
-            text-align:center;
-            padding: 5px;
-        }
-        .table-container {
-            /* margin: 20px; */
-            padding: 20px;
 
-            overflow-x: auto;
-            width: 100%;
-            max-width: 100%;
-            margin-bottom: 10px;
-        }
-        table {
-    width: 100%;
-  white-space: nowrap;
-}
+    .box-body {
+        margin-left: 20%;
+        margin-right: 10%;
+    }
+
+    table.dataTable thead tr th {
+        text-align: center;
+        padding: 5px;
+    }
+
+    .table-container {
+        /* margin: 20px; */
+        padding: 20px;
+
+        overflow-x: auto;
+        width: 100%;
+        max-width: 100%;
+        margin-bottom: 10px;
+    }
+
+    table {
+        width: 100%;
+        white-space: nowrap;
+    }
 
     input[type=number]::-webkit-inner-spin-button,
     input[type=number]::-webkit-outer-spin-button {
@@ -1611,9 +1490,10 @@
         color: white;
     }
 
-.engRows{
-    background-color: #7c6c6c !important;
-}
+    .engRows {
+        background-color: #7c6c6c !important;
+    }
+
     .sec-row-input {
         font-size: 12px;
         border: none;
@@ -1655,7 +1535,7 @@
     .sec-row,
     .third-row {
         margin-bottom: 15px;
-        padding:0 5px;
+        padding: 0 5px;
     }
 
     .label-right {
@@ -1806,9 +1686,11 @@
         height: 50px !important;
     }
 
-    #act, #cq, #pq {
-  width: 100px !important;
-}
+    #act,
+    #cq,
+    #pq {
+        width: 100px !important;
+    }
 
     #data_entry_body>tr>td>input {
         font-size: 12px;
@@ -1845,3 +1727,201 @@
 
     }
 </style>
+<!-- Offline Data get -->
+<script>
+
+    // Start for index blade
+    $(document).ready(function() {
+        // selected value in region
+        $('#data_select_region').click(function() {
+            getDisctictResult($(this).val());
+        });
+
+        // selected value in district
+        $('#data_select_district').click(function() {
+            getTownShipResult($(this).val());
+        });
+
+        // selected value in township
+        $('#data_select_township').click(function() {
+            getHFResult($(this).val());
+        });
+
+        // selected value in healthfacility
+        $('#data_select_hf').click(function() {
+            getSubCenterResult($(this).val());
+        });
+
+        $('#data_select_subcenter').click(function() {
+            getVillageResult($(this).val());
+        });
+
+    });
+
+    // get District Data form Database
+    function getDisctictResult(selectedValue) {
+        // call  ajax method to get data from database
+        // clear data from select option set
+        var list = document.getElementById("data_select_district");
+        clearSelectList(list);
+
+        $.ajax({
+            type: "GET",
+            url: "/api/district/"+selectedValue, //this  should be replace by your server side method
+            //data: "{'value': '" + selectedValue +"'}", //this is parameter name , make sure parameter name is sure as of your sever side method
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            async: false,
+            success: function(data) {
+                console.log(data);
+                for(var i = 0; i < data.length; i++) {
+                    var ele = document.createElement("option");
+                    ele.value = data[i].district_name_mmr;
+                    ele.innerHTML = data[i].district_name_en;
+                    document.getElementById("data_select_district").appendChild(ele);
+                }
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+                alert(errorThrown);
+            }
+        });
+    }
+
+    // get Township Data form Database
+    function getTownShipResult(selectedValue) {
+        // call  ajax method to get data from database
+        // clear data from select option set
+        var list = document.getElementById("data_select_township");
+        clearSelectList(list);
+
+        $.ajax({
+            type: "GET",
+            url: "/api/township/"+selectedValue.substring(0, 6), //this  should be replace by your server side method
+            //data: "{'value': '" + selectedValue +"'}", //this is parameter name , make sure parameter name is sure as of your sever side method
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            async: false,
+            success: function(data) {
+                //console.log(data);
+                //alert(data.township_mmr);
+
+                for(var i = 0; i < data.length; i++) {
+                    var ele = document.createElement("option");
+                    ele.value = data[i].township_mmr;
+                    ele.innerHTML = data[i].township_name_en;
+                    document.getElementById("data_select_township").appendChild(ele);
+                }
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+                alert(errorThrown);
+            }
+        });
+    }
+
+    // get Health Facility Data form Database
+    function getHFResult(selectedValue) {
+        // call  ajax method to get data from database
+        // clear data from select option set
+        var list = document.getElementById("data_select_hf");
+        clearSelectList(list);
+
+        $.ajax({
+            type: "GET",
+            url: "/api/healthfacility/"+selectedValue.substring(0, 9), //this  should be replace by your server side method
+            //data: "{'value': '" + selectedValue +"'}", //this is parameter name , make sure parameter name is sure as of your sever side method
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            async: false,
+            success: function(data) {
+                console.log(data);
+                //alert(data.township_mmr);
+
+                for(var i = 0; i < data.length; i++) {
+                    var ele = document.createElement("option");
+                    ele.value = data[i].health_facility_mmr;
+                    ele.innerHTML = data[i].health_facility_name_en;
+                    document.getElementById("data_select_hf").appendChild(ele);
+                }
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+                alert(errorThrown);
+            }
+        });
+    }
+
+    // get Subcenter Data form Database
+    function getSubCenterResult(selectedValue) {
+        // call  ajax method to get data from database
+        // clear data from select option set
+        var list = document.getElementById("data_select_subcenter");
+        clearSelectList(list);
+
+        $.ajax({
+            type: "GET",
+            url: "/api/subcenter/"+selectedValue.substring(0, 11), //this  should be replace by your server side method
+            //data: "{'value': '" + selectedValue +"'}", //this is parameter name , make sure parameter name is sure as of your sever side method
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            async: false,
+            success: function(data) {
+                // alert('this is sc');
+                // console.log(data);
+                //alert(data.township_mmr);
+
+                for(var i = 0; i < data.length; i++) {
+                    var ele = document.createElement("option");
+                    ele.value = data[i].sub_center_mmr;
+                    ele.innerHTML = data[i].sub_center_name_en;
+                    document.getElementById("data_select_subcenter").appendChild(ele);
+                }
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+                alert(errorThrown);
+            }
+        });
+    }
+
+    function getVillageResult(selectedValue) {
+        // call  ajax method to get data from database
+        // clear data from select option set
+        var list = document.getElementById("data_select_village");
+        clearSelectList(list);
+
+        $.ajax({
+            type: "GET",
+            url: "/api/vhv/"+selectedValue.substring(0, 14), //this  should be replace by your server side method
+            //data: "{'value': '" + selectedValue +"'}", //this is parameter name , make sure parameter name is sure as of your sever side method
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            async: false,
+            success: function(data) {
+                console.log();
+                //alert('this is village');
+
+                for(var i = 0; i < data.length; i++) {
+                    var ele = document.createElement("option");
+                    ele.value = data[i].village_mmr;
+                    ele.innerHTML = data[i].village_name_en;
+                    document.getElementById("data_select_village").appendChild(ele);
+                }
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+                alert(errorThrown);
+            }
+        });
+    }
+
+    function clearSelectList(list) {
+        // when length is 0, the evaluation will return false.
+        while (list.options.length) {
+            // continue to remove the first option until no options remain.
+            list.remove(0);
+        }
+    }
+
+    //End for index blade
+
+
+
+
+</script>

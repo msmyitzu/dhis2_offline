@@ -37,7 +37,7 @@
                                     <div class="input-group input-group-sm">
                                         <select class="form-control input-sm select2 search_state"
                                             name="sr_search"
-                                            onchange="load_lp_township('search_township', this.value)">
+                                            onchange="getTownShipResult( this.value)">
                                             <option value="">ရွေးပါ</option>
                                             @foreach ($tbl_region as $sr)
                                                 <option value="{{ $sr->sr_code }}">

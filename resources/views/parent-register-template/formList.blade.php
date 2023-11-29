@@ -29,7 +29,36 @@
                     style="font-weight: 600;">
                     {{ csrf_field() }}
 
+                    <table id="table_grab_all_corefacility" style="width:100%" class="table table-bordered nowrap">
+                        <thead>
+                        <tr class="theads">
+                            <!--th>No</th-->
+                            <th align="right">SC_Name_MM</th>
+                            <th align="left">Record</th>
+                            <th align="right">Start Date</th>
+                            <th align="right">End Date</th>
+                            <th align="right"></th>
 
+                        </tr>
+                        </thead>
+                        <tbody id="grab_all_corefacility_container" class="tbodys">
+                        <tr>
+                            {{-- @foreach ($health_facility as $hf ) --}}
+                            <td align="right" cf_code="718009">
+                                
+                            </td>
+                            <td align="left">150</td>
+                            <td align="right">7 / 2023</td>
+                            <td align="right">11 / 2023</td>
+
+                            <td>
+
+                            </td>
+
+                            {{-- @endforeach --}}
+                            </tr>
+                            </tbody>
+                        </table>
 
                     @extends('nmcp-template.patient-register-form')
 

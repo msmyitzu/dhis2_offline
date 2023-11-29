@@ -2,8 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\tbl_individual_case;
+use App\tbl_health_facility;
+// use App\tbl_individual_case;
 use App\tbl_region;
+use App\tbl_sub_center;
+use App\tbl_township;
+use App\tbl_district;
+use App\tbl_village;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
@@ -60,12 +66,14 @@ class APIController extends Controller
     //     //  }
     // }
 
-    public function dhis2getData()
+    // function combinedAPIFunction() {
+    public function dhis2getDataRegion()
     {
         $curl = curl_init();
+        ini_set('max_execution_time', 0);
 
         curl_setopt_array($curl, array(
-            CURLOPT_URL => 'https://mcbrs-dev2.myanmarvbdc.com/api/organisationUnits?fields=level:eq:4,id,displayName,code',
+            CURLOPT_URL => 'https://mcbrs-dev2.myanmarvbdc.com//api/organisationUnits.json?filter=level:eq:2&paging=false&fields=name,id,code',
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_ENCODING => '',
             CURLOPT_MAXREDIRS => 10,
@@ -90,11 +98,250 @@ class APIController extends Controller
             try {
                 foreach ($apiData->organisationUnits as $organisationUnit) {
                     $tbl_region_data = [
-                        'region_mmr' => $organisationUnit->id,
-                        'region_name_en' => $organisationUnit->displayName
+                        'region_dhis2_code' => $organisationUnit->id,
+                        'region_name_en' => $organisationUnit->name,
+                        'region_mmr' => $organisationUnit->code
                     ];
 
                     tbl_region::create($tbl_region_data);
+                }
+
+                // You can add logging or return a success message here
+            } catch (\Exception $e) {
+                echo 'Error: ' . $e->getMessage();
+            }
+        } else {
+            echo 'Invalid or missing data in the API response.';
+        }
+    }
+    public function dhis2getDataTownship()
+    {
+        $curl = curl_init();
+        ini_set('max_execution_time', 0);
+
+        curl_setopt_array($curl, array(
+            CURLOPT_URL => 'https://mcbrs-dev2.myanmarvbdc.com/api/29/organisationUnits.json?filter=level:eq:4&paging=false&fields=name,id,code',
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => '',
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 0,
+            CURLOPT_FOLLOWLOCATION => true,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => 'GET',
+            CURLOPT_HTTPHEADER => array(
+                //'Authorization: Basic YWRtaW46RWZvbGlvc2UxMi0jQ2Fzc2l1czI4'
+                'Authorization: Basic YWRtaW46ZGlzdHJpY3Q='
+            ),
+        ));
+
+        $response = curl_exec($curl);
+        curl_close($curl);
+
+        $apiData = json_decode($response);
+        // dd($apiData);
+
+        if ($apiData && isset($apiData->organisationUnits)) {
+            //  dd($apiData);
+            try {
+                foreach ($apiData->organisationUnits as $organisationUnit) {
+                    $tbl_township_data = [
+                        'township_name_dhis2_code' => $organisationUnit->id,
+                        'township_name_en' => $organisationUnit->name,
+                        'township_mmr' => $organisationUnit->code
+                    ];
+
+                    tbl_township::create($tbl_township_data);
+                }
+
+                // You can add logging or return a success message here
+            } catch (\Exception $e) {
+                echo 'Error: ' . $e->getMessage();
+            }
+        }else {
+            echo 'Invalid or missing data in the API response.';
+        }
+    }
+
+    public function dhis2getDataHealthFacility()
+    {
+        $curl = curl_init();
+        ini_set('max_execution_time', 0);
+
+        curl_setopt_array($curl, array(
+            CURLOPT_URL => 'https://mcbrs-dev2.myanmarvbdc.com/api/organisationUnits.json?filter=level:eq:5&paging=false&fields=name,code,id',
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => '',
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 0,
+            CURLOPT_FOLLOWLOCATION => true,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => 'GET',
+            CURLOPT_HTTPHEADER => array(
+                //'Authorization: Basic YWRtaW46RWZvbGlvc2UxMi0jQ2Fzc2l1czI4'
+                'Authorization: Basic YWRtaW46ZGlzdHJpY3Q='
+            ),
+        ));
+
+        $response = curl_exec($curl);
+        curl_close($curl);
+
+        $apiData = json_decode($response);
+
+
+        if ($apiData && isset($apiData->organisationUnits)) {
+            //  dd($apiData);
+            try {
+                foreach ($apiData->organisationUnits as $organisationUnit) {
+                    $tbl_health_facility_data = [
+                        'health_facility_dhis2_code' => $organisationUnit->id,
+                        'health_facility_name_en' => $organisationUnit->name,
+                        'health_facility_mmr' => $organisationUnit->code
+                    ];
+
+                    tbl_health_facility::create($tbl_health_facility_data);
+                }
+
+                // You can add logging or return a success message here
+            } catch (\Exception $e) {
+                echo 'Error: ' . $e->getMessage();
+            }
+        } else {
+            echo 'Invalid or missing data in the API response.';
+        }
+    }
+
+public function dhis2getDataSubCenter()
+    {
+        $curl = curl_init();
+        ini_set('max_execution_time', 0);
+
+        curl_setopt_array($curl, array(
+            CURLOPT_URL => 'https://mcbrs-dev2.myanmarvbdc.com/api/organisationUnits.json?filter=level:eq:6&paging=false&fields=id,code,name',
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => '',
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 0,
+            CURLOPT_FOLLOWLOCATION => true,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => 'GET',
+            CURLOPT_HTTPHEADER => array(
+                //'Authorization: Basic YWRtaW46RWZvbGlvc2UxMi0jQ2Fzc2l1czI4'
+                'Authorization: Basic YWRtaW46ZGlzdHJpY3Q='
+            ),
+        ));
+
+        $response = curl_exec($curl);
+        curl_close($curl);
+
+        $apiData = json_decode($response);
+
+
+        if ($apiData && isset($apiData->organisationUnits)) {
+            //  dd($apiData);
+            try {
+                foreach ($apiData->organisationUnits as $organisationUnit) {
+                    $tbl_sub_center_data = [
+                        'sub_center_dhis2_code' => $organisationUnit->id,
+                        'sub_center_name_en' => $organisationUnit->name,
+                        'sub_center_mmr' => $organisationUnit->code
+                    ];
+
+                    tbl_sub_center::create($tbl_sub_center_data);
+                }
+
+                // You can add logging or return a success message here
+            } catch (\Exception $e) {
+                echo 'Error: ' . $e->getMessage();
+            }
+        } else {
+            echo 'Invalid or missing data in the API response.';
+        }
+    }
+
+    public function dhis2getDataDistrict()
+    {
+        $curl = curl_init();
+        ini_set('max_execution_time', 0);
+
+        curl_setopt_array($curl, array(
+            CURLOPT_URL => 'https://mcbrs-dev2.myanmarvbdc.com//api/organisationUnits.json?filter=level:eq:3&paging=false&fields=id,name,code',
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => '',
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 0,
+            CURLOPT_FOLLOWLOCATION => true,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => 'GET',
+            CURLOPT_HTTPHEADER => array(
+                //'Authorization: Basic YWRtaW46RWZvbGlvc2UxMi0jQ2Fzc2l1czI4'
+                'Authorization: Basic YWRtaW46ZGlzdHJpY3Q='
+            ),
+        ));
+
+        $response = curl_exec($curl);
+        curl_close($curl);
+
+        $apiData = json_decode($response);
+
+
+        if ($apiData && isset($apiData->organisationUnits)) {
+            // dd($apiData);
+            try {
+                foreach ($apiData->organisationUnits as $organisationUnit) {
+                    $tbl_district_data = [
+                        'district_name_dhis2_code' => $organisationUnit->id,
+                        'district_name_en' => $organisationUnit->name,
+                        'district_name_mmr' => $organisationUnit->code
+                    ];
+
+                    tbl_district::create($tbl_district_data);
+                }
+
+                // You can add logging or return a success message here
+            } catch (\Exception $e) {
+                echo 'Error: ' . $e->getMessage();
+            }
+        } else {
+            echo 'Invalid or missing data in the API response.';
+        }
+    }
+    public function dhis2getDataVillage()
+    {
+        $curl = curl_init();
+        ini_set('max_execution_time', 0);
+
+        curl_setopt_array($curl, array(
+            CURLOPT_URL => 'https://mcbrs-dev2.myanmarvbdc.com//api/organisationUnits.json?filter=level:eq:7&paging=false&fields=id,name,code',
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => '',
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 0,
+            CURLOPT_FOLLOWLOCATION => true,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => 'GET',
+            CURLOPT_HTTPHEADER => array(
+                //'Authorization: Basic YWRtaW46RWZvbGlvc2UxMi0jQ2Fzc2l1czI4'
+                'Authorization: Basic YWRtaW46ZGlzdHJpY3Q='
+            ),
+        ));
+
+        $response = curl_exec($curl);
+        curl_close($curl);
+
+        $apiData = json_decode($response);
+
+
+        if ($apiData && isset($apiData->organisationUnits)) {
+            // dd($apiData);
+            try {
+                foreach ($apiData->organisationUnits as $organisationUnit) {
+                    $tbl_village_data = [
+                        'village_dhis2_code' => $organisationUnit->id,
+                        'village_name_en' => $organisationUnit->name,
+                        'village_mmr' => $organisationUnit->code
+                    ];
+
+                    tbl_village::create($tbl_village_data);
                 }
 
                 // You can add logging or return a success message here
@@ -330,15 +577,39 @@ class APIController extends Controller
     public function dhis2postData(){
 
 
-        $table = DB::table('tbl_individual_case')->get();
-
-
+        $table = DB::table('tbl_individual_case')->where('township','MMR001001')->get();
         $trackedEntityInstances = [];
 
         foreach ($table as $row) {
+            $scr_date = $row->screening_date;
             $patient_name = $row->patient_name;
+            $pt_age = $row->pt_age;
+            $pt_father_name = $row->pt_father_name;
+            $pt_address = $row->pt_address;
+            $pt_crr_tsp = $row->pt_current_township;
+            $pt_crr_vlg = $row->pt_current_village;
+            $pt_crr_ward = $row->pt_current_ward;
+            $pt_pm_tsp = $row->pt_permanent_township;
+            $pt_pm_vlg = $row->pt_permanent_village;
+            $pt_pm_ward = $row->pt_permanent_ward;
+            $sex = $row->Sex_Code;
+            $preg = $row->Preg_YN;
+            $micro = $row->Micro_Code;
+            $rdt = $row->RDT_Code;
+            $ioc = $row->IOC_Code;
+            $act = $row->ACT_Code;
+            $cq = $row->CQ_Code;
+            $pq = $row->PQ_Code;
+            // $tg = $row->TG_Code
+            $reffer = $row->Referral_Code;
+            $Malaria_dh = $row ->Malaria_Death;
+            $remark = $row ->Remark;
+            $travel = $row ->travel_yn;
+            $occupation = $row->occupation;
+
+
             $data = '{
-                "trackedEntityInstances": [
+                "trackedEntityInstances                                                          ": [
                     {
                     "orgUnit": "S1sWiUMHf9g",
                     "program": "ec31yGIJJzu",
@@ -351,11 +622,11 @@ class APIController extends Controller
                         },
                         {
                             "attribute": "ntzzGM9v0kJ",
-                            "value": "U Toe Toe"	//no need in programstage
+                            "value": "pt_father_name"	//no need in programstage
                         },
                         {
                             "attribute": "NlmG4cwRzmJ",
-                            "value": "TT-Female"	//no need in programstage
+                            "value": "$sex"	//no need in programstage
                         }
                      ],
                     "enrollments": [

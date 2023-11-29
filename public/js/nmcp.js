@@ -256,9 +256,11 @@ function load_sr_lp_township(ts_id, sr_code, token, region_code) {
     }
 }
 
-function load_lp_township(target_ts_id, region_id) {
+function load_lp_township(target_ts_id,region_id) {
+
     // && region_id.length == 6
     if (region_id != "0" ) {
+
         try {
             $("." + target_ts_id).html("<option>Loading...</option>");
             // $("." + target_ts_id).prop("disabled", true);
@@ -266,9 +268,8 @@ function load_lp_township(target_ts_id, region_id) {
             $.ajax({
                 type: "GET",
                 url: BACKEND_URL + 'get_lp_township/' + region_id,
-                data: "",
+                // data: "",
                 success: function (data) {
-
                     $("." + target_ts_id).html("");
 
                     $("." + target_ts_id).append("<option value='0'> ရွေးရန် </option>");
@@ -288,10 +289,12 @@ function load_lp_township(target_ts_id, region_id) {
                     }
                 },
                 error : function(error){
-                    console.log(error);
+
+                    console.log('hello',error);
                 }
             });
         } catch (err) {
+
             bootbox.alert(err.message);
         }
     }
@@ -326,6 +329,7 @@ function load_lp_township(target_ts_id, region_id) {
         try {
             $("." + target_ts_id).html("<option>Loading...</option>");
             $("." + target_ts_id).prop("disabled", true);
+            // alert(region_id);
             $.ajax({
                 type: "GET",
                 url: BACKEND_URL + 'get_lp_township/' + region_id,
@@ -518,7 +522,7 @@ function load_hfm(target_control_id, hf_code, token) {
 
 //start upload data to server
 
-function showConfirmationPopup() {
+function showConfirmationPopupUpload() {
     var isConfirmed = window.confirm("All data will be uploaded to the server. Do you want to proceed?");
 
     if (isConfirmed) {
@@ -530,15 +534,15 @@ function showConfirmationPopup() {
 }
 
 
-var showPopupBtn = document.getElementById("showPopupBtnUpload");
-showPopupBtn.addEventListener("click", showConfirmationPopup);
+var showPopupBtnUpload = document.getElementById("showPopupBtnUpload");
+showPopupBtnUpload.addEventListener("click", showConfirmationPopupUpload);
 
 //end upload data to server
 
 
 //start download data from server
 
-function showConfirmationPopup() {
+function showConfirmationPopupDownload() {
     var isConfirmed = window.confirm("Download Data from Online Server. Do you want to proceed?");
 
     if (isConfirmed) {
@@ -550,8 +554,8 @@ function showConfirmationPopup() {
 }
 
 
-var showPopupBtn = document.getElementById("showPopupBtnDownload");
-showPopupBtn.addEventListener("click", showConfirmationPopup);
+var showPopupBtnDownload = document.getElementById("showPopupBtnDownload");
+showPopupBtnDownload.addEventListener("click", showConfirmationPopupDownload);
 
 //end download data from server
 

@@ -23,6 +23,7 @@ Route::get('/health-facilities', 'lookupsController@show_lookup_page');
 
 Route::get('/chart','lookupsController@show_charts');
 
+Route::get('/home', 'HomeController@index');
 
 Route::get('/get_lp_township/{region_id}','lookupsController@get_lp_township');
 Route::get('/uploadForm','lookupsController@show_upload_form');
@@ -108,3 +109,9 @@ Route::get('/write_status', 'syncController@write_status_check');
 
 
 Route::get('/','lookupsController@get_patient_registerform_offline')->name('parent-register');
+
+Route::get('/patient_register_form_row','lookupsController@get_patient_registerform_row')->name('parent-register_row');
+
+// {region_name_en}/{district_name_en}/ {health_facility_name_en}/{sub_center_name_en}/
+Route::get('/malaria_test/{township_name_en}/{village_name_en}/{sDate}/{eDate}','lookupsController@malaria_test');
+Route::get('/loopDataToUploadServer','lookupsController@loopDataToUpload');

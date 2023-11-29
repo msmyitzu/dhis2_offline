@@ -14,7 +14,7 @@
        </a>
      </li>
      <li >
-        <a href="{{ url()->previous() }}" class="" id="" >Go To HomePage</a>
+        <a href="/" class="" id="" >Go To HomePage</a>
     </li>
    </ul>
 
@@ -35,28 +35,49 @@
                                         <div class="form-group">
                                             <label class="control-label">တိုင်းနှင့်ပြည်နယ်</label>
                                                 <select class="form-control input-sm select2 search_state"
-                                                    name="sr_search" onchange="load_lp_township('search_township', this.value)" >
+                                                    name="sr_search" id="region_data" >
                                                     <option value="">ရွေးပါ</option>
                                                     @foreach($state_region as $stateRegion)
-                                                        <option value="{{ $stateRegion->region_id }}">{{ $stateRegion->region_name_en }} | {{ $stateRegion->region_name_mm }}</option>
+                                                        <option value="{{ $stateRegion->region_mmr}}">{{ $stateRegion->region_name_en }} | {{ $stateRegion->region_name_mm }}</option>
                                                     @endforeach
                                                 </select>
                                         </div>
                                     </div>
 
-
+                                    <div class="col-md-3">
+                                        <div class="form-group"   style="width:100%;">
+                                            <label class="control-label">ခရိုင်</label>
+                                                <select id="district_data" class="form-control input-sm select2 search_township"
+                                                    name="ts_search" style="width: 100%">
+                                                    <option value="">ရွေးပါ</option>
+                                                    @foreach($district as $dst)
+                                                    <option value="{{ $dst->township_id}}">
+                                                        {{ $dst->district_name_mmr }} | {{ $dst->district_name_en }}
+                                                    </option>
+                                                    @endforeach
+                                                </select>
+                                        </div>
+                                    </div>
 
                                     <div class="col-md-3">
                                         <div class="form-group"   style="width:100%;">
                                             <label class="control-label">မြို့နယ်</label>
-                                                <select class="form-control input-sm select2 search_township"
+                                                <select id="township_data" class="form-control input-sm select2 search_township"
                                                     name="ts_search" style="width: 100%">
                                                     <option value="">ရွေးပါ</option>
-                                                    @foreach($township as $tsp)
-                                                    <option value="{{ $tsp->township_id}}">
-                                                        {{ $tsp->township_mmr }} | {{ $tsp->township_name_en }}
-                                                    </option>
-                                                    @endforeach
+
+                                                </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label class="control-label">Health Facility</label>
+
+                                                <select id="hf_data" class="form-control input-sm"
+                                                    name="hf_search" style="width: 100%;">
+                                                    <option value="">ရွေးပါ</option>
+
                                                 </select>
                                         </div>
                                     </div>
@@ -65,15 +86,12 @@
                                         <div class="form-group">
                                             <label class="control-label">Sub Center</label>
 
-                                                <select class="form-control input-sm"
-                                                    name="sub_center_search" style="width: 100%;">
+                                                <select id="subcenter_data" class="form-control input-sm "
+                                                    name="sub_center_search" style="width:100%;">
                                                     <option value="">ရွေးပါ</option>
-                                                    @foreach($township as $tsp)
-                                                    <option value="{{ $tsp->township_id}}">
-                                                        {{ $tsp->township_mmr }} | {{ $tsp->township_name_en }}
-                                                    </option>
-                                                    @endforeach
+
                                                 </select>
+
                                         </div>
                                     </div>
 
@@ -81,14 +99,10 @@
                                         <div class="form-group">
                                             <label class="control-label">VHV</label>
 
-                                                <select class="form-control input-sm "
+                                                <select id="vhv_data" class="form-control input-sm "
                                                     name="vhv_search" style="width:100%;">
                                                     <option value="">ရွေးပါ</option>
-                                                    @foreach($township as $tsp)
-                                                    <option value="{{ $tsp->township_id}}">
-                                                        {{ $tsp->township_mmr }} | {{ $tsp->township_name_en }}
-                                                    </option>
-                                                    @endforeach
+
                                                 </select>
 
                                         </div>
@@ -108,11 +122,13 @@
                                                 <input type="text" class="form-control input-sm search_date"
                                                     id="edate_input" name="edate_search"
                                                     placeholder="End Date" autocomplete="off">
+                                                    {{-- <input type="text" class="form-control text-center" id="form-date" name="form-date"
+                                    autocomplete=off placeholder="လ / ခုနှစ်" readonly> --}}
                                         </div>
                                     </div>
                                     <div class="col-md-2">
                                         <div class="form-group">
-                                            <button type="text" id="btnSearch"
+                                            <button type="text" id="btnSearch" onClick="state_and_region_tab();"
                                                 class="btn btn-info btn-flat btnSearchs" style="width: 100%;margin-top:20px;">
                                                 <i class="fa fa-search"></i> Search
                                             </button>
@@ -124,7 +140,7 @@
 <thead>
 <tr class="theads">
     <!--th>No</th-->
-    <th align="right">SC_Name_MM</th>
+    <th align="right">Township_Name_MM</th>
     <th align="left">Record</th>
     <th align="right">Start Date</th>
     <th align="right">End Date</th>
@@ -132,41 +148,53 @@
 
 </tr>
 </thead>
+@foreach ($groupedCases as $case)
 <tbody id="grab_all_corefacility_container" class="tbodys">
-    {{-- <tr title="လူနာအချက်အလက်များကြည့်ရန် နှိပ်ပါ" id="tr_61023589407718013"
+    {{-- @foreach($core_facility as $cf) --}}
+
+    <tr>
+    {{-- @foreach ( ) --}}
+
+    <td align="right" cf_code="718009">
+        {{-- {{ $cf->service_provider }} --}}
+        {{ $case->township_name_en }}
+    </td>
+
+
+
+   <td align="left">{{ $case ->count }}</td>
+   <td align="right">{{ $case ->start_date }}</td>
+   <td align="right">{{ $case ->end_date }}</td>
+
+    <td>
+        <form id="" method="POST">
+        <div class="btn-group" style="width:max-content">
+             {{-- <tr title="လူနာအချက်အလက်များကြည့်ရန် နှိပ်ပါ" id="tr_61023589407718013"
     onClick="load_tbl_individual_case('61023589407718013', this)">
 
     </tr> --}}
+            <a href="/formList">
+                <button  title="လူနာအချက်အလက်များကြည့်ရန် နှိပ်ပါ" id=""
+                onClick="load_tbl_individual_case(this)" type="button" class="btn btn-success btn-xs" onClick="goto_form()" >
+                    Uploaded
+                 </button>
+            </a>
 
-<tr title="လူနာအချက်အလက်များကြည့်ရန် နှိပ်ပါ" id="tr_51023586194718009"
-    onClick="load_tbl_individual_case('51023586194718009', this)">
-        <td align="right" cf_code="718009">
-            Basic Health Staff
-        </td>
-        <td align="left">150</td>
-        <td align="right">7 / 2023</td>
-        <td align="right">11 / 2023</td>
+            <button title="Upload to server" type="button" class="btn btn-info btn-xs" id="showPopupBtnUpload"
+                onClick="delete_tbl_core_facility()">
 
-        <td>
-            <form id="form_51023586194718009" method="POST">
-            <div class="btn-group" style="width:max-content">
-                <a href="/formList">
-                    <button title="Data Uploaded" type="button" class="btn btn-success btn-xs" onClick="goto_form()" >
-                        Uploaded
-                     </button>
-                </a>
+                <i class="fa fa-upload upload_to_online_btn"></i>Upload to server
+            </button>
+        </div>
+        </form>
+    </td>
 
-                <button title="Upload to server" type="button" class="btn btn-info btn-xs" cf_link_code="51023586194718009"
-                    onClick="delete_tbl_core_facility()">
-
-                    <i class="fa fa-upload upload_to_online_btn"></i>Upload to server
-                </button>
-            </div>
-            </form>
-        </td>
 
     </tr>
+{{-- @endforeach --}}
+
     </tbody>
+    @endforeach
 </table>
 
     </div>
@@ -213,8 +241,277 @@
 
 <script>
 
+      var o_sdate, o_edate;
+        $(document.ready(function() {
+            var health_facility_table = $('#health_facility_table').DataTable({
+                "destroy": true,
+                'paging': true,
+                'lengthChange': false,
+                'searching': false,
+                'ordering': true,
+                'info': true,
+                'autoWidth': false
+            });
+
+            // $('.select2').select2();
+
+            //Date picker
+            $('#datepicker').datepicker({
+                autoclose: true
+            });
+        }));
+var toDay = new Date().getDate();
+$("#form-date").datepicker({
+            console.log('this is datetime');
+            autoclose: true,
+            format: "mm/yyyy",
+            viewMode: "months",
+            minViewMode: "months",
+            // startDate: new Date(new Date().setDate(toDay - 365)),
+            endDate: new Date()
+        });
+
+
+
+    // Start for UploadForm blade
+    $(document).ready(function() {
+        // selected value in region
+        $('#region_data').click(function() {
+            DisctictResult($(this).val());
+        });
+
+        // selected value in district
+        $('#district_data').click(function() {
+            TownShipResult($(this).val());
+        });
+
+        // selected value in township
+        $('#township_data').click(function() {
+            HFResult($(this).val());
+        });
+
+        // selected value in healthfacility
+        $('#hf_data').click(function() {
+            SubCenterResult($(this).val());
+        });
+
+        // selected value in Subcenter
+        $('#hf_data').click(function() {
+            VHVResult($(this).val());
+        });
+
+    });
+
+    // get District Data form Database
+    function DisctictResult(selectedValue) {
+        // call  ajax method to get data from database
+        // clear data from select option set
+        var list = document.getElementById("district_data");
+        clearSelectList(list);
+
+        $.ajax({
+            type: "GET",
+            url: "/api/district/"+selectedValue, //this  should be replace by your server side method
+            //data: "{'value': '" + selectedValue +"'}", //this is parameter name , make sure parameter name is sure as of your sever side method
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            async: false,
+            success: function(data) {
+                console.log('myitzu',data);
+                    for(var i = 0; i < data.length; i++) {
+                    var ele = document.createElement("option");
+                    ele.value = data[i].district_name_mmr;
+                    ele.innerHTML = data[i].district_name_en;
+                    document.getElementById("district_data").appendChild(ele);
+                }
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+                alert(errorThrown);
+            }
+        });
+    }
+
+    // get Township Data form Database
+    function TownShipResult(selectedValue) {
+        // call  ajax method to get data from database
+        // clear data from select option set
+        var list = document.getElementById("township_data");
+        clearSelectList(list);
+
+        $.ajax({
+            type: "GET",
+            url: "/api/township/"+selectedValue.substring(0, 6), //this  should be replace by your server side method
+            //data: "{'value': '" + selectedValue +"'}", //this is parameter name , make sure parameter name is sure as of your sever side method
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            async: false,
+            success: function(data) {
+                //console.log(data);
+                //alert(data.township_mmr);
+
+                for(var i = 0; i < data.length; i++) {
+                    var ele = document.createElement("option");
+                    ele.value = data[i].township_mmr;
+                    ele.innerHTML = data[i].township_name_en;
+                    document.getElementById("township_data").appendChild(ele);
+                }
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+                alert(errorThrown);
+            }
+        });
+    }
+
+    // get Health Facility Data form Database
+    function HFResult(selectedValue) {
+        // call  ajax method to get data from database
+        // clear data from select option set
+        var list = document.getElementById("hf_data");
+        clearSelectList(list);
+
+        $.ajax({
+            type: "GET",
+            url: "/api/healthfacility/"+selectedValue.substring(0, 9), //this  should be replace by your server side method
+            //data: "{'value': '" + selectedValue +"'}", //this is parameter name , make sure parameter name is sure as of your sever side method
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            async: false,
+            success: function(data) {
+                console.log('myitzu',data);
+                //alert(data.township_mmr);
+
+                for(var i = 0; i < data.length; i++) {
+                    var ele = document.createElement("option");
+                    ele.value = data[i].health_facility_mmr;
+                    ele.innerHTML = data[i].health_facility_name_en;
+                    document.getElementById("hf_data").appendChild(ele);
+                }
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+                alert(errorThrown);
+            }
+        });
+    }
+
+    // get Subcenter Data form Database
+    function SubCenterResult(selectedValue) {
+        // call  ajax method to get data from database
+        // clear data from select option set
+        var list = document.getElementById("subcenter_data");
+        clearSelectList(list);
+
+        $.ajax({
+            type: "GET",
+            url: "/api/subcenter/"+selectedValue.substring(0, 11), //this  should be replace by your server side method
+            //data: "{'value': '" + selectedValue +"'}", //this is parameter name , make sure parameter name is sure as of your sever side method
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            async: false,
+            success: function(data) {
+                console.log(data);
+                //alert(data.township_mmr);
+
+                for(var i = 0; i < data.length; i++) {
+                    var ele = document.createElement("option");
+                    ele.value = data[i].sub_center_mmr;
+                    ele.innerHTML = data[i].sub_center_name_en;
+                    document.getElementById("subcenter_data").appendChild(ele);
+                }
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+                alert(errorThrown);
+            }
+        });
+    }
+
+    function VHVResult(selectedValue) {
+        // call  ajax method to get data from database
+        // clear data from select option set
+        var list = document.getElementById("vhv_data");
+        clearSelectList(list);
+
+        $.ajax({
+            type: "GET",
+            url: "/api/vhv/"+selectedValue.substring(0, 14), //this  should be replace by your server side method
+            //data: "{'value': '" + selectedValue +"'}", //this is parameter name , make sure parameter name is sure as of your sever side method
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            async: false,
+            success: function(data) {
+                console.log(data);
+                //alert(data.township_mmr);
+
+                for(var i = 0; i < data.length; i++) {
+                    var ele = document.createElement("option");
+                    ele.value = data[i].village_mmr;
+                    ele.innerHTML = data[i].village_name_en;
+                    document.getElementById("vhv_data").appendChild(ele);
+                }
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+                alert(errorThrown);
+            }
+        });
+    }
+
+    function clearSelectList(list) {
+        // when length is 0, the evaluation will return false.
+        while (list.options.length) {
+            // continue to remove the first option until no options remain.
+            list.remove(0);
+        }
+    }
+
+    //End for UploadForm blade
+
+    function state_and_region_tab() {
+    year = $('#ts_exam_pos').find(":selected").text();
+    filter_month = $("#month_filter").val();
+    state_region = $('#state_region_exam_pos').find(":selected").val();
+    sr_township = $("#sr_township_exam_pos").val();
+    //Malaria Test
+    $.ajax({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        type: "GET",
+        //  + district_name_en + '/' + health_facility_name_en+'/'+sub_center_name_en + '/'
+        url: 'malaria_test/'+region_name_en  + '/'  + township_name_en + '/'  + village_name_en + '/' + sDate + '/' + eDate,
+        beforeSend: function () {
+            $('.loader1').show();
+        },
+        success: function (data) {
+
+            alert('this is found',data);
+            malaria_test.updateOptions({
+                series: [
+                    {
+                        name: 'Tests',
+                        data: data[1]
+                    }
+                ],
+                xaxis: {
+                    categories: data[0]
+                }
+            });
+
+        },
+        complete: function () {
+            $('.loader1').hide();
+        },
+    });
+
+
+
+}
+
+
+
+
 </script>
+
 <style>
+
 .header_bar{
     margin: 0;
     padding: 0;

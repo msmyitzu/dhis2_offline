@@ -8,9 +8,10 @@ use App\tbl_individual_case;
 use App\tbl_individual_case_temp;
 use App\tbl_nil;
 use App\tbl_region;
+use App\tbl_district;
 // use App\tbl_sub_center;
 use App\tbl_total_patient;
-// use App\tbl_health_facility;
+use App\tbl_health_facility;
 use App\tbl_township;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -248,50 +249,58 @@ class lookupsController extends Controller
 
 
 
-	// public function get_lp_township($region_id)
-	// {
-    //     try{
+	public function get_lp_township($data)
+	{
+        //  ($region_id);
+        try{
 
-    //         if($region_id === "all"){
-    //             $region = tbl_region::all();
-    //         } else {
-    //             $township = tbl_township::where('township_id','LIKE', $region_id.'%')->orderBy('township_name_mm')->get();
-    //         }
+            // if($region_id === "all"){
+            //     $region = tbl_region::all();
+            // } else {
+            //     $township = tbl_township::where('region_id','LIKE', $region_id.'%')->orderBy('township_name_mm')->get();
+            // }
 
-    //         $header = array (
-    //             'Content-Type' => 'application/json; charset=UTF-8',
-    //             'charset' => 'utf-8'
-    //         );
+            // $header = array (
+            //     'Content-Type' => 'application/json; charset=UTF-8',
+            //     'charset' => 'utf-8'
+            // );
+            // return response()->json($township , 200, $header, JSON_UNESCAPED_UNICODE);
 
-    //         return response()->json($township , 200, $header, JSON_UNESCAPED_UNICODE);
-    //     }
-    //     catch (\Exception $e) {
-    //         return $e->getMessage();
-    //     }
-    // }
+            $data = DB::table("tbl_township")
+            ->where('township_mmr', 'like', $data . '%')
+            ->get();
+            return response()->json($data);
 
-
-
-    public function get_lp_township($region_id)
-{
-    try {
-        if ($region_id === "all") {
-            $townships = tbl_township::orderBy('township_mmr')->get();
-            // dd($township);
-        } else {
-            //
-            $townships = tbl_township::where('township_id', 'LIKE','region_id')->orderBy('township_mmr')->get();
         }
-
-        if ($townships->isEmpty()) {
-            return response()->json(['message' => 'No townships found for the given region ID'], 404);
+        catch (\Exception $e) {
+            return $e->getMessage();
         }
-
-        return response()->json($townships, 200, [], JSON_UNESCAPED_UNICODE);
-    } catch (\Exception $e) {
-        return response()->json(['error' => $e->getMessage()], 500);
     }
-}
+
+
+
+
+
+//     public function get_lp_township($region_id)
+// {
+//     try {
+//         if ($region_id === "all") {
+//             $townships = tbl_township::orderBy('township_mmr')->get();
+//             // dd($township);
+//         } else {
+//             //
+//             $townships = tbl_township::where('township_id', 'LIKE','region_id')->orderBy('township_mmr')->get();
+//         }
+
+//         if ($townships->isEmpty()) {
+//             return response()->json(['message' => 'No townships found for the given region ID'], 404);
+//         }
+
+//         return response()->json($townships, 200, [], JSON_UNESCAPED_UNICODE);
+//     } catch (\Exception $e) {
+//         return response()->json(['error' => $e->getMessage()], 500);
+//     }
+// }
 
 
     // public function get_tbl_hfm()
@@ -535,9 +544,20 @@ class lookupsController extends Controller
 
         $tbl_core_facility = tbl_core_facility::get();    //->limit(2) orderBy('form_name')->
         // dd($lp_form_cat);
-        $tbl_region = tbl_region::get();
-        $tbl_township = tbl_township::get();
-        return view('parent-register-template.index',compact('tbl_core_facility','tbl_region','tbl_township'));
+        // $tbl_region = tbl_region::get();
+        // $tbl_township = tbl_township::get();
+        $data_region = DB::table("tbl_region")->get();
+        return view('parent-register-template.index',compact('tbl_core_facility','data_region'));
+    }
+
+    public function get_patient_registerform_row(Request $request){
+
+        // $tbl_core_facility = tbl_core_facility::get();    //->limit(2) orderBy('form_name')->
+        // dd($lp_form_cat);
+        // $tbl_region = tbl_region::get();
+        $township = tbl_township::all();
+        // $data_region = DB::table("tbl_region")->get();
+        return view('nmcp-template.patient_register_form_row')->with('township',$township);
     }
 
 
@@ -598,7 +618,7 @@ class lookupsController extends Controller
 
     {
 
-
+        // dd($request);
         try {
             $data = json_decode($request->getContent(), true);
             if($data){
@@ -649,19 +669,33 @@ class lookupsController extends Controller
                 //     return "2" ;
                 // }
 
-                // $tbl_core_facility_data = [
-                //     'service_provider' => $data['service_provider'],
-                //     'data_entry_type' => $data['data_entry'],
-                //     'region_mmr' => $data['state_region'],
-                //     'district_mmr' => $data['township'],
-                //     'township_mmr' => $data['sc_health'],
-                //     'healh_facility' => $data['icmv_select'],
-                //     'report_month' => $data['rp_month'],
-                //     'blood_test_result' => $data['blood_test'],
-                //     'condition' => $data['condition']
-                // ];
-                // tbl_core_facility::insert($tbl_core_facility_data);
-                    // dd($data);
+
+                // data["service_provider"] = $("#service_provider").val();
+                // data["data_entry"] = $("#data_entry_type").val();
+                // data["state_region"] = $("#state_region").val();
+                // data["township"] = $("#township").val();
+                // data["rhc_health"] = $("#rhc_health").val();
+                // data["sc_health"] = $("#sc_health").val();
+                // data["icmv_select"] = $("#icmvSelect").val();
+                // data["rp_month"] = $("#rp_month").val();
+                // data["blood_test"] = $("#bloodTest").val();
+                // data["condition"] = $("#conditionalSelect").val();
+
+
+                $tbl_core_facility_data = [
+                    'service_provider' => $data['service_provider'],
+                    'data_entry_type' => $data['data_entry'],
+                    'region_mmr' => $data['state_region'],
+                    'district_mmr' => $data['township'],
+                    'township_mmr' => $data['sc_health'],
+                    'health_facility' => $data['icmv_select'],
+                    'report_month' => $data['rp_month'],
+                    'blood_test_result' => $data['blood_test'],
+                    'condition' => $data['condition']
+                ];
+                // dd($tbl_core_facility_data );
+                $tbl = tbl_core_facility::insert($tbl_core_facility_data);
+
                 $tbl_nil_data = [
                     'total_outpatient' => $data['Total_Outpatient'],
                     'u5_outpatient' => $data['U5_Outpatient'],
@@ -673,7 +707,9 @@ class lookupsController extends Controller
                 ];
                 $tbl = tbl_nil::insert($tbl_nil_data);
                 // dd($tbl);
+                // alert("All Data Saved to related Table");
                 return "1";
+
             }
         }
         catch (\Exception $e) {
@@ -788,12 +824,98 @@ class lookupsController extends Controller
         }
     }
 
-    public function show_upload_form($request){
+    public function show_upload_form(){
         $state_region = tbl_region::all();
+        $district = tbl_district::all();
         $township = tbl_township::all();
+        $core_facility = tbl_core_facility::all();
+        $individual_case = tbl_individual_case::all();
+        $health_facility = tbl_health_facility::all();
+        // $groupedCases =tbl_individual_case::select('pt_current_township',
+        //  DB::raw('COUNT(pt_current_township) as count'),
+        //  DB::raw('MIN(screening_date) as start_date'),
+        //  DB::raw('MAX(screening_date) as end_date')
+        // )
+        // ->join('tbl_township', 'tbl_township.township_mmr', '=' , 'tbl_individual_case.pt_current_township')
+        // ->get('tbl_township.township_name_en')
+        // ->groupBy('pt_current_township');
+            // ->with('township') // Load township relationship to get township names
+        // ->get();
+        $groupedCases = tbl_individual_case::select(
+            'tbl_individual_case.pt_current_township',
+            'tbl_township.township_name_en',
+            DB::raw('COUNT(tbl_individual_case.pt_current_township) as count'),
+            DB::raw('MIN(tbl_individual_case.screening_date) as start_date'),
+            DB::raw('MAX(tbl_individual_case.screening_date) as end_date')
+        )
+        ->join('tbl_township', 'tbl_township.township_mmr', '=', 'tbl_individual_case.pt_current_township')
+        ->groupBy('tbl_township.township_name_en')
+        ->get();
 
-        return view('parent-register-template.uploadForm', compact('state_region','township'));
+        // dd($groupedCases->toArray());
+        // return view('parent-register-template.uploadForm', compact());
+        return view('parent-register-template.uploadForm', compact('state_region','district','township','core_facility','individual_case','health_facility','groupedCases'));
     }
+
+    // $district_name_en,$health_facility_name_en,$sub_center_name_en,
+
+    public function loopDataToUpload() {
+        // Fetch data grouped by township and get counts for each group
+
+
+    }
+
+    // public function malaria_test($region_name_en,$township_name_en,$village_name_en,$sDate,$eDate)
+    // {
+    //     $startDate = $sDate == null ? date('mm/YYYY') : $sDate ;
+    //     $endDate = $eDate == 0 ? date('mm/YYYY')  : $eDate;
+
+
+    //     if($region_name_en == 1) {
+    //         $malaria_tests = DB::table('tbl_indivitual_case')
+    //             ->join('tbl_township', 'tbl_township.township_mmr', '=' , 'tbl_individual_case.pt_current_township')
+    //             // ->join('tbl_district', 'tbl_district.district_name_en', '=', 'tbl_township.d_code')
+    //             ->join('tbl_region', 'tbl_region.region_mmr', 'like', 'tbl_township.township_mmr.%')
+    //             // ->join('tbl_health_facility', 'tbl_township.township_mmr' , 'like' , 'tbl_health_facility.health_facility_mmr.%')
+    //             // ->join('tbl_sub_center','lp_rdt_result.r_code','=','tbl_individual_case.RDT_Code')
+    //             // ->join('lp_micro_result','lp_micro_result.mr_code','=','tbl_individual_case.Micro_Code')
+    //             // ->select('lp_state_region.sr_name AS res_name')
+    //             ->selectRaw(
+    //                 "SUM(CASE WHEN (CASE WHEN r_code not in ( '7', '9') or mr_code not in ('7', '9') THEN 1 ELSE 0 END) > 0 THEN 1 ELSE 0 END) AS total_test")
+    //             ->where('tbl_indiviual_case.screenig_date', '=', $startDate)
+    //             ->whereIn('tbl_individual_case.screenig_date', $endDate)
+    //             ->orderBy('total_test')
+    //             ->groupby('tbl_township.township_mmr')
+    //             ->get();
+    //     }else{
+    //         $malaria_tests = DB::table('tbl_indivitual_case')
+    //             ->join('tbl_township', 'tbl_township.township_mmr', '=' , 'tbl_individual_case.pt_current_township')
+    //             // ->join('tbl_district', 'tbl_district.district_name_en', '=', 'tbl_township.d_code')
+    //             ->join('tbl_region', 'tbl_region.region_mmr', 'like', 'tbl_township.township_mmr.%')
+    //             // ->join('tbl_health_facility', 'tbl_township.township_mmr' , 'like' , 'tbl_health_facility.health_facility_mmr.%')
+    //             // ->join('tbl_sub_center','lp_rdt_result.r_code','=','tbl_individual_case.RDT_Code')
+    //             // ->join('lp_micro_result','lp_micro_result.mr_code','=','tbl_individual_case.Micro_Code')
+    //             // ->select('lp_state_region.sr_name AS res_name')
+    //             ->selectRaw(
+    //                 "SUM(CASE WHEN (CASE WHEN r_code not in ( '7', '9') or mr_code not in ('7', '9') THEN 1 ELSE 0 END) > 0 THEN 1 ELSE 0 END) AS total_test")
+    //             ->where('tbl_indivdual_case.sDate', '=', $startDate)
+    //             ->whereIn('tbl_individual_case.eDate', $endDate)
+    //             ->orderBy('total_test')
+    //             ->groupby('tbl_township.towhship_mmr')
+    //             ->get();
+    //     }
+
+    //     $res_name = [];
+    //     $total_test = [];
+    //     foreach ($malaria_tests as $malaria_tests) {
+    //         array_push($res_name,$malaria_tests->res_name);
+    //         array_push($total_test,$malaria_tests->total_test);
+    //     }
+
+    //     return[$res_name,$total_test];
+    // }
+
+
 
     public function show_form_list(){
         return view('parent-register-template.formList');

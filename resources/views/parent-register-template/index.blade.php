@@ -804,14 +804,14 @@
 
 
 <script>
-    // $(document).ready(function() {
-    //         $('#datepicker').datepicker({
-    //             format: "mm/yyyy",
-    //             startView: "months",
-    //             minViewMode: "months",
-    //             autoclose: true,
-    //         });
-    //     });
+    $(document).ready(function() {
+            // $('#datepicker').datepicker({
+            //     format: "mm/yyyy",
+            //     startView: "months",
+            //     minViewMode: "months",
+            //     autoclose: true,
+            // });
+        });
 
     function load_tbl_hfm(target_control_id, ts_code, token, form_type = null) {
 

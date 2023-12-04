@@ -573,16 +573,20 @@ public function dhis2getDataSubCenter()
 
     // }
 
-    //public function postDHIS()
-    public function dhis2postData(){
 
-
-        $table = DB::table('tbl_individual_case')->where('township','MMR001001')->get();
+    public function dhis2postData($pt_current_township){
+        // dd($pt_current_township);
+    try{
+        $table = DB::table('tbl_individual_case')->where('pt_current_township',$pt_current_township)->get();
         $trackedEntityInstances = [];
+        $cores = DB::table('tbl_core_facility')->get();
+        $nils = DB::table('tbl_nil')->get();
+        // dd('hi', $table->toArray());
 
         foreach ($table as $row) {
+            // Retrieve data from each row in the table
             $scr_date = $row->screening_date;
-            $patient_name = $row->patient_name;
+            $patient_name = $row->pt_Name;
             $pt_age = $row->pt_age;
             $pt_father_name = $row->pt_father_name;
             $pt_address = $row->pt_address;
@@ -600,7 +604,7 @@ public function dhis2getDataSubCenter()
             $act = $row->ACT_Code;
             $cq = $row->CQ_Code;
             $pq = $row->PQ_Code;
-            // $tg = $row->TG_Code
+             $tg = $row->TG_Code;
             $reffer = $row->Referral_Code;
             $Malaria_dh = $row ->Malaria_Death;
             $remark = $row ->Remark;
@@ -608,179 +612,258 @@ public function dhis2getDataSubCenter()
             $occupation = $row->occupation;
 
 
-            $data = '{
-                "trackedEntityInstances                                                          ": [
-                    {
-                    "orgUnit": "S1sWiUMHf9g",
-                    "program": "ec31yGIJJzu",
-                    "trackedEntityType": "bwrCfr3nMhv",
-                    "type":"created",
-                     "attributes":[
-                         {
-                        "attribute": "C89brF2qFjY",
-                        "value": "$patient_name"	//no need on programstages
-                        },
-                        {
-                            "attribute": "ntzzGM9v0kJ",
-                            "value": "pt_father_name"	//no need in programstage
-                        },
-                        {
-                            "attribute": "NlmG4cwRzmJ",
-                            "value": "$sex"	//no need in programstage
-                        }
-                     ],
-                    "enrollments": [
-
-                        {
-                        "program": "ec31yGIJJzu",
-                        "orgUnit": "S1sWiUMHf9g",
-                        "events":[
-                            {
-                                "orgUnit": "S1sWiUMHf9g",
-                            "program": "ec31yGIJJzu",
-                        "programStage": "bgPjhWMVFDv",
-                        "eventDate": "2023-11-15",
-                        "type":"created",
-                        "dataValues": [
-                        {
-                            "dataElement":"mPKo8fRmj2A",
-                            "value":"Survey"
-                        },
-                        {
-                            "dataElement": "HqF8dFu79ex",
-                            "value": "No (within Township)"
-                        },
-                        {
-                            "dataElement": "ncDYKoYDCbi",
-                            "value": "23"
-                        },
-                        {
-                            "dataElement": "oIRHWGk2OCy",
-                            "value": "Gardening"
-                        },
-                        {
-                            "dataElement": "YPmjEZvUjpg",
-                            "value": "No"
-                        },
-                        {
-                            "dataElement": "Kxzh0PMCa2d",
-                            "value": "Yes"
-                        },
-                        // {
-                        //     "dataElement":"UWS9UZxBLDI",
-                        //     "value":"2023-11-01"
-                        // },
-                        {
-                            "dataElement":"qCI5cGiVE3B",
-                            "value" :"ctownship"
-                        },
-                        {
-                            "dataElement":"Qr3v7XAQC77",
-                            "value" :"cvillage"
-                        },
-                        {
-                            "dataElement":"E0qWI5la2Zh",
-                            "value" :"cward"
-                        },
-                        {
-                            "dataElement": "hMK8hf12Yvi",
-                             "value": "Test Ptown"
-                        },
-                         {
-                             "dataElement": "w9RT32cvgHf",
-                             "value": "Test Pvillage"
-                         },
-                         {
-                             "dataElement": "XZ3OP1jdCfo",
-                             "value": "Test Pward"
-                         },
-                        {"dataElement":"SWhiDdRgUwT",
-                        "value" :""
-                        },
-                         {
-                            "dataElement": "KdiR3PGFj3P",
-                            "value": ""
-                        },
-                        {
-                            "dataElement":"qihIcNI1PdA",
-                            "value":"Uncomplicated (OP)"
-                        },
-                        {
-                            "dataElement":"GASizN790rz",
-                            "value":"> 24hr"
-                        },
-                        {
-                            "dataElement": "WJ1MqhmfPHz",
-                            "value": "N/A"
-                        },
-                        {
-                            "dataElement": "jqCfD3BCumN",
-                            "value": "N/A"
-                        },
-                        {
-                            "dataElement": "QBBPxUuOulF",
-                            "value": "N/A"
-                        },
-                        {
-                            "dataElement": "UUWSRVYn7Pl",
-                            "value": "No"
-                        },
-                         {
-                            "dataElement": "aWLj1EJFbQV",
-                            "value": "No"
-                        },
-                         {
-                            "dataElement": "rBkCZXJFKXq",
-                            "value": "test remark"
-                        }
-
+            // Create an array representing the trackedEntityInstance for each row
+            $trackedEntityInstance = [
+                "orgUnit" =>"S1sWiUMHf9g",
+                "program"=>"ec31yGIJJzu",
+                "trackedEntityType"=> "bwrCfr3nMhv",
+                "type"=>"created",
+                // Add other keys and values based on retrieved database data
+                "attributes" => [
+                    [
+                        "attribute" => "C89brF2qFjY",
+                        "value" => $patient_name
+                    ],
+                    [
+                        "attribute"=> "ntzzGM9v0kJ",
+                        "value"=> $pt_father_name	//no need in programstage
+                    ],
+                    [
+                        "attribute"=> "NlmG4cwRzmJ",
+                        "value"=> $sex	//no need in programstage
                     ]
-                    }
+                ],
+                "enrollments" => [
+                    [
+                        "program" => "ec31yGIJJzu",
+                        "orgUnit" => "S1sWiUMHf9g",
+                        "events" => [
+                            [
+                                "orgUnit" => "S1sWiUMHf9g",
+                                "program" => "ec31yGIJJzu",
+                                "programStage"=> "bgPjhWMVFDv",
+                                "eventDate"=> "2023-11-15",
+                                "type"=>"created",
+                                "dataValues"=> [
+                                    [
+                                        "dataElement"=>"mPKo8fRmj2A",
+                                        "value"=>"Survey"
+                                    ],
+                                    [
+                                        "dataElement"=> "HqF8dFu79ex",
+                                        "value"=> $pt_address
+                                    ],
+                                    [
+                                        "dataElement"=> "ncDYKoYDCbi",
+                                        "value"=> $pt_age
+                                    ],
+
+                                    [
+                                        "dataElement"=> "YPmjEZvUjpg",
+                                        "value"=> $preg
+                                    ],
+                                    [
+                                        "dataElement"=> "Kxzh0PMCa2d",
+                                        "value"=> $travel
+                                    ],
+                                    [
+                                        "dataElement"=>"UWS9UZxBLDI",
+                                        "value"=>"$scr_date"
+                                    ],
+                                    [
+                                        "dataElement"=>"qCI5cGiVE3B",
+                                        "value" =>$pt_crr_tsp
+                                    ],
+                                    [
+                                        "dataElement"=>"Qr3v7XAQC77",
+                                        "value" =>$pt_crr_vlg
+                                    ],
+                                    [
+                                        "dataElement"=>"E0qWI5la2Zh",
+                                        "value" =>$pt_crr_ward
+                                    ],
+                                    [
+                                        "dataElement"=> "hMK8hf12Yvi",
+                                         "value"=> $pt_pm_tsp
+                                    ],
+                                     [
+                                         "dataElement"=> "w9RT32cvgHf",
+                                         "value"=> $pt_pm_vlg
+                                     ],
+                                     [
+                                         "dataElement"=> "XZ3OP1jdCfo",
+                                         "value"=> $pt_pm_ward
+                                     ],
+                                        ["dataElement"=>"SWhiDdRgUwT",
+                                        "value" =>$micro
+                                        ],
+                                     [
+                                        "dataElement"=> "KdiR3PGFj3P",
+                                        "value"=> $rdt
+                                    ],
+                                    [
+                                        "dataElement"=>"qihIcNI1PdA",
+                                        "value"=>$ioc
+                                    ],
+                                    [
+                                        "dataElement"=>"GASizN790rz",
+                                        "value"=>$tg
+                                    ],
+                                    [
+                                        "dataElement"=> "WJ1MqhmfPHz",
+                                        "value"=> $act
+                                    ],
+                                    [
+                                        "dataElement"=> "jqCfD3BCumN",
+                                        "value"=> $cq
+                                    ],
+                                    [
+                                        "dataElement"=> "QBBPxUuOulF",
+                                        "value"=> $pq
+                                    ],
+                                    [
+                                        "dataElement"=> "UUWSRVYn7Pl",
+                                        "value"=> $reffer
+                                    ],
+                                     [
+                                        "dataElement"=> "aWLj1EJFbQV",
+                                        "value"=> $Malaria_dh
+                                    ],
+                                     [
+                                        "dataElement"=> "rBkCZXJFKXq",
+                                        "value"=> $remark
+                                    ]
+
+                                ]
+
+                            ]
+                        ]
                     ]
-                }
+                ]
+            ];
 
-            ]
-
+            // Add the trackedEntityInstance to the trackedEntityInstances array
+            $trackedEntityInstances[] = $trackedEntityInstance;
         }
-    ]
 
-    }';
+    $data = [
+        "trackedEntityInstances" => $trackedEntityInstances
+    ];
 
+    //for cores table
+
+    foreach ($cores as $core) {
+        // Retrieve data from each row in the table
+        $hf = $core->health_facility;
+        $activity = $core->condition;
+        // Retrieve other fields similarly...
+
+        // Create an array representing the trackedEntityInstance for each row
+        $trackedEntityInstance = [
+            "orgUnit" => "S1sWiUMHf9g",
+            "program" => "ec31yGIJJzu",
+            // Add other keys and values based on retrieved database data
+            "attributes" => [
+                [
+                    "attribute" => "C89brF2qFjY",
+                    "value" => $patient_name
+                ],
+                // Add other attribute values based on database fields
+                // ...
+            ],
+            "enrollments" => [
+                [
+                    "program" => "ec31yGIJJzu",
+                    "orgUnit" => "S1sWiUMHf9g",
+                    "events" => [
+                        [
+                            "orgUnit" => "S1sWiUMHf9g",
+                            "program" => "ec31yGIJJzu",
+                            // Add event details based on database fields
+                            // ...
+                        ]
+                    ]
+                ]
+            ]
+        ];
+
+        // Add the trackedEntityInstance to the trackedEntityInstances array
         $trackedEntityInstances[] = $trackedEntityInstance;
+    }
 
-}
-        $url = 'https://mcbrs-dev2.myanmarvbdc.com/api/40/trackedEntityInstances';
-        // $username = 'admin';
-        // $password = 'district';
-        $ch = curl_init($url);
+    //for nil table
 
-        // Set the content type to JSON
-        // curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
+    foreach ($nils as $nil) {
+        // Retrieve data from each row in the table
+        $t_outpt = $nil->total_outpatient;
+        $u5_outpt = $nil->u5_outpatient;
+        $pre_outpt = $nil->preg_outpatient;
+        $t_inpt = $nil->total_inpatient;
+        $u5_inpt = $nil->total_inpatient;
+        $pre_inpt = $nil->preg_inpatient;
+        $t_df = $nil->death_facility;
 
-        curl_setopt($ch, CURLOPT_HTTPHEADER, array(
-            'Content-Type: application/json',
-            'Authorization: Basic YWRtaW46ZGlzdHJpY3Q=',
-            'charset=utf8'
-        ));
+        // Retrieve other fields similarly...
 
-        // Set the request method to POST
-        curl_setopt($ch, CURLOPT_POST, 1);
+        // Create an array representing the trackedEntityInstance for each row
+        $trackedEntityInstance = [
+            "orgUnit" => "S1sWiUMHf9g",
+            "program" => "ec31yGIJJzu",
+            // Add other keys and values based on retrieved database data
+            "attributes" => [
+                [
+                    "attribute" => "C89brF2qFjY",
+                    "value" => $patient_name
+                ],
+                // Add other attribute values based on database fields
+                // ...
+            ],
+            "enrollments" => [
+                [
+                    "program" => "ec31yGIJJzu",
+                    "orgUnit" => "S1sWiUMHf9g",
+                    "events" => [
+                        [
+                            "orgUnit" => "S1sWiUMHf9g",
+                            "program" => "ec31yGIJJzu",
+                            // Add event details based on database fields
+                            // ...
+                        ]
+                    ]
+                ]
+            ]
+        ];
 
-        // Attach the JSON data to the request
-        curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
+        // Add the trackedEntityInstance to the trackedEntityInstances array
+        $trackedEntityInstances[] = $trackedEntityInstance;
+    }
 
-        // Receive server response...
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 
-        // Execute the cURL request
-        $response = curl_exec($ch);
-        dd('this is sent=>',$response);
-        // Close cURL session handle
-        curl_close($ch);
+$url = 'https://mcbrs-dev2.myanmarvbdc.com/api/40/trackedEntityInstances';
+$ch = curl_init($url);
+
+curl_setopt($ch, CURLOPT_HTTPHEADER, [
+    'Content-Type: application/json',
+    'Authorization: Basic YWRtaW46ZGlzdHJpY3Q=',
+    'charset=utf8'
+]);
+
+curl_setopt($ch, CURLOPT_POST, 1);
+curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data));
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+$response = curl_exec($ch);
+curl_close($ch);
 
         // Output the server response
-
+        // dd('this is sent=>',$response);
+      
         echo $response;
+
+    } catch (\Exception $e) {
+        echo 'Error: ' . $e->getMessage();
+    }
+
     }
 
 }

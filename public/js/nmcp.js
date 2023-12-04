@@ -919,7 +919,7 @@ function load_healthfacility(containerid) {
 }
 
 // function highlight_row(item) {
-//     reset_row_border("register-table");
+//     //reset_row_border("register-table");
 //     var row = $(item).closest("tr");
 //     $(row).children().css("border-top", "2px solid #FF6B50");
 //     $(row).children().css("border-bottom", "2px solid #FF6B50");

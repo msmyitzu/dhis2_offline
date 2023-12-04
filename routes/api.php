@@ -26,7 +26,7 @@ Route::get('/dhis2getDataDistrict','APIController@dhis2getDataDistrict');
 Route::get('/dhis2getDataHealthFacility','APIController@dhis2getDataHealthFacility');
 Route::get('/dhis2getDataSubCenter','APIController@dhis2getDataSubCenter');
 Route::get('/dhis2getDataVillage','APIController@dhis2getDataVillage');
-Route::post('/dhis2postData','APIController@dhis2postData');
+Route::post('/dhis2postData/{pt_current_township}','APIController@dhis2postData');
 
 
 /* Township */

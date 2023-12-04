@@ -621,6 +621,7 @@ class lookupsController extends Controller
         // dd($request);
         try {
             $data = json_decode($request->getContent(), true);
+            // dd($data);
             if($data){
 
                 $tbl_individual_case_data = [
@@ -851,6 +852,8 @@ class lookupsController extends Controller
         ->join('tbl_township', 'tbl_township.township_mmr', '=', 'tbl_individual_case.pt_current_township')
         ->groupBy('tbl_township.township_name_en')
         ->get();
+
+        // dd($groupedCases->toArray());
 
         // dd($groupedCases->toArray());
         // return view('parent-register-template.uploadForm', compact());

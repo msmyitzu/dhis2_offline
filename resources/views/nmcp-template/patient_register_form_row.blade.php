@@ -24,9 +24,10 @@
     <td>
         <select class="" name="address" id="" onchange="outsideTownShipResult(this);"  >
             {{-- <option value="" selected>ရွေးပါ</option> --}}
-            <option value="20">No(Within Township)</option>
-            <option value="30" >No(Outside Township)</option>
-            <option value="99" >No(Outside Country)</option>
+            <option value="">ရွေးပါ</option>
+            <option value="No (within Township)">No (Within township)</option>
+            <option value="No (Outside Township)">No (Outside Township)</option>
+            <option value="No (Outside Country)">No (Outside Country)</option>
         </select>
     </td>
     <td>
@@ -76,16 +77,16 @@
         <select name="sex" id="sex" onchange="checkSex(this); adjustInputWidth(this)" class="sex">
 
                 <option value="choose">ရွေးပါ</option>
-                <option value="male">Male</option>
-                <option value="female">Female</option>
+                <option value="TT-Male">Male</option>
+                <option value="TT-female">Female</option>
 
         </select>
     </td>
     <td>
         <select name="preg" id="preg" class="preg" onchange="checkPreg(this); adjustInputWidth(this);">
 
-                {{-- <option value="">ရွေးပါ</option> --}}
-                <option value="N/A">N/A</option>
+                <option value="">ရွေးပါ</option>
+                {{-- <option value="N/A">N/A</option> --}}
                 <option value="Yes">Yes</option>
                 <option value="No">No</option>
 
@@ -94,75 +95,73 @@
     </td>
     <td>
         <select name="rsc_test" id="rsc_test" onchange="checkTestResult(this); adjustInputWidth();" class="" >
-            <option value="NotExam">Not exam</option>
-            <option value="Negative">Negative</option>
-            <option value="Pf">Pf</option>
-            <option value="Pv">Pv</option>
-            <option value="Mixed">Mixed</option>
-            <option value="Pm">Pm</option>
-            <option value="Po">Po</option>
+            <option value="not exam">Not Exam</option>
+            <option value="neg">Negative</option>
+            <option value="pf">Pf</option>
+            <option value="pv">Pv</option>
+            <option value="mixed">Mixed</option>
+            <option value="pm">Pm</option>
+            <option value="po">Po</option>
+
         </select>
     </td>
     <td>
         <select name="rdt_test" id="rdt_test" class="" onchange="checkTestResult(this); adjustInputWidth(this);">
-            <option value="NotExam">Not exam</option>
-            <option value="Negative">Negative</option>
-            <option value="Pf">Pf</option>
-            <option value="Pv">Pv</option>
-            <option value="Mixed">Mixed</option>
+            <option value="not exam">Not Exam</option>
+            <option value="neg">Negative</option>
+            <option value="pf">Pf</option>
+            <option value="pv">Pv</option>
+            <option value="mixed">Mixed</option>
         </select>
     </td>
     <td>
         <select name="out-patient" id="" oninput="adjustInputWidth(this)"  style="width: 100%">
-            <option value="" selected>N/A</option>
-            <option value="test">Testing</option>
-            {{-- @foreach ($lp_in_out_cat as $ioc)
-                <option value="{{ $ioc->ioc_code }}">
-                    {{ $ioc->io_cat }}
-                </option>--}}
-
-            {{-- @endforeach --}}
+            <option value="Uncomplicated (OP)">Uncomplicated (OP)</option>
+            <option value="Uncomplicated (IP)">Uncomplicated (IP)</option>
+            <option value="Severe (OP)">Severe (OP)</option>
+            <option value="Cerebral Malaria (IP)">Cerebral Malaria (IP)</option>
+            <option value="Other Severe Complicated Malaria (IP)">Other Severe Complicated Malaria (IP)</option><option value="N/A">N/A</option>
         </select>
     </td>
     <td>
         {{-- oninput="adjustInputWidth(this)" --}}
-        <select name="ACT" id="act"  onchange="checkACT(this); adjustInputWidth(this);" class="acts"  >
-           <option value="N/A">N/A</option>
-           <option value="3">ACT-6 tablets(1/2 strip)</option>
-           <option value="6">ACT-6 tablets(1 strip)</option>
-           <option value="12">ACT-12 tablets(1 strip)</option>
-           <option value="18">ACT-18 tablets(1 strip)</option>
-           <option value="24">ACT-24 tablets(1 strip)</option>
-           <option value="Other_ACT">Other ACT</option>
-           <option value="Out">Out of stock</option>
-           <option value="N/A">N/A</option>
+        <select name="ACT" id="act"  onchange="adjustInputWidth();" class="acts"  >
+            <option value="N/A">N/A</option>
+            <option value="ACT-6 tablets (1/2 strip)">ACT-6 tablets (1/2 strip)</option>
+            <option value="ACT-6 tablets (1 strip)">ACT-6 tablets (1 strip)</option>
+            <option value="ACT-12 tablets (1 strip)">ACT-12 tablets (1 strip)</option>
+            <option value="ACT-18 tablets (1 strip)">ACT-18 tablets (1 strip)</option>
+            <option value="ACT-24 tablets (1 strip)">ACT-24 tablets (1 strip)</option>
+            <option value="Other ACT">Other ACT</option>
+            <option value="Out of stock">Out of stock</option>
+            <option value="N/A">N/A</option>
         </select>
     </td>
     <td>
-        {{-- <input type="text" id="" oninput="adjustInputWidth(this)" placeholder="N/A" class="cq only-integer"> oninput="adjustInputWidth(this)"--}}
-        <select name="" id="cq" class="cq only-integer" onchange="checkCQ(this); adjustInputWidth(this);">
+        <select name="CQ" id="cq" class="cq">
             <option value="N/A">N/A</option>
-            <option value="1">CQ-1 tablets</option>
-            <option value="4">CQ-4 tablets</option>
-            <option value="5">CQ-5 tablets</option>
-            <option value="7.5">CQ-7.5 tablets</option>
-            <option value="10">CQ-10 tablets</option>
-            <option value="Out">Out of stock</option>
+            <option value="CQ - 1 tablet">CQ - 1 tablet</option>
+            <option value="CQ - 4 tablets">CQ - 4 tablets</option>
+            <option value="CQ - 5 tablets">CQ - 5 tablets</option>
+            <option value="CQ - 7.5 tablets">CQ - 7.5 tablets</option>
+            <option value="CQ - 10 tablets">CQ - 10 tablets</option>
+            <option value="Out of stock">Out of stock</option>
             <option value="N/A">N/A</option>
         </select>
     </td>
-    <td><select name="" id="pq" class="pq only-integer" onchange="filterPQ(this); adjustInputWidth(this);">
-            <option value="N/A">N/A</option>
-            <option value="1">PQ-1 tablets</option>
-            <option value="2">PQ-2 tablets</option>
-            <option value="4">PQ-4 tablets</option>
-            <option value="6">PQ-6 tablets</option>
-            <option value="7">PQ-7 tablets</option>
-            <option value="14">PQ-14 tablets</option>
-            <option value="21">PQ-21 tablets</option>
-            <option value="28">PQ-28 tablets</option>
-            <option value="Out">Out of stock</option>
-            <option value="N/A">N/A</option>
+    <td><select name="PQ" id="pq" class="pq" >
+
+        <option value="N/A">N/A</option>
+        <option value="PQ - 1 tablet">PQ - 1 tablet</option>
+        <option value="PQ - 2 tablets">PQ - 2 tablets</option>
+        <option value="PQ - 4 tablets">PQ - 4 tablets</option>
+        <option value="PQ - 6 tablets">PQ - 6 tablets</option>
+        <option value="PQ - 7 tablets">PQ - 7 tablets</option>
+        <option value="PQ - 14 tablets">PQ - 14 tablets</option>
+        <option value="PQ - 21 tablets">PQ - 21 tablets</option>
+        <option value="PQ - 28 tablets">PQ - 28 tablets</option>
+        <option value="Out of stock">Out of stock</option>
+        <option value="N/A">N/A</option>
         </select>
         {{--" <input type="text" id=""  placeholder="N/A" class="pq only-integer">oninput="adjustInputWidth(this)" --}}
 
@@ -214,9 +213,9 @@
     <td>
         <select name="job" id="job" oninput="adjustInputWidth(this)">
             <option value="" selected>ရွေးပါ</option>
-            <option value="RubberPlantation">Rubber Plantation</option>
+            <option value="Rubber Plantation">Rubber Plantation</option>
             <option value="Gardening">Gardening</option>
-            <option value="ForestRelatedJob">Forest Related Job</option>
+            <option value="Forest Related Job">Forest Related Job</option>
             <option value="Construction">Construction</option>
             <option value="Mining">Mining</option>
             <option value="Other">Other</option>
@@ -307,10 +306,10 @@ function outsideTownShipResult(selectedValue) {
         // clear data from select option set
         //  alert('hi myitzu=>');
             var tr = $(selectedValue).closest('tr');
-        if (selectedValue.value === '30') {
+        if (selectedValue.value === 'No (Outside Township)') {
                     $(selectedValue).show();
                     tr.find('td:eq(9) select,td:eq(10) select').prop('disabled',false);
-                }else if(selectedValue.value === '99'){
+                }else if(selectedValue.value === 'No (Outside Country)'){
                     $(selectedValue).show();
                     tr.find('td:eq(9) select,td:eq(10) select').prop('disabled',true);
                 }else {

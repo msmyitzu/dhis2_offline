@@ -1130,6 +1130,9 @@
 </script>
 
 <style>
+    .user-image{
+        margin-top:15px !important;
+    }
 .header_bar{
     margin: 0;
     padding: 0;

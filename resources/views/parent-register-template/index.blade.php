@@ -8,10 +8,10 @@
     <ul class="nav navbar-nav">
         <!-- User Account: style can be found in dropdown.less -->
         <li class="dropdown user user-menu">
-            <a href="https://mcbrs-dev2.myanmarvbdc.com/" class="" data-toggle="">
-                <img src="{{ asset('img/logo.png') }}" class="user-image" alt="User Image">
+            {{-- <a href="https://mcbrs-dev2.myanmarvbdc.com/" class="" > --}}
+                <img src="{{ asset('img/mcbrs_logo.png') }}" class="user-image" alt="User Image">
                 <span class="card-title"> Malaria Case-Based Reporting for VBDC Myanmar </span>
-            </a>
+            {{-- </a> --}}
         </li>
         <li>
 
@@ -1883,6 +1883,9 @@ console.log(value);
 </script>
 <style>
 
+.user-image{
+    margin-top:10px !important;
+}
 
 
 

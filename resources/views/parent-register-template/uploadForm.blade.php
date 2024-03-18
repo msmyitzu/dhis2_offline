@@ -416,10 +416,10 @@ width: 100% !important;
     <ul class="nav navbar-nav">
         <!-- User Account: style can be found in dropdown.less -->
         <li class="dropdown user user-menu">
-            <a href="https://mcbrs-dev2.myanmarvbdc.com/" class="" data-toggle="">
-                <img src="{{ asset('img/logo.png') }}" class="user-image" alt="User Image">
+
+                <img src="{{ asset('img/mcbrs_logo.png') }}" class="user-image"alt="User Image">
                 <span class="card-title"> Malaria Case-Based Reporting for VBDC Myanmar </span>
-            </a>
+
         </li>
         <li>
             <a href="/home" class="" id="">Go To HomePage</a>
@@ -433,12 +433,12 @@ width: 100% !important;
     <div class="col-md-12">
         <div class="box">
             <div class="box-header" style="text-align:center;padding-top:20px;">
-                <h3 class="box-title">သိမ်းထားသောပုံစံများ</h3>
+                <h3 class="box-title">သိမ်းဆည်းထားသောလူနာစာရင်းပုံစံအချက်အလက်များ</h3>
             </div>
             <div>
-                <form  method="GET" action="#">
+                {{-- <form  method="GET" action="#"> --}}
                     <!-- <input type="hidden" name="_token" value="Eu7aH4i70ibviYKFqAcvBAELd33uD9TII5BNB7yO"> -->
-                    <div class="row"style="padding:15px;">
+                    <div class="row"style="padding:7px;">
                         {{-- <div class="col-md-3">
                             <div class="form-group">
                                 <label class="control-label">တိုင်းနှင့်ပြည်နယ်</label>
@@ -561,7 +561,7 @@ width: 100% !important;
 
 
                     </div>
-                </form>
+                {{-- </form> --}}
 
                <div class="tables" style="height:100%;">
 
@@ -598,10 +598,10 @@ width: 100% !important;
 
                                 <td>
                                     {{-- <form id="" method="POST"> --}}
-                                        <div class="buttons" style="width:max-content; align:center; padding-left:70px;">
+                                        <div class="buttons" style="width:max-content; align:center; padding-left:70px; padding-top:7px; padding-bottom:7px;">
 
-                                                <a href="{{ 'formList/'.$case->pt_current_township }}">
-                                                <button title="" id="form_form_{{ $case->pt_current_township }}"
+                                                <a href="{{ 'formList/'.$case->pt_current_township }}" style="padding-right:5px;">
+                                                <button title="ပြင်ဆင်ရန်" id="form_form_{{ $case->pt_current_township }}"
                                                     type="button"
                                                     class="btn btn-info btn-xs" style="padding:5px;">
                                                     ပြင်ဆင်ရန်
@@ -609,12 +609,14 @@ width: 100% !important;
                                                 </button>
                                                 </a>
                                             {{-- id="showPopupBtnUpload" --}}
+                                           <a href="" style="padding-left:5px;">
                                             <button title="server ပေါ်သို့ပို့ဆောင်မည်" type="button"
-                                                class="btn btn-success btn-xs" style="padding:5px;" id=""
-                                                onClick="dhis2postData('{{ $case->pt_current_township }}')">
-                                                {{-- <i class="fa fa-upload upload_to_online_btn"></i> --}}
-                                                server ပေါ်သို့ပို့ဆောင်မည်
-                                            </button>
+                                            class="btn btn-success btn-xs" style="padding:5px;padding-left:5px;" id=""
+                                            onClick="dhis2postData('{{ $case->pt_current_township }}')">
+                                            {{-- <i class="fa fa-upload upload_to_online_btn"></i> --}}
+                                            server ပေါ်သို့ပို့ဆောင်မည်
+                                        </button>
+                                           </a>
                                         </div>
                                     {{-- </form> --}}
                                 </td>

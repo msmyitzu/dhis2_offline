@@ -515,7 +515,7 @@
         <li class="fa fa-plus-square text-white" style="margin-right:20px;"></li>အသစ်တစ်ကြောင်းထပ်တိုးရန်
     </button>
     <div class="col-md-12 table-container" style="padding: 10px;">
-        <div class="table-container">
+        <div class="">
             <table class="table table-bordered dataTable" id="dynamicInput" id="register-table"
                 style="background-color: rgb(120, 120, 114); justify-content:center">
                 <thead class="mmtext-12">

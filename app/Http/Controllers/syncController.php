@@ -19,7 +19,9 @@ use Illuminate\Support\Facades\DB;
 
 class syncController extends Controller
 {
-    protected $API_URL = "https://www.myanmarvbdc.com/" ;   //login
+    // protected $API_URL = "https://www.myanmarvbdc.com/" ;   //login
+
+    protected $API_URL = "https://mcbrs-dev2.myanmarvbdc.com/api/29/me/authorities/ALL" ;
 
     //Upload data page
     public function show_sync_page()
@@ -291,11 +293,7 @@ class syncController extends Controller
 
     public function sync_download()
     {
-
-
-
         if($user = Auth::user())
-
         {
 
             if(Session::get('api_token') != ""){

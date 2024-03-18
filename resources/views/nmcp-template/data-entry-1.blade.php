@@ -2,7 +2,9 @@
     <div class="row">
         <div class="col-md-7">
             <div class="text-center" style="border: 1px solid #E3E3E3; background-color:#FBFBFB">
+               <div class="" style="align:center">
                 <h5>ပုံစံအချက်အလက်များကိုသေချာရွေးချယ်ပါ။</h5>
+               </div>
                 <form class="form-horizontal" id="frm-patient-register-form" method="post" action="patient-register-form">
                     {{ csrf_field() }}
                     <div class="box-body">

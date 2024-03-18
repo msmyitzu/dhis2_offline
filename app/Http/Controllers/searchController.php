@@ -12,6 +12,7 @@ class searchController extends Controller
 
         public function search(Request $request, $type)
     {
+        // dd($request->all());
 		try{
 
             $message = [
@@ -35,19 +36,19 @@ class searchController extends Controller
             }
 
 			if(Auth::check()){
-				$name = Auth::user()->name ;
-				$state_region = session('role_id') == '1' ? \App\tbl_region::all() : \App\tbl_region::where('sr_code', session('region_code'))->get();
+				// $name = Auth::user()->name ;
+				// $state_region = session('role_id') == '1' ? \App\tbl_region::all() : \App\tbl_region::where('sr_code', session('region_code'))->get();
 				switch($type){
 					case "sr_search":
 						$sr_code = $request->input('sr_search');
 						if($sr_code){
-							$tbl_core_facility = \App\tbl_core_facility::where("sr_code", "=", $sr_code)->get();
+							$tbl_core_facility = \App\tbl_core_facility::where("region_mmr", "=", $sr_code)->get();
 						}
 					break;
 					case "ts_search":
 						$ts_code = $request->input('ts_search');
 						if($ts_code){
-							$tbl_core_facility = \App\tbl_core_facility::where("ts_code", "=", $ts_code)->get();
+							$tbl_core_facility = \App\tbl_core_facility::where("township_mmr", "=", $ts_code)->get();
 						}
 					break;
 					case "sdate_search":

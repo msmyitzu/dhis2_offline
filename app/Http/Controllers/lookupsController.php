@@ -60,20 +60,24 @@ use App\grab_users;
 use App\user_role;
 use App\grab_tbl_hfm_by_region;
 use Hash;
+use Illuminate\Support\Facades\Auth as FacadesAuth;
 use Illuminate\Support\Facades\Crypt;
-use Session ;
+use Session;
 
 class lookupsController extends Controller
 {
 
-    protected $API_URL = "https:/www.myanmarvbdc.com/" ;
+    // protected $API_URL = "https:/www.myanmarvbdc.com/";
+    protected $API_URL = "https://mcbrs-dev2.myanmarvbdc.com/api/25/me/authorities/ALL";
+
+    // protected $API_URL = "https://play.dhis2.org/dev/api/25/me";
 
     // public function get_grab_all_corefacility()
     // {
     //     $grab_all_corefacility = grab_all_corefacility::all();
 
     //     $header = array (
-    //         'Content-Type' => 'application/json; charset=UTF-8',
+    //         'Content-Type' => 'application   /json; charset=UTF-8',
     //         'charset' => 'utf-8'
     //     );
 
@@ -94,10 +98,10 @@ class lookupsController extends Controller
 
     // }
 
-// public function show_entry_2_page(){
+    // public function show_entry_2_page(){
 
-//     return view('nmcp-template.data-entry-2');
-// }
+    //     return view('nmcp-template.data-entry-2');
+    // }
 
 
     // public function get_grab_last_corefacility()
@@ -222,37 +226,37 @@ class lookupsController extends Controller
 
 
 
-	// public function get_lp_pmonth()
-	// {
-	// 	$lp_pmonth = lp_pmonth::all();
-	// 	return $lp_pmonth;
-	// }
+    // public function get_lp_pmonth()
+    // {
+    // 	$lp_pmonth = lp_pmonth::all();
+    // 	return $lp_pmonth;
+    // }
 
-	// public function get_lp_pyear()
-	// {
-	// 	$lp_pyear = lp_pyear::all();
-	// 	return $lp_pyear;
+    // public function get_lp_pyear()
+    // {
+    // 	$lp_pyear = lp_pyear::all();
+    // 	return $lp_pyear;
     // }
 
 
-	// public function get_lp_state_region()
-	// {
+    // public function get_lp_state_region()
+    // {
     //     $lp_state_region = lp_state_region::all();
 
-	// 	$header = array (
+    // 	$header = array (
     //         'Content-Type' => 'application/json; charset=UTF-8',
     //         'charset' => 'utf-8'
     //     );
 
     //     return response()->json($lp_state_region , 200, $header, JSON_UNESCAPED_UNICODE);
-	// }
+    // }
 
 
 
-	public function get_lp_township($data)
-	{
+    public function get_lp_township($data)
+    {
         //  ($region_id);
-        try{
+        try {
 
             // if($region_id === "all"){
             //     $region = tbl_region::all();
@@ -267,12 +271,10 @@ class lookupsController extends Controller
             // return response()->json($township , 200, $header, JSON_UNESCAPED_UNICODE);
 
             $data = DB::table("tbl_township")
-            ->where('township_mmr', 'like', $data . '%')
-            ->get();
+                ->where('township_mmr', 'like', $data . '%')
+                ->get();
             return response()->json($data);
-
-        }
-        catch (\Exception $e) {
+        } catch (\Exception $e) {
             return $e->getMessage();
         }
     }
@@ -281,30 +283,30 @@ class lookupsController extends Controller
 
 
 
-//     public function get_lp_township($region_id)
-// {
-//     try {
-//         if ($region_id === "all") {
-//             $townships = tbl_township::orderBy('township_mmr')->get();
-//             // dd($township);
-//         } else {
-//             //
-//             $townships = tbl_township::where('township_id', 'LIKE','region_id')->orderBy('township_mmr')->get();
-//         }
+    //     public function get_lp_township($region_id)
+    // {
+    //     try {
+    //         if ($region_id === "all") {
+    //             $townships = tbl_township::orderBy('township_mmr')->get();
+    //             // dd($township);
+    //         } else {
+    //             //
+    //             $townships = tbl_township::where('township_id', 'LIKE','region_id')->orderBy('township_mmr')->get();
+    //         }
 
-//         if ($townships->isEmpty()) {
-//             return response()->json(['message' => 'No townships found for the given region ID'], 404);
-//         }
+    //         if ($townships->isEmpty()) {
+    //             return response()->json(['message' => 'No townships found for the given region ID'], 404);
+    //         }
 
-//         return response()->json($townships, 200, [], JSON_UNESCAPED_UNICODE);
-//     } catch (\Exception $e) {
-//         return response()->json(['error' => $e->getMessage()], 500);
-//     }
-// }
+    //         return response()->json($townships, 200, [], JSON_UNESCAPED_UNICODE);
+    //     } catch (\Exception $e) {
+    //         return response()->json(['error' => $e->getMessage()], 500);
+    //     }
+    // }
 
 
     // public function get_tbl_hfm()
-	// {
+    // {
     //     try{
     //         $tbl_hfm = tbl_hfm::take(100)->orderBy('SC_Name')->get();
 
@@ -318,45 +320,39 @@ class lookupsController extends Controller
     //     catch (\Exception $e) {
     //         return $e->getMessage();
     //     }
-	// }
+    // }
 
-	// public function get_lp_treatment_given()
-	// {
-	// 	$lp_treatment_given = lp_treatment_given::all();
-	// 	return $lp_treatment_given;
-	// }
+    // public function get_lp_treatment_given()
+    // {
+    // 	$lp_treatment_given = lp_treatment_given::all();
+    // 	return $lp_treatment_given;
+    // }
 
-	// public function get_lp_yesno()
-	// {
-	// 	$lp_yesno = lp_yesno::all();
-	// 	return $lp_yesno;
+    // public function get_lp_yesno()
+    // {
+    // 	$lp_yesno = lp_yesno::all();
+    // 	return $lp_yesno;
     // }
 
     public function ShowMainTabs()
     {
 
-        if($user = Auth::user())
-        {
+        if ($user = Auth::user()) {
             //Select only related region depends on user role
-            if(session('role_id') === 2)
-            {
+            if (session('role_id') === 2) {
                 //role_id 2 is State level
                 $sr_code = session('region_code');
-                $tbl_region = tbl_region::where('sr_code','=',$sr_code)->orderBy('sr_name')->get();
-                $tbl_township = [] ;
+                $tbl_region = tbl_region::where('sr_code', '=', $sr_code)->orderBy('sr_name')->get();
+                $tbl_township = [];
                 //return $lp_state_region;
-            }
-            else if(session('role_id') === "3")
-            {
+            } else if (session('role_id') === "3") {
                 //role_id 3 is Township level
-                $ts_code = lp_township::where('ts_code','=', session('region_code'))->pluck('ts_code')->first();
+                $ts_code = lp_township::where('ts_code', '=', session('region_code'))->pluck('ts_code')->first();
                 //ts_code = MMR001001    sr_code = MMR001
                 $sr_code = substr($ts_code, 0, 6);
-                $lp_state_region = lp_state_region::where('sr_code','=', $sr_code)->orderBy('sr_name')->get();
-                $lp_township = lp_township::where('ts_code','=', $ts_code)->get();
-            }
-            else
-            {
+                $lp_state_region = lp_state_region::where('sr_code', '=', $sr_code)->orderBy('sr_name')->get();
+                $lp_township = lp_township::where('ts_code', '=', $ts_code)->get();
+            } else {
                 //role_id 1 is Admin. Select everything
 
                 $lp_state_region = lp_state_region::orderBy('sr_name')->get();
@@ -365,47 +361,46 @@ class lookupsController extends Controller
 
             $name = strtoupper(Auth::user()->name);
 
-            return view('adminlte-template.admin-template',compact(
-                            'lp_state_region','lp_township','name'//,'grab_last_corefacility'
-                        ));
-
-        }
-        else {
+            return view('adminlte-template.admin-template', compact(
+                'lp_state_region',
+                'lp_township',
+                'name' //,'grab_last_corefacility'
+            ));
+        } else {
             return redirect('login');
         }
     }
 
     public function get_grab_hfconnect1($ts_code, $form_code)
-	{
-        try{
+    {
+        try {
             $grab_hfconnect1 = grab_hfconnect1::where([
                 ['TS_Code', '=', $ts_code],
                 ['Form_Code', '=', $form_code]
             ])->orderBy('HF_Name')->get();
 
-            $header = array (
+            $header = array(
                 'Content-Type' => 'application/json; charset=UTF-8',
                 'charset' => 'utf-8'
             );
 
-            return response()->json($grab_hfconnect1 , 200, $header, JSON_UNESCAPED_UNICODE);
-        }
-        catch (\Exception $e) {
+            return response()->json($grab_hfconnect1, 200, $header, JSON_UNESCAPED_UNICODE);
+        } catch (\Exception $e) {
             return $e->getMessage();
         }
     }
 
-        public function get_grab_hfconnect($ts_code)
+    public function get_grab_hfconnect($ts_code)
     {
         try {
             $grab_hfconnect = DB::table('healty_facility')->where("TS_Code", "=", $ts_code)->where('status', '<>', '0')->get();
 
-            $header = array (
+            $header = array(
                 'Content-Type' => 'application/json; charset=UTF-8',
                 'charset' => 'utf-8'
             );
 
-            return response()->json($grab_hfconnect , 200, $header, JSON_UNESCAPED_UNICODE);
+            return response()->json($grab_hfconnect, 200, $header, JSON_UNESCAPED_UNICODE);
         } catch (\Exception $e) {
             return $e->getMessage();
         }
@@ -417,18 +412,19 @@ class lookupsController extends Controller
 
         $grab_hfm = DB::select('select "SC_Name" as sc_name, "SC_Name_MM" as sc_name_mm, "SC_Code" as sc_code, "HF_Code" as hf_code
                 from tbl_hfm where status <> 0 and "HF_Code" = ? order by "SC_Name"', [
-                $hf_code
-            ]);
+            $hf_code
+        ]);
 
-        $header = array (
+        $header = array(
             'Content-Type' => 'application/json; charset=UTF-8',
             'charset' => 'utf-8'
         );
 
-        return response()->json($grab_hfm , 200, $header, JSON_UNESCAPED_UNICODE);
+        return response()->json($grab_hfm, 200, $header, JSON_UNESCAPED_UNICODE);
     }
 
-    public function get_patient_registerform(Request $request){
+    public function get_patient_registerform(Request $request)
+    {
         //dd($request);
         // $lp_patient_location = lp_patient_location::all();
         // $lp_patient_sex = lp_patient_sex::all();
@@ -440,8 +436,8 @@ class lookupsController extends Controller
         // $lp_yesno = lp_yesno::all();
         // $lp_occupation = lp_occupation::all();
         // $lp_org = lp_org::all();
-		$tbl_village =tbl_village::where("ts_pcode", "=", $request->input('select_lp_township_de'))->orderBy('village', 'asc')->get();
-       // $lp_form_cat = lp_form_cat::where('form_code', '=' , $request->input("select_lp_form_cat"))->get();
+        $tbl_village = tbl_village::where("ts_pcode", "=", $request->input('select_lp_township_de'))->orderBy('village', 'asc')->get();
+        // $lp_form_cat = lp_form_cat::where('form_code', '=' , $request->input("select_lp_form_cat"))->get();
 
         //$lp_form_cat = $request->input("select_lp_form_cat");
         // dd($lp_form_cat);
@@ -451,7 +447,7 @@ class lookupsController extends Controller
         $tbl_hfm_de = $request->input("select_tbl_hfm_de");
         $hfm_de = $request->input("select_hfm_de");
         $form_date = $request->input("form-date");
-        list($form_month,$form_year) = explode('/', $form_date);
+        list($form_month, $form_year) = explode('/', $form_date);
 
         $cf_link_code = $request->input("cf_link_code");
         // return $request;
@@ -459,15 +455,15 @@ class lookupsController extends Controller
         /*CF_Code == " " means this form is new. No existing record inside tbl_core_facility*/
         // return session("region_code");
 
-        if($cf_link_code == "" /*&& $lp_form_cat == "2"*/){
+        if ($cf_link_code == "" /*&& $lp_form_cat == "2"*/) {
             $tbl_check = tbl_core_facility_temp::where('Form_No', '=', $form_number)
-                                                //->where('Form_Code', '=', $lp_form_cat)
-                                                // ->where('SC_Code', '=', $hfm_de)
-                                                ->where('PMonth', '=', $form_month)
-                                                ->where('PYear', '=', $form_year)
-                                                ->where('user_id', '=', session('userid'))
-                                                ->count();
-            if(!($tbl_check > 0)){
+                //->where('Form_Code', '=', $lp_form_cat)
+                // ->where('SC_Code', '=', $hfm_de)
+                ->where('PMonth', '=', $form_month)
+                ->where('PYear', '=', $form_year)
+                ->where('user_id', '=', session('userid'))
+                ->count();
+            if (!($tbl_check > 0)) {
                 $tbl_core_facility_temp = new tbl_core_facility_temp();
                 //$tbl_core_facility_temp->Form_Code = $lp_form_cat;
                 $tbl_core_facility_temp->Form_No = $form_number;
@@ -489,94 +485,147 @@ class lookupsController extends Controller
                 $tbl_core_facility_temp->cf_link_code = $cf_link_code;
                 $tbl_core_facility_temp->save();
             }
-        }
-        else {
-            $tbl_core_facility_temp = tbl_core_facility_temp::where('cf_link_code','=', $cf_link_code)->get();
-            $tbl_individual_case_temp = tbl_individual_case_temp::where('cf_link_code','=', $cf_link_code)->get();
+        } else {
+            $tbl_core_facility_temp = tbl_core_facility_temp::where('cf_link_code', '=', $cf_link_code)->get();
+            $tbl_individual_case_temp = tbl_individual_case_temp::where('cf_link_code', '=', $cf_link_code)->get();
             // $tbl_org_vhv = tbl_org_vhv_temp::where('cf_link_code', '=', $cf_link_code)->get(); // only for vhv form page
             //$cf_link_code = $tbl_core_facility_temp->cf_link_code;
-			// $tbl_total_patient_temp = tbl_total_patient_temp::where('cf_link_code', '=', $cf_link_code)->get();
+            // $tbl_total_patient_temp = tbl_total_patient_temp::where('cf_link_code', '=', $cf_link_code)->get();
         }
 
 
-        $lp_state_region_name = lp_state_region::where('sr_code','=',$tbl_region)->value('sr_name');
-        $lp_township_name = lp_township::where('ts_code','=',$lp_township_de)->value('ts_name');
-        $tbl_hfm_sc_name = tbl_hfm::where('SC_Code','=',$tbl_hfm_de)->value('SC_Name');
-        $hfm_name = tbl_hfm::where('SC_Code','=',$hfm_de)->value('SC_Name');
-        $lp_form_cat_name = tbl_core_facility::where('form_code','=',$tbl_core_facility)->value('form_name');
+        $lp_state_region_name = lp_state_region::where('sr_code', '=', $tbl_region)->value('sr_name');
+        $lp_township_name = lp_township::where('ts_code', '=', $lp_township_de)->value('ts_name');
+        $tbl_hfm_sc_name = tbl_hfm::where('SC_Code', '=', $tbl_hfm_de)->value('SC_Name');
+        $hfm_name = tbl_hfm::where('SC_Code', '=', $hfm_de)->value('SC_Name');
+        $lp_form_cat_name = tbl_core_facility::where('form_code', '=', $tbl_core_facility)->value('form_name');
         $tbl_individual_case_temp = $tbl_individual_case_temp ?? [];
-         $review_mode = session('role_id') == 4 ? true : false ;
+        $review_mode = session('role_id') == 4 ? true : false;
 
-        if( $lp_form_cat == "2" || $lp_form_cat == "3" ){
+        if ($lp_form_cat == "2" || $lp_form_cat == "3") {
             $tbl_org_vhv = tbl_org_vhv_temp::where('cf_link_code', '=', $cf_link_code)->get();
-            $lp_in_out_cat = lp_in_out_cat::whereIn('ioc_code', [2,4,7,9])->get();
-            return view('nmcp-template/vhv-patient-register-form',
-                        compact('lp_patient_location', 'lp_patient_sex',
-                                'lp_rdt_result', 'lp_treatment_given',
-                                'lp_act_code', 'lp_org',
-                                'lp_form_cat','form_number','lp_township_de',
-                                'tbl_hfm_de','hfm_de','form_year','form_month',
-                                'lp_state_region','lp_state_region_name','lp_township_name',
-                                'tbl_hfm_sc_name','hfm_name','lp_form_cat_name',
-                                'cf_code','lp_in_out_cat', 'tbl_individual_case_temp',
-                                'lp_yesno','lp_occupation', 'tbl_org_vhv','cf_link_code',
-								'tbl_village','review_mode'));
-
-        }else{
+            $lp_in_out_cat = lp_in_out_cat::whereIn('ioc_code', [2, 4, 7, 9])->get();
+            return view(
+                'nmcp-template/vhv-patient-register-form',
+                compact(
+                    'lp_patient_location',
+                    'lp_patient_sex',
+                    'lp_rdt_result',
+                    'lp_treatment_given',
+                    'lp_act_code',
+                    'lp_org',
+                    'lp_form_cat',
+                    'form_number',
+                    'lp_township_de',
+                    'tbl_hfm_de',
+                    'hfm_de',
+                    'form_year',
+                    'form_month',
+                    'lp_state_region',
+                    'lp_state_region_name',
+                    'lp_township_name',
+                    'tbl_hfm_sc_name',
+                    'hfm_name',
+                    'lp_form_cat_name',
+                    'cf_code',
+                    'lp_in_out_cat',
+                    'tbl_individual_case_temp',
+                    'lp_yesno',
+                    'lp_occupation',
+                    'tbl_org_vhv',
+                    'cf_link_code',
+                    'tbl_village',
+                    'review_mode'
+                )
+            );
+        } else {
             $tbl_total_patient_temp = tbl_total_patient_temp::where('cf_link_code', '=', $cf_link_code)->get();
-            $lp_in_out_cat = lp_in_out_cat::whereNotIn('ioc_code', [0,1])->get();
+            $lp_in_out_cat = lp_in_out_cat::whereNotIn('ioc_code', [0, 1])->get();
             //return $tbl_individual_case_temp;
-            return view('nmcp-template/patient-register-form',
-                        compact('lp_patient_location', 'lp_patient_sex',
-                                'lp_rdt_result', 'lp_treatment_given',
-                                'lp_act_code', 'lp_micro_result',
-                                'lp_form_cat','form_number','lp_township_de',
-                                'tbl_hfm_de','hfm_de','form_year','form_month',
-                                'lp_state_region','lp_state_region_name','lp_township_name',
-                                'tbl_hfm_sc_name','hfm_name','lp_form_cat_name',
-                                'cf_code','tbl_individual_case_temp','lp_in_out_cat',
-                                'lp_yesno','lp_occupation','cf_link_code', 'tbl_total_patient_temp',
-								'tbl_village','review_mode'));
+            return view(
+                'nmcp-template/patient-register-form',
+                compact(
+                    'lp_patient_location',
+                    'lp_patient_sex',
+                    'lp_rdt_result',
+                    'lp_treatment_given',
+                    'lp_act_code',
+                    'lp_micro_result',
+                    'lp_form_cat',
+                    'form_number',
+                    'lp_township_de',
+                    'tbl_hfm_de',
+                    'hfm_de',
+                    'form_year',
+                    'form_month',
+                    'lp_state_region',
+                    'lp_state_region_name',
+                    'lp_township_name',
+                    'tbl_hfm_sc_name',
+                    'hfm_name',
+                    'lp_form_cat_name',
+                    'cf_code',
+                    'tbl_individual_case_temp',
+                    'lp_in_out_cat',
+                    'lp_yesno',
+                    'lp_occupation',
+                    'cf_link_code',
+                    'tbl_total_patient_temp',
+                    'tbl_village',
+                    'review_mode'
+                )
+            );
         }
     }
 
-    public function get_patient_registerform_offline(Request $request){
+    public function get_patient_registerform_offline(Request $request)
+    {
+        // dd($request->all());
 
         $tbl_core_facility = tbl_core_facility::get();    //->limit(2) orderBy('form_name')->
         // dd($lp_form_cat);
         // $tbl_region = tbl_region::get();
         // $tbl_township = tbl_township::get();
         $data_region = DB::table("tbl_region")->get();
-        return view('parent-register-template.index',compact('tbl_core_facility','data_region'));
+
+        // dd($data_region);
+
+        return view('parent-register-template.index', compact('tbl_core_facility', 'data_region'));
+        // return view('adminlte-template.login', compact('tbl_core_facility', 'data_region'));
     }
 
-    public function get_patient_registerform_row(Request $request){
+    public function get_patient_registerform_row(Request $request)
+    {
 
         // $tbl_core_facility = tbl_core_facility::get();    //->limit(2) orderBy('form_name')->
         // dd($lp_form_cat);
         // $tbl_region = tbl_region::get();
         $township = tbl_township::all();
         // $data_region = DB::table("tbl_region")->get();
-        return view('nmcp-template.patient_register_form_row')->with('township',$township);
+        return view('nmcp-template.patient_register_form_row')->with('township', $township);
     }
 
 
-    // public function get_existing_form_data($cf_link_code){
-    //     return tbl_core_facility_temp::where('cf_link_code', $cf_link_code)->get();
-    // }
+    public function get_existing_form_data($pt_current_township)
+    {
+
+
+
+        return  view('parent-register-template.formList', compact('tbl_individual_case'));
+    }
+
 
     public function save_tbl_individual_case(Request $request)
     {
         try {
             $data = json_decode($request->getContent(), true);
-			if($data){
-				tbl_individual_case::insert($data);
-				return "1";
-			}else{
-			    return "Edited or Updated Data Successfully Save.";
+            if ($data) {
+                tbl_individual_case::insert($data);
+                return "1";
+            } else {
+                return "Edited or Updated Data Successfully Save.";
             }
-        }
-        catch (\Exception $e) {
+        } catch (\Exception $e) {
             return $e->getMessage();
         }
     }
@@ -584,18 +633,17 @@ class lookupsController extends Controller
     public function save_tbl_individual_case_temp(Request $request)
 
     {
-       // dd($request);
+        //    dd($request);
         try {
             $data = json_decode($request->getContent(), true);
-			if($data){
+            if ($data) {
                 //dd($data);
-				tbl_individual_case::insert($data);
-				return "1";
-			}else{
-			    return "Edited or Updated Data Successfully Save.";
+                tbl_individual_case::insert($data);
+                return "1";
+            } else {
+                return "Edited or Updated Data Successfully Save.";
             }
-        }
-        catch (\Exception $e) {
+        } catch (\Exception $e) {
             return $e->getMessage();
         }
     }
@@ -604,100 +652,102 @@ class lookupsController extends Controller
     {
         try {
             $data = json_decode($request->getContent(), true);
-            if($data){
-			    tbl_total_patient::insert($data);
+            if ($data) {
+                tbl_total_patient::insert($data);
                 return "1";
             }
-        }
-        catch (\Exception $e) {
+        } catch (\Exception $e) {
             return $e->getMessage();
         }
     }
 
     public function save_tbl_total_patient_temp(Request $request)
-
     {
-
-        // dd($request);
+        // dd($request->all());
+        // dd('nils => ',$request->all());
         try {
+
+            $key = md5(microtime() . rand());
             $data = json_decode($request->getContent(), true);
-            // dd($data);
-            if($data){
-
-                $tbl_individual_case_data = [
-                    'screening_date' => $data['date'],
-                    'pt_Name' => $data['Pt_Name'],
-                    'pt_age' => $data['Age_Year'],
-                    'pt_father_name' => $data['Pt_Father_Name'],
-                    'pt_address' => $data['Pt_Location'],
-                    'pt_current_township' => $data['Pt_Address'],
-                    'pt_current_village' => $data['Pt_Address1'],
-                    'pt_current_ward' => $data['Pt_Address2'],
-                    'pt_permanent_township' => $data['Pt_Address3'],
-                    'pt_permanent_village' => $data['Pt_Address4'],
-                    'pt_permanent_ward' => $data['Pt_Address5'],
-                    'Sex_Code' => $data['Sex_Code'],
-                    'Preg_YN' => $data['Preg_YN'],
-                    'Micro_Code' => $data['Micro_Code'],
-                    'RDT_Code' => $data['RDT_Code'],
-                    'IOC_Code' => $data['IOC_Code'],
-                    'ACT_Code' => $data['ACT_Code'],
-                    'CQ_Code' => $data['CQ_Code'],
-                    'PQ_Code' => $data['PQ_Code'],
-                    'Referral_Code' => $data['Referral_Code'],
-                    'Malaria_Death' => $data['Malaria_Death'],
-                    'TG_Code' => $data['TG_Code'],
-                    'travel_yn' => $data['travel_yn'],
-                    'occupation' => $data['occupation'],
-                    'Remark' => $data['Remark']
-                    // ['Total_Outpatient', '=', $data['Total_Outpatient']],
-                    // ['U5_Outpatient', '=', $data['U5_Outpatient']],
-                    // ['Preg_Outpatient', '=', $data['Preg_Outpatient']],
-                    // ['Total_Inpatient', '=', $data['Total_Inpatient']],
-                    // ['U5_Inpatient', '=', $data['U5_Inpatient']],
-                    // ['Preg_Inpatient', '=', $data['Preg_Inpatient']],
-                    // ['Death_Facility', '=', $data['Death_Facility']],
-                    // ['cf_link_code', '=', $data['cf_link_code']]
-                ];
-                $tbl = tbl_individual_case::insert($tbl_individual_case_data );
-                // dd($tbl);
-                //  return "1";
-                // $tbl_total_patient_temp = tbl_individual_case::where('cf_id', '=', $data['cf_id'])->count();
-                // if(!$tbl_total_patient_temp > 0){
-                //     tbl_individual_case::insert($data);
-                //     return "1";
-                // }else{
-                //     return "2" ;
-                // }
 
 
-                // data["service_provider"] = $("#service_provider").val();
-                // data["data_entry"] = $("#data_entry_type").val();
-                // data["state_region"] = $("#state_region").val();
-                // data["township"] = $("#township").val();
-                // data["rhc_health"] = $("#rhc_health").val();
-                // data["sc_health"] = $("#sc_health").val();
-                // data["icmv_select"] = $("#icmvSelect").val();
-                // data["rp_month"] = $("#rp_month").val();
-                // data["blood_test"] = $("#bloodTest").val();
-                // data["condition"] = $("#conditionalSelect").val();
+            if ($data) {
+
+
+                $existingData = tbl_individual_case::where('screening_date', $data['patient'][0]['date'])
+                    ->where('pt_Name', $data['patient'][0]['Pt_Name'])
+                    ->where('pt_age', $data['patient'][0]['Age_Year'])
+                    ->where('pt_father_name', $data['patient'][0]['Pt_Father_Name'])
+                    ->where('Sex_Code', $data['patient'][0]['Sex_Code'])
+
+                    ->exists();
+
+                if ($existingData) {
+                    return "400";
+                }
+
+                foreach ($data['patient'] as $patient) {
+                    $tbl_individual_case_data[] = [
+
+                        'cf_id' => $key,
+                        'screening_date' => $patient['date'],
+                        'pt_Name' => $patient['Pt_Name'],
+                        'pt_age' => $patient['Age_Year'],
+                        'pt_father_name' => $patient['Pt_Father_Name'],
+                        'pt_address' => $patient['Pt_Location'],
+                        'pt_current_township' => $patient['Pt_Address'],
+                        'pt_current_village' => $patient['Pt_Address1'],
+                        'pt_current_ward' => $patient['Pt_Address2'],
+                        'pt_permanent_township' => $patient['Pt_Address3'],
+                        'pt_permanent_village' => $patient['Pt_Address4'],
+                        'pt_permanent_ward' => $patient['Pt_Address5'],
+                        'Sex_Code' => $patient['Sex_Code'],
+                        'Preg_YN' => $patient['Preg_YN'],
+                        'Micro_Code' => $patient['Micro_Code'],
+                        'RDT_Code' => $patient['RDT_Code'],
+                        'IOC_Code' => $patient['IOC_Code'],
+                        'ACT_Code' => $patient['ACT_Code'],
+                        'CQ_Code' => $patient['CQ_Code'],
+                        'PQ_Code' => $patient['PQ_Code'],
+                        'Referral_Code' => $patient['Referral_Code'],
+                        'Malaria_Death' => $patient['Malaria_Death'],
+                        'TG_Code' => $patient['TG_Code'],
+                        'travel_yn' => $patient['travel_yn'],
+                        'occupation' => $patient['occupation'],
+                        'Remark' => $patient['Remark']
+                        // ['Total_Outpatient', '=', $data['Total_Outpatient']],
+                        // ['U5_Outpatient', '=', $data['U5_Outpatient']],
+                        // ['Preg_Outpatient', '=', $data['Preg_Outpatient']],
+                        // ['Total_Inpatient', '=', $data['Total_Inpatient']],
+                        // ['U5_Inpatient', '=', $data['U5_Inpatient']],
+                        // ['Preg_Inpatient', '=', $data['Preg_Inpatient']],
+                        // ['Death_Facility', '=', $data['Death_Facility']],
+                        // ['cf_link_code', '=', $data['cf_link_code']]
+                    ];
+                }
+                $tbl = tbl_individual_case::insert($tbl_individual_case_data);
 
 
                 $tbl_core_facility_data = [
+
                     'service_provider' => $data['service_provider'],
                     'data_entry_type' => $data['data_entry'],
                     'region_mmr' => $data['state_region'],
-                    'district_mmr' => $data['township'],
-                    'township_mmr' => $data['sc_health'],
-                    'health_facility' => $data['icmv_select'],
+                    // 'district_mmr' => $data['township'],
+                    'township_mmr' => $data['township'],
+                    'health_facility' => $data['rhc_health'],
+                    'sub_center' => $data['sc_health'],
+                    'village_health_center' => $data['icmv_select'],
                     'report_month' => $data['rp_month'],
                     'blood_test_result' => $data['blood_test'],
-                    'condition' => $data['condition']
+                    'condition' => $data['condition'],
+                    'core_id' => $key
                 ];
                 // dd($tbl_core_facility_data );
                 $tbl = tbl_core_facility::insert($tbl_core_facility_data);
 
                 $tbl_nil_data = [
+                    'cf_id' => $key,
                     'total_outpatient' => $data['Total_Outpatient'],
                     'u5_outpatient' => $data['U5_Outpatient'],
                     'preg_outpatient' => $data['Preg_Outpatient'],
@@ -707,43 +757,159 @@ class lookupsController extends Controller
                     'death_facility' => $data['Death_Facility']
                 ];
                 $tbl = tbl_nil::insert($tbl_nil_data);
-                // dd($tbl);
-                // alert("All Data Saved to related Table");
+                //   dd($tbl);
                 return "1";
-
             }
-        }
-        catch (\Exception $e) {
+        } catch (\Exception $e) {
             return $e->getMessage();
         }
     }
 
-	// public function update_tbl_total_patient_temp(Request $request)
+
+    public function save_tbl_individual_case_temp_edit(Request $request)
+    {
+        try {
+            $data = json_decode($request->getContent(), true);
+
+            // if($data) {
+            $ic_id_code = $data["ic_id_code"];
+            //dd($ic_id_code);
+            // Check if a record with the same ic_id_code already exists
+            $existing_record = tbl_individual_case::where('cf_id', $ic_id_code)->delete();
+
+
+            foreach ($data['patient'] as $patient) {
+                $tbl_individual_case_data[] = [
+                    'cf_id' => $ic_id_code,
+                    'screening_date' => $patient['date'],
+                    'pt_Name' => $patient['Pt_Name'],
+                    'pt_age' => $patient['Age_Year'],
+                    'pt_father_name' => $patient['Pt_Father_Name'],
+                    'pt_address' => $patient['Pt_Location'],
+                    'pt_current_township' => $patient['Pt_Address'],
+                    'pt_current_village' => $patient['Pt_Address1'],
+                    'pt_current_ward' => $patient['Pt_Address2'],
+                    'pt_permanent_township' => $patient['Pt_Address3'],
+                    'pt_permanent_village' => $patient['Pt_Address4'],
+                    'pt_permanent_ward' => $patient['Pt_Address5'],
+                    'Sex_Code' => $patient['Sex_Code'],
+                    'Preg_YN' => $patient['Preg_YN'],
+                    'Micro_Code' => $patient['Micro_Code'],
+                    'RDT_Code' => $patient['RDT_Code'],
+                    'IOC_Code' => $patient['IOC_Code'],
+                    'ACT_Code' => $patient['ACT_Code'],
+                    'CQ_Code' => $patient['CQ_Code'],
+                    'PQ_Code' => $patient['PQ_Code'],
+                    'Referral_Code' => $patient['Referral_Code'],
+                    'Malaria_Death' => $patient['Malaria_Death'],
+                    'TG_Code' => $patient['TG_Code'],
+                    'travel_yn' => $patient['travel_yn'],
+                    'occupation' => $patient['occupation'],
+                    'Remark' => $patient['Remark']
+                ];
+            }
+
+            $inset = tbl_individual_case::insert($tbl_individual_case_data);
+            // $aa = tbl_individual_case::where('cf_id',$ic_id_code)->get();
+            // dd($aa->toArray());
+            // }
+
+            tbl_nil::where('cf_id', $ic_id_code)
+                ->update([
+                    'total_outpatient' => $data['Total_Outpatient'],
+                    'u5_outpatient' => $data['U5_Outpatient'],
+                    'preg_outpatient' => $data['Preg_Outpatient'],
+                    'total_inpatient' => $data['Total_Inpatient'],
+                    'u5_inpatient' => $data['U5_Inpatient'],
+                    'preg_inpatient' => $data['Preg_Inpatient'],
+                    'death_facility' => $data['Death_Facility']
+                ]);
+
+
+            return "1";
+            // return redirect('/');
+
+            // return view('parent-register-template.uploadForm');
+            // }
+        } catch (\Exception $e) {
+            return $e->getMessage();
+        }
+    }
+
+
+
+    // public function save_tbl_individual_case_temp_edit(Request $request)
     // {
-	// 	try{
+
+    //     // dd('Edit=>',$request->all());
+    // 	try {
+
+    //         // $key = md5(microtime().rand());
     //         $data = json_decode($request->getContent(), true);
-    //         $tbl_total_patient = tbl_individual_case::find($data['TP_Code']);
-    //         $tbl_total_patient->cf_link_code = $data['cf_link_code'];
-    //         $tbl_total_patient->Total_Outpatient = $data['Total_Outpatient'];
-    //         $tbl_total_patient->U5_Outpatient = $data['U5_Outpatient'];
-    //         $tbl_total_patient->Preg_Outpatient = $data['Preg_Outpatient'];
-    //         $tbl_total_patient->Total_Inpatient = $data['Total_Inpatient'];
-    //         $tbl_total_patient->U5_Inpatient = $data['U5_Inpatient'];
-    //         $tbl_total_patient->Preg_Inpatient = $data['Preg_Inpatient'];
-    //         $tbl_total_patient->Death_Facility = $data['Death_Facility'];
-    //         $tbl_total_patient->save();
-    //         return '1';
-    //     }catch (\Exception $e){
+
+    //         if($data){
+    //             //  dd($data->toArray());
+    //             $tbl_individual_case_data = [
+
+    //                 'cf_id' => $data["ic_id_code"],
+    //                 'screening_date' => $data['date'],
+    //                 'pt_Name' => $data['Pt_Name'],
+    //                 'pt_age' => $data['Age_Year'],
+    //                 'pt_father_name' => $data['Pt_Father_Name'],
+    //                 'pt_address' => $data['Pt_Location'],
+    //                 'pt_current_township' => $data['Pt_Address'],
+    //                 'pt_current_village' => $data['Pt_Address1'],
+    //                 'pt_current_ward' => $data['Pt_Address2'],
+    //                 'pt_permanent_township' => $data['Pt_Address3'],
+    //                 'pt_permanent_village' => $data['Pt_Address4'],
+    //                 'pt_permanent_ward' => $data['Pt_Address5'],
+    //                 'Sex_Code' => $data['Sex_Code'],
+    //                 'Preg_YN' => $data['Preg_YN'],
+    //                 'Micro_Code' => $data['Micro_Code'],
+    //                 'RDT_Code' => $data['RDT_Code'],
+    //                 'IOC_Code' => $data['IOC_Code'],
+    //                 'ACT_Code' => $data['ACT_Code'],
+    //                 'CQ_Code' => $data['CQ_Code'],
+    //                 'PQ_Code' => $data['PQ_Code'],
+    //                 'Referral_Code' => $data['Referral_Code'],
+    //                 'Malaria_Death' => $data['Malaria_Death'],
+    //                 'TG_Code' => $data['TG_Code'],
+    //                 'travel_yn' => $data['travel_yn'],
+    //                 'occupation' => $data['occupation'],
+    //                 'Remark' => $data['Remark']
+    //             ];
+    //             $tbl = tbl_individual_case::insert($tbl_individual_case_data);
+    //             $ic_id_code = $data["ic_id_code"];
+    //             $existing_record = tbl_individual_case::where('cf_id',  $ic_id_code)->first();
+    //             // dd('existing=>',$existing_record->toArray());
+    //             $tbl_nil_data = [
+    //                 'cf_id' => $data["ic_id_code"],
+    //                 'total_outpatient' => $data['Total_Outpatient'],
+    //                 'u5_outpatient' => $data['U5_Outpatient'],
+    //                 'preg_outpatient' => $data['Preg_Outpatient'],
+    //                 'total_inpatient' => $data['Total_Inpatient'],
+    //                 'u5_inpatient'  => $data['U5_Inpatient'],
+    //                 'preg_inpatient' => $data['Preg_Inpatient'],
+    //                 'death_facility' => $data['Death_Facility']
+    //             ];
+    //             $tbl = tbl_nil::insert($tbl_nil_data);
+    //             //  dd($tbl);
+    //             return "2";
+
+    //         }
+    //     }
+
+    //   catch (\Exception $e) {
     //         return $e->getMessage();
     //     }
-	// }
+    // }
 
     public function update_tbl_individual_case(Request $request)
     {
         try {
             $data = json_decode($request->getContent(), true);
             //return $data["P_Number"];
-            if($data) {
+            if ($data) {
                 // dd($data);
                 $tbl_individual_case = tbl_individual_case::find($data["P_Number"]);
 
@@ -765,7 +931,7 @@ class lookupsController extends Controller
                 $tbl_individual_case->ACT_Code = $data["ACT_Code"];
                 $tbl_individual_case->CQ_Code = $data["CQ_Code"];
                 $tbl_individual_case->PQ_Code = $data["PQ_Code"];
-//              $tbl_individual_case->cqpq = $data["cqpq"];
+                //              $tbl_individual_case->cqpq = $data["cqpq"];
                 $tbl_individual_case->Referral_Code = $data["Referral_Code"];
                 $tbl_individual_case->Malaria_Death = $data["Malaria_Death"];
                 $tbl_individual_case->TG_Code = $data["TG_Code"];
@@ -775,11 +941,10 @@ class lookupsController extends Controller
 
                 $tbl_individual_case->save();
                 return "1";
-            }else{
+            } else {
                 return "No Patient Data to Update Or Save!";
             }
-        }
-        catch (\Exception $e) {
+        } catch (\Exception $e) {
             return $e->getMessage();
         }
     }
@@ -789,7 +954,7 @@ class lookupsController extends Controller
         try {
             $data = json_decode($request->getContent(), true);
             //return $data["P_Number"];
-            if($data) {
+            if ($data) {
                 $tbl_individual_case_temp = tbl_individual_case_temp::find($data["P_Number"]);
                 $tbl_individual_case_temp->CF_Code = $data["CF_Code"];
                 $tbl_individual_case_temp->Row_No = $data["Row_No"];
@@ -816,16 +981,17 @@ class lookupsController extends Controller
 
                 $tbl_individual_case_temp->save();
                 return "1";
-            }else{
+            } else {
                 return "Edited or Updated Data Successfully Save.";
             }
-        }
-        catch (\Exception $e) {
+        } catch (\Exception $e) {
             return $e->getMessage();
         }
     }
 
-    public function show_upload_form(){
+    public function show_upload_form(Request $request)
+    {
+        // dd($request->all());
         $state_region = tbl_region::all();
         $district = tbl_district::all();
         $township = tbl_township::all();
@@ -840,29 +1006,35 @@ class lookupsController extends Controller
         // ->join('tbl_township', 'tbl_township.township_mmr', '=' , 'tbl_individual_case.pt_current_township')
         // ->get('tbl_township.township_name_en')
         // ->groupBy('pt_current_township');
-            // ->with('township') // Load township relationship to get township names
+        // ->with('township') // Load township relationship to get township names
         // ->get();
         $groupedCases = tbl_individual_case::select(
             'tbl_individual_case.pt_current_township',
+            // 'tbl_individual_case.ic_id'
             'tbl_township.township_name_en',
             DB::raw('COUNT(tbl_individual_case.pt_current_township) as count'),
             DB::raw('MIN(tbl_individual_case.screening_date) as start_date'),
             DB::raw('MAX(tbl_individual_case.screening_date) as end_date')
         )
-        ->join('tbl_township', 'tbl_township.township_mmr', '=', 'tbl_individual_case.pt_current_township')
-        ->groupBy('tbl_township.township_name_en')
-        ->get();
+
+            ->join('tbl_township', 'tbl_township.township_mmr', '=', 'tbl_individual_case.pt_current_township')
+            ->townshipSearch($request->search)
+            ->where('tbl_individual_case.sync', '=', 0)
+            ->groupBy('tbl_township.township_name_en')
+            // ->get()
+            ->simplePaginate(10);
 
         // dd($groupedCases->toArray());
 
         // dd($groupedCases->toArray());
         // return view('parent-register-template.uploadForm', compact());
-        return view('parent-register-template.uploadForm', compact('state_region','district','township','core_facility','individual_case','health_facility','groupedCases'));
+        return view('parent-register-template.uploadForm', compact('state_region', 'district', 'township', 'core_facility', 'individual_case', 'health_facility', 'groupedCases'));
     }
 
     // $district_name_en,$health_facility_name_en,$sub_center_name_en,
 
-    public function loopDataToUpload() {
+    public function loopDataToUpload()
+    {
         // Fetch data grouped by township and get counts for each group
 
 
@@ -920,9 +1092,26 @@ class lookupsController extends Controller
 
 
 
-    public function show_form_list(){
-        return view('parent-register-template.formList');
+    public function show_form_list($pt_current_township)
+    {
+
+        $tbl_individual_cases = tbl_individual_case::where('pt_current_township', $pt_current_township)
+            ->where('tbl_individual_case.sync', '=', 0)
+            ->get();
+        $cf_id = $tbl_individual_cases[0]->cf_id;
+        $tbl_core = tbl_core_facility::where('core_id', '=', $cf_id)->first();
+        // $tbl_health_facility = tbl_health_facility
+
+        //dd($tbl_core);
+        $tbl_nil = tbl_nil::where('cf_id', '=', $tbl_individual_cases[0]->cf_id)->first();
+        $data_region = DB::table("tbl_region")->get();
+
+        // dd($tbl_nil->toArray());
+
+        return view('parent-register-template.index', compact('tbl_individual_cases', 'data_region', 'tbl_nil', 'tbl_core'));
     }
+
+
     // public function get_tbl_individual_case($cf_link_code)
     // {
     //     $tbl_individual_case = tbl_individual_case::where('cf_link_code','=', $cf_link_code)->get();
@@ -947,17 +1136,21 @@ class lookupsController extends Controller
     //     return response()->json($tbl_individual_case_temp , 200, $header, JSON_UNESCAPED_UNICODE);
     // }
 
-    // public function get_grab_tbl_individual_case($cf_link_code)
-    // {
-    //     $tbl_individual_case = grab_tbl_individual_case::where('cf_link_code','=', $cf_link_code)->get();
-    //     //return strlen(json_encode($tbl_individual_case));
-    //     $header = array (
-    //         'Content-Type' => 'application/json; charset=UTF-8',
-    //         'charset' => 'utf-8'
-    //     );
+    public function get_grab_tbl_individual_case(Request $request)
+    {
+        // dd($request->all());
 
-    //     return response()->json($tbl_individual_case , 200, $header, JSON_UNESCAPED_UNICODE);
-    // }
+        // $pt_current_township = tbl_individual_case::where('pt_current_township','=',)
+
+        // $tbl_individual_case = tbl_individual_case::where('ic_id','=', $ic_id)->get();
+        //return strlen(json_encode($tbl_individual_case));
+        // $header = array (
+        //     'Content-Type' => 'application/json; charset=UTF-8',
+        //     'charset' => 'utf-8'
+        // );
+        // dd($tbl_individual_case->toArray()); , compact('tbl_individual_case')
+        return view('parent-register-template.formList');
+    }
 
     // public function get_grab_tbl_individual_case_temp($cf_link_code)
     // {
@@ -1003,7 +1196,7 @@ class lookupsController extends Controller
     //     $data = tbl_org_vhv_temp::all();
     //     return $data;
     // }
-	// public function update_tbl_org_vhv(Request $request){
+    // public function update_tbl_org_vhv(Request $request){
     //     try{
     //         $data = json_decode($request->getContent(), true);
     //         $orgvhv_id = $data['OrgVHV_ID'];
@@ -1031,7 +1224,7 @@ class lookupsController extends Controller
     //     //         $sr_code = substr($ts_code, 0, 6);
     //     //         $ts_code = lp_township::where('ts_code', '=', session('region_code'))->pluck('ts_code')->first();
     //     //         $lp_state_region = lp_state_region::where('sr_code','=', $sr_code)->orderBy('sr_name')->get();
-	// 	// 	    $lp_township = lp_township::where('ts_code','=', $ts_code)->get();
+    // 	// 	    $lp_township = lp_township::where('ts_code','=', $ts_code)->get();
     //     //         dd($lp_township );
 
     //     if(Auth::check()){
@@ -1048,7 +1241,7 @@ class lookupsController extends Controller
     //             $sr_code = substr($ts_code, 0, 6);
     //             $ts_code = lp_township::where('ts_code', '=', session('region_code'))->pluck('ts_code')->first();
     //             $lp_state_region = lp_state_region::where('sr_code','=', $sr_code)->orderBy('sr_name')->get();
-	// 		    $lp_township = lp_township::where('ts_code','=', $ts_code)->get();
+    // 		    $lp_township = lp_township::where('ts_code','=', $ts_code)->get();
     //         }
     //         /*$examined_and_positive_agegroup = DB::select("select * from chart_examined_and_positive_agegroup");
     //         $examined_and_positive_hf = DB::select("select * from chart_examined_and_positive_hf");
@@ -1107,65 +1300,16 @@ class lookupsController extends Controller
 
     public function show_login()
     {
-        if(Auth::check()){
-            return redirect('/chart');
-        }else{
+
+
+        // dd('thereee');
+        if (Auth::check()) {
+            return redirect('/');
+            // return view('parent-register-template.index');
+        } else {
             return view('adminlte-template.login');
+            // return redirect('/')->with('info','error cannot signin');
         }
-    }
-
-    public function auth(Request $request)
-    {
-        $email = $request->input("email");
-        $password = $request->input("password");
-
-        // check user table
-        // if not exist data in user table fetch from server
-        $count = User::where('email', '=', $email)->count();
-        if($count > 0){
-            // check email and pass is correct or not
-            if (Auth::attempt(['email' => $email, 'password' => $password])){
-                $user = Auth::user();
-                if($user->role_id == "2"){
-
-                }
-                session([
-                    'email'=>$email,
-                    'userid'=>$user->id,
-                    'region_code'=>$user->region_code,
-                    'role_id'=>$user->role_id,
-                    'api_code'=>$user->api_code
-                ]);
-
-                //return session('email');
-                return redirect('/chart');
-            }else{
-                return redirect('/login')->withErrors(['error' => 'Email and Password not match.']);
-            }
-        }else{
-            return redirect('pure-login')->with('info', 'သင့်အကောင့်နှင့်သက်ဆိုင်သော ဒေတာများမရှိသေးပါ။ Online Server မှာ downloadဆွဲယူရန် Email နှင့် Password ပြန်လည်ထည့်သွင်းပါ။');
-        }
-
-        // if (Auth::attempt(['email' => $email, 'password' => $password]))
-        // {
-        //     $user = Auth::user();
-        //     if($user->role_id == "2"){
-        //     }
-        //     session([
-        //         'email'=>$email,
-        //         'userid'=>$user->id,
-        //         'region_code'=>$user->region_code,
-        //         'role_id'=>$user->role_id,
-        //         'api_code'=>$user->api_code
-        //     ]);
-        //     //return session('email');
-        //     return redirect('/');
-        // }
-        // else {
-        //     // return redirect('/login');
-        //     $user = User::where('email', '=', $email)->count();
-        //     return $user ;
-        // }
     }
 
     public function pure_login()
@@ -1173,80 +1317,197 @@ class lookupsController extends Controller
         return view('adminlte-template.pure-login');
     }
 
-    public function pure_login_auth(Request $req)
+    public function pure_login_auth(Request $request)
     {
-        try{
-            $email = $req->input("email");
-            $password = $req->input("password");
-            if(Auth::attempt(['email' => $email, 'password' => $password])){
-                $user = Auth::user();
-                session([
-                    'email'=>$email,
-                    'userid'=>$user->id,
-                    'region_code'=>$user->region_code,
-                    'role_id'=>$user->role_id,
-                    'api_code'=>$user->api_code
-                ]);
-                return redirect('/chart');
-            }else{
-                $client = new \GuzzleHttp\Client();
-                $response = $client->request('POST', $this->API_URL . 'fetch_data',[
-                    'form_params' => [
-                        'email' => $email,
-                        'password' => $password
-                    ]
-                ]);
+        $request->validate([
+            'email' => 'required',
+            'password' => 'required'
+        ]);
 
-                $res = $response->getBody()->getContents() ;
-                // return $res ;
-                if($res == '99'){
-                    return redirect('pure-login')->with('info', 'သင့် Email နှင့် Password ကိုဆာဗာ၌ ရှာမတွေ့ပါ။ သေချာစစ်ဆေး၍ ပြန်လည်ထည့်သွင်းပါ။');
-                }else if($res == '77'){
-                    return redirect('pure-login')->with('err', 'Offline Application တွင် Township Level အကောင့်သာအသုံးပြုနိုင်သည်။');
-                }else{
-                    $json = json_decode($res, true);
-                    // return ($json);
-                    if(count($json) > 0){
-                        if($json['user']){
-                            $user = new User() ;
-                            $user->id = $json['user']['id'];
-                            $user->name = $json['user']['name'];
-                            $user->email = $json['user']['email'];
-                            $user->password = Hash::make($password);
-                            // $user->username = $json['user']['username'];
-                            $user->role_id = $json['user']['role_id'];
-                            $user->region_code = $json['user']['region_code'];
-                            $user->api_code = $json['user']['api_code'];
-                            $user->_temp = $json['user']['_temp'];
-                            $user->save();
+        $email = $request->input('email');
+        $password = $request->input('password');
 
-                            // tbl_hfm::truncate();
-                        }
+        $encodedPassword = base64_encode($email . ':' . $password);
+        // dd($encodedPassword);
+
+        $connected = @fsockopen("mcbrs-dev2.myanmarvbdc.com", 80);
+        if ($connected) {
+            fclose($connected);
+
+            $curl = curl_init();
+
+            curl_setopt_array($curl, array(
+                CURLOPT_URL => 'https://mcbrs-dev2.myanmarvbdc.com/api/29/me?fields=teiSearchOrganisationUnits[id,name,code,level]&fields=organisationUnits[id,name,level]',
+                CURLOPT_RETURNTRANSFER => true,
+                CURLOPT_ENCODING => '',
+                CURLOPT_MAXREDIRS => 10,
+                CURLOPT_TIMEOUT => 0,
+                CURLOPT_FOLLOWLOCATION => true,
+                CURLOPT_SSL_VERIFYPEER => false, 
+                CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+                CURLOPT_CUSTOMREQUEST => 'GET',
+                CURLOPT_HTTPHEADER => array(
+                    'Authorization:Basic ' .  $encodedPassword,
+                    'Cookie: JSESSIONID=05F34003F7EBD4099B261718FF35EB4A'
+                ),
+            ));
+
+            $response = curl_exec($curl);
+
+            curl_close($curl);
+            // dd($response);
+            $responseArray = json_decode($response, true);
+            //
+            //dd($responseArray);
+            // if ($response == 'true') {
+            // if(array_key_exists("username",$responseArray) && $responseArray['username'] == $email){
+            if (!isset($responseArray['httpStatus'])) {
+
+
+                $national_code = null;
+                $region_code = null;
+                $district_code = null;
+                $township_code = null;
+                $health_facility_code = null;
+                $sub_center_code = null;
+                $village_code = null;
+                //dd($responseArray[0]->organisationUnits);
+                
+                foreach ($responseArray['teiSearchOrganisationUnits'] as $unit) {
+                    switch ($unit['level']) {
+                        case 1:
+                            $national_code = $unit['id'];
+                            break;
+                        case 2:
+                            $region_code = $unit['id'];
+                            break;
+                        case 3:
+                            $district_code = $unit['id'];
+                            break;
+                        case 4:
+                            $township_code = $unit['id'];
+                            break;
+                        case 5:
+                            $health_facility_code = $unit['id'];
+                            break;
+                        case 6:
+                            $sub_center_code = $unit['id'];
+                            break;
+                        case 7:
+                            $village_code = $unit['id'];
+                            break;
                     }
-                    return redirect('/login')->with('success', 'Download data success. please login again');
                 }
+                // dd($township_code);
+                $user_type = count($responseArray['organisationUnits']);
+                $user_type_status = 'level not found';
+                if($user_type == 5){
+                    $user_type_status = 'region level';
+                }else if($user_type == 4){
+                    $user_type_status = 'township level';
+                }else{
+                    return redirect('/')->withErrors(['error' => 'ပြည်နယ် (သို့) တိုင်း (သို့) မြို့နယ်အဆင့် သာခွင့်ပြုပါသည်။']);
+                }
+
+                $encryptPassword = Crypt::encryptString($password);
+                $decryptPassword = Crypt::decryptString($encryptPassword);
+
+                $existingUser = User::where('email', $email)->first();
+
+                if (!$existingUser) {
+                    $existingUser = User::create([
+                        'email' => $email,
+                        'password' => $encryptPassword,
+                        'national_code' => $national_code,
+                        'region_code' => $region_code,
+                        'district_code' => $district_code,
+                        'township_code' => $township_code,
+                        'health_facility_code' => $health_facility_code,
+                        'sub_center_code' => $sub_center_code,
+                        'village_code' => $village_code,
+                        'staff_type' => $user_type_status,
+                        '_temp' => $password
+                    ]);
+                    // dd('here');
+                } else {
+                    $existingUserId = $existingUser->id;
+                    $user = User::find($existingUserId);
+                    $user->delete();
+                    $existingUser = User::create([
+                        'email' => $email,
+                        'password' => $encryptPassword,
+                        'national_code' => $national_code,
+                        'region_code' => $region_code,
+                        'district_code' => $district_code,
+                        'township_code' => $township_code,
+                        'health_facility_code' => $health_facility_code,
+                        'sub_center_code' => $sub_center_code,
+                        'village_code' => $village_code,
+                        '_temp' => $password
+                    ]);
+
+                }
+
+                // dd($existingUser->toArray());
+
+                Auth::login($existingUser);
+
+
+
+                // dd(auth()->id());
+
+                return redirect('/home');
+            } else {
+
+                // Invalid credentials. Please try again.
+                return redirect('/')->withErrors(['error' => 'Email and Password not match.']);
             }
-        }catch(\Exception $e){
-            return $e->getMessage();
+        } else {
+            $checkUser = User::where('email', $email)->first();
+            if ($checkUser) {
+
+                $userPsw =  Crypt::decryptString($checkUser->password);
+
+                if ($password == $userPsw) {
+                    Auth::login($checkUser);
+                    return redirect('/home');
+                } else {
+                    return redirect('/')->withErrors(['error' => 'Email and Password not match.']);
+                }
+                //    dd(auth()->id());
+
+
+            } else {
+                return redirect('/')->withErrors(['error' => 'သင့်အကောင့်နှင့်သက်ဆိုင်သော ဒေတာများမရှိသေးပါ။ Online Server မှာ downloadဆွဲယူရန် Email နှင့် Password ပြန်လည်ထည့်သွင်းပါ။']);
+            }
+
+            //  dd("not connected");
         }
     }
 
+
+
+    public function logout()
+    {
+        Auth::logout();
+        return redirect('/');
+    }
+
+
+
     public function signout()
     {
-        if($user = Auth::user())
-        {
+        if ($user = Auth::user()) {
             Auth::logout();
             return redirect('/login');
-        }
-        else {
+        } else {
             return redirect('/login');
         }
     }
 
     public function show_users()
     {
-        if($user = Auth::user())
-        {
+        if ($user = Auth::user()) {
             return session('api_token');
 
             $name = strtoupper(Auth::user()->name);
@@ -1255,23 +1516,20 @@ class lookupsController extends Controller
             $user_roles = user_role::all();
 
             // return $users;
-            return view('nmcp-template.users',compact(
-                'users','name','user_roles'
+            return view('nmcp-template.users', compact(
+                'users',
+                'name',
+                'user_roles'
             ));
-
-        }
-        else {
+        } else {
             return redirect('login');
         }
-
     }
 
     public function edit_users(Request $request, $action)
     {
-        if($user = Auth::user())
-        {
-            if($action === "save")
-            {
+        if ($user = Auth::user()) {
+            if ($action === "save") {
                 $user = new User();
 
                 $user->name = $request->input("txt_name");
@@ -1282,20 +1540,16 @@ class lookupsController extends Controller
                 $user->api_code = Crypt::encryptString(str_random(40));
 
                 $user->save();
-            }
-            else if($action === "delete")
-            {
+            } else if ($action === "delete") {
                 User::where('id', $request->input("id"))->delete();
-            }
-            else if($action === "update")
-            {
+            } else if ($action === "update") {
                 $user = user::find($request->input("hidden_id"));
 
                 $user->name = $request->input("txt_name");
                 $user->email = $request->input("txt_email");
                 $user->role_id = $request->input("select_user_role");
                 $user->region_code = $request->input("select_region_code");
-                if($request->input("txt_password") != ""){
+                if ($request->input("txt_password") != "") {
                     $user->password = Hash::make($request->input("txt_password"));
                 }
 
@@ -1303,30 +1557,24 @@ class lookupsController extends Controller
             }
 
             return redirect('users');
-
-        }
-        else {
+        } else {
             return redirect('login');
         }
-
     }
 
     public function generate_token(Request $request)
     {
         $api_code = User::where('id', $request->input("userid"))->pluck('api_code')->first();
 
-        if($api_code != ""){
+        if ($api_code != "") {
             $api_code = Crypt::decryptString($api_code);
 
-            if($api_code == $request->input("api_code")){
+            if ($api_code == $request->input("api_code")) {
                 return "Passed";
             }
-
-        }
-        else{
+        } else {
             return "Authentication failed.";
         }
-
     }
 
     public function request_token()
@@ -1338,9 +1586,9 @@ class lookupsController extends Controller
 
         $data = [
             'query' => [
-                            'userid' => Auth::user()->id,
-                            'api_code' => $api_code
-                    ]
+                'userid' => Auth::user()->id,
+                'api_code' => $api_code
+            ]
         ];
 
         $client = new \GuzzleHttp\Client();
@@ -1351,66 +1599,69 @@ class lookupsController extends Controller
 
     // public function get_vhv_dataentry_row($ts_code)
     // {
-	// 	$lp_patient_location = lp_patient_location::all();
-	// 	$lp_patient_sex = lp_patient_sex::where('Sex_Code', '0')->orWhere('Sex_Code', '1')->get();
-	// 	$lp_rdt_result = lp_rdt_result::whereNotIn('r_code', ['9'])->get();
-	// 	$lp_treatment_given = lp_treatment_given::whereIn('tg_code', ['1','2','77'])->get();
-	// 	$lp_act_code = lp_act_code::whereNotIn('act_code', ['6','9'])->get();
-	// 	$lp_org = lp_org::all();
-	// 	$lp_form_cat = lp_form_cat::all();
-	// 	$lp_in_out_cat = lp_in_out_cat::whereIn('ioc_code', [2,4,7,9])->get();
-	// 	$lp_yesno = lp_yesno::whereIn('YN_Code', ['0','1','7'])->get();
+    // 	$lp_patient_location = lp_patient_location::all();
+    // 	$lp_patient_sex = lp_patient_sex::where('Sex_Code', '0')->orWhere('Sex_Code', '1')->get();
+    // 	$lp_rdt_result = lp_rdt_result::whereNotIn('r_code', ['9'])->get();
+    // 	$lp_treatment_given = lp_treatment_given::whereIn('tg_code', ['1','2','77'])->get();
+    // 	$lp_act_code = lp_act_code::whereNotIn('act_code', ['6','9'])->get();
+    // 	$lp_org = lp_org::all();
+    // 	$lp_form_cat = lp_form_cat::all();
+    // 	$lp_in_out_cat = lp_in_out_cat::whereIn('ioc_code', [2,4,7,9])->get();
+    // 	$lp_yesno = lp_yesno::whereIn('YN_Code', ['0','1','7'])->get();
     //     $lp_occupation = lp_occupation::all();
     //     $tbl_village = tbl_village::where("ts_pcode","=", $ts_code)->orderBy('village', 'asc')->get();
-	// 	return view('nmcp-template/vhv_dataentry_row',
-	// 				compact('lp_patient_location', 'lp_patient_sex',
-	// 						'lp_rdt_result', 'lp_treatment_given',
-	// 						'lp_act_code', 'lp_org', 'lp_form_cat',
-	// 						'lp_in_out_cat', 'lp_yesno', 'lp_occupation', 'tbl_village'));
-	// }
+    // 	return view('nmcp-template/vhv_dataentry_row',
+    // 				compact('lp_patient_location', 'lp_patient_sex',
+    // 						'lp_rdt_result', 'lp_treatment_given',
+    // 						'lp_act_code', 'lp_org', 'lp_form_cat',
+    // 						'lp_in_out_cat', 'lp_yesno', 'lp_occupation', 'tbl_village'));
+    // }
     // public function get_patient_dataentry_row2($ts_code)
     // {
 
-	// 	$lp_patient_location = lp_patient_location::all();
-	// 	$lp_patient_sex = lp_patient_sex::where('Sex_Code', '0')->orWhere('Sex_Code', '1')->get();
-	// 	$lp_rdt_result = lp_rdt_result::whereNotIn('r_code', ['9'])->get();
-	// 	$lp_treatment_given = lp_treatment_given::whereIn('tg_code', ['1','2','77'])->get();
-	// 	$lp_act_code = lp_act_code::whereNotIn('act_code', ['6','9'])->get();
-	// 	$lp_org = lp_org::all();
-	// 	$lp_form_cat = lp_form_cat::all();
-	// 	$lp_in_out_cat =  lp_in_out_cat::whereNotIn('ioc_code', [0,1,9])->get();
-	// 	$lp_yesno = lp_yesno::whereIn('YN_Code', ['0','1','7'])->get();
-	// 	$lp_occupation = lp_occupation::all();
+    // 	$lp_patient_location = lp_patient_location::all();
+    // 	$lp_patient_sex = lp_patient_sex::where('Sex_Code', '0')->orWhere('Sex_Code', '1')->get();
+    // 	$lp_rdt_result = lp_rdt_result::whereNotIn('r_code', ['9'])->get();
+    // 	$lp_treatment_given = lp_treatment_given::whereIn('tg_code', ['1','2','77'])->get();
+    // 	$lp_act_code = lp_act_code::whereNotIn('act_code', ['6','9'])->get();
+    // 	$lp_org = lp_org::all();
+    // 	$lp_form_cat = lp_form_cat::all();
+    // 	$lp_in_out_cat =  lp_in_out_cat::whereNotIn('ioc_code', [0,1,9])->get();
+    // 	$lp_yesno = lp_yesno::whereIn('YN_Code', ['0','1','7'])->get();
+    // 	$lp_occupation = lp_occupation::all();
     //     $lp_micro_result = lp_micro_result::whereNotIn('mr_code', ['5','9'])->get();
     //     $tbl_village = tbl_village::where("ts_pcode","=", $ts_code)->orderBy('village', 'asc')->get();
 
 
-	// 	return view('nmcp-template/patient_register_form_row',
-	// 				compact('lp_patient_location', 'lp_patient_sex',
-	// 						'lp_rdt_result', 'lp_treatment_given',
-	// 						'lp_act_code', 'lp_org', 'lp_form_cat',
-	// 						'lp_in_out_cat', 'lp_yesno', 'lp_occupation', 'lp_micro_result','tbl_village'));
-	// }
+    // 	return view('nmcp-template/patient_register_form_row',
+    // 				compact('lp_patient_location', 'lp_patient_sex',
+    // 						'lp_rdt_result', 'lp_treatment_given',
+    // 						'lp_act_code', 'lp_org', 'lp_form_cat',
+    // 						'lp_in_out_cat', 'lp_yesno', 'lp_occupation', 'lp_micro_result','tbl_village'));
+    // }
 
     public function get_patient_dataentry_row($ts_code)
     {
-
-       //$ts_code = 'MMR011010';
-		// $lp_patient_location = lp_patient_location::all();
-		// $lp_patient_sex = lp_patient_sex::where('Sex_Code', '0')->orWhere('Sex_Code', '1')->get();
-		// $lp_rdt_result = lp_rdt_result::whereNotIn('r_code', ['9'])->get();
-		// $lp_treatment_given = lp_treatment_given::whereIn('tg_code', ['1','2','77'])->get();
-		// $lp_act_code = lp_act_code::whereNotIn('act_code', ['6','9'])->get();
-		// $lp_org = lp_org::all();
-		$tbl_core_facility = tbl_core_facility::all();
-		// $lp_in_out_cat =  lp_in_out_cat::whereNotIn('ioc_code', [0,1,9])->get();
-		// $lp_yesno = lp_yesno::whereIn('YN_Code', ['0','1','7'])->get();
-		// $lp_occupation = lp_occupation::all();
+        // dd($ts_code);
+        //$ts_code = 'MMR011010';
+        // $lp_patient_location = lp_patient_location::all();
+        // $lp_patient_sex = lp_patient_sex::where('Sex_Code', '0')->orWhere('Sex_Code', '1')->get();
+        // $lp_rdt_result = lp_rdt_result::whereNotIn('r_code', ['9'])->get();
+        // $lp_treatment_given = lp_treatment_given::whereIn('tg_code', ['1','2','77'])->get();
+        // $lp_act_code = lp_act_code::whereNotIn('act_code', ['6','9'])->get();
+        // $lp_org = lp_org::all();
+        $tbl_core_facility = tbl_core_facility::all();
+        // dd($tbl_core_facility->toArray());
+        // $lp_in_out_cat =  lp_in_out_cat::whereNotIn('ioc_code', [0,1,9])->get();
+        // $lp_yesno = lp_yesno::whereIn('YN_Code', ['0','1','7'])->get();
+        // $lp_occupation = lp_occupation::all();
         // $lp_micro_result = lp_micro_result::whereNotIn('mr_code', ['5','9'])->get();
-        $tbl_village = tbl_village::where("ts_pcode","=", $ts_code)->orderBy('village', 'asc')->get();
+        $tbl_village = tbl_village::where("village_name_en", "=", $ts_code)->orderBy('village', 'asc')->get();
 
 
-		return view('nmcp-template/patient_register_form_row',
-					compact('tbl_core_facility','tbl_village'));
-	}
+        return view(
+            'nmcp-template/patient_register_form_row',
+            compact('tbl_core_facility', 'tbl_village')
+        );
+    }
 }

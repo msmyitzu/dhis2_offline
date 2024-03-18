@@ -20,6 +20,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 /* Offline Version - 2 */
 /* DHIS2 in get Data */
+Route::get('/downloadDataFromOnline','APIController@downloadDataFromOnline');
 Route::get('/dhis2getDataRegion','APIController@dhis2getDataRegion');
 Route::get('/dhis2getDataTownship','APIController@dhis2getDataTownship');
 Route::get('/dhis2getDataDistrict','APIController@dhis2getDataDistrict');

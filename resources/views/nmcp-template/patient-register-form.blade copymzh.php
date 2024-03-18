@@ -681,6 +681,7 @@
                             if (result == "1") {
                                 //console.log(result + " update success");
                                 save_update_check = true;
+                                
                             } else {
                                 save_update_check = false;
                             }

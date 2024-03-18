@@ -23,16 +23,16 @@ Route::get('/health-facilities', 'lookupsController@show_lookup_page');
 
 Route::get('/chart','lookupsController@show_charts');
 
-Route::get('/home', 'HomeController@index');
+// Route::get('/home', 'HomeController@index');
 
 Route::get('/get_lp_township/{region_id}','lookupsController@get_lp_township');
 Route::get('/uploadForm','lookupsController@show_upload_form');
-Route::get('/formList','lookupsController@show_form_list');
+Route::get('/formList/{pt_current_township}','lookupsController@show_form_list');
 Route::get('/search/{type}', 'searchController@search')->name('form_search');
 
 Route::post('/patient-register-form','lookupsController@get_patient_registerform');        //
 
-Route::get('/get_existing_form_data/{cf_link_code}', 'lookupsController@get_existing_form_data');
+Route::get('/get_existing_form_data/{pt_current_township}', 'lookupsController@get_existing_form_data');
 
 Route::get('/vhv-patient-register-form', 'lookupsController@get_vhv_patient_registerform');
 
@@ -43,7 +43,7 @@ Route::get('/township-summary-report-SC', function(){
 
 
 
-Route::get('/get_grab_tbl_individual_case/{cf_link_code}','lookupsController@get_grab_tbl_individual_case');
+Route::get('/get_grab_tbl_individual_case/{pt_current_township}','lookupsController@get_grab_tbl_individual_case');
 Route::get('/get_grab_tbl_individual_case_temp/{cf_link_code}','lookupsController@get_grab_tbl_individual_case_temp');
 Route::post('/save_tbl_individual_case','lookupsController@save_tbl_individual_case');
 Route::post('/save_tbl_individual_case_temp','lookupsController@save_tbl_individual_case_temp');
@@ -52,7 +52,7 @@ Route::post('/save_tbl_total_patient_temp','lookupsController@save_tbl_total_pat
 Route::post('/update_tbl_total_patient_temp','lookupsController@update_tbl_total_patient_temp');
 Route::post('/update_tbl_individual_case','lookupsController@update_tbl_individual_case');
 Route::post('/update_tbl_individual_case_temp','lookupsController@update_tbl_individual_case_temp');
-
+Route::post('/save_tbl_individual_case_temp_edit','lookupsController@save_tbl_individual_case_temp_edit');
 Route::get('/get_patient_dataentry_row/{ts_code}', 'lookupsController@get_patient_dataentry_row');
 Route::get('/get_vhv_dataentry_row/{ts_code}', 'lookupsController@get_vhv_dataentry_row');
 Route::post('/delete_tbl_core_facility_by_code/{cf}', 'lookupsController@delete_tbl_core_facility_by_code');
@@ -68,9 +68,15 @@ Route::get('/testpage', function(){
     return view('test');
 });
 
-Route::get('login','lookupsController@show_login');
+Route::get('/','lookupsController@show_login');
 
-Route::post('login','lookupsController@auth');
+// Route::post('login','lookupsController@auth');
+Route::post('login','lookupsController@pure_login_auth');
+
+Route::get('/pure-login', 'lookupsController@pure_login');
+Route::post('/pure_login_auth', 'lookupsController@pure_login_auth');
+
+Route::get('/logout', 'lookupsController@logout');
 
 Route::get('/login/signout','lookupsController@signout');
 
@@ -83,7 +89,7 @@ Route::post('/generate_token','lookupsController@generate_token');
 Route::get('/request_token','lookupsController@request_token');
 //Auth::routes();
 
-//Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/home', 'HomeController@index')->name('home');
 //Sync
 
 Route::get('/sync','syncController@show_sync_page');
@@ -99,8 +105,7 @@ Route::get('/delete_all_hfm', 'syncController@delete_all_hfm');
 
 
 Route::get('/fetch_data', 'syncController@fetch_data');
-Route::get('/pure-login', 'lookupsController@pure_login');
-Route::post('/pure_login_auth', 'lookupsController@pure_login_auth');
+
 
 Route::get('/write_status', 'syncController@write_status_check');
 
@@ -108,7 +113,7 @@ Route::get('/write_status', 'syncController@write_status_check');
 
 
 
-Route::get('/','lookupsController@get_patient_registerform_offline')->name('parent-register');
+Route::get('/home','lookupsController@get_patient_registerform_offline')->name('parent-register');
 
 Route::get('/patient_register_form_row','lookupsController@get_patient_registerform_row')->name('parent-register_row');
 

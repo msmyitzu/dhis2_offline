@@ -34,7 +34,7 @@
         <table style="margin:auto; width: 800px; color:white; font-size:small;">
             <tr style="text-align: center;">
                 <td colspan="3" align-item="center">
-                    <h3 style="font-size: 18px;">Ministry of Health, Myanmar</h3>
+                    <h3 style="font-size: 18px;">Malaria Case-Based Reporting for VBDC Myanmar</h3>
                 </td>
             </tr>
             <tr>
@@ -70,7 +70,7 @@
             <form action="pure_login_auth" method="post">
                 {{ csrf_field() }}
                 <div class="form-group has-feedback">
-                    <input type="email" name="email" id="email" class="form-control" placeholder="Email"
+                    <input type="text" name="email" id="email" class="form-control" placeholder="Email"
                         required>
                     <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
                 </div>
@@ -114,7 +114,8 @@
     </script>
     <style>
         .login-page {
-            background: #999;
+            /* background: #999; */
+            background-color: rgb(44, 102, 147);
         }
 
         .ct-margin {

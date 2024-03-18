@@ -958,6 +958,7 @@ class lookupsController extends Controller
 
     public function auth(Request $request)
     {
+
         $email = $request->input("email");
         $password = $request->input("password");
 
@@ -981,6 +982,7 @@ class lookupsController extends Controller
 
                 //return session('email');
                 return redirect('/chart');
+                
             }else{
                 return redirect('/login')->withErrors(['error' => 'Email and Password not match.']);
             }

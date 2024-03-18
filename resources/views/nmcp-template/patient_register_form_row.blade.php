@@ -1,30 +1,30 @@
-
-
 <tr id="data_entry_row">
     <td style="font-size:10px; font-weight: bold;" P_Number="0"></td>
     <td>
-        <input type="date" id="birthday" oninput="adjustInputWidth(this)" name="birthday" placeholder="dd/mm/yyyy">
-        {{-- <input class="dentry_date" type="text" id=""  > --}}
+        <input type="date" id="date" oninput="adjustInputWidth(this)" name="date" max="<?= date('Y-m-d') ?>"
+            placeholder="dd/mm/yyyy" required>
+        {{-- <input  class="dentry_date" type="text" id=""  > --}}
     </td>
-    <td><input type="text" id="" oninput="adjustInputWidth(this)" placeholder="အမည်"></td>
-    <td><input id="age" type="text" placeholder="အသက်" onchange="checkAge(this);" class="age"></td>
-    <td><input type="text" id="" oninput="adjustInputWidth(this)" placeholder="အဘအမည်"></td>
+    <td><input type="text" id="" oninput="adjustInputWidth(this)" placeholder="အမည်" required></td>
+    <td><input id="age" type="text" placeholder="အသက်" onchange="checkAge(this);" class="age"
+            required=""></td>
+    <td><input type="text" id="" oninput="adjustInputWidth(this)" placeholder="အဘအမည်" required></td>
     {{-- <td> --}}
     {{-- <select name="address" id="" onchange="checkAddress(this);"> --}}
     {{-- <option value="">ရွေးပါ</option> --}}
-    @foreach ($tbl_village as $location)
-        {{-- <option value="{{ $location->p_location }}"> --}}
+    {{-- @foreach ($tbl_village as $location) --}}
+    {{-- <option value="{{ $location->p_location }}"> --}}
 
-        {{ $location->village_name_en }} &nbsp;&
-        {{-- </option> --}}
-    @endforeach
+    {{-- {{ $location->village_name_en }} &nbsp;& --}}
+    {{-- </option> --}}
+    {{-- @endforeach --}}
     {{-- </select> --}}
     {{-- </td> --}}
 
     <td>
-        <select class="" name="address" id="" onchange="outsideTownShipResult(this);"  >
+        <select class="" name="address" id="" onchange="outsideTownShipResult(this);">
             {{-- <option value="" selected>ရွေးပါ</option> --}}
-            <option value="">ရွေးပါ</option>
+            <option value="" disabled>ရွေးပါ</option>
             <option value="No (within Township)">No (Within township)</option>
             <option value="No (Outside Township)">No (Outside Township)</option>
             <option value="No (Outside Country)">No (Outside Country)</option>
@@ -32,26 +32,26 @@
     </td>
     <td>
         <select class="" name="address" id="" onchange="outsideHFResult(this)">
-            <option value="" selected>မြို့နယ်(လက်ရှိနေရပ်လိပ်စာ)</option>
+            <option value="" disabled>မြို့နယ်(လက်ရှိနေရပ်လိပ်စာ)</option>
         </select>
 
     </td>
     {{-- <input type="text" name="address" id="dAddress1" oninput="adjustInputWidth(this)"  placeholder=""> --}}
     <td>
         <select class="" name="address" id="">
-            <option value="" selected>ကျေးရွာ/ရပ်ကွက်(လက်ရှိနေရပ်လိပ်စာ)</option>
+            <option value="" disabled selected>ကျေးရွာ/ရပ်ကွက်(လက်ရှိနေရပ်လိပ်စာ)</option>
 
         </select>
         {{-- <input type="text" name="address" id="dAddress2" oninput="adjustInputWidth(this)" placeholder=""> --}}
     </td>
     <td>
-        <select class="" name="address" id="dAddress" disabled  onchange="location_changed(this)">
-            <option value="" selected>ကျေးရွာ/ရပ်ကွက်အမည်(လက်ရှိနေရပ်လိပ်စာ)</option>
-            @foreach ($tbl_village as $v)
-                <option value="{{ $v->village_pcode }}">
+        <select class="" name="address" id="dAddress" disabled onchange="location_changed(this)">
+            <option value="" disabled selected>ကျေးရွာ/ရပ်ကွက်အမည်(လက်ရှိနေရပ်လိပ်စာ)</option>
+            {{-- @foreach ($tbl_village as $v) --}}
+            {{-- <option value="{{ $v->village_pcode }}">
                     {{ $v->village }} &nbsp;&nbsp;&nbsp;&nbsp;| {{ $v->village_tract }}
-                </option>
-            @endforeach
+                </option> --}}
+            {{-- @endforeach --}}
             <!-- <option value="10">Other</option> -->
             <option value="20">Other Within Township</option>
             <option value="30">Other Outside Township</option>
@@ -60,41 +60,44 @@
         {{-- <input type="text" name="address" id="dAddress3" oninput="adjustInputWidth(this)" placeholder=""> --}}
     </td>
     <td>
-        <select class="" name="address" id=""  onchange="currentHFResult(this)">
-            <option value="" selected>မြို့နယ်(အမြဲတမ်းနေရပ်လိပ်စာ)</option>
+        <select class="" name="address" id="" onchange="currentHFResult(this)">
+            <option value="" disabled selected>မြို့နယ်(အမြဲတမ်းနေရပ်လိပ်စာ)</option>
         </select>
         {{-- <input type="text" name="address" id="dAddress4" oninput="adjustInputWidth(this)" placeholder=""> --}}
     </td>
     <td>
-        <select class="" name="address" id=""  onchange="location_changed(this)">
-            <option value="" selected>ကျေးရွာ/ရပ်ကွက်(အမြဲတမ်းနေရပ်လိပ်စာ)</option>
+        <select class="" name="address" id="" onchange="location_changed(this)">
+            <option value="" disabled selected>ကျေးရွာ/ရပ်ကွက်(အမြဲတမ်းနေရပ်လိပ်စာ)</option>
         </select>
         {{-- <input type="text" name="address" id="dAddress5" oninput="adjustInputWidth(this)" placeholder=""> --}}
     </td>
     <td>
-        <input type="text" class="other-address" placeholder="ရွာ-မြို့-ပြည်-နယ်-တိုင်း" disabled="true"></td>
+        <input type="text" class="other-address" placeholder="ရွာ-မြို့-ပြည်-နယ်-တိုင်း" disabled="true">
+    </td>
     <td>
         <select name="sex" id="sex" onchange="checkSex(this); adjustInputWidth(this)" class="sex">
 
-                <option value="choose">ရွေးပါ</option>
-                <option value="TT-Male">Male</option>
-                <option value="TT-female">Female</option>
+            <option value="choose" disabled>ရွေးပါ</option>
+            <option value="TT-Male">Male</option>
+            <option value="TT-female">Female</option>
 
         </select>
     </td>
     <td>
-        <select name="preg" id="preg" class="preg" onchange="checkPreg(this); adjustInputWidth(this);">
+        <select name="preg" id="preg" class="preg" onchange="checkPreg(this); adjustInputWidth(this);"
+            required>
 
-                <option value="">ရွေးပါ</option>
-                {{-- <option value="N/A">N/A</option> --}}
-                <option value="Yes">Yes</option>
-                <option value="No">No</option>
+            <option value="" disabled>ရွေးပါ</option>
+            {{-- <option value="N/A">N/A</option> --}}
+            <option value="Yes">Yes</option>
+            <option value="No">No</option>
 
 
         </select>
     </td>
     <td>
-        <select name="rsc_test" id="rsc_test" onchange="checkTestResult(this); adjustInputWidth();" class="" >
+        <select name="rsc_test" id="rsc_test" onchange="checkTestResult(this); adjustInputWidth();" class=""
+            required>
             <option value="not exam">Not Exam</option>
             <option value="neg">Negative</option>
             <option value="pf">Pf</option>
@@ -106,7 +109,8 @@
         </select>
     </td>
     <td>
-        <select name="rdt_test" id="rdt_test" class="" onchange="checkTestResult(this); adjustInputWidth(this);">
+        <select name="rdt_test" id="rdt_test" class="" onchange="checkTestResult(this); adjustInputWidth(this);"
+            required>
             <option value="not exam">Not Exam</option>
             <option value="neg">Negative</option>
             <option value="pf">Pf</option>
@@ -115,17 +119,18 @@
         </select>
     </td>
     <td>
-        <select name="out-patient" id="" oninput="adjustInputWidth(this)"  style="width: 100%">
+        <select name="out-patient" id="" oninput="adjustInputWidth(this)" style="width: 100%">
             <option value="Uncomplicated (OP)">Uncomplicated (OP)</option>
             <option value="Uncomplicated (IP)">Uncomplicated (IP)</option>
             <option value="Severe (OP)">Severe (OP)</option>
             <option value="Cerebral Malaria (IP)">Cerebral Malaria (IP)</option>
-            <option value="Other Severe Complicated Malaria (IP)">Other Severe Complicated Malaria (IP)</option><option value="N/A">N/A</option>
+            <option value="Other Severe Complicated Malaria (IP)">Other Severe Complicated Malaria (IP)</option>
+            <option value="N/A">N/A</option>
         </select>
     </td>
     <td>
         {{-- oninput="adjustInputWidth(this)" --}}
-        <select name="ACT" id="act"  onchange="adjustInputWidth();" class="acts"  >
+        <select name="ACT" id="act" onchange="adjustInputWidth();" class="acts">
             <option value="N/A">N/A</option>
             <option value="ACT-6 tablets (1/2 strip)">ACT-6 tablets (1/2 strip)</option>
             <option value="ACT-6 tablets (1 strip)">ACT-6 tablets (1 strip)</option>
@@ -149,21 +154,21 @@
             <option value="N/A">N/A</option>
         </select>
     </td>
-    <td><select name="PQ" id="pq" class="pq" >
+    <td><select name="PQ" id="pq" class="pq">
 
-        <option value="N/A">N/A</option>
-        <option value="PQ - 1 tablet">PQ - 1 tablet</option>
-        <option value="PQ - 2 tablets">PQ - 2 tablets</option>
-        <option value="PQ - 4 tablets">PQ - 4 tablets</option>
-        <option value="PQ - 6 tablets">PQ - 6 tablets</option>
-        <option value="PQ - 7 tablets">PQ - 7 tablets</option>
-        <option value="PQ - 14 tablets">PQ - 14 tablets</option>
-        <option value="PQ - 21 tablets">PQ - 21 tablets</option>
-        <option value="PQ - 28 tablets">PQ - 28 tablets</option>
-        <option value="Out of stock">Out of stock</option>
-        <option value="N/A">N/A</option>
+            <option value="N/A">N/A</option>
+            <option value="PQ - 1 tablet">PQ - 1 tablet</option>
+            <option value="PQ - 2 tablets">PQ - 2 tablets</option>
+            <option value="PQ - 4 tablets">PQ - 4 tablets</option>
+            <option value="PQ - 6 tablets">PQ - 6 tablets</option>
+            <option value="PQ - 7 tablets">PQ - 7 tablets</option>
+            <option value="PQ - 14 tablets">PQ - 14 tablets</option>
+            <option value="PQ - 21 tablets">PQ - 21 tablets</option>
+            <option value="PQ - 28 tablets">PQ - 28 tablets</option>
+            <option value="Out of stock">Out of stock</option>
+            <option value="N/A">N/A</option>
         </select>
-        {{--" <input type="text" id=""  placeholder="N/A" class="pq only-integer">oninput="adjustInputWidth(this)" --}}
+        {{-- " <input type="text" id=""  placeholder="N/A" class="pq only-integer">oninput="adjustInputWidth(this)" --}}
 
 
 
@@ -192,8 +197,10 @@
     </td>
     <td>
         <select name="" id="t-given">
-            <option value="" selected><=24hr</option>
-            {{-- @foreach ($lp_treatment_given as $treatment)
+            <option value="" selected>
+                <=24hr
+            </option>
+                    {{-- @foreach ($lp_treatment_given as $treatment)
                 <option value="{{ $treatment->tg_code }}">
                     {{ $treatment->t_given }}
                 </option>
@@ -211,8 +218,8 @@
         </select>
     </td>
     <td>
-        <select name="job" id="job" oninput="adjustInputWidth(this)">
-            <option value="" selected>ရွေးပါ</option>
+        <select name="job" id="job" oninput="adjustInputWidth(this)" required>
+            <option value="" disabled selected>ရွေးပါ</option>
             <option value="Rubber Plantation">Rubber Plantation</option>
             <option value="Gardening">Gardening</option>
             <option value="Forest Related Job">Forest Related Job</option>
@@ -237,85 +244,81 @@
     </td>
 </tr>
 <script>
+    // $('#dAddress').change(function(){
+    // 			location_changed(this.value);
+    // });
 
-// $('#dAddress').change(function(){
-// 			location_changed(this.value);
-// });
-
-function location_changed(location) {
-    var currentTR = $(location).closest('tr');
-    var local_value = (location.value);
-    if (local_value === '10' || local_value == '20' || local_value == '30') {
-        currentTR.find('.other-address').prop('disabled', false);
-        currentTR.find('.other-address').val('');
-    } else {
-        currentTR.find('.other-address').val('N/A');
-        currentTR.find('.other-address').prop('disabled', true);
+    function location_changed(location) {
+        var currentTR = $(location).closest('tr');
+        var local_value = (location.value);
+        if (local_value === '10' || local_value == '20' || local_value == '30') {
+            currentTR.find('.other-address').prop('disabled', false);
+            currentTR.find('.other-address').val('');
+        } else {
+            currentTR.find('.other-address').val('N/A');
+            currentTR.find('.other-address').prop('disabled', true);
+        }
     }
-}
 
-//Start for township & village calling
-
-
-// $(document).ready(function() {
-//     $('#data_select_township').change(function() {
-//         var selectedValue = $(this).val();
-//         getTownshipResult(selectedValue);
-//     });
-
-//     function getTownshipResult(selectedValue) {
-//         // Your existing AJAX call to populate the first select box remains unchanged
-
-//         // Add another AJAX call to populate the second select box
-//         $.ajax({
-//             type: "GET",
-//             url: "/api/township/" + selectedValue.substring(0, 6),
-//             contentType: "application/json; charset=utf-8",
-//             dataType: "json",
-//             success: function(data) {
-//                 console.log('hello mzh->',data);
-//                 $('#second_select_township').empty();
+    //Start for township & village calling
 
 
-//                 for (var i = 0; i < data.length; i++) {
-//                     var ele = document.createElement("option");
-//                     ele.value = data[i].township_mmr;
-//                     ele.innerHTML = data[i].township_name_en;
-//                     $('#second_select_township').append(ele);
-//                 }
-//             },
-//             error: function(jqXHR, textStatus, errorThrown) {
-//                 alert(errorThrown);
-//             }
-//         });
-//     }
-// });
+    // $(document).ready(function() {
+    //     $('#data_select_township').change(function() {
+    //         var selectedValue = $(this).val();
+    //         getTownshipResult(selectedValue);
+    //     });
+
+    //     function getTownshipResult(selectedValue) {
+    //         // Your existing AJAX call to populate the first select box remains unchanged
+
+    //         // Add another AJAX call to populate the second select box
+    //         $.ajax({
+    //             type: "GET",
+    //             url: "/api/township/" + selectedValue.substring(0, 6),
+    //             contentType: "application/json; charset=utf-8",
+    //             dataType: "json",
+    //             success: function(data) {
+    //                 console.log('hello mzh->',data);
+    //                 $('#second_select_township').empty();
+
+
+    //                 for (var i = 0; i < data.length; i++) {
+    //                     var ele = document.createElement("option");
+    //                     ele.value = data[i].township_mmr;
+    //                     ele.innerHTML = data[i].township_name_en;
+    //                     $('#second_select_township').append(ele);
+    //                 }
+    //             },
+    //             error: function(jqXHR, textStatus, errorThrown) {
+    //                 alert(errorThrown);
+    //             }
+    //         });
+    //     }
+    // });
 
 
     // $('#outsideCountry').click(function() {
     //             outsideHFResult($(this).val());
     //         });
-// selected value in district
+    // selected value in district
 
-
-
-
-// get Township Data form Database
-function outsideTownShipResult(selectedValue) {
+    // get Township Data form Database
+    function outsideTownShipResult(selectedValue) {
         // call  ajax method to get data from database
         // clear data from select option set
-        //  alert('hi myitzu=>');
-            var tr = $(selectedValue).closest('tr');
+        // alert('hi myitzu=>');
+        var tr = $(selectedValue).closest('tr');
         if (selectedValue.value === 'No (Outside Township)') {
-                    $(selectedValue).show();
-                    tr.find('td:eq(9) select,td:eq(10) select').prop('disabled',false);
-                }else if(selectedValue.value === 'No (Outside Country)'){
-                    $(selectedValue).show();
-                    tr.find('td:eq(9) select,td:eq(10) select').prop('disabled',true);
-                }else {
-                    $(selectedValue).hide();
-                    return;
-                };
+            $(selectedValue).show();
+            tr.find('td:eq(9) select,td:eq(10) select').prop('disabled', false);
+        } else if (selectedValue.value === 'No (Outside Country)') {
+            $(selectedValue).show();
+            tr.find('td:eq(9) select,td:eq(10) select').prop('disabled', true);
+        } else {
+            $(selectedValue).show();
+            return;
+        };
 
         // console.log('thisis ',selectedValue.value);
         var tr = $(selectedValue).closest('tr');
@@ -328,8 +331,8 @@ function outsideTownShipResult(selectedValue) {
 
         $.ajax({
             type: "GET",
-            url: "/api/outtownship/"+selectedValue.value,
-             //this  should be replace by your server side method
+            url: "/api/outtownship/" + selectedValue.value,
+            //this  should be replace by your server side method
             //data: "{'value': '" + selectedValue +"'}", //this is parameter name , make sure parameter name is sure as of your sever side method
             contentType: "application/json; charset=utf-8",
             dataType: "json",
@@ -337,9 +340,9 @@ function outsideTownShipResult(selectedValue) {
 
             success: function(data) {
 
-                console.log('thu',data);
+                console.log('thu', data);
 
-                for(var i = 0; i < data.length; i++) {
+                for (var i = 0; i < data.length; i++) {
                     var ele = document.createElement("option");
                     ele.value = data[i].township_mmr;
                     ele.innerHTML = data[i].township_name_en;
@@ -370,16 +373,16 @@ function outsideTownShipResult(selectedValue) {
 
         $.ajax({
             type: "GET",
-            url: "/api/outhealthfacility/"+selectedValue.value.substring(0, 9), //this  should be replace by your server side method
+            url: "/api/outhealthfacility/" + selectedValue.value.substring(0,
+                9), //this  should be replace by your server side method
             //data: "{'value': '" + selectedValue +"'}", //this is parameter name , make sure parameter name is sure as of your sever side method
             contentType: "application/json; charset=utf-8",
             dataType: "json",
             async: false,
             success: function(data) {
-                // alert('myitzuuu=>');
-                //alert(data.township_mmr);
 
-                for(var i = 0; i < data.length; i++) {
+
+                for (var i = 0; i < data.length; i++) {
                     var ele = document.createElement("option");
                     ele.value = data[i].health_facility_mmr;
                     ele.innerHTML = data[i].health_facility_name_en;
@@ -398,7 +401,7 @@ function outsideTownShipResult(selectedValue) {
         //  var list = document.getElementById("outsideCountry");
         // alert('thisis ',selectedValue.value);
         var tr = $(selectedValue).closest('tr');
-        //console.log('thi mzhhhh',tr);
+
         var list = tr.find('td:eq(10) > select');
         //console.log('hiii',selectedValue.value);
 
@@ -407,16 +410,16 @@ function outsideTownShipResult(selectedValue) {
 
         $.ajax({
             type: "GET",
-            url: "/api/currenthealthfacility/"+selectedValue.value.substring(0, 9), //this  should be replace by your server side method
+            url: "/api/currenthealthfacility/" + selectedValue.value.substring(0,
+                9), //this  should be replace by your server side method
             //data: "{'value': '" + selectedValue +"'}", //this is parameter name , make sure parameter name is sure as of your sever side method
             contentType: "application/json; charset=utf-8",
             dataType: "json",
             async: false,
             success: function(data) {
-                // alert('myitzuuu=>');
-                //alert(data.township_mmr);
 
-                for(var i = 0; i < data.length; i++) {
+
+                for (var i = 0; i < data.length; i++) {
                     var ele = document.createElement("option");
                     ele.value = data[i].health_facility_mmr;
                     ele.innerHTML = data[i].health_facility_name_en;
@@ -433,8 +436,7 @@ function outsideTownShipResult(selectedValue) {
     function currentTownShipResult(selectedValue) {
         // call  ajax method to get data from database
         // clear data from select option set
-        //  alert('hi myitzu=>');
-        // console.log('thisis ',selectedValue.value);
+
         var tr = $(selectedValue).closest('tr');
         //console.log('thi mzh',tr);
         var list = tr.find('td:eq(9) > select');
@@ -445,8 +447,8 @@ function outsideTownShipResult(selectedValue) {
 
         $.ajax({
             type: "GET",
-            url: "/api/currenttownship/"+selectedValue.value,
-             //this  should be replace by your server side method
+            url: "/api/currenttownship/" + selectedValue.value,
+            //this  should be replace by your server side method
             //data: "{'value': '" + selectedValue +"'}", //this is parameter name , make sure parameter name is sure as of your sever side method
             contentType: "application/json; charset=utf-8",
             dataType: "json",
@@ -454,9 +456,9 @@ function outsideTownShipResult(selectedValue) {
 
             success: function(data) {
 
-                console.log('thu',data);
+                console.log('thu', data);
 
-                for(var i = 0; i < data.length; i++) {
+                for (var i = 0; i < data.length; i++) {
                     var ele = document.createElement("option");
                     ele.value = data[i].township_mmr;
                     ele.innerHTML = data[i].township_name_en;
@@ -480,7 +482,7 @@ function outsideTownShipResult(selectedValue) {
 
 
 
-//End for township & village calling
+    //End for township & village calling
 
     clickOnRow();
 
@@ -504,7 +506,7 @@ function outsideTownShipResult(selectedValue) {
             placeholder: '_',
             clearIncomplete: true,
             min: '09-09-0999',
-            max: maxDate
+
         });
     });
 

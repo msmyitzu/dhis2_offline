@@ -8,6 +8,16 @@
 <script data-require="jquery@*" data-semver="2.0.3" src="http://code.jquery.com/jquery-2.0.3.min.js"></script>
 
 <style>
+
+/* HTML: <div class="loader"></div> */
+
+
+	@keyframes spin {
+		0% { transform: rotate(0deg); }
+		100% { transform: rotate(360deg); }
+	}
+
+
     .header_bar {
         margin: 0;
         padding: 0;
@@ -32,16 +42,32 @@
 
     .btnSearchs {}
 
+    .table-bordered{
+        border-top:1px solid gray !important;
+        width:90% !important;
+        justify-content: center !important;
+        margin-left:70px;
+
+    }
+
     .theads th {
-        padding-top: 16px !important;
-        padding-bottom: 16px !important;
+        padding-top: 10px !important;
+        padding-bottom: 10px !important;
+        font-size: 16px !important;
     }
 
     .tbodys {
         margin-bottom: 0px;
-        padding: 20px;
+        padding:10px;
+        /* font-weight:0 !important; */
+        font-size: 12px !important;
+        color:#333;
 
-    }
+        height: 35px;
+
+        padding-left: 20px;
+}
+
 
     .upload_to_online_btn {
         margin-left: auto;
@@ -79,6 +105,7 @@ width: 100% !important;
     table.dataTable thead tr th {
         text-align: center;
         padding: 5px;
+        background-color: #7c6c6c;
     }
 
     .table-container {
@@ -92,8 +119,10 @@ width: 100% !important;
     }
 
     table {
-        width: 100%;
+        width: 80%;
         white-space: nowrap;
+        margin: auto;
+        vertical-align: middle;
     }
 
     input[type=number]::-webkit-inner-spin-button,
@@ -127,9 +156,15 @@ width: 100% !important;
     }
 
     table.dataTable thead tr {
-        background-color: #5c5c5c;
+
         color: white;
     }
+
+    .dataTables_wrapper .dataTables_paginate {
+            float: right !important;
+            text-align: right;
+            margin-bottom: 5px;
+        }
 
     .engRows {
         background-color: #7c6c6c !important;
@@ -304,14 +339,16 @@ width: 100% !important;
         padding-left: 5px;
     }
 
-
+    th{
+        border-top:1px solid gray;
+    }
 
     .table>thead>tr>th,
     .table>tbody>tr>td {
         text-align: center;
         vertical-align: middle;
         padding: 20px;
-        border: 1px solid grey;
+        border: 1px solid gray;
         padding: 0px;
         margin: 0px;
         font-weight: 600;
@@ -371,8 +408,8 @@ width: 100% !important;
     #data_entry_body>tr>td>select:focus {
         outline: none;
         background-color: #bdbdbd !important;
-
     }
+
 </style>
 
 <div class="header_bar">
@@ -385,7 +422,7 @@ width: 100% !important;
             </a>
         </li>
         <li>
-            <a href="/" class="" id="">Go To HomePage</a>
+            <a href="/home" class="" id="">Go To HomePage</a>
         </li>
     </ul>
 
@@ -395,18 +432,18 @@ width: 100% !important;
 <div class="row">
     <div class="col-md-12">
         <div class="box">
-            <div class="box-header">
+            <div class="box-header" style="text-align:center;padding-top:20px;">
                 <h3 class="box-title">သိမ်းထားသောပုံစံများ</h3>
             </div>
             <div>
-                <form id="search_form" method="GET">
+                <form  method="GET" action="#">
                     <!-- <input type="hidden" name="_token" value="Eu7aH4i70ibviYKFqAcvBAELd33uD9TII5BNB7yO"> -->
-                    <div class="row">
-                        <div class="col-md-3">
+                    <div class="row"style="padding:15px;">
+                        {{-- <div class="col-md-3">
                             <div class="form-group">
                                 <label class="control-label">တိုင်းနှင့်ပြည်နယ်</label>
                                 <select class="form-control input-sm select2 search_state" name="sr_search"
-                                    id="region_data">
+                                    id="region_data" formaction="{{ route('form_search', ['type' => 'sr_search']) }}">
                                     <option value="">ရွေးပါ</option>
                                     @foreach ($state_region as $stateRegion)
                                         <option value="{{ $stateRegion->region_mmr }}">
@@ -415,13 +452,13 @@ width: 100% !important;
                                     @endforeach
                                 </select>
                             </div>
-                        </div>
+                        </div> --}}
 
-                        <div class="col-md-3">
+                        {{-- <div class="col-md-3" hidden>
                             <div class="form-group" style="width:100%;">
                                 <label class="control-label">ခရိုင်</label>
                                 <select id="district_data" class="form-control input-sm select2 search_township"
-                                    name="ts_search" style="width: 100%">
+                                    name="ts_search"  style="width: 100%">
                                     <option value="">ရွေးပါ</option>
                                     @foreach ($district as $dst)
                                         <option value="{{ $dst->township_id }}">
@@ -430,20 +467,20 @@ width: 100% !important;
                                     @endforeach
                                 </select>
                             </div>
-                        </div>
+                        </div> --}}
 
-                        <div class="col-md-3">
+                        {{-- <div class="col-md-3">
                             <div class="form-group" style="width:100%;">
                                 <label class="control-label">မြို့နယ်</label>
-                                <select id="township_data" class="form-control input-sm select2 search_township"
+                                <select id="township_data" class="form-control input-sm select2 search_township" formaction="{{ route('form_search', ['type' => 'ts_search']) }}"
                                     name="ts_search" style="width: 100%">
                                     <option value="">ရွေးပါ</option>
 
                                 </select>
                             </div>
-                        </div>
+                        </div> --}}
 
-                        <div class="col-md-3">
+                        {{-- <div class="col-md-3">
                             <div class="form-group">
                                 <label class="control-label">Health Facility</label>
 
@@ -453,9 +490,9 @@ width: 100% !important;
 
                                 </select>
                             </div>
-                        </div>
+                        </div> --}}
 
-                        <div class="col-md-3">
+                        {{-- <div class="col-md-3">
                             <div class="form-group">
                                 <label class="control-label">Sub Center</label>
 
@@ -466,9 +503,9 @@ width: 100% !important;
                                 </select>
 
                             </div>
-                        </div>
+                        </div> --}}
 
-                        <div class="col-md-3">
+                        {{-- <div class="col-md-3">
                             <div class="form-group">
                                 <label class="control-label">VHV</label>
 
@@ -479,43 +516,63 @@ width: 100% !important;
                                 </select>
 
                             </div>
-                        </div>
+                        </div> --}}
 
-                        <div class="col-md-3">
+                        {{-- <div class="col-md-3">
                             <div class="form-group">
+
                                 <label class="control-label">စတင်သည့်ရက် လ/ခုနှစ်</label>
-                                <input type="text" class="form-control input-sm search_date" id="sdate_input"
-                                    name="sdate_search" placeholder="Start Date" autocomplete="off"
+                                <input type="month" min="2022-01" class="form-control input-sm search_date" id="sdate_input"
+                                    name="sdate_search" placeholder="Start Date" formaction="{{ route('form_search', ['type' => 'sdate_search']) }}" autocomplete="off"
                                     style="width: 100%;">
                             </div>
-                        </div>
-                        <div class="col-md-3">
+                        </div> --}}
+                        {{-- <div class="col-md-3">
                             <div class="form-group">
                                 <label class="control-label">ပြီးဆုံးသည့်ရက် လ/ခုနှစ်</label>
-                                <input type="text" class="form-control input-sm search_date" id="edate_input"
+                                <input type="month" class="form-control input-sm search_date" id="edate_input"
                                     name="edate_search" placeholder="End Date" autocomplete="off">
                                 {{-- <input type="text" class="form-control text-center" id="form-date" name="form-date"
-                                    autocomplete=off placeholder="လ / ခုနှစ်" readonly> --}}
+                                    autocomplete=off placeholder="လ / ခုနှစ်" readonly>
                             </div>
-                        </div>
-                        <div class="col-md-2">
-                            <div class="form-group">
-                                <button type="text" id="btnSearch" onClick="state_and_region_tab();"
-                                    class="btn btn-info btn-flat btnSearchs" style="width: 100%;margin-top:20px;">
-                                    <i class="fa fa-search"></i> Search
-                                </button>
-                            </div>
-                        </div>
+                        </div>--}}
+
+
+                                <div class="col-md-3 col-md-offset-9" style="padding: 15px;">
+                                    <div class="form-group">
+                                        {{-- <label class="control-label">Search:</label> --}}
+                                        <div class="input-group input-group-sm">
+                                            <input type="search" class="form-control" placeholder="Search" name="search" value="{{ request()->get('search') }}">
+                                            <span class="input-group-btn">
+                                                <button type="submit" id="edate_search" class="btn btn-info btn-flat">
+                                                    <i class="fa fa-search"></i>
+                                                </button>
+                                            </span>
+                                        </div>
+                                    </div>
+                                    </div>
+                                </div>
+
+
+
+
+
+
+
+
                     </div>
                 </form>
-                <table id="table_grab_all_corefacility" style="width:100%" class="table table-bordered nowrap">
+
+               <div class="tables" style="height:100%;">
+
+                <table id="table_grab_all_corefacility" class="table table-bordered">
                     <thead>
                         <tr class="theads">
                             <!--th>No</th-->
-                            <th align="right">Township_Name_MM</th>
-                            <th align="left">Record</th>
-                            <th align="right">Start Date</th>
-                            <th align="right">End Date</th>
+                            <th align="right">မြို့နယ်ကျန်းမာရေးဌာန</th>
+                            <th align="left">လူနာအချက်အလက်မှတ်တမ်း</th>
+                            <th align="right">ရိုက်သွင်းသည့်နေ့အစ</th>
+                            <th align="right">ရိုက်သွင်းသည့်နေအဆုံး</th>
                             <th align="right"></th>
 
                         </tr>
@@ -535,36 +592,31 @@ width: 100% !important;
 
                                     {{ $case->township_name_en }}
                                 </td>
-
-
-
                                 <td align="left">{{ $case->count }}</td>
                                 <td align="right">{{ $case->start_date }}</td>
                                 <td align="right">{{ $case->end_date }}</td>
 
                                 <td>
-                                    <form id="" method="POST">
-                                        <div class="btn-group" style="width:max-content">
-                                            {{-- <tr title="လူနာအချက်အလက်များကြည့်ရန် နှိပ်ပါ" id="tr_61023589407718013"
-    onClick="load_tbl_individual_case('61023589407718013', this)">
+                                    {{-- <form id="" method="POST"> --}}
+                                        <div class="buttons" style="width:max-content; align:center; padding-left:70px;">
 
-    </tr> --}}
-                                            <a href="/formList">
-                                                <button title="လူနာအချက်အလက်များကြည့်ရန် နှိပ်ပါ" id=""
-                                                    onClick="load_tbl_individual_case(this)" type="button"
-                                                    class="btn btn-success btn-xs"
-                                                    onClick="goto_form({{ $case->township_name_en }})">
-                                                    Uploaded
+                                                <a href="{{ 'formList/'.$case->pt_current_township }}">
+                                                <button title="" id="form_form_{{ $case->pt_current_township }}"
+                                                    type="button"
+                                                    class="btn btn-info btn-xs" style="padding:5px;">
+                                                    ပြင်ဆင်ရန်
+                                                    {{-- <li class="fa fa-edit fa-1x"></li> --}}
                                                 </button>
-                                            </a>
+                                                </a>
                                             {{-- id="showPopupBtnUpload" --}}
-                                            <button title="Upload to server" type="button"
-                                                class="btn btn-info btn-xs" id="showPopupBtnUpload"
+                                            <button title="server ပေါ်သို့ပို့ဆောင်မည်" type="button"
+                                                class="btn btn-success btn-xs" style="padding:5px;" id=""
                                                 onClick="dhis2postData('{{ $case->pt_current_township }}')">
-                                                <i class="fa fa-upload upload_to_online_btn"></i>Upload to server
+                                                {{-- <i class="fa fa-upload upload_to_online_btn"></i> --}}
+                                                server ပေါ်သို့ပို့ဆောင်မည်
                                             </button>
                                         </div>
-                                    </form>
+                                    {{-- </form> --}}
                                 </td>
 
 
@@ -575,6 +627,13 @@ width: 100% !important;
                     @endforeach
                 </table>
 
+               <div class="paginate" style="margin-left:80%;padding-left:20px;padding-right:20px;font-color:#333;font-size:14px;">
+                {{ $groupedCases->links() }}
+               </div>
+
+
+               </div>
+
             </div>
             <!-- Custom Tabs -->
         </div>
@@ -582,41 +641,7 @@ width: 100% !important;
 
         @extends('nmcp-template.patient-register-form')
 
-        {{-- fontawsome 6.4.2 js 1 --}}
-        {{-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" --}}
-            {{-- integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" --}}
-            {{-- crossorigin="anonymous" referrerpolicy="no-referrer" /> --}}
-        {{-- for js --}}
-        {{-- <script src="{{ asset('bower_components/jquery/dist/jquery.js') }}"></script>
-        <script src="{{ asset('bower_components/jquery-ui/jquery-ui.min.js') }}"></script>
-        <script src="{{ asset('bower_components/select2/dist/js/select2.min.js') }}"></script>
-        <script>
-            $.widget.bridge('uibutton', $.ui.button);
-        </script>
-        <script src="{{ asset('bower_components/bootstrap/dist/js/bootstrap.min.js') }}"></script>
-        <script src="{{ asset('bower_components/raphael/raphael.min.js') }}"></script>
-        <script src="{{ asset('bower_components/morris.js/morris.min.js') }}"></script>
-        <script src="{{ asset('bower_components/jquery-sparkline/dist/jquery.sparkline.min.js') }}"></script>
-        <script src="{{ asset('bower_components/admin-lte/plugins/jvectormap/jquery-jvectormap-1.2.2.min.js') }}"></script>
-        <script src="{{ asset('bower_components/admin-lte/plugins/jvectormap/jquery-jvectormap-world-mill-en.js') }}"></script>
-        <script src="{{ asset('bower_components/jquery-knob/dist/jquery.knob.min.js') }}"></script>
-        <script src="{{ asset('bower_components/moment/min/moment.min.js') }}"></script>
-        <script src="{{ asset('bower_components/bootstrap-daterangepicker/daterangepicker.js') }}"></script>
-        <script src="{{ asset('bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js') }}"></script>
-        <script src="{{ asset('bower_components/admin-lte/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js') }}">
-        </script>
-        <script src="{{ asset('bower_components/jquery-slimscroll/jquery.slimscroll.min.js') }}"></script>
-        <script src="{{ asset('bower_components/fastclick/lib/fastclick.js') }}"></script>
-        <script src="{{ asset('bower_components/admin-lte/dist/js/demo.js') }}"></script>
-        <script src="{{ asset('bower_components/datatables.net/js/jquery.dataTables.min.js') }}"></script>
-        <script src="{{ asset('bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js') }}"></script>
-        <script src="{{ asset('js/nmcp.js') }}"></script>
-        <script src="{{ asset('js/popper.min.js') }}"></script>
-        <script src="{{ asset('js/bootbox.all.min.js') }}"></script>
-        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script> --}}
 
-        {{-- fontawsome 6.4.2 js 1 --}}
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
 integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
 crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -650,24 +675,72 @@ $.widget.bridge('uibutton', $.ui.button);
 <script src="{{ asset('js/bootbox.all.min.js') }}"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script>
 
-        <script>
+
+            // $("body").addClass("loading");
+
+    $( function() {
+        $('.search_date').datepicker({
+                    format: 'mm/yyyy',
+                    viewMode: 1,
+                    minViewMode: 1,
+                    autoclose: true,
+                });
+    } );
 
 
-function showConfirmationPopupUpload() {
-    var isConfirmed = window.confirm("All data will be uploaded to the server. Do you want to proceed?");
-
-    if (isConfirmed) {
-
-        alert("Data uploaded to the server.");
-    } else {
-        alert("Upload canceled.");
+  $(document).on({
+    ajaxStart: function(){
+        $("body").addClass("loading");
+    },
+    ajaxStop: function(){
+        $("body").removeClass("loading");
     }
+});
+function goto_form(pt_current_township) {
+    $.ajax({
+        type: "GET",
+        url: BACKEND_URL + "show_form_list/" + pt_current_township,
+        success: function(datas) {
+            // Assuming datas is an array of objects
+            datas.forEach(function(data) {
+                // Assuming you want to add the inputs to a form with ID form_${pt_current_township}
+                var form = $(`#form_${pt_current_township}`);
+
+                // Add or update input fields with the retrieved data
+                form.find('input[name=""]').val(data.Form_Code);
+                form.find('input[name="form_number"]').val(data.Form_No);
+                form.find('input[name="select_lp_state_region"]').val(data.TS_Code.slice(0, 6));
+                form.find('input[name="select_lp_township_de"]').val(data.TS_Code);
+                form.find('input[name="select_tbl_hfm_de"]').val(data.HF_Code);
+                form.find('input[name="select_hfm_de"]').val(data.SC_Code);
+                form.find('input[name="form-date"]').val(data.PMonth + "/" + data.PYear);
+                form.find('input[name="pt_current_township"]').val(data.pt_current_township);
+                form.find('input[name="_token"]').val('{{ csrf_token() }}');
+
+                // Submit the form
+                form.prop('action', '/patient-register-form');
+                form.submit();
+            });
+        }
+    });
 }
 
 
-var showPopupBtnUpload = document.getElementById("showPopupBtnUpload");
-showPopupBtnUpload.addEventListener("click", showConfirmationPopupUpload);
+
+
+
+
+
+
+
+
+
+
+
+// var showPopupBtnUpload = document.getElementById("showPopupBtnUpload");
+// showPopupBtnUpload.addEventListener("click", showConfirmationPopupUpload);
 
             // var o_sdate, o_edate;
             // $(document.ready(function() {
@@ -705,7 +778,8 @@ showPopupBtnUpload.addEventListener("click", showConfirmationPopupUpload);
                 // selected value in region
                 $('#region_data').click(function() {
                     console.log("Hi");
-                    DisctictResult($(this).val());
+                    //DisctictResult($(this).val());
+                    TownShipResult($(this).val());
                 });
 
                 // selected value in district
@@ -762,7 +836,7 @@ showPopupBtnUpload.addEventListener("click", showConfirmationPopupUpload);
                     dataType: "json",
                     async: false,
                     success: function(data) {
-                        console.log('myitzu', data);
+                        console.log('=>', data);
                         for (var i = 0; i < data.length; i++) {
                             var ele = document.createElement("option");
                             ele.value = data[i].district_name_mmr;
@@ -932,7 +1006,7 @@ showPopupBtnUpload.addEventListener("click", showConfirmationPopupUpload);
                     },
                     success: function(data) {
 
-                        alert('this is found', data);
+                        // alert('this is found', data);
                         malaria_test.updateOptions({
                             series: [{
                                 name: 'Tests',
@@ -957,9 +1031,59 @@ showPopupBtnUpload.addEventListener("click", showConfirmationPopupUpload);
                 console.log("Hi");
             }
 
-            function dhis2postData(hi) {
-                console.log(hi);
 
+
+            function goto_form(pt_current_township) {
+            $.ajax({
+                type: "GET",
+                url:  BACKEND_URL +"get_existing_form_data/" + pt_current_township,
+                success: datas => {
+
+
+                     var formData = new FormData();
+                     console.log('formData=>',formData);
+                    // datas.map(data => {
+                    //     $(`#form_${cf_link_code}`).append(
+                    //         `<input type="hidden" name="select_lp_form_cat" value="${data.Form_Code}"/>`
+                    //         );
+                    //     $(`#form_${cf_link_code}`).append(
+                    //         `<input type="hidden" name="form_number" value="${data.Form_No}"/>`);
+                    //     $(`#form_${cf_link_code}`).append(
+                    //         `<input type="hidden" name="select_lp_state_region" value="${data.TS_Code.slice(0,6)}"/>`
+                    //         );
+                    //     $(`#form_${cf_link_code}`).append(
+                    //         `<input type="hidden" name="select_lp_township_de" value="${data.TS_Code}"/>`
+                    //         );
+                    //     $(`#form_${cf_link_code}`).append(
+                    //         `<input type="hidden" name="select_tbl_hfm_de" value="${data.HF_Code}"/>`
+                    //         );
+                    //     $(`#form_${cf_link_code}`).append(
+                    //         `<input type="hidden" name="select_hfm_de" value="${data.SC_Code}"/>`
+                    //         );
+                    //     $(`#form_${cf_link_code}`).append(
+                    //         `<input type="hidden" name="form-date" value="${data.PMonth}/${data.PYear}"/>`
+                    //         );
+                    //     $(`#form_${cf_link_code}`).append(
+                    //         `<input type="hidden" name="cf_link_code" value="${data.cf_link_code}"/>`
+                    //         );
+                    //     $(`#form_${cf_link_code}`).append(
+                    //         `<input type="hidden" name="_token" value="{{ csrf_token() }}"/>`);
+                    //     $(`#form_${cf_link_code}`).prop('action', '/patient-register-form');
+                    //     $(`#form_${cf_link_code}`).submit();
+                    // });
+                }
+            });
+}
+
+
+
+            function dhis2postData(hi) {
+               // console.log(hi);
+               var isConfirmed = window.confirm("All data will be uploaded to the server. Do you want to proceed?");
+            //    $(button).prop("disabled", true);
+            // $(button).html('<img src="img/default-loading.gif" style="width:20px;"/> ခေတ္တစောင့်ပါ');
+
+            if (isConfirmed) {
                 $.ajax({
                     type: "POST",
                     url: "/api/dhis2postData/" + hi,
@@ -968,15 +1092,27 @@ showPopupBtnUpload.addEventListener("click", showConfirmationPopupUpload);
                     dataType: "json",
                     async: false,
                     success: function(data) {
-                        console.log('myitzu', data);
+
+                        console.log('dhs', data);
                         //alert(data.township_mmr);
 
-
+                        alert("Data uploaded to the server.");
+                        setTimeout(() => {
+                            location.reload();
+                        }, 1500);
                     },
                     error: function(jqXHR, textStatus, errorThrown) {
                         alert(errorThrown);
-                        console.log("Myitzu is not ok");
+
+
+                        console.log("not ok");
                     }
                 });
+
+            } else {
+                alert("Upload canceled.");
             }
+
+            }
+
         </script>

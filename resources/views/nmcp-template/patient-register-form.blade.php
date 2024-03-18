@@ -38,6 +38,7 @@
 </head>
 
 <body>
+    {{-- class="loading" --}}
 
     {{-- <input type="hidden" id="cf_code" value="{{ $cf_code }}" /> --}}
     {{-- <input type="hidden" id="cf_link_code" value="{{ $cf_link_code }}" /> --}}
@@ -225,8 +226,10 @@
         // });
 
         function save_data_entry(button) {
-            $(button).prop("disabled", true);
-            $(button).html('<img src="img/default-loading.gif" style="width:20px;"/> ခေတ္တစောင့်ပါ');
+
+            // alert('to save=>');
+            // $(button).prop("disabled", true);
+            // $(button).html('<img src="img/default-loading.gif" style="width:20px;"/> ခေတ္တစောင့်ပါ');
             //tpa check
             var tp_code = document.getElementById('txt_Death_Facility').getAttribute('tp_code');
             var tpa_out = $("#txt_Total_Outpatient").val();
@@ -594,7 +597,7 @@
                 //"http://" + window.location.host +
             }
 
-        // } 
+        // }
 
         function set_row_numbers() {
             var table = document.getElementById('data_entry_body');
@@ -720,6 +723,8 @@
         }
         set_row_numbers();
     </script>
+
+        {{-- <div class="loading-content"></div> --}}
 
 </body>
 

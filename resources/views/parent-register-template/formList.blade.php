@@ -18,7 +18,7 @@
     </li>
   </ul>
 </div>
-<h2 class="form_head" style="font-weight: 600; color:rgb(44, 102, 147); padding-top:10px; padding-left:20px; text-align:center;">Form Lists</h2>
+{{-- <h2 class="form_head" style="font-weight: 600; color:rgb(44, 102, 147); padding-top:10px; padding-left:20px; text-align:center;">Form Lists</h2> --}}
 
 <main>
     <div class="tab-pane active " id="data_entry">
@@ -29,44 +29,547 @@
                     style="font-weight: 600;">
                     {{ csrf_field() }}
 
-                    <table id="table_grab_all_corefacility" style="width:100%" class="table table-bordered nowrap">
-                        <thead>
-                        <tr class="theads">
-                            <!--th>No</th-->
-                            <th align="right">SC_Name_MM</th>
-                            <th align="left">Record</th>
-                            <th align="right">Start Date</th>
-                            <th align="right">End Date</th>
-                            <th align="right"></th>
-
-                        </tr>
-                        </thead>
-                        <tbody id="grab_all_corefacility_container" class="tbodys">
-                        <tr>
-                            {{-- @foreach ($health_facility as $hf ) --}}
-                            <td align="right" cf_code="718009">
-                                
-                            </td>
-                            <td align="left">150</td>
-                            <td align="right">7 / 2023</td>
-                            <td align="right">11 / 2023</td>
-
-                            <td>
-
-                            </td>
-
-                            {{-- @endforeach --}}
-                            </tr>
-                            </tbody>
-                        </table>
 
                     @extends('nmcp-template.patient-register-form')
+                    {{-- @extends('nmcp-template.patient_register_form_row') --}}
 
                     <input type="hidden" id="cf_code" name="cf_code" />
                     <input type="hidden" id="cf_link_code" name="cf_link_code" />
                 </form>
             </div>
         </div>
+
+
+        <div class="row">
+            <div class="text-center" style="padding: 20px">
+                {{-- <span style="float:left; font-size: 10px;">ပုံစံအမျိုးအစား - </span> --}}
+                {{-- {{ $lp_form_cat_name }} --}}
+                <h3>ငှက်ဖျားလူနာစစ်ဆေးကုသမှုမှတ်တမ်း /လချုပ်</h3>
+                <hr>
+                {{-- / <span style="float:right; font-size: 10px;">Form No - </span> --}}
+                {{-- {{ $form_number }} --}}
+            </div>
+
+            {{-- <div class="first-row" style="text-align: center;"> --}}
+            {{-- <label class="control-label top-label">အထွေထွေဆေးခန်းလာပြင်ပလူနာသစ်ပေါင်း (ပြင်ပ)*</label> --}}
+            <div class=""
+                style="border: 1px solid #fff; box-shadow: grey 3px 3px 1px; border-radius: 10px; background-color:white; color:#000;">
+                <table class="" style="margin-left:20px;">
+
+                    @foreach ($tbl_individual_cases as $case)
+                    <tbody align="left">
+                        <tr style="padding-bottom:20px;">
+                            <td style="padding:10px; padding-right:50px; margin-right:20px;">
+
+                                <small style="font-weight: 700; font-size: 15px; padding-right:10px; ">
+                                    အထွေထွေဆေးခန်းလာပြင်ပလူနာသစ်ပေါင်း(ပြင်ပ)* - </small>
+                                <input type="text" id="txt_total_outpatient" value=""
+                                    style="width: 20%;padding-left:10px;">
+
+                            </td>
+                            <td style="padding:10px 50px 10px 30px;  margin-right:20px">
+
+                                <small style="font-weight: 700; font-size: 15px; padding-right:10px;">
+                                    ငါးနှစ်အောက်အထွေထွေဆေးခန်းလာ(ပြင်ပ)
+                                    - </small>
+                                <input type="text" id="txt_total_child_out" value="" style="width: 20%; ">
+
+                            </td>
+                            <td style="padding:10px 50px 10px 30px; margin-right:20px">
+
+                                <small style="font-weight: 700; font-size: 15px; padding-right:10px;">
+                                    ကိုယ်ဝန်ဆောင်အထွေထွေဆေးခန်းလာ(ပြင်ပ)
+                                    - </small>
+                                <input type="text" id="txt_total_preg_out" value=""
+                                    style="width: 20%; margin-right:20px;">
+
+                            </td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td style="padding:10px 50px 10px 30px; margin-right:20px">
+
+                                <small style="font-weight: 700; font-size: 15px; padding-right:10px;">
+                                    ဆေးရုံတက်အတွင်းလူနာသစ်ပေါင်း - </small>
+                                <input type="text" id="txt_total_inpatient" value="" style="width: 20%; ">
+                            </td>
+                            <td style="padding:10px 50px 10px 30px; margin-right:20px">
+
+                                <small style="font-weight: 700; font-size: 15px;"> ငါးနှစ်အောက်အထွေထွေဆေးခန်းလာ(အတွင်း)
+                                    - </small>
+                                <input type="text" id="txt_total_in_child" value="" style="width: 20%; ">
+
+                            </td>
+                            <td style="padding:10px 50px 10px 30px; margin-right:20px">
+
+                                <small style="font-weight: 700; font-size: 15px;"> ကိုယ်ဝန်ဆောင်အထွေထွေဆေးခန်းလာ(အတွင်း)
+                                    - </small>
+                                <input type="text" id="txt_total_preg_in" value=""
+                                    style="width: 20%; margin-right:20px; ">
+
+                            </td>
+
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td style="padding:10px 50px 10px 30px; margin-right:20px">
+
+                                <small style="font-weight: 700; font-size: 15px;"> ဆေးရုံတွင်သေဆုံးသူစုစုပေါင်း - </small>
+                                <input type="text" id="txt_total_death_in" value="" style="width: 20%; ">
+
+                            </td>
+                            <td></td>
+                        </tr>
+
+
+                    </tbody>
+                    @endforeach
+                </table>
+            </div>
+
+
+            {{-- <span class="top-label-value"></span> --}}
+            {{-- {{ $lp_state_region_name }} --}}
+
+
+
+
+
+
+
+            {{-- </div> --}}
+
+
+            <?php
+                    if(isset($tbl_total_patient_temp)){
+                        if(count($tbl_total_patient_temp) > 0){
+                            //echo "this is tbl greater than zero";
+                            foreach($tbl_total_patient_temp as $tp){
+                ?>
+            <table width='100%' id='tbl_iop'>
+                <tbody id='tbody_iop'>
+                    <tr>
+                        <td>အထွေထွေဆေးခန်းလာပြင်ပလူနာသစ်ပေါင်း</td>
+                        <td><input class="" type="number" id='txt_Total_Outpatient'
+                                value={{ $tp->Total_Outpatient }}></td>
+                        <td>ငါးနှစ်အောက်အထွေထွေဆေးခန်းလာ(ပြင်ပ)</td>
+                        <td><input class="" type="number" id='txt_U5_Outpatient'
+                                value="{{ $tp->U5_Outpatient }}"></td>
+                        <td>ကိုယ်ဝန်ဆောင်အထွေထွေဆေးခန်းလာ(ပြင်ပ)</td>
+                        <td><input class="" type="number" id='txt_Preg_Outpatient'
+                                value="{{ $tp->Preg_Outpatient }}" onblur="chNumOut()"></td>
+                        <td></td>
+                        <td></td>
+                        <td>လ</td>
+                        <td><input type="text" id='frm_month'value='{{ $form_month }}' disabled></td>
+                    </tr>
+
+                </tbody>
+            </table>
+            <?php
+                    }}else{
+                        //echo "this is plane table";
+                ?>
+            <table width='100%' id='tbl_iop'>
+                <tbody id='tbody_iop'>
+                    <tr>
+                        <td>အထွေထွေဆေးခန်းလာပြင်ပ
+                            လူနာသစ်ပေါင်း</td>
+                        <td><input type="number" class="" id='txt_Total_Outpatient' value="0"></td>
+                        <td>ငါးနှစ်အောက်အထွေထွေဆေးခန်းလာ(ပြင်ပ)</td>
+                        <td><input type="number" class="" id='txt_U5_Outpatient' value="0"></td>
+                        <td style="margin-right: 20px;">ကိုယ်ဝန်ဆောင်အထွေထွေဆေးခန်းလာ(ပြင်ပ)</td>
+                        <td><input type="number" class="" id='txt_Preg_Outpatient' value="0"
+                                onblur="chNumOut()"></td>
+                        <td></td>
+                        <td></td>
+                        <td>လ</td>
+                        <td><input type="text" id='frm_month'value='{{ $form_month }}' disabled></td>
+                    </tr>
+
+                </tbody>
+            </table>
+            <?php }} ?>
+
+
+            <button class="btn btn-default btn-sm pull-right btn-primary"
+                style="margin-top: 20px; margin-bottom: 10px; margin-right:30px;" id="add_row" onClick="add_row(this)">
+                <li class="fa fa-plus-square text-white" style="margin-right:20px;"></li>အသစ်တစ်ကြောင်းထပ်တိုးရန်
+            </button>
+            <div class="col-md-12 table-container" style="padding: 10px;">
+                <div class="">
+                    <table class="table table-bordered dataTable" id="dynamicInput" id="register-table"
+                        style="background-color: rgb(120, 120, 114); justify-content:center">
+                        <thead class="mmtext-12">
+                            <tr>
+                                <th rowspan="2" width="20px">စဉ်</th>
+                                <th rowspan="2" width="80px">ရက်စွဲ</th>
+                                <th rowspan="2">အမည်</th>
+                                <th rowspan="2" width="35px">အသက်</th>
+                                <th rowspan="2" width="100px">အဘအမည်</th>
+                                <th rowspan="2" width="150">ကျန်းမာရေးဌာန<br>အတွင်းရှိရွာ<br>
+                                    (ဟုတ်/မဟုတ်)</th>
+                                <th rowspan="2" width="100">မြို့နယ်<br>
+                                    (လက်ရှိနေရပ်လိပ်စာ)</th>
+                                <th rowspan="2" width="100">ကျေးရွာ/ရပ်ကွက်<br>
+                                    (လက်ရှိနေရပ်လိပ်စာ)</th>
+                                <th rowspan="2" width="100">ကျေးရွာ/ရပ်ကွက်အမည်<br>
+                                    (လက်ရှိနေရပ်လိပ်စာ)</th>
+                                <th rowspan="2" width="100">မြို့နယ်<br>
+                                    (အမြဲတမ်းနေရပ်လိပ်စာ)</th>
+                                <th rowspan="2" width="100">ကျေးရွာ/ရပ်ကွက်<br>
+                                    (အမြဲတမ်းနေရပ်လိပ်စာ)</th>
+                                <th rowspan="2" width="100">ကျေးရွာ/ရပ်ကွက်အမည်<br>
+                                    (အမြဲတမ်းနေရပ်လိပ်စာ)</th>
+                                <th rowspan="2" width="80">လိင်<br>(ကျား/မ)</th>
+                                <th rowspan="2" width="80">ကိုယ်၀န်ဆောင်</th>
+                                <th rowspan="2" width="70px">မှန်ဘီလူးဖြင့်စစ်ဆေး</th>
+                                <th rowspan="2" width="70px">RDTဖြင့်စစ်ဆေး</th>
+                                <th rowspan="2" width="90px">ပြင်ပ/အတွင်း</th>
+                                <th colspan="3" width="150" height="20px">ကုသပေးသော<br />ငှက်ဖျားဆေး</th>
+                                <th rowspan="2" width="80">Referral</th>
+                                <th rowspan="2" width="50px">Mp(+) <br>Malaria Death</th>
+                                <th rowspan="2" width="50px">Treatment Given</th>
+                                <th rowspan="2" width="80px">ခရီးသွားခြင်း <br>(၂ပတ်-၁လအတွင်း)</th>
+                                <th rowspan="2" width="110px">အလုပ်အကိုင်</th>
+                                <th rowspan="2" width="70px">မှတ်ချက်</th>
+                                <th rowspan="2" style="width: 20px"></th>
+                            </tr>
+                        </thead>
+                        <thead class="mmtext-12">
+                            <tr class="engRows">
+                                <th rowspan="2" width="20px">Sr</th>
+                                <th rowspan="2" width="80px">Date</th>
+                                <th rowspan="2" width="100px">Name</th>
+                                <th rowspan="2" width="35px">Age</th>
+                                <th rowspan="2" width="100px">Father Name</th>
+                                <th rowspan="2" width="150">Patient who live<br> in the village<br>
+                                    within the Sub-center
+                                    (Yes/No)</th>
+                                <th rowspan="2" width="100">Township<br>
+                                    (Current Address)</th>
+                                <th rowspan="2" width="100">Village/Ward<br>
+                                    (Current Address)</th>
+                                <th rowspan="2" width="100">Village/Ward Name<br>
+                                    (Current Address)</th>
+                                <th rowspan="2" width="100">Township<br>
+                                    (Permanent Address)</th>
+                                <th rowspan="2" width="100">Village/Ward<br>
+                                    (Permanent Address)</th>
+                                <th rowspan="2" width="100">Village/Ward Name<br>
+                                    (Permanent Address)</th>
+                                <th rowspan="2" width="80">Sex</th>
+                                <th rowspan="2" width="80">Pregnant</th>
+                                <th rowspan="2" width="70px">Exam by Microscope</th>
+                                <th rowspan="2" width="70px">Exam by RDT</th>
+                                <th rowspan="2" width="90px">OP/IP</th>
+                                <th colspan="3" width="150" height="20px">Treatment by<br>
+                                    Malaria Drug</th>
+                                <th rowspan="2" width="80">Referral</th>
+                                <th rowspan="2" width="50px">Mp(+) <br>Malaria Death</th>
+                                <th rowspan="2" width="50px">Treatment Given</th>
+                                <th rowspan="2" width="80px">Travelling
+                                </th>
+                                <th rowspan="2" width="110px">Occupation</th>
+                                <th rowspan="2" width="70px">Remark</th>
+                                <th rowspan="2" style="width: 20px"></th>
+                            </tr>
+                            <tr class="engRows">
+                                <th width="100px">ACT</th>
+                                <th width="100px">CQ</th>
+                                <th width="100px">PQ</th>
+                        </thead>
+                       @foreach ($tbl_individual_cases as  $cases )
+
+                       <tbody id="data_entry_body">
+                        <?php
+                            if(isset($tbl_individual_case_temp))
+                            foreach($tbl_individual_case_temp as $patient) {
+                                list($year, $month, $day) = explode("-", $patient->Screening_Date);
+                                //echo $patient->P_Number; return false;
+                            ?>
+                        <tr>
+                            <td style="font-size:10px; font-weight: bold;" P_Number="<?= $patient->P_Number ?>">
+                                <?= $patient->Row_No ?>
+                            </td>
+
+                            <td>
+                                <input type="text" id="datepicker" class="form-control text-center"
+                                    style="height: 50px;" autocomplete="off">
+
+                            </td>
+
+                            <td>
+                                <input type="text" id="" oninput="adjustInputWidth(this)"
+                                    placeholder="အမည်" value="{{ $cases->pt_Name }}">
+                            </td>
+                            <td>
+                                {{-- oninput="adjustInputWidth(this)" --}}
+                                <input type="text" id="ageInput" maxlength="3" placeholder="အသက်"
+                                    class="age dentry_age" value="{{ $cases->pt_age }}" onchange="checkAge(this)">
+                            </td>
+                            <td><input type="text" id="" oninput="adjustInputWidth(this)"
+                                    placeholder="အဘအမည်" value="{{ $cases->pt_father_name }}"></td>
+                            <td>
+                                <select name="address" id="" oninput="adjustInputWidth(this)"
+                                    onblur="location_changed(this)" {{ $review_mode ? 'disabled' : '' }}>
+
+                                        <option value="">Other</option>
+                                        @foreach ($tbl_village as $v)
+                                            <option value="{{ $case->pt_address }}">
+                                                {{ $v->village_name_en }} &nbsp;&nbsp;&nbsp;&nbsp;| {{ $v->village_name_mm }}
+                                            </option>
+                                        @endforeach
+
+                                </select>
+                            </td>
+                            <td>
+                                <select name="address" id="" onblur="location_changed(this)"
+                                    {{ $review_mode ? 'disabled' : '' }}>
+
+                                        <option value="{{ $cases->pt_current_township}}">Other</option>
+                                        @foreach ($tbl_village as $v)
+                                            <option value="{{ $case->pt_address }}">
+                                                {{ $v->village }} &nbsp;&nbsp;&nbsp;&nbsp;| {{ $v->village_tract }}
+                                            </option>
+                                        @endforeach
+
+                                </select>
+                            </td>
+                            <td>
+                                <select name="address" id="" onblur="location_changed(this)"
+                                    {{ $review_mode ? 'disabled' : '' }}>
+
+                                        <option value="">Other</option>
+                                        @foreach ($tbl_individual_cases as $v)
+                                            <option value="{{ $cases->pt_current_village }}">
+                                                {{ $v->village }} &nbsp;&nbsp;&nbsp;&nbsp;| {{ $v->village_tract }}
+                                            </option>
+                                        @endforeach
+
+                                </select>
+                            </td>
+                            <td>
+                                <select name="address" id="" onblur="location_changed(this)"
+                                    {{ $review_mode ? 'disabled' : '' }}>
+                                    @if ($patient->Pt_Location == 10)
+                                        <option value="">Other</option>
+
+                                    @else
+                                    <input type="text">
+                                    @endif
+                                </select>
+                            </td>
+                            <td>
+                                <select name="address" id="" onblur="location_changed(this)"
+                                    {{ $review_mode ? 'disabled' : '' }}>
+
+                                        <option value="{{ $patient->Pt_Location }}">Other</option>
+                                        @foreach ($tbl_village as $v)
+                                            <option value="{{$cases->pt_current_ward }}">
+                                                {{ $v->village }} &nbsp;&nbsp;&nbsp;&nbsp;|
+                                                {{ $v->village_tract }}
+                                            </option>
+                                        @endforeach
+
+                                </select>
+                            </td>
+                            <td>
+                                <select name="address" id="" onblur="location_changed(this)"
+                                    {{ $review_mode ? 'disabled' : '' }}>
+
+                                        <option value="{{ $patient->Pt_Location }}">Other</option>
+                                        @foreach ($tbl_village as $v)
+                                            <option value="{{ $cases->pt_permanent_township }}">
+                                                {{ $v->village }} &nbsp;&nbsp;&nbsp;&nbsp;|
+                                                {{ $v->village_tract }}
+                                            </option>
+                                        @endforeach
+
+                                </select>
+                            </td>
+                            <td>
+                                <input type="text" placeholder="ရွာ-မြို့-ပြည်-နယ်-တိုင်း"
+                                value="{{ $cases->pt_permanent_village }}{{ $review_mode ? 'disabled' : '' }}>
+                            </td>
+                            {{-- <td>
+                                <select name="sex" class="sex" id="sex" onchange="checkSex(this)">
+                                    <option value="choose">ရွေးပါ</option>
+                                    <option value="male">male</option>
+                                    <option value="female">female</option>
+                                </select>
+                            </td> --}}
+                            <td>
+                                <select name="preg" class="preg" id="preg" onchange="checkPreg(this)" >
+                                    {{-- <option value="">ရွေးပါ</option> --}}
+                                    <option value="N/A">N/A</option>
+                                    <option value="Yes">Yes</option>
+                                    <option value="No">No</option>
+
+                                </select>
+
+                            </td>
+                            <td>
+                                {{-- <select name="rcs" class="rcs" id="checkRCS" onchange="checkRCS(this)">
+                                    <option value="Missing">Missing</option>
+                                    <option value="Negative">Negative</option>
+                                    <option value="Pf">Pf</option>
+                                    <option value="Pv">Pv</option>
+                                    <option value="Mixed">Mixed</option>
+                                    <option value="Pm">Pm</option>
+                                    <option value="Po">Po</option>
+                                    <option value="NotExam">Not exam</option>
+
+                                </select> --}}
+                            </td>
+                            {{-- <td>
+                                <select name="rdt" class="rdt" id="checkRDT" onchange="checkRTD(this)">
+                                    <option value="Missing">Missing</option>
+                                    <option value="Negative">Negative</option>
+                                    <option value="Pf">Pf</option>
+                                    <option value="Pv">Pv</option>
+                                    <option value="Mixed">Mixed</option>
+                                    <option value="Pm">Pm</option>
+                                    <option value="Po">Po</option>
+                                    <option value="NotExam">Not exam</option>
+
+                                </select>
+                            </td> --}}
+                            <td>
+                                <select name="out-patient" id="" style="width: 100%">
+                                    <option value="">ရွေးပါ</option>
+                                    @foreach ($lp_in_out_cat as $ioc)
+                                        <option value="{{ $ioc->ioc_code }}" <?php echo $ioc->ioc_code == $patient->IOC_Code ? 'selected' : ''; ?>>
+                                            {{ $ioc->io_cat }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                            </td>
+                            <td>
+                                <select name="ACT" class="act">
+                                    <option value="">ရွေးပါ</option>
+                                    @foreach ($lp_act_code as $act)
+                                        <option value="{{ $act->act_code }}" <?php echo $act->act_code == $patient->ACT_Code ? 'selected' : ''; ?>>
+                                            {{ $act->act_treatment }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                            </td>
+                            <td>
+                                <select name="" id="" class="cq only-integer">
+                                    <option value="0">N/A</option>
+                                    <option value="1">3</option>
+                                    <option value="2">6</option>
+                                    <option value="3">12</option>
+                                    <option value="4">18</option>
+                                    <option value="5">24</option>
+                                    <option value="6">Not treated</option>
+                                </select>
+                                {{-- <input type="text" value="{{ $patient->CQ_Code }}"
+                                    {{ $review_mode ? 'disabled' : '' }} class="cq only-integer"> --}}
+                            </td>
+                            <td>
+                                <select name="" id="pq" class="pq only-integer">
+                                    <option value="1">3</option>
+                                    <option value="2">6</option>
+                                    <option value="3">12</option>
+                                    <option value="4">18</option>
+                                    <option value="5">24</option>
+                                    <option value="6">Not treated</option>
+                                </select>
+                                {{-- <input type="text" value="{{ $patient->PQ_Code }}"
+                                    {{ $review_mode ? 'disabled' : '' }} class="pq only-integer"> --}}
+                            </td>
+                            <td>
+                                <select name="referral" {{ $review_mode ? 'disabled' : '' }} id="">
+                                    <option value="">ရွေးပါ</option>
+                                    @foreach ($lp_yesno as $yn)
+                                        <option value="{{ $yn->YN_Code }}" <?php echo $yn->YN_Code == $patient->Referral_Code ? 'selected' : ''; ?>>
+                                            {{ $yn->YesNo }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                            </td>
+                            <td>
+                                <select name="malaria-death" onchange="checkMpdeath(this)"
+                                    {{ $review_mode ? 'disabled' : '' }}>
+                                    <option value="">ရွေးပါ</option>
+                                    @foreach ($lp_yesno as $yn)
+                                        <option value="{{ $yn->YN_Code }}" <?php echo $yn->YN_Code == $patient->Malaria_Death ? 'selected' : ''; ?>>
+                                            {{ $yn->YesNo }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                            </td>
+                            <td>
+                                <select name="" id="t-given">
+                                    <option value="">ရွေးပါ</option>
+                                    @foreach ($lp_treatment_given as $treatment)
+                                        <option value="{{ $treatment->tg_code }}" <?php echo $treatment->tg_code == $patient->TG_Code ? 'selected' : ''; ?>>
+                                            {{ $treatment->t_given }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                            </td>
+                            <td>
+                                <select name="travel-log" id="travel-log" style="width: 50px">
+                                    <option value="">ရွေးပါ</option>
+                                    @foreach ($lp_yesno as $yn)
+                                        <option value="{{ $yn->YN_Code }}" <?php echo $yn->YN_Code == $patient->travel_yn ? 'selected' : ''; ?>>
+                                            {{ $yn->YesNo }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                            </td>
+                            <td>
+                                <select name="job" id="job">
+                                    <option value="">ရွေးပါ</option>
+                                    @foreach ($lp_occupation as $job)
+                                        <option value="{{ $job->occupation_id }}" <?php echo $job->occupation_id == $patient->occupation ? 'selected' : ''; ?>>
+                                            {{ $job->occupation_name }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                            </td>
+                            <td>
+                                <input type="text" placeholder="Remark" value="<?= $patient->Remark ?>"
+                                    {{ $review_mode ? 'disabled' : '' }}>
+                            </td>
+                            <td>
+                                <a href="javascript:void(0);" class="delete_icon"
+                                    onclick="delete_existing_row(<?= $patient->P_Number ?>,<?= $patient->sync ?>, this);"
+                                    rowNo="">
+                                    <li class="fa fa-trash-o"></li>
+                                </a>
+                            </td>
+                        </tr>
+                        <?php } ?>
+                    </tbody>
+
+                       @endforeach
+                    </table>
+                </div>
+            </div>
+
+
+            <div class="col-md-12" style="text-align: center; margin-bottom:30px;">
+
+                <button class="btn btn-success save_btn" onclick="save_data_entry(this)">
+                    <li class="fa fa-save"></li> အားလုံးသိမ်းမည်
+                </button>
+
+                {{-- <button class="btn btn-default" onclick="close_page()">
+                            မသိမ်းပဲပိတ်မည်
+                        </button> --}}
+
+
+            </div>
+
+
+        </div>
+
+
+
         <div class="col-md-6">
 
         </div>
@@ -115,59 +618,54 @@
 
 <script>
 
-// $(document).ready(function() {
-//         $('#datepicker').datepicker({
-//             format: "mm/yyyy",
-//             startView: "months",
-//             minViewMode: "months",
-//             autoclose: true,
-//         });
-//     });
 
     function load_tbl_hfm(target_control_id, ts_code, token, form_type = null) {
 
         //alert('thisejrwo');
-    let form_cat = $('#select_lp_form_cat').val();
+        let form_cat = $('#select_lp_form_cat').val();
 
 
-    let hf_types = [];
+        let hf_types = [];
 
-    if (form_cat == 2 || form_cat == 3) {
-        hf_types = ['SC', 'MH', 'SU'];
-    }
-
-    try {
-        var form_code = "";
-
-        if ($("#select_lp_form_cat").val() == "0") {
-            bootbox.alert("<p>• ပုံစံအမျိုးအစားရွေးပါ</p>");
-            return false;
+        if (form_cat == 2 || form_cat == 3) {
+            hf_types = ['SC', 'MH', 'SU'];
         }
 
-        $("#" + target_control_id).html("<option>Loading...</option>");
-        $("#" + target_control_id).prop("disabled", true);
+        try {
+            var form_code = "";
 
-        $.ajax({
-            type: "GET",
-            url: BACKEND_URL + 'get_grab_hfconnect/' + ts_code,
-            data: { hf_types: hf_types },
-            success: function(data) {
-                //console.log('mzh', data);
-                $("#" + target_control_id).html("");
-
-                $("#" + target_control_id).append("<option value='0'> ရွေးရန် </option>");
-                $("#" + target_control_id).prop("disabled", false);
-
-                jQuery.each(data, function(i, val) {
-                    var opt = "<option value='" + val.HF_Code + "'>" + val.hf_name + " | " + val.hf_name_mm + "</option>";
-                    $("#" + target_control_id).append(opt);
-                });
+            if ($("#select_lp_form_cat").val() == "0") {
+                bootbox.alert("<p>• ပုံစံအမျိုးအစားရွေးပါ</p>");
+                return false;
             }
-        });
-    } catch (err) {
-        bootbox.alert(err.message);
+
+            $("#" + target_control_id).html("<option>Loading...</option>");
+            $("#" + target_control_id).prop("disabled", true);
+
+            $.ajax({
+                type: "GET",
+                url: BACKEND_URL + 'get_grab_hfconnect/' + ts_code,
+                data: {
+                    hf_types: hf_types
+                },
+                success: function(data) {
+                    //console.log('mzh', data);
+                    $("#" + target_control_id).html("");
+
+                    $("#" + target_control_id).append("<option value='0'> ရွေးရန် </option>");
+                    $("#" + target_control_id).prop("disabled", false);
+
+                    jQuery.each(data, function(i, val) {
+                        var opt = "<option value='" + val.HF_Code + "'>" + val.hf_name + " | " + val
+                            .hf_name_mm + "</option>";
+                        $("#" + target_control_id).append(opt);
+                    });
+                }
+            });
+        } catch (err) {
+            bootbox.alert(err.message);
+        }
     }
-}
 
     function yesno(yncode) {
         switch (yncode) {
@@ -188,12 +686,12 @@
 
 
     function adjustInputWidth(input) {
-            if (input.value.length <= 15 || input.value.length === 0) {
-                input.style.width = "20ch"; // Default width
-            } else {
-                input.style.width = `${input.value.length + 2}ch`;
-            }
+        if (input.value.length <= 15 || input.value.length === 0) {
+            input.style.width = "20ch"; // Default width
+        } else {
+            input.style.width = `${input.value.length + 2}ch`;
         }
+    }
 
 
     clickOnRow();
@@ -210,53 +708,7 @@
         var zzz = new custom_inputmask(_id, '_', '-');
     });
 
-    // $(function() {
-    //     var toDate = new Date();
-    //     var dd = toDate.getDate() < 10 ? `0${toDate.getDate()}` : toDate.getDate();
-    //     var mm = toDate.getMonth() < 9 ? `0${toDate.getMonth() + 1}` : toDate.getMonth() + 1;
-    //     var yyyy = toDate.getFullYear();
-    //     var maxDate = `${dd}-${mm}-${yyyy}`;
 
-
-    //     $('.dentry_date').inputmask('datetime', {
-    //         inputFormat: 'dd-mm-yyyy',
-    //         placeholder: '_',
-    //         clearIncomplete: true,
-    //         min: '09-09-0999',
-    //         max: maxDate
-    //     });
-
-    //     $('#txt_Total_Outpatient').focus().select();
-
-    //     $('#health_facility_table').DataTable({
-    //         'paging': true,
-    //         'lengthChange': false,
-    //         'searching': false,
-    //         'ordering': true,
-    //         'info': true,
-    //         'autoWidth': false
-    //     });
-
-    //     //Initialize Select2 Elements
-    //     $('.select2').select2()
-
-
-    //     //Date picker
-    //     $('#datepicker').datepicker({
-    //         autoclose: true
-    //     })
-
-    //     // $('.dentry_date').datepicker({
-    //     //     autoclose: true,
-    //     //     format: 'dd-mm-yyyy',
-    //     //     todayHighlight: true,
-    //     //     endDate : new Date()
-    //     // }).on('change', function(){
-    //     //     $(this).focus();
-    //     //     // $('.bhs-name').focus();
-    //     // });
-
-    // });
 
     // start 16/8/23 add by me
 
@@ -324,7 +776,7 @@
     });
 
     $("#data_entry_body tr td select").on('focus', function() {
-       //highlight_row(this);
+        //highlight_row(this);
     });
 
     // $(document).ready(function(){
@@ -336,106 +788,104 @@
     // });
 
     function save_data_entry(button) {
-        //alert('hello i am new1111');
+        // alert('hello i am new1111');
         //$(button).prop("disabled", true);
         //$(button).html('<img src="img/default-loading.gif" style="width:20px;"/> ခေတ္တစောင့်ပါ');
         //tpa check
 
 
-                var data = {};
-                    data["service_provider"] = $("#service_provider").val();
-                    data["data_entry"] = $("#data_entry_type").val();
-                    data["state_region"] = $("#state_region").val();
-                    data["township"] = $("#township").val();
-                    data["rhc_health"] =$("#rhc_health").val();
-                    data["sc_health"] = $("#sc_health").val();
-                    data["icmv_select"] = $("#icmvSelect").val();
-                    data["rp_month"] = $("#rp_month").val();
-                    data["blood_test"] = $("#bloodTest").val();
-                    data["condition"] = $("#conditionalSelect").val();
-                    //data["cf_link_code"] = $("#cf_link_code").val();
-                    data["Total_Outpatient"] = $("#txt_total_outpatient").val();
-                    data["U5_Outpatient"] = $("#txt_total_child_out").val();
-                    data["Preg_Outpatient"] = $("#txt_total_preg_out").val();
-                    data["Total_Inpatient"] = $("#txt_total_inpatient").val();
-                    data["U5_Inpatient"] = $("#txt_total_in_child").val();
-                    data["Preg_Inpatient"] = $("#txt_total_preg_in").val();
-                    data["Death_Facility"] = $("#txt_total_death_in").val();
-                    var table = document.getElementById('data_entry_body');
-            for (var i = 0, row; row = table.rows[i]; i++) {
-                    data["date"] = row.cells[1].children[0].value;
-                    data["Pt_Name"] = row.cells[2].children[0].value;
-                    data["Age_Year"] = row.cells[3].children[0].value;
-                    data["Pt_Father_Name"] = row.cells[4].children[0].value;
-                    data["Pt_Location"] = row.cells[5].children[0].value;
-                    data["Pt_Address"] = row.cells[6].children[0].value;
-                    data["Pt_Address1"] = row.cells[7].children[0].value;
-                    data["Pt_Address2"] = row.cells[8].children[0].value;
-                    data["Pt_Address3"] = row.cells[9].children[0].value;
-                    data["Pt_Address4"] = row.cells[10].children[0].value;
-                    data["Pt_Address5"] = row.cells[11].children[0].value;
-                    data["Sex_Code"] = row.cells[12].children[0].value;
-                    data["Preg_YN"] = row.cells[13].children[0].value;
-                    data["Micro_Code"] = row.cells[14].children[0].value;
-                    data["RDT_Code"] = row.cells[15].children[0].value;
-                    data["IOC_Code"] = row.cells[16].children[0].value;
-                    data["ACT_Code"] = row.cells[17].children[0].value;
-                    data["CQ_Code"] = row.cells[18].children[0].value;
-                    data["PQ_Code"] = row.cells[19].children[0].value;
-                    data["Referral_Code"] = row.cells[20].children[0].value;
-                    data["Malaria_Death"] = row.cells[21].children[0].value;
-                    data["TG_Code"] = row.cells[22].children[0].value;
-                    data["travel_yn"] = row.cells[23].children[0].value;
-                    data["occupation"] = row.cells[24].children[0].value;
-                    data["Remark"] = row.cells[25].children[0].value;
+        var data = {};
+
+        data["service_provider"] =  document.getElementById("select_lp_form_cat").value;
+        data["data_entry"] = document.getElementById("dataEntry").value;
+        data["state_region"] = document.getElementById("data_select_region").value;
+        data["township"] = document.getElementById("data_select_township").value;
+        data["rhc_health"] = document.getElementById("data_select_hf").value;
+        data["sc_health"] = document.getElementById("data_select_subcenter").value;
+        data["icmv_select"] = document.getElementById("data_select_village").value;
+        data["rp_month"] = document.getElementById("start").value;
+        data["blood_test"] = document.getElementById("chooseOption").value;
+        data["condition"] = document.getElementById("conditionalOption").value;
+
+        //data["cf_link_code"] = $("#cf_link_code").val();
+        data["Total_Outpatient"] = $("#txt_total_outpatient").val();
+        data["U5_Outpatient"] = $("#txt_total_child_out").val();
+        data["Preg_Outpatient"] = $("#txt_total_preg_out").val();
+        data["Total_Inpatient"] = $("#txt_total_inpatient").val();
+        data["U5_Inpatient"] = $("#txt_total_in_child").val();
+        data["Preg_Inpatient"] = $("#txt_total_preg_in").val();
+        data["Death_Facility"] = $("#txt_total_death_in").val();
+        var table = document.getElementById('data_entry_body');
+        // {{-- console.log('mmrr',table); --}}
+        for (var i = 0, row; row = table.rows[i]; i++) {
+            // var checker = "false";
+
+
+            data["date"] = row.cells[1].children[0].value;
+            data["Pt_Name"] = row.cells[2].children[0].value;
+            data["Age_Year"] = row.cells[3].children[0].value;
+            data["Pt_Father_Name"] = row.cells[4].children[0].value;
+            data["Pt_Location"] = row.cells[5].children[0].value;
+            data["Pt_Address"] = row.cells[6].children[0].value;
+            data["Pt_Address1"] = row.cells[7].children[0].value;
+            data["Pt_Address2"] = row.cells[8].children[0].value;
+            data["Pt_Address3"] = row.cells[9].children[0].value;
+            data["Pt_Address4"] = row.cells[10].children[0].value;
+            data["Pt_Address5"] = row.cells[11].children[0].value;
+            data["Sex_Code"] = row.cells[12].children[0].value;
+            data["Preg_YN"] = row.cells[13].children[0].value;
+            data["Micro_Code"] = row.cells[14].children[0].value;
+            data["RDT_Code"] = row.cells[15].children[0].value;
+            data["IOC_Code"] = row.cells[16].children[0].value;
+            data["ACT_Code"] = row.cells[17].children[0].value;
+            data["CQ_Code"] = row.cells[18].children[0].value;
+            data["PQ_Code"] = row.cells[19].children[0].value;
+            data["Referral_Code"] = row.cells[20].children[0].value;
+            data["Malaria_Death"] = row.cells[21].children[0].value;
+            data["TG_Code"] = row.cells[22].children[0].value;
+            data["travel_yn"] = row.cells[23].children[0].value;
+            data["occupation"] = row.cells[24].children[0].value;
+            data["Remark"] = row.cells[25].children[0].value;
+        }
+
+        var data_to_post = JSON.stringify(data);
+        console.log(data);
+        var save_update_check = $.ajax({
+            async: false,
+            type: "POST",
+            headers: {
+                "X-CSRF_TOKEN": '{{ csrf_token() }}'
+            },
+            url: BACKEND_URL + "save_tbl_total_patient_temp/",
+            data: data_to_post,
+            success: function(result) {
+
+
+                // if (checker == "true") {
+                //             $(button).prop("disabled", false);
+                //             $(button).html('<li class="fa fa-floppy-o"></li> အားလုံးသိမ်းမည်');
+                //             return false;
+                // }else
+                if(result == "1") {
+                    alert('saved data to tbl_individual_case successfully');
+                    // console.log("save success");
+                    save_update_check = true;
+                    setTimeout(() => {
+                        location.reload();
+                    }, 1500);
+
+                } else {
+                    console.log(result);
+                }
             }
+        }).responseText;
 
-                var data_to_post = JSON.stringify(data);
-                console.log(data);
-                var save_update_check = $.ajax({
-                    async: false,
-                    type: "POST",
-                    headers: {
-                        "X-CSRF_TOKEN": '{{ csrf_token() }}'
-                    },
-                    url: BACKEND_URL + "save_tbl_total_patient_temp/",
-                     data: data_to_post,
-                    success: function(result) {
-
-                        if (result == "1") {
-                            alert('save data to tbl_individual_case');
-                            //console.log("save success");
-                            save_update_check = true;
-                        } else {
-                            console.log(result);
-                        }
-                    }
-                 }).responseText;
-                // var data_to_update = JSON.stringify(data);
-                // console.log(data_to_update);
-                // var save_update_check = $.ajax({
-                //     async: false,
-                //     type: "POST",
-                //     headers: {
-                //         "X-CSRF_TOKEN": '{{ csrf_token() }}'
-                //     },
-                //     url: BACKEND_URL + "update_tbl_total_patient_temp/",
-                //     data: data_to_update,
-                //     success: function(result) {
-                //         if (result == "1") {
-                //             //console.log(result + " update success");
-                //             save_update_check = true;
-                //         } else {
-                //             save_update_check = false;
-                //         }
-                //     }
-                // }).responseText;
 
 
 
     }
 
-// ------------------------------------
+    // ------------------------------------
 
     function isValidDate(d, m, y) {
         var thirtyDaysMonth = [9, 4, 6, 11];
@@ -498,10 +948,10 @@
     }
 
     function add_row(btn) {
-    //alert('this will new rowlll');
+        // alert('this will new rowlll');
 
         //$(btn).prop('disabled', true);
-        $(btn).html("<li class='fa fa-spinner fa-spin'></li> ခေတ္တစောင့်ပါ");
+        // $(btn).html("<li class='fa fa-spinner fa-spin'></li> ခေတ္တစောင့်ပါ");
         // var table = document.getElementById('data_entry_body');
         var row_count = get_row();
         if (row_count >= 17) {
@@ -509,7 +959,7 @@
             //bootbox.alert('Reached Maximun Number of Rows.');
             checkBtn();
         } else {
-            var select_lp_township_de = document.getElementById('select_lp_township_de');
+            var select_lp_township_de = document.getElementById('data_select_township');
             var value = select_lp_township_de.value;
             //var select_lp_township_de_text = e.options[e.selectedIndex].text;
             //console.log('aaaaaa',select_lp_township_de_text);
@@ -549,7 +999,7 @@
 
 
 
-        function delete_row(btn) {
+    function delete_row(btn) {
         // alert('this is deleted111',btn);
         var rowNum = $(btn).attr("rowNo");
         // confirm("Row အမှတ် " + rowNum + " တစ်ခုလုံးအား အပြီးဖျက်မည်။ သေချာပါက OK နှိပ်ပါ", function(c) {
@@ -560,12 +1010,12 @@
 
         //  });
 
-         if (confirm("Row အမှတ် " + rowNum + " တစ်ခုလုံးအား အပြီးဖျက်မည်။ သေချာပါက OK နှိပ်ပါ") == true){
+        if (confirm("Row အမှတ် " + rowNum + " တစ်ခုလုံးအား အပြီးဖျက်မည်။ သေချာပါက OK နှိပ်ပါ") == true) {
             $(btn).closest('tr').remove();
-                set_row_numbers();
-         }else{
+            set_row_numbers();
+        } else {
             checkBtn();
-         }
+        }
 
     }
 
@@ -678,6 +1128,7 @@
 
     set_row_numbers();
 </script>
+
 <style>
 .header_bar{
     margin: 0;

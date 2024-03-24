@@ -1456,7 +1456,6 @@
             $.ajax({
                 type: "GET",
                 url: BACKEND_URL + "get_patient_dataentry_row/" + value,
-                url: "/get_patient_dataentry_row/$lp_township_de" + value,
                 data: "",
                 success: function(data) {
                     // alert('this isopeirepw');

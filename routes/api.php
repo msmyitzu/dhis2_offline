@@ -47,9 +47,13 @@ Route::get('/vhv/{id}',[DataEntryController::class , 'vhvData']);
 
 //for outsidetsp&Country
 Route::get('/outtownship/{id}',[DataEntryController::class , 'outsideTownshipData']);
+Route::get('/national/{id}',[DataEntryController::class , 'nationalData']);
 Route::get('/outhealthfacility/{id}',[DataEntryController::class , 'outsideHealthFacilityData']);
+Route::get('/currenthealthfacility/{id}',[DataEntryController::class , 'currentHealthFacilityData']);
 
 
 Route::get('/currenttownship/{id}',[DataEntryController::class , 'currentTownshipData']);
-Route::get('/currenthealthfacility/{id}',[DataEntryController::class , 'currentHealthFacilityData']);
+Route::get('/nationaltownship',[DataEntryController::class , 'nationalTownship']);
+
+
 

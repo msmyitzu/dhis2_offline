@@ -681,7 +681,7 @@
                             if (result == "1") {
                                 //console.log(result + " update success");
                                 save_update_check = true;
-                                
+
                             } else {
                                 save_update_check = false;
                             }
@@ -926,7 +926,6 @@
                     type: "GET",
                     //url: BACKEND_URL + "/get_patient_dataentry_row/{{ $lp_township_de }}",
                     //url: "/get_patient_dataentry_row/{{ $lp_township_de }}",
-                    data: "",
                     success: function(data) {
                         //console.log("name", data);
                         $("#data_entry_body").append(data);

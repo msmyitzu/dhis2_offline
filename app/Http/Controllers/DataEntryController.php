@@ -103,22 +103,6 @@ public function outsideTownshipData($data)
          return response()->json($data);
     }
 
-    public function outsideHealthFacilityData($data)
-    {
-        $data = DB::table("tbl_health_facility")
-        ->where('health_facility_mmr', 'like', $data . '%')
-        ->get();
-        return response()->json($data);
-    }
-
-    public function currentTownshipData($data)
-    {
-         $data = DB::table("tbl_township")
-        // ->where('township_mmr', 'like', $data . '%')
-         ->get();
-         return response()->json($data);
-    }
-
     public function currentHealthFacilityData($data)
     {
         $data = DB::table("tbl_health_facility")
@@ -126,6 +110,34 @@ public function outsideTownshipData($data)
         ->get();
         return response()->json($data);
     }
+
+    public function outsideHealthFacilityData($data)
+    {
+        $data = DB::table("tbl_national_health_facility")
+        ->where('health_facility_mmr', 'like', $data . '%')
+        ->get();
+        return response()->json($data);
+    }
+
+
+
+    public function currentTownshipData($data)
+    {
+         $data = DB::table("tbl_township")
+        ->where('township_mmr', 'like', $data . '%')
+         ->get();
+         return response()->json($data);
+    }
+
+    public function nationalTownship()
+    {
+        $data = DB::table('tbl_national_township')
+        ->get();
+
+        return response()->json($data);
+    }
+
+
 
 
 

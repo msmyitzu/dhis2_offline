@@ -26,8 +26,10 @@ Route::get('/chart','lookupsController@show_charts');
 // Route::get('/home', 'HomeController@index');
 
 Route::get('/get_lp_township/{region_id}','lookupsController@get_lp_township');
-Route::get('/uploadForm','lookupsController@show_upload_form');
+Route::get('/uploadForm','lookupsController@show_upload_form'); //old
+Route::get('/uploadview','lookupsController@show_upload_view_form');
 Route::get('/formList/{pt_current_township}','lookupsController@show_form_list');
+Route::get('/nilList/{pt_current_township}','lookupsController@show_nil_list');
 Route::get('/search/{type}', 'searchController@search')->name('form_search');
 
 Route::post('/patient-register-form','lookupsController@get_patient_registerform');        //
@@ -120,3 +122,6 @@ Route::get('/patient_register_form_row','lookupsController@get_patient_registerf
 // {region_name_en}/{district_name_en}/ {health_facility_name_en}/{sub_center_name_en}/
 Route::get('/malaria_test/{township_name_en}/{village_name_en}/{sDate}/{eDate}','lookupsController@malaria_test');
 Route::get('/loopDataToUploadServer','lookupsController@loopDataToUpload');
+
+
+Route::get('/userprofile','MCBRSController@getUserView');

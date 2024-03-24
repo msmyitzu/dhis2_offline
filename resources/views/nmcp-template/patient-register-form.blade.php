@@ -232,7 +232,7 @@
             // $(button).html('<img src="img/default-loading.gif" style="width:20px;"/> ခေတ္တစောင့်ပါ');
             //tpa check
             var tp_code = document.getElementById('txt_Death_Facility').getAttribute('tp_code');
-            var tpa_out = $("#txt_Total_Outpatient").val();
+            var tpa_out = $("#txt_total_outpatient").val();
             var u5_tpa = $("#txt_U5_Outpatient").val();
             var preg_tpa = $("#txt_Preg_Outpatient").val();
             var df = $("#txt_Death_Facility").val();
@@ -545,14 +545,14 @@
         function checkBtn() {
             var btn = document.getElementById('add_row');
             var row_count = get_row();
-            console.log('this is work',row_count);
-            if (row_count >= 17) {
-                $(btn).prop('disabled', true);
-                $(btn).html('<li class="fa fa-ban"></li> Maximun');
-            } else {
+            // console.log('this is work',row_count);
+            // if (row_count >= 20) {
+            //     $(btn).prop('disabled', true);
+            //     $(btn).html('<li class="fa fa-ban"></li> Maximun');
+            // } else {
                 $(btn).prop('disabled', false);
-                $(btn).html('<li class="fa fa-plus-square"></li> အသစ်တစ်ကြောင်းတိုးရန်');
-            }
+                $(btn).html('<li class="fa fa-plus-square"></li> အသစ်တစ်ကြောင်းထပ်တိုးရန်');
+            // }
         }
 
         function get_row() {
@@ -579,20 +579,18 @@
                     type: "GET",
                     url: BACKEND_URL + "/get_patient_dataentry_row",
 
-                    url: "/get_patient_dataentry_row",
-                    }
-                    data: "",
-                    success: function(data) {
-                        // console.log("this is new row", data);
-                        $("#data_entry_body").append(data);
-                        set_row_numbers();
-                        checkBtn();
-                        set_focus();
                     },
-                    error: function(error) {
-                        bootbox.alert(error.statusText);
-                        checkBtn();
-                    }
+                        success: function(data) {
+                            // console.log("this is new row", data);
+                            $("#data_entry_body").append(data);
+                            set_row_numbers();
+                            checkBtn();
+                            set_focus();
+                        },
+                        error: function(error) {
+                            bootbox.alert(error.statusText);
+                            checkBtn();
+                        }
                     )};
                 //"http://" + window.location.host +
             }

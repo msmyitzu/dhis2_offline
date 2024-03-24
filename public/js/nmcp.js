@@ -2,7 +2,7 @@
 
 var BACKEND_URL = window.location.origin + "/";
 // let hfTypes = JSON.parse($('#hfTypes').val());
-
+var input_age = '';
 function isValidDate(d, m, y) {
     var thirtyDaysMonth = [4, 6, 9, 11];
     if (parseInt(d) && parseInt(m) && parseInt(y)) {
@@ -554,8 +554,8 @@ function showConfirmationPopupDownload() {
 }
 
 
-var showPopupBtnDownload = document.getElementById("showPopupBtnDownload");
-showPopupBtnDownload.addEventListener("click", showConfirmationPopupDownload);
+// var showPopupBtnDownload = document.getElementById("showPopupBtnDownload");
+// showPopupBtnDownload.addEventListener("click", showConfirmationPopupDownload);
 
 //end download data from server
 
@@ -564,10 +564,41 @@ showPopupBtnDownload.addEventListener("click", showConfirmationPopupDownload);
 function load_icmv_village(service_provider) {
     //  alert('this is icmvbillage',form_code);
     var selectFormCode = document.getElementById("select_lp_form_cat");
-    if (selectFormCode.value === "ICMV") {
+    if (selectFormCode.value === "ICMV" || selectFormCode.value === "GP" || selectFormCode.value === "Private Outlet") {
         document.getElementById("icmvSelect").style.display = "block";
+        document.getElementById("txt_total_inpatients").value = 0;
+        document.getElementById("txt_total_in_childs").value = 0;
+        document.getElementById("txt_total_pregs_in").value = 0;
+        document.getElementById("txt_total_deaths_in").value = 0;
+        document.getElementById("txt_total_outpatients").value = 0;
+        document.getElementById("txt_total_childs_out").value = 0;
+        document.getElementById("txt_total_pregs_out").value = 0;
+        document.getElementById("txt_total_inpatients").disabled = true;
+        document.getElementById("txt_total_inpatients").disabled = true;
+        document.getElementById("txt_total_in_childs").disabled = true;
+        document.getElementById("txt_total_pregs_in").disabled = true;
+        document.getElementById("txt_total_deaths_in").disabled = true;
+        document.getElementById("txt_total_outpatients").disabled = true;
+         document.getElementById("txt_total_childs_out").disabled = true;
+         document.getElementById("txt_total_pregs_out").disabled = true;
+
     } else {
         document.getElementById("icmvSelect").style.display = "none";
+        document.getElementById("txt_total_inpatients").value = '';
+        document.getElementById("txt_total_in_childs").value = '';
+        document.getElementById("txt_total_pregs_in").value = '';
+        document.getElementById("txt_total_deaths_in").value = '';
+        document.getElementById("txt_total_outpatients").value = '';
+        document.getElementById("txt_total_childs_out").value = '';
+        document.getElementById("txt_total_pregs_out").value = '';
+        document.getElementById("txt_total_inpatients").disabled = false;
+        document.getElementById("txt_total_inpatients").disabled = false;
+        document.getElementById("txt_total_in_childs").disabled = false;
+        document.getElementById("txt_total_pregs_in").disabled = false;
+        document.getElementById("txt_total_deaths_in").disabled = false;
+        document.getElementById("txt_total_outpatients").disabled = false;
+         document.getElementById("txt_total_childs_out").disabled = false;
+         document.getElementById("txt_total_pregs_out").disabled = false;
     }
 }
 
@@ -580,11 +611,15 @@ function showConditionalSelect() {
     var conditionalSelect = document.getElementById("chooseOption");
     if (conditionalSelect.value === "yes") {
         document.getElementById("conditionalSelect").style.display = "block";
-    } else {
+        document.getElementById("nilTable").style.display = "block";
+        document.getElementById("dEntryTable").style.display = "block";
+
+    } else{
         document.getElementById("conditionalSelect").style.display = "none";
+        document.getElementById("nilTable").style.display = "block";
+        document.getElementById("dEntryTable").style.display = "none";
     }
 
-    //document.getElementById("conditionalSelect").style.display = "block";
 }
 
 //function hideConditionalSelect() {
@@ -1376,75 +1411,75 @@ function dateCheck(day) {
 // }
 
 
+    function checkAge(age) {
+        var tr = $(age).closest('tr');
+        var char = $(age).val();
+        if (char !== '0') {
+            char = parseInt(char, 10).toString();
+        }
+        if (char == 0){
+            return char;
+        }
+        // console.log('debug',age)
+        if (char.length > 3) {
+            $(age).val('');
+            $(age).focus();
+            return;
+        }
 
+        if (isNaN(char) || char < 0 || char > 110) {
+            // alert("အသက် ၁၁၀ အောက်ဖြစ်ရမည်။");
+            $(age).val('');
+            $(age).focus();
+            return;
+        }
 
-$(document).ready(function(){
-    let input_age = '';
+        if (char <= 13 || char >= 60) {
+            var sex = tr.find('td:eq(12) select').val();
+            var preg = tr.find('td:eq(13) select').val();
 
-  });
-function checkAge(age) {
-    var tr = $(age).closest('tr');
-    var char = parseInt($(age).val());
-    // console.log('this->',char);
-    // var char = tr.find('.age'.val());
-    // alert(char);
-    var sex = tr.find('td:eq(12) select').val();
-    var preg = tr.find('td:eq(13) select').val();
-
-    if ((char >= 0) && (char <= 110)) {
-
-        if (char <= 10 || char >= 60) {
-            //checkPreg(preg);
-            //let selectPreg = tr.find('td:eq(13) select').val();
             if (sex == "TT-female" && preg == "Yes") {
-                // alert("အသက် ၁၀ နှစ်နှင့် ၆၀ အတွင်းသာ \"ကိုယ်ဝန်ဆောင်\" ရွေးခွင့်ရှိသည်။", function(e) {}).on('hidden.bs.modal', function() {
-                //     $(age).focus();
-                //  });
-                //alert('age is more than 60');
-                //alert(sextype);
-                tr.find('td:eq(13) select').prop('disabled', true);
-                tr.find('td:eq(13) select').css('cursor', 'not-allowed');
-            } else {
-                tr.find('td:eq(13) select').prop('disabled', true);
-                tr.find('td:eq(13) select').css('cursor', 'not-allowed');
-           }
+                tr.find('td:eq(19) select').val('');
+                tr.find('td:eq(19) select').prop('disabled', true).css('cursor', 'not-allowed');
+            }
+             else {
+                tr.find('td:eq(19) select').val('');
+                tr.find('td:eq(19) select').prop('disabled', true).css('cursor', 'not-allowed');
+
+                //return;
+            }
+        }else{
+            tr.find('td:eq(19) select').prop('disabled', false).css('cursor', 'default');
         }
+
         if(char <= 1){
-            input_age = 'AGE_GROUP_1';
-            tr.find('td:eq(19) select,td:eq(13) select').prop('disabled', true);
-            tr.find('td:eq(19) select,td:eq(13) select').css('cursor', 'not-allowed');
+        input_age = 'AGE_GROUP_1';
+        tr.find('td:eq(19) select,td:eq(13) select').val('N/A');
+        tr.find('td:eq(19) select,td:eq(13) select').prop('disabled', true);
+        tr.find('td:eq(19) select,td:eq(13) select').css('cursor', 'not-allowed');
         }else if(char >= 1 && char <= 4) {
-            tr.find('td:eq(19) select').prop('disabled', false);
-            tr.find('td:eq(19) select').css('cursor', 'default');
-            input_age = 'AGE_GROUP_1_TO_4';
+        tr.find('td:eq(19) select').prop('disabled', false);
+        tr.find('td:eq(19) select').css('cursor', 'default');
+        input_age = 'AGE_GROUP_1_TO_4';
         } else if (char >= 5 && char <= 9) {
-            tr.find('td:eq(19) select').prop('disabled', false);
-            tr.find('td:eq(19) select').css('cursor', 'default');
-            input_age = 'AGE_GROUP_5_TO_9';
+        tr.find('td:eq(19) select').prop('disabled', false);
+        tr.find('td:eq(19) select').css('cursor', 'default');
+        input_age = 'AGE_GROUP_5_TO_9';
         } else if (char >= 10 && char <= 14) {
-            tr.find('td:eq(19) select').prop('disabled', false);
-            tr.find('td:eq(19) select').css('cursor', 'default');
-            input_age = 'AGE_GROUP_10_TO_14';
+        tr.find('td:eq(19) select').prop('disabled', false);
+        tr.find('td:eq(19) select').css('cursor', 'default');
+        input_age = 'AGE_GROUP_10_TO_14';
         } else{
-            tr.find('td:eq(19) select').prop('disabled', false);
-            tr.find('td:eq(19) select').css('cursor', 'default');
-            input_age = 'AGE_GROUP_15_AND_ABOVE';
+        tr.find('td:eq(19) select').prop('disabled', false);
+        tr.find('td:eq(19) select').css('cursor', 'default');
+        input_age = 'AGE_GROUP_15_AND_ABOVE';
         }
+        console.log('here',input_age);
+        return input_age;
 
-    }else {
-        if (char == 999) {
-            tr.find('td:eq(13) select').focus();
-            tr.find('td:eq(13) select').prop('selectedIndex', 0);
-        } else {
-            alert("အသက် ၁၁၀ အောက်ဖြစ်ရမည်။ (သိ့့) ၉၉၉ ဟုရိုက်ပါ။").on('hidden.bs.modal', function() {
-                $(age).focus();
-                $(age).val('');
-            });
-        }
     }
-    //  alert(input_age);
 
-}
+
 
 
 // function location_changed(location) {
@@ -1462,21 +1497,21 @@ function checkAge(age) {
 
 // 13/9/23
 
-function location_changed(location) {
-    var currentTR = $(location).closest("tr");
-    if (
-        location.value == "10" ||
-        location.value == "20" ||
-        location.value == "30"
-    ) {
-        currentTR.find("td:eq(5) input").prop("disabled", false);
-        currentTR.find("td:eq(5) input").select();
-        currentTR.find("td:eq(5) input").focus();
-    } else {
-        currentTR.find("td:eq(5) input").prop("disabled", true);
-        currentTR.find("td:eq(5) input").val("N/A");
-    }
-}
+// function location_changed(location) {
+//     var currentTR = $(location).closest("tr");
+//     if (
+//         location.value == "10" ||
+//         location.value == "20" ||
+//         location.value == "30"
+//     ) {
+//         currentTR.find("td:eq(5) input").prop("disabled", false);
+//         currentTR.find("td:eq(5) input").select();
+//         currentTR.find("td:eq(5) input").focus();
+//     } else {
+//         currentTR.find("td:eq(5) input").prop("disabled", true);
+//         currentTR.find("td:eq(5) input").val("N/A");
+//     }
+// }
 //13/9/23
 
 function select_village() {
@@ -1493,11 +1528,14 @@ function checkSex(sextype) {
      console.log('this is ->',input_age);
     var tr = $(sextype).closest('tr');
     var sex = tr.find('td:eq(12) select').val();
+    preg = tr.find('td:eq(13) select').val();
+    console.log('rt=>',preg);
     // console.log('this is sextype....',sex);
     //var input_age = tr.find('td:eq(3) input').val();
     // alert('thii->',input_age);
    if (sex == "TT-Male") {
     // alert('this is tt_male');
+    tr.find('td:eq(13) select').val('');
     tr.find('td:eq(13) select').prop('disabled', true);
     tr.find('td:eq(13) select').css('cursor', 'not-allowed');
    }else{
@@ -1506,10 +1544,12 @@ function checkSex(sextype) {
     if (input_age == 'AGE_GROUP_1' || input_age == 'AGE_GROUP_1_TO_4' || input_age == 'AGE_GROUP_5_TO_9') {
         // console.log('this is=>',input_age);
         console.log('yhhhh=>',input_age);
+        tr.find('td:eq(13) select').val('');
         tr.find('td:eq(13) select').prop('disabled',true);
         tr.find('td:eq(13) select').css('cursor', 'not-allowed');
     }else {
         //  alert('female');
+
         tr.find('td:eq(13) select').prop('disabled',false);
         tr.find('td:eq(13) select').css('cursor', 'default');
     }
@@ -1524,6 +1564,7 @@ function checkPreg(preg) {
     var  select_preg = tr.find('td:eq(13) select').val();
     // console.log('hello preg is choosen :',select_preg);
     if (select_preg == "Yes") {
+        tr.find('td:eq(19) select').val('');
         tr.find('td:eq(19) select').prop('disabled', true);
         tr.find('td:eq(19) select').css('cursor', 'not-allowed');
     } else {
@@ -1545,16 +1586,23 @@ function checkTestResult(rdt) {
 
         if (select_check_lens == "neg" && select_check_rdt == "neg") {
             assum_result ='neg';
+            tr.find('td:eq(17) select,td:eq(18) select,td:eq(19) select').val("N/A");
             tr.find('td:eq(17) select,td:eq(18) select,td:eq(19) select').prop('disabled', true);
+
+
+
+
             tr.find('td:eq(17) select,td:eq(18) select,td:eq(19) select').css('cursor', 'not-allowed');
         } else if (select_check_lens == "neg" && select_check_rdt == "pf") {
             assum_result='pf';
+            tr.find('td:eq(17) select,td:eq(18) select,td:eq(19) select').prop("N/A");
             tr.find('td:eq(17) select,td:eq(18) select,td:eq(19) select').prop('disabled', false);
             tr.find('td:eq(17) select,td:eq(18) select,td:eq(19) select').css('cursor', 'default');
 
 
         } else if (select_check_lens == "neg" && select_check_rdt == "pv") {
             assum_result='pv';
+            tr.find('td:eq(17) select,td:eq(18) select,td:eq(19) select').val('N/A');
             tr.find('td:eq(17) select,td:eq(18) select,td:eq(19) select').prop('disabled', false);
             tr.find('td:eq(17) select,td:eq(18) select,td:eq(19) select').css('cursor', 'default');
 
@@ -1693,7 +1741,9 @@ function checkTestResult(rdt) {
         tr.find('td:eq(17) select,td:eq(18) select,td:eq(19) select').prop('disabled', false);
         tr.find('td:eq(17) select,td:eq(18) select,td:eq(19) select').css('cursor', 'default');
     }else if(select_check_lens == "not exam" && select_check_rdt == "not exam"){
+        alert('Please choose one existing test Result!')
         assum_result='not exam';
+        tr.find('td:eq(17) select,td:eq(18) select,td:eq(19) select').val('N/A');
         tr.find('td:eq(17) select,td:eq(18) select,td:eq(19) select').prop('disabled', true);
         tr.find('td:eq(17) select,td:eq(18) select,td:eq(19) select').css('cursor', 'not-allowed');
     }
@@ -1704,42 +1754,55 @@ function checkTestResult(rdt) {
     // console.log('tttmy=>',assum_result);
 
     //alert(assum_result);
-   checkAge(age);
+   let custom_age_group = checkAge(tr.find("td:eq(3) input"));
 
    //alert(input_age);
+    // console.log('input')
 
     if(assum_result == 'pf'){
+        console.log(assum_result);
+        console.log('ther=>=>',custom_age_group);
         if(input_age == "AGE_GROUP_1"){
+            tr.find('td:eq(18) select,td:eq(19) select').val('N/A');
             tr.find('td:eq(18) select,td:eq(19) select').prop('disabled',true);
             tr.find('td:eq(18) select,td:eq(19) select').css('cursor', 'not-allowed');
             var $select = tr.find("td:eq(17) select");
             $select.val("ACT-6 tablets (1/2 strip)");
+            $select.val("N/A");
             $select.find("option[value='ACT-6 tablets (1 strip)'], option[value='ACT-12 tablets (1 strip)'], option[value='ACT-18 tablets (1 strip)'], option[value='ACT-24 tablets (1 strip)']").prop("disabled", true);
-        }else if(input_age == "AGE_GROUP_1_TO_4"){
+    }else if(input_age == "AGE_GROUP_1_TO_4"){
+        tr.find('td:eq(18) select').val('N/A');
             tr.find('td:eq(18) select').prop('disabled',true);
             tr.find('td:eq(18) select').css('cursor', 'not-allowed');
             var $select = tr.find("td:eq(17) select");
             $select.val("ACT-6 tablets (1 strip)");
+            $select.val("N/A");
             $select.find("option[value='ACT-6 tablets (1/2 strip'], option[value='ACT-12 tablets (1 strip)'], option[value='ACT-18 tablets (1 strip)'], option[value='ACT-24 tablets (1 strip)']").prop("disabled", true);
             var $select = tr.find("td:eq(19) select");
             $select.val("PQ - 1 tablet");
+            $select.val("N/A");
             $select.find("option[value='PQ - 2 tablets'], option[value='PQ - 4 tablets'], option[value='PQ - 6 tablets'], option[value='PQ - 7 tablets'], option[value='PQ - 14 tablets'], option[value='PQ - 21 tablets'], option[value='PQ - 28 tablets']").prop("disabled", true);
 
         }else if(input_age == "AGE_GROUP_5_TO_9"){
+            tr.find('td:eq(18) select').val('N/A');
             tr.find('td:eq(18) select').prop('disabled',true);
             tr.find('td:eq(18) select').css('cursor', 'not-allowed');
             var $select = tr.find("td:eq(17) select");
             $select.val("ACT-12 tablets (1 strip)");
+            $select.val("N/A");
             $select.find("option[value='ACT-6 tablets (1/2 strip)'], option[value='ACT-6 tablets (1 strip)'], option[value='ACT-18 tablets (1 strip)'], option[value='ACT-24 tablets (1 strip)']").prop("disabled", true);
             var $select = tr.find("td:eq(19) select");
             $select.val("PQ - 2 tablets");
+            $select.val("N/A");
             $select.find("option[value='PQ - 1 tablet'], option[value='PQ - 4 tablets'], option[value='PQ - 6 tablets'], option[value='PQ - 7 tablets'], option[value='PQ - 14 tablets'], option[value='PQ - 21 tablets'], option[value='PQ - 28 tablets']").prop("disabled", true);
 
         }else if(input_age == "AGE_GROUP_10_TO_14"){
+            tr.find('td:eq(18) select').val('N/A');
             tr.find('td:eq(18) select').prop('disabled',true);
             tr.find('td:eq(18) select').css('cursor', 'not-allowed');
             var $select = tr.find("td:eq(17) select");
             $select.val("ACT-18 tablets (1 strip)");
+            $select.val("N/A");
             $select.find("option[value='ACT-6 tablets (1/2 strip)'], option[value='ACT-12 tablets (1 strip)'], option[value='ACT-6 tablets (1 strip)'], option[value='ACT-24 tablets (1 strip)']").prop("disabled", true);
             checkPreg(preg);
             // if (select_preg == "Yes") {
@@ -1748,13 +1811,16 @@ function checkTestResult(rdt) {
             // } else {
                 var $select = tr.find("td:eq(19) select");
                 $select.val("PQ - 4 tablets");
+                $select.val("N/A");
                 $select.find("option[value='PQ - 2 tablets'], option[value='PQ - 1 tablet'], option[value='PQ - 6 tablets'], option[value='PQ - 7 tablets'], option[value='PQ - 14 tablets'], option[value='PQ - 21 tablets'], option[value='PQ - 28 tablets']").prop("disabled", true);
             // }
         }else if(input_age == "AGE_GROUP_15_AND_ABOVE"){
-            tr.find('td:eq(18) select').prop('disabled',false);
+            tr.find('td:eq(18) select').val('N/A');
+            tr.find('td:eq(18) select').prop('disabled',true);
             tr.find('td:eq(18) select').css('cursor', 'not-allowed');
             var $select = tr.find("td:eq(17) select");
             $select.val("ACT-24 tablets (1 strip)");
+            $select.val("N/A");
             $select.find("option[value='ACT-6 tablets (1/2 strip)'], option[value='ACT-12 tablets (1 strip)'], option[value='ACT-18 tablets (1 strip)'], option[value='ACT-6 tablets (1 strip)']").prop("disabled", true);
             checkPreg(preg);
             // // if (select_preg == "Yes") {
@@ -1763,6 +1829,7 @@ function checkTestResult(rdt) {
             // } else {
                 var $select = tr.find("td:eq(19) select");
                 $select.val("PQ - 6 tablets");
+                $select.val("N/A");
                 $select.find("option[value='PQ - 2 tablets'], option[value='PQ - 4 tablets'], option[value='PQ - 1 tablet'], option[value='PQ - 7 tablets'], option[value='PQ - 14 tablets'], option[value='PQ - 21 tablets'], option[value='PQ - 28 tablets']").prop("disabled", true);
             // }
 
@@ -1773,30 +1840,39 @@ function checkTestResult(rdt) {
 
     }else if(assum_result == "pv" || assum_result == "po"){
         if(input_age == "AGE_GROUP_1"){
+            tr.find('td:eq(17) select,td:eq(19) select').val('N/A');
             tr.find('td:eq(17) select,td:eq(19) select').prop('disabled',true);
             tr.find('td:eq(17) select,td:eq(19) select').css('cursor', 'not-allowed');
             var $select = tr.find("td:eq(18) select");
             $select.val("CQ - 1 tablet");
+            $select.val("N/A");
             $select.find("option[value='CQ - 4 tablets'], option[value='CQ - 5 tablets'], option[value='CQ - 7.5 tablets'], option[value='CQ - 10 tablets']").prop("disabled", true);
         }else if(input_age == "AGE_GROUP_1_TO_4"){
+            tr.find('td:eq(17) select').val('N/A');
             tr.find('td:eq(17) select').prop('disabled',true);
             tr.find('td:eq(17) select').css('cursor', 'not-allowed');
             var $select = tr.find("td:eq(19) select");
             $select.val("PQ - 7 tablets");
+            $select.val("N/A");
             $select.find("option[value='PQ - 2 tablets'], option[value='PQ - 4 tablets'], option[value='PQ - 1 tablet'], option[value='PQ - 6 tablets'], option[value='PQ - 14 tablets'], option[value='PQ - 21 tablets'], option[value='PQ - 28 tablets']").prop("disabled", true);
             var $select = tr.find("td:eq(18) select");
             $select.val("CQ - 4 tablets");
+            $select.val("N/A");
             $select.find("option[value='CQ - 1 tablet'], option[value='CQ - 5 tablets'], option[value='CQ - 7.5 tablets'], option[value='CQ - 10 tablets']").prop("disabled", true);
         }else if(input_age == "AGE_GROUP_5_TO_9"){
+            tr.find('td:eq(17) select').val('N/A');
             tr.find('td:eq(17) select').prop('disabled',true);
             tr.find('td:eq(17) select').css('cursor', 'not-allowed');
             var $select = tr.find("td:eq(19) select");
             $select.val("PQ - 14 tablets");
+            $select.val("N/A");
             $select.find("option[value='PQ - 2 tablets'], option[value='PQ - 4 tablets'], option[value='PQ - 1 tablet'], option[value='PQ - 6 tablets'], option[value='PQ - 7 tablets'], option[value='PQ - 21 tablets'], option[value='PQ - 28 tablets']").prop("disabled", true);
             var $select = tr.find("td:eq(18) select");
             $select.val("CQ - 5 tablets");
+            $select.val("N/A");
             $select.find("option[value='CQ - 1 tablet'], option[value='CQ - 4 tablets'], option[value='CQ - 7.5 tablets'], option[value='CQ - 10 tablets']").prop("disabled", true);
         }else if(input_age == "AGE_GROUP_10_TO_14"){
+            tr.find('td:eq(17) select').val('N/A');
             tr.find('td:eq(17) select').prop('disabled',true);
             tr.find('td:eq(17) select').css('cursor', 'not-allowed');
             checkPreg(preg);
@@ -1806,12 +1882,15 @@ function checkTestResult(rdt) {
             // }else{
                 var $select = tr.find("td:eq(19) select");
             $select.val("PQ - 21 tablets");
+            $select.val("N/A");
             $select.find("option[value='PQ - 2 tablets'], option[value='PQ - 4 tablets'], option[value='PQ - 1 tablet'], option[value='PQ - 6 tablets'], option[value='PQ - 14 tablets'], option[value='PQ - 7 tablets'], option[value='PQ - 28 tablets']").prop("disabled", true);
             // }
             var $select = tr.find("td:eq(18) select");
             $select.val("CQ - 7.5 tablets");
+            $select.val("N/A");
             $select.find("option[value='CQ - 1 tablet'], option[value='CQ - 5 tablets'], option[value='CQ - 4 tablets'], option[value='CQ - 10 tablets']").prop("disabled", true);
         }else if(input_age == "AGE_GROUP_15_AND_ABOVE"){
+            tr.find('td:eq(17) select').val('N/A');
             tr.find('td:eq(17) select').prop('disabled',true);
             tr.find('td:eq(17) select').css('cursor', 'not-allowed');
             checkPreg(preg);
@@ -1821,45 +1900,56 @@ function checkTestResult(rdt) {
             // }else{
                 var $select = tr.find("td:eq(19) select");
                 $select.val("PQ - 28 tablets");
+                $select.val("N/A");
                 $select.find("option[value='PQ - 2 tablets'], option[value='PQ - 4 tablets'], option[value='PQ - 1 tablet'], option[value='PQ - 6 tablets'], option[value='PQ - 14 tablets'], option[value='PQ - 21 tablets'], option[value='PQ - 7 tablets']").prop("disabled", true);
             // }
             var $select = tr.find("td:eq(18) select");
             $select.val("CQ - 10 tablets");
+            $select.val("N/A");
             $select.find("option[value='CQ - 1 tablet'], option[value='CQ - 5 tablets'], option[value='CQ - 7.5 tablets'], option[value='CQ - 4 tablets']").prop("disabled", true);
         }else{
 
         }
     }else if(assum_result == "mixed"){
         if(input_age == "AGE_GROUP_1"){
+            tr.find('td:eq(18) select,td:eq(19) select').val('N/A');
             tr.find('td:eq(18) select,td:eq(19) select').prop('disabled',true);
             tr.find('td:eq(18) select,td:eq(19) select').css('cursor', 'not-allowed');
             var $select = tr.find("td:eq(17) select");
             // alert($select);
             $select.val("ACT-6 tablets (1/2 strip)");
+            $select.val("N/A");
             $select.find("option[value='ACT-24 tablets (1 strip)'], option[value='ACT-12 tablets (1 strip)'], option[value='ACT-18 tablets (1 strip)'], option[value='ACT-6 tablets (1 strip)']").prop("disabled", true);
         }else if(input_age == "AGE_GROUP_1_TO_4"){
+            tr.find('td:eq(18) select').val('N/A');
             tr.find('td:eq(18) select').prop('disabled',true);
             tr.find('td:eq(18) select').css('cursor', 'not-allowed');
             var $select = tr.find("td:eq(17) select");
             $select.val("ACT-6 tablets (1 strip)");
+            $select.val("N/A");
             $select.find("option[value='ACT-6 tablets (1/2 strip)'], option[value='ACT-12 tablets (1 strip)'], option[value='ACT-18 tablets (1 strip)'], option[value='ACT-24 tablets (1 strip)']").prop("disabled", true);
             var $select = tr.find("td:eq(19) select");
             $select.val("PQ - 7 tablets");
             $select.find("option[value='PQ - 1 tablet'], option[value='PQ - 4 tablets'], option[value='PQ - 6 tablets'], option[value='PQ - 2 tablets'], option[value='PQ - 14 tablets'], option[value='PQ - 21 tablets'], option[value='PQ - 28 tablets']").prop("disabled", true);
         }else if(input_age == "AGE_GROUP_5_TO_9"){
+            tr.find('td:eq(18) select').val('N/A');
             tr.find('td:eq(18) select').prop('disabled',true);
             tr.find('td:eq(18) select').css('cursor', 'not-allowed');
             var $select = tr.find("td:eq(17) select");
-            $select.val("12");
-            $select.find("option[value='3'], option[value='6'], option[value='18'], option[value='24']").prop("disabled", true);
+            $select.val("ACT-12 tablets (1 strip)");
+            $select.val("N/A");
+            $select.find("option[value='ACT-6 tablets (1/2 strip)'], option[value='ACT-6 tablets (1 strip)'], option[value='ACT-18 tablets (1 strip'], option[value='ACT-24 tablets (1 strip)']").prop("disabled", true);
             var $select = tr.find("td:eq(19) select");
             $select.val("PQ - 14 tablets");
+            $select.val("N/A");
             $select.find("option[value='PQ - 1 tablet'], option[value='PQ - 4 tablets'], option[value='PQ - 6 tablets'], option[value='PQ - 7 tablets'], option[value='PQ - 2 tablets'], option[value='PQ - 21 tablets'], option[value='PQ - 28 tablets']").prop("disabled", true);
         }else if(input_age == "AGE_GROUP_10_TO_14"){
+            tr.find('td:eq(18) select').val('N/A');
             tr.find('td:eq(18) select').prop('disabled',true);
             tr.find('td:eq(18) select').css('cursor', 'not-allowed');
             var $select = tr.find("td:eq(17) select");
             $select.val("ACT-18 tablets (1 strip)");
+            $select.val("N/A");
             $select.find("option[value='ACT-6 tablets (1/2 strip)'], option[value='ACT-6 tablets (1 strip)'], option[value='ACT-12 tablets (1 strip)'], option[value='ACT-24 tablets (1 strip)']").prop("disabled", true);
             checkPreg(preg);
             // if (select_preg == "Yes") {
@@ -1868,13 +1958,16 @@ function checkTestResult(rdt) {
             // }else{
             var $select = tr.find("td:eq(19) select");
             $select.val("PQ - 21 tablets");
+            $select.val("N/A");
             $select.find("option[value='PQ - 1 tablet'], option[value='PQ - 4 tablets'], option[value='PQ - 6 tablets'], option[value='PQ - 7 tablets'], option[value='PQ - 14 tablets'], option[value='PQ - 2 tablets'], option[value='PQ - 28 tablets']").prop("disabled", true);
             // }
         }else if(input_age == "AGE_GROUP_15_AND_ABOVE"){
+            tr.find('td:eq(18) select').val('N/A');
             tr.find('td:eq(18) select').prop('disabled',true);
             tr.find('td:eq(18) select').css('cursor', 'not-allowed');
             var $select = tr.find("td:eq(17) select");
             $select.val("ACT-24 tablets (1 strip)");
+            $select.val("N/A");
             $select.find("option[value='ACT-6 tablets (1/2 strip)'], option[value='ACT-6 tablets (1 strip)'], option[value='ACT-18 tablets (1 strip)'], option[value='ACT-12 tablets (1 strip)']").prop("disabled", true);
             checkPreg(preg);
             // if (select_preg == "Yes") {
@@ -1883,6 +1976,7 @@ function checkTestResult(rdt) {
             // }else{
             var $select = tr.find("td:eq(19) select");
             $select.val("PQ - 28 tablets");
+            $select.val("N/A");
             $select.find("option[value='PQ - 1 tablet'], option[value='PQ - 4 tablets'], option[value='PQ - 6 tablets'], option[value='PQ - 7 tablets'], option[value='PQ - 14 tablets'], option[value='PQ - 21 tablets'], option[value='PQ - 2 tablets']").prop("disabled", true);
             // }
         }else{
@@ -1890,34 +1984,44 @@ function checkTestResult(rdt) {
         }
     }else if(assum_result == "pm"){
         if(input_age == "AGE_GROUP_1"){
+            tr.find('td:eq(17) select,td:eq(19) select').val('N/A');
             tr.find('td:eq(17) select,td:eq(19) select').prop('disabled',true);
             tr.find('td:eq(17) select,td:eq(19) select').css('cursor', 'not-allowed');
             var $select = tr.find("td:eq(18) select");
             $select.val("CQ - 1 tablet");
+            $select.val("N/A");
             $select.find("option[value='CQ - 10 tablets'], option[value='CQ - 5 tablets'], option[value='CQ - 7.5 tablets'], option[value='CQ - 4 tablets']").prop("disabled", true);
         }else if(input_age == "AGE_GROUP_1_TO_4"){
+            tr.find('td:eq(17) select,td:eq(19) select').val('N/A');
             tr.find('td:eq(17) select,td:eq(19) select').prop('disabled',true);
             tr.find('td:eq(17) select,td:eq(19) select').css('cursor', 'not-allowed');
             var $select = tr.find("td:eq(18) select");
             $select.val("CQ - 4 tablets");
+            $select.val("N/A");
             $select.find("option[value='CQ - 1 tablet'], option[value='CQ - 5 tablets'], option[value='CQ - 7.5 tablets'], option[value='CQ - 10 tablets']").prop("disabled", true);
         }else if(input_age == "AGE_GROUP_5_TO_9"){
+            tr.find('td:eq(17) select,td:eq(19) select').val('N/A');
             tr.find('td:eq(17) select,td:eq(19) select').prop('disabled',true);
             tr.find('td:eq(17) select,td:eq(19) select').css('cursor', 'not-allowed');
             var $select = tr.find("td:eq(18) select");
             $select.val("CQ - 5 tablets");
+            $select.val("N/A");
             $select.find("option[value='CQ - 1 tablet'], option[value='CQ - 10 tablets'], option[value='CQ - 7.5 tablets'], option[value='CQ - 4 tablets']").prop("disabled", true);
         }else if(input_age == "AGE_GROUP_10_TO_14"){
+            tr.find('td:eq(17) select,td:eq(19) select').val('N/A');
             tr.find('td:eq(17) select,td:eq(19) select').prop('disabled',true);
             tr.find('td:eq(17) select,td:eq(19) select').css('cursor', 'not-allowed');
             var $select = tr.find("td:eq(18) select");
             $select.val("CQ - 7.5 tablets");
+            $select.val("N/A");
             $select.find("option[value='CQ - 1 tablet'], option[value='CQ - 5 tablets'], option[value='CQ - 10 tablets'], option[value='CQ - 4 tablets']").prop("disabled", true);
         }else if(input_age == "AGE_GROUP_15_AND_ABOVE"){
+            tr.find('td:eq(17) select,td:eq(19) select').val('N/A');
             tr.find('td:eq(17) select,td:eq(19) select').prop('disabled',true);
             tr.find('td:eq(17) select,td:eq(19) select').css('cursor', 'not-allowed');
             var $select = tr.find("td:eq(18) select");
             $select.val("CQ - 10 tablets");
+            $select.val("N/A");
             $select.find("option[value='CQ - 1 tablet'], option[value='CQ - 5 tablets'], option[value='CQ - 7.5 tablets'], option[value='CQ - 4 tablets']").prop("disabled", true);
         }else{
 
